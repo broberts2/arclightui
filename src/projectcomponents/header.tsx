@@ -33,11 +33,6 @@ const H: FC<{
 				},
 			]}
 			linksRight={[
-				{
-					icon: "newspaper",
-					route: "/",
-					text: "Articles",
-				},
 				{ icon: "user-astronaut", route: "/staff", text: "Staff" },
 				{ icon: "scroll", route: "/", text: "Applications" },
 				fns.readToken()._token
@@ -85,39 +80,14 @@ const H: FC<{
 				route: "/",
 			}}
 			links={[
-				{
-					route: "/community",
-					text: "Community",
-				},
-				{
-					route: "/teams",
-					text: "Teams and Stats",
-				},
-				{
-					route: "/",
-					text: "Crux",
-				},
-				{
-					route: "/",
-					text: "Articles",
-				},
-				{
-					route: "/staff",
-					text: "Staff",
-				},
-				{
-					route: "/",
-					text: "Applications",
-				},
+				{ icon: "users", route: "/community", text: "Community" },
+				{ icon: "chart-line", route: "/teams", text: "Teams and Stats" },
+				{ icon: "chess-knight", route: "/", text: "Crux" },
+				{ icon: "user-astronaut", route: "/staff", text: "Staff" },
+				{ icon: "scroll", route: "/", text: "Applications" },
 				fns.readToken()._token
-					? {
-							route: "/profile",
-							text: "My Profile",
-					  }
-					: {
-							route: "/login",
-							text: "Login",
-					  },
+					? { icon: "scroll", route: "/profile", text: "My Profile" }
+					: { icon: "scroll", route: "/login", text: "Login" },
 			]}
 			socialMedia={[
 				{

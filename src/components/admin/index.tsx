@@ -6,6 +6,8 @@ import FlexPanel from "./flexpanel";
 import Page from "../page";
 import Panels from "./panels/index";
 
+import { useMediaQuery } from "react-responsive";
+
 import database from "./indexitems/database";
 import integration from "./indexitems/integration";
 import event from "./indexitems/event";
@@ -72,13 +74,17 @@ const Admin: FC<{
 			>
 				<Styles.Body className={`flex flex-row`}>
 					<Styles.Drawer
-						className={"hidden xl:block"}
+						className={"block"}
 						style={{ display: !authenticated ? "none" : "" }}
 					>
 						<Drawer
-							headerImg={`${endpoint}/${noSelect}`}
-							startOpen={true}
-							locked={true}
+							headerImg={
+								useMediaQuery({ query: "(min-width: 1024px)" })
+									? `${endpoint}/${noSelect}`
+									: undefined
+							}
+							startOpen={useMediaQuery({ query: "(min-width: 1024px)" })}
+							locked={useMediaQuery({ query: "(min-width: 1024px)" })}
 							animation={"slide"}
 							buttonSide="left"
 							side="left"

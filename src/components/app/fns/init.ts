@@ -1,5 +1,5 @@
 export default (_: { [key: string]: any }) =>
-	(cb: Function, recursive: Array<string>, init: boolean) => {
+	(D: any, cb: Function, recursive: Array<string>, init: boolean) => {
 		if (_ && _.calls && !init) {
 			if (_.calls.getdatamodels) _.calls.getdatamodels();
 			Object.keys(_.calls).map((key: string) => {
@@ -9,11 +9,9 @@ export default (_: { [key: string]: any }) =>
 						key.includes("getintegrations") ||
 						key.includes("getscripts"))
 				) {
-					_.calls[key]({
-						_recursive: recursive.find(
-							(s: string) => key.split("getrecords_")[1] === s
-						),
-					});
+					_.calls[key]();
+				} else if (key.includes("recursiveinit")) {
+					_.calls[key]({ _recursive: true });
 				}
 			});
 			cb(true);

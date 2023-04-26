@@ -10,8 +10,7 @@ root.render(
 	<React.StrictMode>
 		<App
 			nopage={"static/defaultart/404.jpg"}
-			socketEndpoint={`http://titanesports.org:7000`}
-			recursive={["settings"]}
+			socketEndpoint={`http://localhost:7000`}
 			pages={{
 				leagueoflegends: {
 					Home: { route: "/", component: require("./pages/Home") },
@@ -25,6 +24,10 @@ root.render(
 					Profile: { route: "/profile", component: require("./pages/Profile") },
 					Teams: { route: "/teams", component: require("./pages/Teams") },
 					Team: { route: "/team", component: require("./pages/Team") },
+					Article: {
+						route: "/article",
+						component: require("./pages/Article"),
+					},
 				},
 				admin: {
 					Home: {

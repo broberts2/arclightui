@@ -4,15 +4,32 @@ import Styles from "./styles";
 export interface PropTypes {
 	ruby?: string;
 	fadeOpacity?: number;
+	img?: string;
 }
 
-const FadeDivider: FC<PropTypes> = ({ ruby, fadeOpacity }) => {
+const FadeDivider: FC<PropTypes> = ({ ruby, fadeOpacity, img }) => {
+	const imgs: Array<JSX.Element> = [];
+	if (img) {
+		for (let i = 0; i < 3; i++) {
+			imgs.push(
+				<Styles.BackgroundImgFade
+					src={img}
+					className={``}
+					style={{ opacity: fadeOpacity }}
+				/>
+			);
+		}
+	}
 	return (
 		<Styles.Container>
-			<Styles.BackgroundFade
-				className={`bg-gradient-to-b from-background-tertiary to to-transparent`}
-				style={{ opacity: fadeOpacity }}
-			/>
+			{img ? (
+				<React.Fragment>{imgs}</React.Fragment>
+			) : (
+				<Styles.BackgroundFade
+					className={`bg-gradient-to-b from-background-tertiary to to-transparent`}
+					style={{ opacity: fadeOpacity }}
+				/>
+			)}
 			{ruby ? (
 				<img
 					src={ruby}

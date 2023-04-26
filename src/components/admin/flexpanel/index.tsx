@@ -47,6 +47,20 @@ const Bttn = (props: { a: Function; t: string; span?: boolean }) => (
 	/>
 );
 
+const ChkBox = (props: { v: boolean; a: Function; t: string }) => (
+	<div
+		className={`text-text-primary font-primary text-base flex justify-start`}
+	>
+		<div className={`m-auto`}>
+			<Checkbox
+				value={props.v}
+				onChange={(b: boolean, cb: Function) => props.a()}
+			/>
+		</div>
+		<div className={`m-auto`}>{props.t}</div>
+	</div>
+);
+
 const ItemContent = (props: any) => {
 	return (
 		<Styles.ItemContent
@@ -88,30 +102,47 @@ const ItemContent = (props: any) => {
 								))}
 						</div>
 					</div>
-					<div className={`flex justify-end w-full space-x-2`}>
-						{[
-							{ fn: "onExecute", t: "Execute" },
-							{ fn: "onLog", t: "Log" },
-							{ fn: "onAddField", t: "Add Field" },
-							{ fn: "onCreate", t: "Create" },
-							{ fn: "onSubmit", t: "Submit" },
-							{ fn: "onUpdate", t: "Update" },
-							{ fn: "onDelete", t: "Delete" },
-							{ fn: "onBack", t: "Back" },
-						]
-							.filter(
-								(el) => props[el.fn] && !(props.state && props.state.onDelete)
-							)
-							.map((el) => (
-								<Bttn
-									t={el.t}
-									a={() =>
-										props[el.fn]((s: Object) =>
-											props.setState((_: Object) => ({ ..._, ...s }))
-										)
-									}
-								/>
-							))}
+					<div className={`flex flex-row w-full`}>
+						<div className={`flex justify-start space-x-2 w-1/3`}>
+							{[{ fn: "onRecursiveInit", t: "Recursive Init" }]
+								.filter((el) => props[el.fn])
+								.map((el) => (
+									<ChkBox
+										v={props.state.recursiveinit}
+										t={el.t}
+										a={() =>
+											props[el.fn]((s: Object) =>
+												props.setState((_: Object) => ({ ..._, ...s }))
+											)
+										}
+									/>
+								))}
+						</div>
+						<div className={`flex justify-end space-x-2 w-full`}>
+							{[
+								{ fn: "onExecute", t: "Execute" },
+								{ fn: "onLog", t: "Log" },
+								{ fn: "onAddField", t: "Add Field" },
+								{ fn: "onCreate", t: "Create" },
+								{ fn: "onSubmit", t: "Submit" },
+								{ fn: "onUpdate", t: "Update" },
+								{ fn: "onDelete", t: "Delete" },
+								{ fn: "onBack", t: "Back" },
+							]
+								.filter(
+									(el) => props[el.fn] && !(props.state && props.state.onDelete)
+								)
+								.map((el) => (
+									<Bttn
+										t={el.t}
+										a={() =>
+											props[el.fn]((s: Object) =>
+												props.setState((_: Object) => ({ ..._, ...s }))
+											)
+										}
+									/>
+								))}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -219,6 +250,7 @@ const FlexPanel: FC<PropTypes> = ({
 				onBack={state._items[i].onBack}
 				onAddField={state._items[i].onAddField}
 				onExecute={state._items[i].onExecute}
+				onRecursiveInit={state._items[i].onRecursiveInit}
 				onLog={state._items[i].onLog}
 				onPublicRead={state._items[i].onPublicRead}
 				active={

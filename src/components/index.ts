@@ -2,6 +2,7 @@ import "./app/style.css";
 import Admin from "./admin";
 import AnimatedBorder from "./animatedborder";
 import App from "./app";
+import ArticlePage from "./articlepage";
 import AuthPage from "./authpage";
 import Button from "./button";
 import Card from "./card";
@@ -38,6 +39,7 @@ export {
 	Admin,
 	AnimatedBorder,
 	App,
+	ArticlePage,
 	AuthPage,
 	Button,
 	Card,

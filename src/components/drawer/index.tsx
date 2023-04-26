@@ -170,7 +170,7 @@ const Drawer: FC<PropTypes> = ({
 			buttonSide={buttonSide}
 			className={className ? className : null}
 		>
-			<Styles.Item buttonSide={buttonSide}>
+			<Styles.Item buttonSide={buttonSide} showBars={!locked}>
 				<Component
 					right={side === "right"}
 					width={width}
@@ -179,7 +179,7 @@ const Drawer: FC<PropTypes> = ({
 					onClose={() => (!locked ? setIsOpen(false) : null)}
 					noOverlay={locked}
 				>
-					<Styles.Component className={``}>
+					<Styles.Component className={`${!locked ? "pt-6" : ""}`}>
 						{headerImg ? (
 							<img src={headerImg} className={`w-24 m-auto mb-10 mt-0`} />
 						) : null}

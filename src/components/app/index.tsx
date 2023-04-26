@@ -27,7 +27,7 @@ export interface PropTypes {
 const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 	const AppRef = React.useRef(null);
 	let pagenotfound = true;
-	const [D, setD] = React.useState(null);
+	const [D, setD] = React.useState({ nopage: `${socketEndpoint}/${nopage}` });
 	const [app, setApp] = React.useState(null);
 	const [loading, setLoading] = React.useState(true);
 	const [transitioning, setTransitioning] = React.useState(false);
@@ -100,6 +100,7 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 										authBackgroundImage={authBackgroundImage}
 										noSelect={noSelect}
 										fns={{
+											readState: fns.readState,
 											scrollLock: fns.scrollLock,
 											setModal,
 											readToken: fns.readToken,
@@ -110,6 +111,7 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 											calls: fns.calls,
 											addAnimationFrame: fns.addAnimationFrame,
 											route: _route,
+											route404: fns.route404,
 											authenticate: fns.authenticate(
 												socket,
 												async (b: boolean) => {
@@ -159,7 +161,7 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 				/>
 			</Styles.Container>
 		));
-		fns.init(() => setInit(true), recursive, init);
+		fns.init(D, () => setInit(true), recursive, init);
 		if (loading && D) setTimeout(() => setLoading(false), 1000);
 	}, [route, loading, transitioning, D, modal]);
 	React.useEffect(() => {

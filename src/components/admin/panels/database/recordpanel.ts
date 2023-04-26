@@ -80,6 +80,14 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 							publicread: !_.publicread,
 						}))
 				: null,
+		onRecursiveInit:
+			key === "permissions"
+				? () =>
+						updateState((_: any) => ({
+							..._,
+							recursiveinit: !_.recursiveinit,
+						}))
+				: null,
 		onAddField:
 			key === "model"
 				? () => {

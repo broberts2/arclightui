@@ -109,7 +109,7 @@ const listpanel: FC<PropTypes> = React.memo(
 			else if (_ > 1024) setNPerRow(8);
 			else if (_ > 768) setNPerRow(4);
 			else if (_ > 604) setNPerRow(3);
-			else setNPerRow(2);
+			else setNPerRow(3);
 		};
 		window.addEventListener("resize", handleResize);
 		React.useEffect(handleResize, []);

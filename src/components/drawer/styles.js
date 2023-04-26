@@ -21,6 +21,7 @@ const Item = styled.div`
 
 	/* Color/shape of burger icon bars */
 	.bm-burger-bars {
+		background: ${(props) => (props.showBars ? "white" : "transparent")};
 	}
 
 	/* Color/shape of burger icon bars on hover*/
