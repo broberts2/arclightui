@@ -367,10 +367,7 @@ const FlexPanel: FC<PropTypes> = ({
 									case "PickList":
 										return picklist(c, i, PickList, state, setState, true);
 									case "ListPanel":
-										c.cards.map(
-											(c: any) => (c.subText = setCardTitle(c.subText))
-										);
-										return listpanel(c, i, ListPanel, state, setState);
+										return listpanel(c, i, ListPanel, state, setState, fns, D);
 									case "DynamicField":
 										return dynamicfield(
 											c,

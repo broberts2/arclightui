@@ -5,15 +5,15 @@ import Footer from "../../projectcomponents/footer";
 
 import { ListPanel, Page, PageTitle, HeroPanel } from "../../components";
 
-const Home: FC<{
+const Community: FC<{
 	fns: {
 		[key: string]: any;
 	};
 	D: { [key: string]: any };
 	endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
-	const [hItem, setHItem] = React.useState(1);
-	return (
+	const [hItem, setHItem] = React.useState(0);
+	return D && fns.calls ? (
 		<Page
 			fns={fns}
 			backgroundImage={{
@@ -34,7 +34,7 @@ const Home: FC<{
 				small
 				cards={[
 					{
-						active: hItem === 1,
+						active: hItem === 0,
 						hoverComponent: (
 							<div>
 								<div className={`text-md`}>
@@ -50,10 +50,10 @@ const Home: FC<{
 								  ).legendimg
 								: "",
 						subText: "Legends",
-						onClick: () => setHItem(1),
+						onClick: () => setHItem(0),
 					},
 					{
-						active: hItem === 2,
+						active: hItem === 1,
 						hoverComponent: (
 							<div>
 								<div className={`text-md`}>
@@ -68,34 +68,28 @@ const Home: FC<{
 								  ).dynastyimg
 								: "",
 						subText: "Dynasties",
-						onClick: () => setHItem(2),
+						onClick: () => setHItem(1),
 					},
 				]}
 			/>
 			<ListPanel
-				cards={[
-					fns.e(D, `D.getrecords_user.user`, []).map((el: any) => ({
-						bgImg: el.img,
-						subText: el.username,
-						onClick: () => fns.route("/profile"),
-					})),
-					fns.e(D, `D.getrecords_dynasty.dynasty`, []).map((el: any) => ({
-						bgImg: el.img,
-						subText: el.name,
-						onClick: () => fns.route("/dynasty"),
-					})),
-				][hItem - 1].map((u: any) => ({
-					bgImg: u.bgImg,
-					subText: u.subText,
-					onClick: u.onClick,
-				}))}
-				line={false}
+				Request={{
+					type: hItem ? `dynasty` : `user`,
+					search: hItem ? { limit: 8 } : { _managed: "Discord", limit: 8 },
+				}}
 				fns={fns}
+				D={D}
+				card={(c: any) => ({
+					img: c.img,
+					subtext: hItem ? c.name : c.username,
+					onClick: () => null,
+				})}
+				line={false}
 				constrain
 			/>
 			<Footer fns={fns} endpoint={endpoint} />
 		</Page>
-	);
+	) : null;
 };
 
-export default Home;
+export default Community;

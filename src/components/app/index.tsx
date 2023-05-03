@@ -77,7 +77,8 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 												(fns.readState().subdomain == domain ||
 													(domain === "_root_" &&
 														!fns.readState().subdomain)) &&
-												route == pages[domain][component].route
+												(route.includes("?") ? route.split("?")[0] : route) ==
+													pages[domain][component].route
 										  )
 										: !fns.parseAdminDomainState();
 							return (
@@ -161,7 +162,7 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 				/>
 			</Styles.Container>
 		));
-		fns.init(D, () => setInit(true), recursive, init);
+		fns.init(D, () => setInit(true), fns, recursive, init);
 		if (loading && D) setTimeout(() => setLoading(false), 1000);
 	}, [route, loading, transitioning, D, modal]);
 	React.useEffect(() => {

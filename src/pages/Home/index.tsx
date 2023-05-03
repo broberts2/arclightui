@@ -19,7 +19,6 @@ const Home: FC<{
 	D: { [key: string]: any };
 	endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
-	console.log(D);
 	return (
 		<Page
 			fns={fns}

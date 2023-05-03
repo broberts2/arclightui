@@ -4,23 +4,22 @@ import Button from "../button";
 import TextField from "../textfield";
 
 export interface PropTypes {
-	textField?: {
-		label?: string | null;
-		value?: string;
-	} | null;
+	textField: any;
 	buttons?: Array<{
 		icon?: string | null;
 		text?: string | null;
+		key?: string | null;
 		onClick?: Function | null;
 	}> | null;
 	className?: string | null;
-	fns?: {
-		[key: string]: Function;
-	};
 	children: JSX.Element | JSX.Element[];
 	constrain?: boolean;
 	onChange?: Function;
 	hot?: boolean;
+	pagination?: any;
+	btnActive?: number;
+	setBtnActive?: Function;
+	search?: any;
 }
 
 const SearchControls: FC<PropTypes> = ({
@@ -28,11 +27,18 @@ const SearchControls: FC<PropTypes> = ({
 	onChange,
 	buttons,
 	className,
-	fns,
 	children,
 	constrain,
 	hot,
+	pagination,
+	btnActive,
+	setBtnActive,
+	search,
 }) => {
+	const a = pagination.skip * pagination.length + 1;
+	const b = pagination.skip * pagination.length + pagination.length;
+	const c = pagination.totalcount;
+	const bb = b > c ? c : b;
 	return (
 		<Styles.Container className={`text-text-primary font-primary ${className}`}>
 			{textField ? (
@@ -41,8 +47,7 @@ const SearchControls: FC<PropTypes> = ({
 						value={textField?.value}
 						hot={hot}
 						onChange={(data: string) => {
-							console.log("test");
-							if (onChange) onChange(data);
+							if (textField && textField.onChange) textField.onChange(data);
 						}}
 						type={"text"}
 						key={1}
@@ -51,7 +56,7 @@ const SearchControls: FC<PropTypes> = ({
 					/>
 				</div>
 			) : null}
-			{buttons ? (
+			{buttons && search ? (
 				<React.Fragment>
 					<div className={`flex flex-row`}>
 						<Button
@@ -61,6 +66,9 @@ const SearchControls: FC<PropTypes> = ({
 							size={"normal"}
 							animation={true}
 							className={`hidden m-1 lg:block`}
+							onClick={() =>
+								search ? search.onSubmit("username", textField?.value) : null
+							}
 						/>
 						<Button
 							label={"Search"}
@@ -69,28 +77,39 @@ const SearchControls: FC<PropTypes> = ({
 							size={"small"}
 							animation={true}
 							className={`block m-1 lg:hidden`}
+							onClick={() =>
+								search ? search.onSubmit("username", search.value) : null
+							}
 						/>
-						<div className={`hidden flex-row-reverse w-full lg:flex`}>
-							{buttons.map((b) => (
+						<div className={`hidden flex-row justify-end w-full lg:flex`}>
+							{buttons.map((b: any, i) => (
 								<Button
 									label={b.text ? b.text : null}
 									idleIcon={b.icon ? b.icon : null}
 									type={"button"}
 									size={"normal"}
 									animation={true}
-									className={`m-1`}
+									className={`m-1 ${i === btnActive ? "" : "opacity-30"}`}
+									onClick={() => {
+										if (setBtnActive) setBtnActive(i);
+										b.onClick();
+									}}
 								/>
 							))}
 						</div>
-						<div className={`flex flex-row-reverse w-full lg:hidden`}>
-							{buttons.map((b) => (
+						<div className={`flex flex-row justify-end w-full lg:hidden`}>
+							{buttons.map((b: any, i) => (
 								<Button
 									label={null}
 									idleIcon={b.icon ? b.icon : null}
 									type={"button"}
 									size={"small"}
 									animation={true}
-									className={`m-1`}
+									className={`m-1 ${i === btnActive ? "" : "opacity-30"}`}
+									onClick={() => {
+										if (setBtnActive) setBtnActive(i);
+										b.onClick();
+									}}
 								/>
 							))}
 						</div>
@@ -104,64 +123,81 @@ const SearchControls: FC<PropTypes> = ({
 				{children}
 			</Styles.Children>
 			<div
-				className={`absolute w-full pointer-events-none`}
+				className={`absolute w-full pointer-events-none bottom-0`}
 				style={{
 					top: constrain ? "100%" : "125%",
-					display:
-						Array.isArray(children) && children.length > 48 ? "" : "none",
+					display: Array.isArray(children) && children.length > 1 ? "" : "",
 				}}
 			>
-				<div className={`flex items-center justify-center`}>
-					<Button
-						className={"hidden m-1 lg:block pointer-events-auto"}
-						label={"Last"}
-						idleIcon={"arrow-left"}
-						type={"button"}
-						size={"normal"}
-						animation={true}
-						onClick={(status: any) =>
-							fns ? fns.routeExternal(`https://discord.gg/kuWyKDxkR7`) : null
-						}
-					/>
-					<Button
-						className={"block m-1 lg:hidden pointer-events-auto"}
-						label={"Last"}
-						idleIcon={"arrow-left"}
-						type={"button"}
-						size={"small"}
-						animation={true}
-						onClick={(status: any) =>
-							fns ? fns.routeExternal(`https://discord.gg/kuWyKDxkR7`) : null
-						}
-					/>
-					<Button
-						className={"hidden m-1 lg:block pointer-events-auto"}
-						label={"Next"}
-						idleIcon={"arrow-right"}
-						type={"button"}
-						size={"normal"}
-						animation={true}
-						onClick={(status: any) =>
-							fns ? fns.routeExternal(`https://discord.gg/kuWyKDxkR7`) : null
-						}
-					/>
-					<Button
-						className={"block m-1 lg:hidden pointer-events-auto"}
-						label={"Next"}
-						idleIcon={"arrow-right"}
-						type={"button"}
-						size={"small"}
-						animation={true}
-						onClick={(status: any) =>
-							fns ? fns.routeExternal(`https://discord.gg/kuWyKDxkR7`) : null
-						}
-					/>
-				</div>
-				<div className="text-center pointer-events-auto">
-					<div className={"text-text-primary font-primary text-lg"}>
-						Showing 1-48 of 2590
+				{pagination ? (
+					<div className={`flex items-center justify-center`}>
+						<Button
+							className={"hidden m-1 lg:block pointer-events-auto"}
+							style={
+								pagination.skip > 0
+									? {}
+									: { opacity: 0.3, pointerEvents: "none" }
+							}
+							label={"Last"}
+							idleIcon={"arrow-left"}
+							type={"button"}
+							size={"normal"}
+							animation={true}
+							onClick={(status: any) => pagination.onClick(-1)}
+						/>
+						<Button
+							className={"block m-1 lg:hidden pointer-events-auto"}
+							style={
+								pagination.skip > 0
+									? {}
+									: { opacity: 0.3, pointerEvents: "none" }
+							}
+							label={"Last"}
+							idleIcon={"arrow-left"}
+							type={"button"}
+							size={"small"}
+							animation={true}
+							onClick={(status: any) => pagination.onClick(-1)}
+						/>
+						<Button
+							className={"hidden m-1 lg:block pointer-events-auto"}
+							style={
+								(pagination.skip + 1) * pagination.length <
+								pagination.totalcount
+									? {}
+									: { opacity: 0.3, pointerEvents: "none" }
+							}
+							label={"Next"}
+							idleIcon={"arrow-right"}
+							type={"button"}
+							size={"normal"}
+							animation={true}
+							onClick={(status: any) => pagination.onClick(1)}
+						/>
+						<Button
+							className={"block m-1 lg:hidden pointer-events-auto"}
+							style={
+								(pagination.skip + 1) * pagination.length <
+								pagination.totalcount
+									? {}
+									: { opacity: 0.3, pointerEvents: "none" }
+							}
+							label={"Next"}
+							idleIcon={"arrow-right"}
+							type={"button"}
+							size={"small"}
+							animation={true}
+							onClick={(status: any) => pagination.onClick(1)}
+						/>
 					</div>
-				</div>
+				) : null}
+				{pagination ? (
+					<div className="text-center pointer-events-auto">
+						<div className={"text-text-primary font-primary text-lg"}>
+							Showing {a}-{bb} of {c}
+						</div>
+					</div>
+				) : null}
 			</div>
 		</Styles.Container>
 	);

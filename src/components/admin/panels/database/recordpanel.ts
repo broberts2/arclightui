@@ -123,17 +123,9 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 				  }
 				: null,
 		onBack: () => {
-			//if (fns.calls.getdatamodels && key === "model") fns.calls.getdatamodels();
 			fns.setAdminDomainState({
 				...fns.parseAdminDomainState(),
 				activePanel: 0,
 			});
-			// setTimeout(
-			// 	() =>
-			// 		updateState((_: any) => ({
-			// 			_id: null,
-			// 		})),
-			// 	10
-			// );
 		},
 	});

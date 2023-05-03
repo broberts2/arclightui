@@ -47,31 +47,18 @@ const Home: FC<{
 					}))}
 			/>
 			<ListPanel
-				key={hItem}
-				cards={[
-					fns
-						.e(D, `D.getrecords_team.team`, [])
-						.filter((t: any) => t.league === "divinity")
-						.map((el: any) => ({
-							bgImg: el.img,
-							subText: el.name,
-							onClick: () => fns.route("/team"),
-						})),
-					fns
-						.e(D, `D.getrecords_team.team`, [])
-						.filter((t: any) => t.league === "conqueror")
-						.map((el: any) => ({
-							bgImg: el.img,
-							subText: el.name,
-							onClick: () => fns.route("/team"),
-						})),
-				][hItem - 1].map((u: any) => ({
-					bgImg: u.bgImg,
-					subText: u.subText,
-					onClick: u.onClick,
-				}))}
-				line={false}
+				Request={{
+					type: "team",
+					search: { limit: 8 },
+				}}
 				fns={fns}
+				D={D}
+				card={(c: any) => ({
+					img: c.img,
+					subtext: c.name,
+					onClick: () => null,
+				})}
+				line={false}
 				constrain
 			/>
 			<Footer fns={fns} endpoint={endpoint} />

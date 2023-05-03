@@ -22,6 +22,7 @@ export interface PropTypes {
 	isIconButton?: boolean;
 	className?: string | null;
 	span?: boolean | null;
+	style?: any;
 }
 
 const Button: FC<PropTypes> = ({
@@ -43,6 +44,7 @@ const Button: FC<PropTypes> = ({
 	square,
 	isIconButton,
 	className,
+	style,
 }) => {
 	const [state, setState] = React.useState("idle");
 	const onClickHandler = async () => {
@@ -53,6 +55,7 @@ const Button: FC<PropTypes> = ({
 		<Styles.Container
 			span={span}
 			className={`text-text-primary font-primary ${className}`}
+			style={style}
 		>
 			<ReactiveButton
 				buttonState={state}

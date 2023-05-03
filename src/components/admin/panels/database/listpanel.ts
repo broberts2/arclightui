@@ -8,25 +8,35 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 				: null,
 		controls: [
 			{
-				cards: Constructors.constructFromRecordList(key).map((el: any) => ({
-					bgImg:
-						el.metaimg && el.metaimg.length
-							? el.metaimg
-							: el.img && el.img.length
-							? el.img
-							: `${endpoint}/static/integrationsart/daedalus.jpg`,
-					subText: key === "model" ? el._type : setTitle(el),
-					onClick: () => {
-						updateState((_: any) => ({
-							_id: el._id,
-						}));
-						fns.setAdminDomainState({
-							...fns.parseAdminDomainState(),
-							activePanel: 1,
-							id: el._id,
-						});
-					},
-				})),
+				// cards: Constructors.constructFromRecordList(key).map((el: any) => ({
+				// 	bgImg:
+				// 		el.metaimg && el.metaimg.length
+				// 			? el.metaimg
+				// 			: el.img && el.img.length
+				// 			? el.img
+				// 			: `${endpoint}/static/integrationsart/daedalus.jpg`,
+				// 	subText: key === "model" ? el._type : setTitle(el),
+				// 	onClick: () => {
+				// 		updateState((_: any) => ({
+				// 			_id: el._id,
+				// 		}));
+				// 		fns.setAdminDomainState({
+				// 			...fns.parseAdminDomainState(),
+				// 			activePanel: 1,
+				// 			id: el._id,
+				// 		});
+				// 	},
+				// })),
+				onClick: (el) => {
+					updateState((_: any) => ({
+						_id: el._id,
+					}));
+					fns.setAdminDomainState({
+						...fns.parseAdminDomainState(),
+						activePanel: 1,
+						id: el._id,
+					});
+				},
 				type: "ListPanel",
 				label: "Search",
 			},
