@@ -20,7 +20,7 @@ module.exports = {
 					quarternary: "rgb(203,213,225)",
 				},
 				visibility: {
-					primary: "rgba(0,0,0,0.5)",
+					primary: "rgba(0,0,0,0.75)",
 				},
 			},
 		},

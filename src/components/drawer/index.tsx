@@ -5,6 +5,7 @@ import FontAwesome from "../fontawesome/index";
 import Button from "../button";
 
 interface ItemPropTypes {
+	index: number;
 	icon?: string;
 	text?: string;
 	onClick?: Function;
@@ -12,9 +13,11 @@ interface ItemPropTypes {
 	isExpanded?: boolean | null;
 	italic?: boolean;
 	color?: string;
+	autoSort?: boolean;
 }
 
 const Item: FC<ItemPropTypes> = ({
+	index,
 	icon,
 	text,
 	onClick,
@@ -22,14 +25,20 @@ const Item: FC<ItemPropTypes> = ({
 	isExpanded,
 	italic,
 	color,
+	autoSort,
 }) => {
 	const [expanded, setExpanded] = React.useState(isExpanded);
 	React.useEffect(() => setExpanded(isExpanded), [isExpanded]);
 	return icon || text ? (
 		<Styles.Item
 			className={
-				"flex items-center cursor-pointer font-primary text-text-primary text-left whitespace-nowrap z-20"
+				"flex items-center cursor-pointer font-primary text-text-primary text-left whitespace-nowrap z-20 opacity-0"
 			}
+			mountAnim={{
+				anim: "fadeInRight",
+				duration: "0.35s",
+				delay: `${0.075 * index}s`,
+			}}
 		>
 			<table className={"w-full"}>
 				<tbody>
@@ -86,21 +95,22 @@ const Item: FC<ItemPropTypes> = ({
 											// @ts-ignore
 											.sort((a, b) =>
 												// @ts-ignore
-												a.text && b.text
+												autoSort && a.text && b.text
 													? // @ts-ignore
 													  a.text < b.text
 														? -1
 														: 1
 													: // @ts-ignore
-													a.text && b.text
+													autoSort && a.text && b.text
 													? // @ts-ignore
 													  a.icon < b.icon
 														? -1
 														: 1
 													: null
 											)
-											.map((item: { [key: string]: any }) => (
+											.map((item: { [key: string]: any }, index: number) => (
 												<Item
+													index={index}
 													items={item.items}
 													icon={item.icon}
 													text={item.text}
@@ -128,6 +138,7 @@ export interface PropTypes {
 	className?: string | object;
 	signOut?: Function;
 	headerImg?: string;
+	autoSort?: boolean;
 	items?:
 		| Array<{
 				color?: string;
@@ -161,6 +172,7 @@ const Drawer: FC<PropTypes> = ({
 	items,
 	signOut,
 	headerImg,
+	autoSort,
 }) => {
 	const [isOpen, setIsOpen] = React.useState(startOpen ? startOpen : false);
 	// @ts-ignore
@@ -187,19 +199,21 @@ const Drawer: FC<PropTypes> = ({
 							items
 								// @ts-ignore
 								.sort((a, b) =>
-									a.text && b.text
+									autoSort && a.text && b.text
 										? a.text < b.text
 											? -1
 											: 1
 										: a.text && b.text
 										? // @ts-ignore
-										  a.icon < b.icon
+										  autoSort && a.icon < b.icon
 											? -1
 											: 1
 										: null
 								)
-								.map((item) => (
+								.map((item, index: number) => (
 									<Item
+										index={index}
+										autoSort={autoSort}
 										color={item.color}
 										italic={item.italic}
 										isExpanded={item.isExpanded ? item.isExpanded : null}
@@ -211,6 +225,8 @@ const Drawer: FC<PropTypes> = ({
 								))
 						) : items ? (
 							<Item
+								index={0}
+								autoSort={autoSort}
 								color={items.color}
 								italic={items.italic}
 								isExpanded={items.isExpanded ? items.isExpanded : null}

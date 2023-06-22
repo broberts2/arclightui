@@ -11,9 +11,11 @@ const Article: FC<{
 	D: { [key: string]: any };
 	endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
-	const article = fns
-		.e(D, `D.recursiveinit_article.article`, [])
-		.find((e: any) => e._id === fns.readState().query.id);
+	let article = fns.e(D, `D.getrecords_article.init`, null);
+	if (article)
+		article = article.records.find(
+			(e: any) => e._id === fns.readState().query.id
+		);
 	return (
 		<Page
 			fns={fns}

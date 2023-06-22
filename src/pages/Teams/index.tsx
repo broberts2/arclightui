@@ -4,7 +4,7 @@ import Header from "../../projectcomponents/header";
 import Footer from "../../projectcomponents/footer";
 import { ListPanel, Page, PageTitle, HeroPanel } from "../../components";
 
-const Home: FC<{
+const Teams: FC<{
 	fns: {
 		[key: string]: any;
 	};
@@ -12,11 +12,11 @@ const Home: FC<{
 	endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
 	const [hItem, setHItem] = React.useState(1);
-	return (
+	return D && fns.calls ? (
 		<Page
 			fns={fns}
 			backgroundImage={{
-				src: "https://images.alphacoders.com/128/1287104.jpg",
+				src: "https://images3.alphacoders.com/131/1312787.png",
 				opacity: 0.5,
 			}}
 		>
@@ -32,7 +32,7 @@ const Home: FC<{
 			<HeroPanel
 				small
 				cards={fns
-					.e(D, `D.getrecords_lolleague.lolleague`, [])
+					.e(D, `D.getrecords_lolleague.lolleague.records`, [])
 					.map((league: { [key: string]: any }, i) => ({
 						active: hItem === i + 1,
 						locked: league.locked,
@@ -48,6 +48,7 @@ const Home: FC<{
 			/>
 			<ListPanel
 				Request={{
+					index: "teams",
 					type: "team",
 					search: { limit: 8 },
 				}}
@@ -63,7 +64,7 @@ const Home: FC<{
 			/>
 			<Footer fns={fns} endpoint={endpoint} />
 		</Page>
-	);
+	) : null;
 };
 
-export default Home;
+export default Teams;

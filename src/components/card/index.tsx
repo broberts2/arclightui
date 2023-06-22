@@ -50,17 +50,6 @@ const Card: FC<PropTypes> = ({
 	const [top, setTop] = React.useState(0);
 	const [s, setS] = React.useState(null);
 	const BodyComponentRef = React.useRef<any>(null);
-	// React.useEffect(() => {
-	// 	const scroll = () => {
-	// 		const dim = BodyComponentRef.current.getBoundingClientRect();
-	// 		if (dim.y > 0) setTop(-500);
-	// 		else if (dim.y < 0) setTop(-dim.y - 500);
-	// 	};
-	// 	if (noBodyComponentAbsolute && max) {
-	// 		window.addEventListener("scroll", () => scroll());
-	// 		return window.removeEventListener("scroll", () => scroll());
-	// 	}
-	// }, []);
 	React.useEffect(() => {
 		if (noBodyComponentAbsolute && (max || modal)) {
 			const resize = () => {
@@ -157,7 +146,7 @@ const Card: FC<PropTypes> = ({
 								: !line && !small
 								? "m-2 lg:m-10 text-2xl"
 								: !line
-								? "text-1xl"
+								? "text-sm"
 								: "text-md lg:text-2xl"
 						} relative p-0`}
 					>

@@ -20,6 +20,7 @@ export interface PropTypes {
 	btnActive?: number;
 	setBtnActive?: Function;
 	search?: any;
+	picklist?: boolean;
 }
 
 const SearchControls: FC<PropTypes> = ({
@@ -34,13 +35,19 @@ const SearchControls: FC<PropTypes> = ({
 	btnActive,
 	setBtnActive,
 	search,
+	picklist,
 }) => {
-	const a = pagination.skip * pagination.length + 1;
-	const b = pagination.skip * pagination.length + pagination.length;
-	const c = pagination.totalcount;
-	const bb = b > c ? c : b;
+	const a = pagination ? pagination.skip * pagination.length + 1 : null;
+	const b = pagination
+		? pagination.skip * pagination.length + pagination.length
+		: null;
+	const c = pagination ? pagination.totalcount : null;
+	const bb = pagination ? (b > c ? c : b) : null;
 	return (
-		<Styles.Container className={`text-text-primary font-primary ${className}`}>
+		<Styles.Container
+			picklist={picklist}
+			className={`text-text-primary font-primary ${className}`}
+		>
 			{textField ? (
 				<div style={{ textAlign: "left" }}>
 					<TextField
@@ -129,7 +136,7 @@ const SearchControls: FC<PropTypes> = ({
 					display: Array.isArray(children) && children.length > 1 ? "" : "",
 				}}
 			>
-				{pagination ? (
+				{pagination && pagination.totalcount ? (
 					<div className={`flex items-center justify-center`}>
 						<Button
 							className={"hidden m-1 lg:block pointer-events-auto"}
@@ -191,7 +198,7 @@ const SearchControls: FC<PropTypes> = ({
 						/>
 					</div>
 				) : null}
-				{pagination ? (
+				{pagination && pagination.totalcount ? (
 					<div className="text-center pointer-events-auto">
 						<div className={"text-text-primary font-primary text-lg"}>
 							Showing {a}-{bb} of {c}

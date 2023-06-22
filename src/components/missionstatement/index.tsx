@@ -13,7 +13,7 @@ const MissionStatement: FC<PropTypes> = ({ title, message, bgImg, button }) => {
 		<Styles.Container className={"text-text-primary font-primary"}>
 			{bgImg ? <Styles.BgImg src={bgImg} /> : null}
 			<div
-				className={`w-3/5 mx-24 xl:mx-96 xl:w-3/5 relative ${
+				className={`w-full px-10 xl:mx-96 xl:w-3/5 relative ${
 					bgImg ? "bg-visibility-primary rounded-md p-10" : ""
 				}`}
 			>
@@ -24,7 +24,7 @@ const MissionStatement: FC<PropTypes> = ({ title, message, bgImg, button }) => {
 				>
 					{title}
 				</div>
-				<div className={"text-md my-14"}>{message}</div>
+				<div className={"text-md my-14 w-full"}>{message}</div>
 				{button ? button : null}
 			</div>
 		</Styles.Container>

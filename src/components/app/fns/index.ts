@@ -15,6 +15,7 @@ import writeToken from "./writeToken";
 import route404 from "./route404";
 import e from "./eval";
 import scrollLock from "./scrolllock";
+import getCallType from "./getCallType";
 
 const animationFrames: Array<Function> = [];
 // const CryptoJS = require("crypto-js");
@@ -39,5 +40,6 @@ export default (D: any, setD: Function, Cookies: any, App: any) => {
 	_.e = e(_, D);
 	_.scrollLock = scrollLock(App);
 	_.route404 = route404(_);
+	_.getCallType = getCallType;
 	return _;
 };

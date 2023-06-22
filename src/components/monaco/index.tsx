@@ -38,7 +38,10 @@ const Monaco: FC<PropTypes> = ({
 			//@ts-ignore
 			MonacoRef.current.setValue(defaultValue);
 			//@ts-ignore
-			MonacoRef.current.getAction("editor.action.formatDocument").run();
+			if (MonacoRef.current.getAction("editor.action.formatDocument")) {
+				//@ts-ignore
+				MonacoRef.current.getAction("editor.action.formatDocument").run();
+			}
 		}
 	}, [language, defaultValue, refName]);
 	return (
@@ -62,10 +65,17 @@ const Monaco: FC<PropTypes> = ({
 							MonacoRef: stateMonacoRef,
 						}));
 						[10, 20, 40, 80].map((n: number) =>
-							setTimeout(
-								() => editor.getAction("editor.action.formatDocument").run(),
-								n
-							)
+							setTimeout(() => {
+								if (
+									//@ts-ignore
+									MonacoRef.current.getAction("editor.action.formatDocument")
+								) {
+									//@ts-ignore
+									MonacoRef.current
+										.getAction("editor.action.formatDocument")
+										.run();
+								}
+							}, n)
 						);
 					}
 				}}
@@ -78,7 +88,10 @@ const Monaco: FC<PropTypes> = ({
 					animation={true}
 					isIconButton={true}
 					onClick={(status: any) =>
-						MonacoRef && MonacoRef.current
+						MonacoRef &&
+						MonacoRef.current &&
+						//@ts-ignore
+						MonacoRef.current.getAction("editor.action.formatDocument")
 							? MonacoRef.current
 									//@ts-ignore
 									.getAction("editor.action.formatDocument")

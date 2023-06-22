@@ -1,4 +1,4 @@
-import LolTournamentAPI from "../apps/LoL Tournament API";
+import LolTournamentAPI from "../../apps/LoL Tournament API";
 
 export default (
 	state: { [key: string]: any },

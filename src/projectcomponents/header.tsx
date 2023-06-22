@@ -42,6 +42,16 @@ const H: FC<{
 							text: "My Profile",
 					  }
 					: { icon: "scroll", route: "/login", text: "Login" },
+				fns.readToken()._token
+					? {
+							icon: "scroll",
+							route: "/",
+							text: "Sign Out",
+							onClick: () => {
+								fns.writeToken();
+							},
+					  }
+					: null,
 			]}
 			socialMediaLeft={[
 				{
@@ -88,6 +98,16 @@ const H: FC<{
 				fns.readToken()._token
 					? { icon: "scroll", route: "/profile", text: "My Profile" }
 					: { icon: "scroll", route: "/login", text: "Login" },
+				fns.readToken()._token
+					? {
+							icon: "scroll",
+							route: "/",
+							text: "Sign Out",
+							onClick: () => {
+								fns.writeToken();
+							},
+					  }
+					: null,
 			]}
 			socialMedia={[
 				{

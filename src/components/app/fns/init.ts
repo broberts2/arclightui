@@ -9,13 +9,9 @@ export default (_: { [key: string]: any }) =>
 						key.includes("getintegrations") ||
 						key.includes("getscripts"))
 				) {
-					//_.calls[key]();
+					_.calls[key]();
 				}
 			});
-			//else if (key.includes("recursiveinit")) {
-			// 		_.calls[key]({ _recursive: true });
-			// 	}
-			// });
 			Object.keys(_.calls).map((key: string) => {
 				if (key.includes("recursiveinit")) {
 					_.calls[key]({ _recursive: true });

@@ -1,32 +1,20 @@
 export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 	(D: any, Constructors: any, fns: any, key: string, endpoint: string) =>
 	(currentState: { [key: string]: any }, updateState: Function) => ({
+		listquery: (type: string, _id: string) => {
+			if (fns.calls && fns.calls[`getrecords_${type}`]) {
+				fns.calls[`getrecords_${type}`]({
+					search: { _id },
+				});
+			}
+		},
 		title: `Manage ${xFormKey(key.replace(/_/g, ""))}`,
 		backgroundImg:
-			D && D.getdatamodels && key !== "model"
-				? D.getdatamodels.find((m: any) => m._type === key).metaimg
+			D && D.getdatamodels && D.getdatamodels.records && key !== "model"
+				? D.getdatamodels.records.find((m: any) => m._type === key).metaimg
 				: null,
 		controls: [
 			{
-				// cards: Constructors.constructFromRecordList(key).map((el: any) => ({
-				// 	bgImg:
-				// 		el.metaimg && el.metaimg.length
-				// 			? el.metaimg
-				// 			: el.img && el.img.length
-				// 			? el.img
-				// 			: `${endpoint}/static/integrationsart/daedalus.jpg`,
-				// 	subText: key === "model" ? el._type : setTitle(el),
-				// 	onClick: () => {
-				// 		updateState((_: any) => ({
-				// 			_id: el._id,
-				// 		}));
-				// 		fns.setAdminDomainState({
-				// 			...fns.parseAdminDomainState(),
-				// 			activePanel: 1,
-				// 			id: el._id,
-				// 		});
-				// 	},
-				// })),
 				onClick: (el) => {
 					updateState((_: any) => ({
 						_id: el._id,
@@ -44,17 +32,19 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 		onCreate:
 			D &&
 			D.getdatamodels &&
+			D.getdatamodels.records &&
 			(key !== "model"
 				? fns && fns.calls && fns.calls[`createrecords_${key}`]
 				: true)
 				? () => {
-						D.getdatamodels = D.getdatamodels.concat({
+						D.getdatamodels.records = D.getdatamodels.records.concat({
 							_type: "model",
 							type: "",
 							text: "",
 							icon: "",
 							subicon: "",
 							metaimg: "",
+							category: "",
 						});
 						updateState((_: any) => ({
 							_id: null,

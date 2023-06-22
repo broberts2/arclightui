@@ -25,8 +25,8 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 								"after-delete",
 								"universal",
 							].map((k: string) => ({
-								bgImg: `${endpoint}/static/defaultart/js.jpg`,
-								subText: k,
+								img: `${endpoint}/static/defaultart/js.jpg`,
+								name: k,
 								onClick: () => {
 									fns.setAdminDomainState({
 										...fns.parseAdminDomainState(),

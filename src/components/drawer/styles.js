@@ -1,5 +1,5 @@
 import styled from "styled-components";
-//import tw from "twin.macro";
+import { mountHandler } from "../animations";
 
 const Container = styled.div``;
 
@@ -7,9 +7,12 @@ const SignOut = styled.div``;
 
 const Component = styled.div`
 	height: 100%;
+	width: 100%;
+	overflow-x: hidden;
 `;
 
 const Item = styled.div`
+	${(props) => mountHandler(props)}
 	/* Position and sizing of burger button */
 	.bm-burger-button {
 		position: fixed;

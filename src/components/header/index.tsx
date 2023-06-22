@@ -5,13 +5,46 @@ import Styles from "./styles";
 
 export interface PropTypes {
 	fns: { [key: string]: Function };
-	logo: { route: string; src: string };
-	linksRight?: Array<{ route: string; text: string; icon?: string | null }>;
-	linksLeft?: Array<{ route: string; text: string; icon?: string | null }>;
-	links?: Array<{ route: string; text: string; icon?: string | null }>;
-	socialMediaRight?: Array<{ route: string; icon: string }>;
-	socialMediaLeft?: Array<{ route: string; icon: string }>;
-	socialMedia?: Array<{ route: string; icon: string }>;
+	logo: { route: string; src: string; onClick?: Function | null | undefined };
+	linksRight?: Array<{
+		route?: string | undefined | null;
+		routeExternal?: string | undefined | null;
+		text: string;
+		icon?: string | null;
+		onClick?: Function | null | undefined;
+	} | null>;
+	linksLeft?: Array<{
+		route?: string | undefined | null;
+		routeExternal?: string | undefined | null;
+		text: string;
+		icon?: string | null;
+		onClick?: Function | null | undefined;
+	} | null>;
+	links?: Array<{
+		route?: string | undefined | null;
+		routeExternal?: string | undefined | null;
+		text: string;
+		icon?: string | null;
+		onClick?: Function | null | undefined;
+	} | null>;
+	socialMediaRight?: Array<{
+		route?: string | undefined | null;
+		routeExternal?: string | undefined | null;
+		icon: string;
+		onClick?: Function | null | undefined;
+	}>;
+	socialMediaLeft?: Array<{
+		route?: string | undefined | null;
+		routeExternal?: string | undefined | null;
+		icon: string;
+		onClick?: Function | null | undefined;
+	}>;
+	socialMedia?: Array<{
+		route?: string | undefined | null;
+		routeExternal?: string | undefined | null;
+		icon: string;
+		onClick?: Function | null | undefined;
+	}>;
 }
 
 const Header: FC<PropTypes> = ({
@@ -34,17 +67,32 @@ const Header: FC<PropTypes> = ({
 				// @ts-ignore
 				items={
 					linksRight && linksLeft
-						? linksLeft.concat(linksRight).map((l) => ({
-								icon: l.icon,
-								text: l.text,
-								onClick: () => fns.route(l.route),
-						  }))
+						? linksLeft
+								.concat(linksRight)
+								.filter((el: any) => el)
+								.map((l: any) => ({
+									icon: l.icon,
+									text: l.text,
+									onClick: () =>
+										fns.route
+											? fns.route(l.route)
+											: fns.routeExternal
+											? fns.routeExternal(l.routeExternal)
+											: null,
+								}))
 						: links
-						? links.map((l) => ({
-								icon: l.icon,
-								text: l.text,
-								onClick: () => fns.route(l.route),
-						  }))
+						? links
+								.filter((el: any) => el)
+								.map((l: any) => ({
+									icon: l.icon,
+									text: l.text,
+									onClick: () =>
+										fns.route
+											? fns.route(l.route)
+											: fns.routeExternal
+											? fns.routeExternal(l.routeExternal)
+											: null,
+								}))
 						: null
 				}
 			/>
@@ -60,14 +108,23 @@ const Header: FC<PropTypes> = ({
 							<Styles.Td className="w-2/5 relative">
 								<div className="flex m-auto gap-8 relative place-content-end">
 									{linksLeft
-										? linksLeft.map((l) => (
-												<div
-													className="text-xl font-bold whitespace-nowrap cursor-pointer"
-													onClick={() => fns.route(l.route)}
-												>
-													{l.text}
-												</div>
-										  ))
+										? linksLeft
+												.filter((el: any) => el)
+												.map((l: any) => (
+													<div
+														className="text-xl font-bold whitespace-nowrap cursor-pointer"
+														onClick={() => {
+															if (l.onClick) l.onClick();
+															return fns.route
+																? fns.route(l.route)
+																: fns.routeExternal
+																? fns.routeExternal(l.routeExternal)
+																: null;
+														}}
+													>
+														{l.text}
+													</div>
+												))
 										: null}
 									<div className={"absolute top-12"}>
 										<div className="flex m-auto gap-4">
@@ -77,7 +134,14 @@ const Header: FC<PropTypes> = ({
 															animation="none"
 															icon={l.icon}
 															size="xl"
-															onClick={() => () => fns.route(l.route)}
+															onClick={() => {
+																if (l.onClick) l.onClick();
+																return fns.route
+																	? fns.route(l.route)
+																	: fns.routeExternal
+																	? fns.routeExternal(l.routeExternal)
+																	: null;
+															}}
 														/>
 												  ))
 												: null}
@@ -87,7 +151,10 @@ const Header: FC<PropTypes> = ({
 							</Styles.Td>
 							<td className="w-1/5">
 								<img
-									onClick={() => fns.route(logo.route)}
+									onClick={() => {
+										if (logo.onClick) logo.onClick();
+										return fns.route(logo.route);
+									}}
 									src={logo.src}
 									className={"h-24 m-4 lg:h-36 lg:m-auto cursor-pointer"}
 								/>
@@ -95,14 +162,23 @@ const Header: FC<PropTypes> = ({
 							<Styles.Td className="w-2/5">
 								<div className="flex m-auto gap-8 relative">
 									{linksRight
-										? linksRight.map((l) => (
-												<div
-													className="text-xl font-bold whitespace-nowrap cursor-pointer"
-													onClick={() => fns.route(l.route)}
-												>
-													{l.text}
-												</div>
-										  ))
+										? linksRight
+												.filter((el: any) => el)
+												.map((l: any) => (
+													<div
+														className="text-xl font-bold whitespace-nowrap cursor-pointer"
+														onClick={() => {
+															if (l.onClick) l.onClick();
+															return fns.route
+																? fns.route(l.route)
+																: fns.routeExternal
+																? fns.routeExternal(l.routeExternal)
+																: null;
+														}}
+													>
+														{l.text}
+													</div>
+												))
 										: null}
 									<div className={"absolute top-12"}>
 										<div className="flex m-auto gap-4 place-content-start">
@@ -112,7 +188,14 @@ const Header: FC<PropTypes> = ({
 															animation="none"
 															icon={l.icon}
 															size="xl"
-															onClick={() => fns.route(l.route)}
+															onClick={() => {
+																if (l.onClick) l.onClick();
+																return fns.route
+																	? fns.route(l.route)
+																	: fns.routeExternal
+																	? fns.routeExternal(l.routeExternal)
+																	: null;
+															}}
 														/>
 												  ))
 												: null}
@@ -130,7 +213,10 @@ const Header: FC<PropTypes> = ({
 						<tr>
 							<td className="w-1/5 relative">
 								<img
-									onClick={() => fns.route(logo.route)}
+									onClick={() => {
+										if (logo.onClick) logo.onClick();
+										return fns.route(logo.route);
+									}}
 									src={logo.src}
 									className={"h-16 m-4 lg:h-24 lg:m-auto cursor-pointer"}
 								/>
@@ -138,14 +224,23 @@ const Header: FC<PropTypes> = ({
 							<Styles.Td className="w-4/5 relative">
 								<div className="flex m-auto gap-8 relative justify-center">
 									{links
-										? links.map((l) => (
-												<div
-													className="text-xl font-bold whitespace-nowrap cursor-pointer"
-													onClick={() => fns.route(l.route)}
-												>
-													{l.text}
-												</div>
-										  ))
+										? links
+												.filter((el: any) => el)
+												.map((l: any) => (
+													<div
+														className="text-xl font-bold whitespace-nowrap cursor-pointer"
+														onClick={() => {
+															if (l.onClick) l.onClick();
+															return fns.route
+																? fns.route(l.route)
+																: fns.routeExternal
+																? fns.routeExternal(l.routeExternal)
+																: null;
+														}}
+													>
+														{l.text}
+													</div>
+												))
 										: null}
 									<div className={"absolute top-12"}>
 										<div className="flex m-auto gap-4 place-content-start">
@@ -155,7 +250,14 @@ const Header: FC<PropTypes> = ({
 															animation="none"
 															icon={l.icon}
 															size="xl"
-															onClick={() => fns.route(l.route)}
+															onClick={() => {
+																if (l.onClick) l.onClick();
+																return fns.route
+																	? fns.route(l.route)
+																	: fns.routeExternal
+																	? fns.routeExternal(l.routeExternal)
+																	: null;
+															}}
 														/>
 												  ))
 												: null}

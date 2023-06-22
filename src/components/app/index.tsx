@@ -101,10 +101,12 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 										authBackgroundImage={authBackgroundImage}
 										noSelect={noSelect}
 										fns={{
+											getCallType: fns.getCallType,
 											readState: fns.readState,
 											scrollLock: fns.scrollLock,
 											setModal,
 											readToken: fns.readToken,
+											writeToken: fns.writeToken,
 											e: fns.e,
 											setAdminDomainState:
 												domain === "admin" ? setAdminDomainState : null,
@@ -159,6 +161,7 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 					modal={modal}
 					setModal={(modal: { [key: string]: any } | null) => setModal(modal)}
 					fns={fns}
+					D={D}
 				/>
 			</Styles.Container>
 		));
@@ -192,10 +195,10 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 				Object.keys(calls).map((event: string) => {
 					if (Array.isArray(calls[event]))
 						calls[event].map((n: string) => {
-							//if (D) delete D[`${event}_${n}`];
 							fns.calls[`${event}_${n}`] = (input: { [key: string]: any }) =>
 								fns.promisify(() =>
 									socket.emit(`${event}_${n}`, {
+										index: "init",
 										...input,
 										...fns.readToken(),
 									})
@@ -203,14 +206,19 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 							// @ts-ignore
 							socket.on(`${event}_${n}`, (data: any) => {
 								const trigger = data._triggerFetch;
+								const index = data.index;
+								delete data.index;
 								delete data._triggerFetch;
-								setD((_: any) => ({
-									..._,
-									[`${event}_${n}`]:
-										_ && _[`${event}_${n}`]
-											? { ..._[`${event}_${n}`], ...data }
-											: data,
-								}));
+								setD((_: any) => {
+									if (!_[`${event}_${n}`]) _[`${event}_${n}`] = {};
+									return {
+										..._,
+										[`${event}_${n}`]: {
+											..._[`${event}_${n}`],
+											[index]: data,
+										},
+									};
+								});
 								if (trigger)
 									socket.emit(`getrecords_${n}`, {
 										...fns.readToken(),
@@ -221,6 +229,7 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 						fns.calls[event] = (input: { [key: string]: any }) =>
 							fns.promisify(() =>
 								socket.emit(event, {
+									//index: "init",
 									...input,
 									...fns.readToken(),
 								})
@@ -229,10 +238,17 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 						socket.on(event, (data: any) => {
 							if (event === "getlogs") console.log(JSON.parse(data));
 							const trigger = data._triggerFetch;
+							const index = data.index;
 							delete data._triggerFetch;
+							delete data.index;
 							setD((_: any) => ({
 								..._,
-								[event]: data,
+								[event]: index
+									? {
+											..._[event],
+											[index]: data,
+									  }
+									: data,
 							}));
 							if (trigger) {
 								socket.emit(event, {

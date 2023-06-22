@@ -17,7 +17,7 @@ const Community: FC<{
 		<Page
 			fns={fns}
 			backgroundImage={{
-				src: "https://1.bp.blogspot.com/-UIKkrj8xLGQ/XpNOHbpd9bI/AAAAAAABia0/DpgF7FitFeYxqIN3I05jisvYFbeq2ckjgCLcBGAsYHQ/s1600/2.png",
+				src: "https://images7.alphacoders.com/129/1293484.jpg",
 				opacity: 0.5,
 			}}
 		>
@@ -44,11 +44,7 @@ const Community: FC<{
 							</div>
 						),
 						bgImg:
-							D && D.getrecords_settings && D.getrecords_settings.settings
-								? D.getrecords_settings.settings.find(
-										(el: any) => el.name === "default"
-								  ).legendimg
-								: "",
+							"https://dotesports.com/wp-content/uploads/wp-content/uploads/2022/10/11100052/LoR_3.17_Arclight_Patchnotes_Skin_Seraphine1_PCruz_V001.jpg",
 						subText: "Legends",
 						onClick: () => setHItem(0),
 					},
@@ -62,11 +58,7 @@ const Community: FC<{
 							</div>
 						),
 						bgImg:
-							D && D.getrecords_settings && D.getrecords_settings.settings
-								? D.getrecords_settings.settings.find(
-										(el: any) => el.name === "default"
-								  ).dynastyimg
-								: "",
+							"https://prod.assets.earlygamecdn.com/images/ArclightEventLoR.jpg?mtime=1666009990",
 						subText: "Dynasties",
 						onClick: () => setHItem(1),
 					},
@@ -74,8 +66,9 @@ const Community: FC<{
 			/>
 			<ListPanel
 				Request={{
+					index: "community",
 					type: hItem ? `dynasty` : `user`,
-					search: hItem ? { limit: 8 } : { _managed: "Discord", limit: 8 },
+					search: hItem ? { limit: 32 } : { _managed: "Discord", limit: 32 },
 				}}
 				fns={fns}
 				D={D}

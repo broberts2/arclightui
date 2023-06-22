@@ -8,6 +8,21 @@
 	src: url("fonts/RussoOne-Regular.ttf");
 }
 
+/* input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+text:-webkit-autofill,
+text:-webkit-autofill:hover,
+text:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	transition: background-color 9999s ease-in-out 0s;
+} */
+
 .nopage {
 	z-index: 0;
 	position: absolute;
@@ -44,57 +59,9 @@
 }
 
 body {
-	overflow-y: overlay;
 	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
 		1px 1px 0 #000;
 }
-::-webkit-scrollbar {
-	width: 10px;
-	margin-right: 100px;
+body::-webkit-scrollbar {
+	display: none;
 }
-::-webkit-scrollbar-button {
-	height: 0;
-	width: 0;
-}
-::-webkit-scrollbar-track {
-	position: absolute;
-	right: -3rem;
-	top: -50rem;
-	background: transparent;
-}
-::-webkit-scrollbar-track:hover {
-	background-color: transparent;
-}
-::-webkit-scrollbar-track:active {
-	background-color: transparent;
-}
-::-webkit-scrollbar-thumb {
-	background-color: #cccccc;
-	background-clip: padding-box;
-	border: solid transparent;
-	border-width: 1px 1px 1px 0px;
-	min-height: 28px;
-	padding: 0px 0 0;
-	border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-	background-color: #999999;
-}
-::-webkit-scrollbar-thumb:active {
-	background-color: #808080;
-}
-
-/* input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-text:-webkit-autofill,
-text:-webkit-autofill:hover,
-text:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-	transition: background-color 9999s ease-in-out 0s;
-} */

@@ -20,7 +20,8 @@ import constructFromRecordList from "./stfns/constructfromrecordlist";
 import constructFromDataModel from "./stfns/constructfromdatamodel";
 import parseCode from "./stfns/parsecode";
 
-const ItemsArray = [database, integration, event, script, report, form, app];
+// const ItemsArray = [database, integration, event, script, report, form, app];
+const ItemsArray = [database, integration, script, app];
 
 const Admin: FC<{
 	fns: {
@@ -78,6 +79,7 @@ const Admin: FC<{
 						style={{ display: !authenticated ? "none" : "" }}
 					>
 						<Drawer
+							autoSort
 							headerImg={
 								useMediaQuery({ query: "(min-width: 1024px)" })
 									? `${endpoint}/${noSelect}`
@@ -97,8 +99,10 @@ const Admin: FC<{
 					<Styles.Content>
 						{!authenticated ? (
 							<AuthPage
+								headless
 								disableNewRegistration
 								fns={fns}
+								D={D}
 								authBackgroundImage={`${endpoint}/${authBackgroundImage}`}
 								OATHOnly={false}
 								OATH={[{ type: "discord", onClick: () => null }]}

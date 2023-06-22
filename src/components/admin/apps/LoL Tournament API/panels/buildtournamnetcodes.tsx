@@ -1,5 +1,56 @@
 import React from "react";
 
+{
+	/* <PickList
+	type={c.lookup}
+	D={D}
+	fns={fns}
+	disallowNone={c.type === "Boolean"}
+	multiple={multiple}
+	span
+	hot
+	value={
+		state[c.label] !== undefined &&
+		state[c.label] !== null &&
+		Array.isArray(state[c.label])
+			? state[c.label]
+			: !multiple
+			? state[c.label]
+			: []
+	}
+	list={
+		c.type === "Boolean"
+			? [
+					{ text: "true", value: true },
+					{ text: "false", value: false },
+			  ]
+			: c &&
+			  c.D &&
+			  c.lookup &&
+			  c.D[`getrecords_${c.lookup}`] &&
+			  c.D[`getrecords_${c.lookup}`][c.label] &&
+			  c.D[`getrecords_${c.lookup}`][c.label].records
+			? c.D[`getrecords_${c.lookup}`][c.label].records.map((obj: any) => {
+					const _: any = { value: obj._id };
+					if (obj.name) _.text = obj.name;
+					else if (obj.username) _.text = obj.username;
+					else if (obj.text) _.text = obj.text;
+					return _;
+			  })
+			: []
+	}
+	onChange={(e: any) => {
+		return setState((_: any) => ({
+			..._,
+			[c.label]: e.target.value,
+		}));
+	}}
+	key={i}
+	label={c.label}
+	variant="standard"
+/>; */
+}
+
 export default (props: any) => {
 	const [state, setState] = React.useState({
 		league: null,
@@ -10,42 +61,81 @@ export default (props: any) => {
 		seasonNum: null,
 		MonacoRef: {},
 	});
-	return (
+	return props.D &&
+		props.D.getintegrations &&
+		props.D.getintegrations["LoL Tournament API"] ? (
 		<div className={`flex flex-col space-y-10`}>
 			{[
 				{
-					l: "League Selection",
-					v: "league",
-					r: "D.getrecords_lolleague.lolleague",
+					type: props.D.getintegrations["LoL Tournament API"].settings
+						.leaguemodeltype,
+					value: "league",
+					label: "League Selection",
 				},
-				{ l: "Team 1 Selection", v: "team1", r: "D.getrecords_team.team" },
-				{ l: "Team 2 Selection", v: "team2", r: "D.getrecords_team.team" },
-				{ l: "Code Count", v: "count", n: [1, 3, 5, 7] },
+				{
+					type: props.D.getintegrations["LoL Tournament API"].settings
+						.teammodeltype,
+					value: "team1",
+					label: "Team 1 Selection",
+				},
+				{
+					type: props.D.getintegrations["LoL Tournament API"].settings
+						.teammodeltype,
+					value: "team2",
+					label: "Team 2 Selection",
+				},
 			].map((el: any) => (
 				<props.Controls.PickList
-					disableSearch
-					disallowNone
+					type={el.type}
+					D={props.D}
+					fns={props.fns}
 					span
 					hot
-					value={state[el.v]}
+					value={state[el.value]}
 					list={
-						el.n
-							? el.n.map((el: any) => ({ text: `${el}`, value: el }))
-							: props.fns
-									.e(props.D, el.r, [])
-									.map((t: any) => ({ text: t.name, value: t }))
+						props.D &&
+						props.D[`getrecords_${el.type}`] &&
+						props.D[`getrecords_${el.type}`][el.label] &&
+						props.D[`getrecords_${el.type}`][el.label].records
+							? props.D[`getrecords_${el.type}`][el.label].records.map(
+									(obj: any) => {
+										const _: any = { value: obj._id };
+										_.text = obj.name;
+										return _;
+									}
+							  )
+							: []
 					}
 					onChange={(e: any) =>
 						setState((_: any) => ({
 							..._,
-							[el.v]: e.target.value,
+							[el.value]: e.target.value,
 						}))
 					}
 					key={0}
-					label={el.l}
+					label={el.label}
 					variant="standard"
 				/>
 			))}
+			<props.Controls.PickList
+				unlinked
+				span
+				hot
+				value={state.count}
+				list={[1, 3, 5, 7].map((value: number) => ({
+					text: `${value}`,
+					value,
+				}))}
+				onChange={(e: any) =>
+					setState((_: any) => ({
+						..._,
+						count: e.target.value,
+					}))
+				}
+				key={0}
+				label={"Code Count"}
+				variant="standard"
+			/>
 			<props.Controls.TextField
 				span
 				hot
@@ -143,5 +233,5 @@ export default (props: any) => {
 				}}
 			/>
 		</div>
-	);
+	) : null;
 };

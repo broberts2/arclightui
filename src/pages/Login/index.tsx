@@ -15,16 +15,18 @@ const Staff: FC<{
 		<Page
 			fns={fns}
 			backgroundImage={{
-				src: "http://localhost:7000/static/media/yone2.jpg",
+				src: "https://a-static.besthdwallpaper.com/the-shadow-reaper-kayn-league-of-legends-lol-wallpaper-2048x768-103766_85.jpg",
 				opacity: 0.5,
 			}}
 		>
 			<Header fns={fns} endpoint={endpoint} />
 			<AuthPage
 				redirect={"/"}
-				disableNewRegistration
+				D={D}
 				fns={fns}
-				authBackgroundImage={"http://localhost:7000/static/media/ionia.jpg"}
+				authBackgroundImage={
+					"https://a-static.besthdwallpaper.com/the-unforgotten-yone-league-of-legends-lol-wallpaper-1024x576-95538_44.jpg"
+				}
 				OATHOnly={false}
 				OATH={[{ type: "discord", onClick: () => null }]}
 			/>

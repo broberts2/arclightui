@@ -10,30 +10,25 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 	) =>
 	(currentState: { [key: string]: any }, updateState: Function) => ({
 		title: `Manage (${fns.parseAdminDomainState().script}) Scripts`,
-
 		controls:
 			D && D.getscripts && fns.parseAdminDomainState().script
 				? [
 						{
-							cards: D.getscripts[fns.parseAdminDomainState().script]
-								? Object.keys(D.getscripts[fns.parseAdminDomainState().script])
-										// .filter(
-										// 	(k: string) =>
-										// 		!JSON.parse(
-										// 			D.getscripts[fns.parseAdminDomainState().script][k]
-										// 				.metadata
-										// 		).managed
-										// )
-										.map((k: string) => ({
-											bgImg: `${endpoint}/static/defaultart/${
+							cards: D.getscripts.records[fns.parseAdminDomainState().script]
+								? Object.keys(
+										D.getscripts.records[fns.parseAdminDomainState().script]
+								  ).map((k: string) => {
+										return {
+											img: `${endpoint}/static/defaultart/${
 												JSON.parse(
-													D.getscripts[fns.parseAdminDomainState().script][k]
-														.metadata
+													D.getscripts.records[
+														fns.parseAdminDomainState().script
+													][k].metadata
 												).managed
 													? "js-m"
 													: "js"
 											}.jpg`,
-											subText: k,
+											name: k,
 											onClick: () => {
 												fns.setAdminDomainState({
 													...fns.parseAdminDomainState(),
@@ -41,7 +36,8 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 													selectedscript: k,
 												});
 											},
-										}))
+										};
+								  })
 								: [],
 							type: "ListPanel",
 							label: "Search",

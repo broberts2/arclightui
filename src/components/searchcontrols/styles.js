@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
 	position: relative;
 	height: 100%;
-	min-height: 600px;
+	${(props) => (!props.picklist ? `min-height: 600px;` : "")}
 `;
 
 const Children = styled.div`

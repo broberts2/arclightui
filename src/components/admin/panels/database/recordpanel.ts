@@ -2,17 +2,17 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 	(D: any, Constructors: any, fns: any, key: string, endpoint: string) =>
 	(currentState: { [key: string]: any }, updateState: Function) => ({
 		title:
-			currentState._id && D.getdatamodels
+			currentState._id && D.getdatamodels && D.getdatamodels.records
 				? `${xFormKey(key.replace(/_/g, "")).slice(0, -1)}: ${(() => {
-						const value = D.getdatamodels.find(
+						const value = D.getdatamodels.records.find(
 							(el: any) => el._id === currentState._id
 						);
 						const value2 = D[`getrecords_${key}`];
 						return key === "model" && value && value.text
 							? value.text
-							: value2 && value2[key]
+							: value2 && value2.init
 							? setTitle(
-									D[`getrecords_${key}`][key].find(
+									D[`getrecords_${key}`].init.records.find(
 										(el: any) => el._id === currentState._id
 									)
 							  )
@@ -20,14 +20,14 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 				  })().replace("*", "(Integration) ")}`
 				: `Create ${xFormKey(key.replace(/_/g, ""))}`,
 		backgroundImg: (() => {
-			if (D && D.getdatamodels && currentState._id) {
+			if (D && D.getdatamodels && D.getdatamodels.records && currentState._id) {
 				if (key === "model") {
-					const o = D.getdatamodels.find(
+					const o = D.getdatamodels.records.find(
 						(el: any) => el._id === currentState._id
 					);
 					if (o) return o.metaimg;
 				} else if (D[`getrecords_${key}`]) {
-					const o = D[`getrecords_${key}`][key].find(
+					const o = D[`getrecords_${key}`].init.records.find(
 						(el: any) => el._id === currentState._id
 					);
 					if (o) return o.img;
@@ -36,8 +36,8 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 		})(),
 		controls: Constructors.constructFromDataModel(
 			(() => {
-				if (D && D.getdatamodels) {
-					const t = D.getdatamodels.find((el: any) =>
+				if (D && D.getdatamodels && D.getdatamodels.records) {
+					const t = D.getdatamodels.records.find((el: any) =>
 						key === "model" ? el._id === currentState._id : el._type === key
 					);
 					if (t && t._type) return t._type;
@@ -91,7 +91,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 		onAddField:
 			key === "model"
 				? () => {
-						const model = D.getdatamodels.find(
+						const model = D.getdatamodels.records.find(
 							(el: any) => el._id === currentState._id
 						);
 						if (model) {
@@ -123,6 +123,10 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 				  }
 				: null,
 		onBack: () => {
+			const _ = fns.parseAdminDomainState().item;
+			fns.calls[_ === "model" ? "getdatamodels" : `getrecords_${_}`]({
+				search: { limit: 32 },
+			});
 			fns.setAdminDomainState({
 				...fns.parseAdminDomainState(),
 				activePanel: 0,

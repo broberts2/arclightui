@@ -7,7 +7,8 @@ export default (
 	Bttn: any,
 	state: { [key: string]: any },
 	setState: Function,
-	D: any
+	D: any,
+	fns: any
 ) => {
 	return state && state[c.label] && typeof state[c.label] === "object" ? (
 		<div
@@ -32,6 +33,7 @@ export default (
 				variant="standard"
 			/>
 			<PickList
+				unlinked
 				disallowNone
 				span
 				hot
@@ -57,15 +59,16 @@ export default (
 				label={"type"}
 				variant="standard"
 			/>
-			{state[c.label].lookup ? (
+			{state[c.label].lookup && D.getdatamodels && D.getdatamodels.records ? (
 				<PickList
 					disallowNone
 					span
 					hot
 					value={state[c.label].lookup}
-					list={D.getdatamodels.map((el: any) => ({
+					list={D.getdatamodels.records.map((el: any) => ({
 						text: el._type,
 						value: el._type,
+						_id: el._id,
 					}))}
 					onChange={(e: any) =>
 						setState((_: any) => ({
@@ -76,9 +79,18 @@ export default (
 							},
 						}))
 					}
-					key={i}
+					keyname={state[c.label].key}
+					id={(() => {
+						const _ = D.getdatamodels.records.find(
+							(el: any) => el._type === state[c.label].lookup
+						);
+						if (_) return _._id;
+					})()}
 					label={"model"}
 					variant="standard"
+					type={state[c.label].lookup}
+					fns={fns}
+					D={D}
 				/>
 			) : null}
 			<div
@@ -136,6 +148,22 @@ export default (
 					/>
 				</div>
 				<div className={`m-auto`}>Required</div>
+				<div className={`m-auto`}>
+					<Checkbox
+						value={state[c.label].searchable}
+						onChange={(b: boolean, cb: Function) => {
+							setState((_: any) => ({
+								..._,
+								[c.label]: {
+									...state[c.label],
+									searchable: b ? null : _[c.label],
+								},
+							}));
+							cb(!b);
+						}}
+					/>
+				</div>
+				<div className={`m-auto`}>Searchable</div>
 				<div className={`flex justify-end w-full space-x-2`}>
 					{!state[c.label].system || true ? (
 						<Bttn

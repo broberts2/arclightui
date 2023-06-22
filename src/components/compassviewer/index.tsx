@@ -99,7 +99,7 @@ const CompassViewer: FC<PropTypes> = ({
 							<Styles.ViewItem
 								className={`${
 									expanded ? "w-full" : "w-0"
-								} transition-all duration-300 px-16`}
+								} transition-all duration-300 px-10`}
 							>
 								{RenderItem}
 							</Styles.ViewItem>

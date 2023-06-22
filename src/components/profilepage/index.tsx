@@ -32,7 +32,10 @@ const ProfilePage: FC<PropTypes> = ({
 					size={"normal"}
 					animation={true}
 					onClick={(status: any) =>
-						fns.setModal({ noescape: true, body: <div>Shalom</div> })
+						fns.setModal({
+							noescape: true,
+							body: (props) => <div>Shalom</div>,
+						})
 					}
 				/>
 			</div>

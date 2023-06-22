@@ -19,13 +19,13 @@ const Home: FC<{
 	D: { [key: string]: any };
 	endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
-	return (
+	return D && fns.calls ? (
 		<Page
 			fns={fns}
 			backgroundImage={{
 				src: fns.e(
 					D,
-					`D.getrecords_homepagesettings.homepagesettings.homepagesettings[0].homepageimg`,
+					`D.getrecords_homepagesettings.init.records[0].homepageimg`,
 					`${endpoint}/static/media/yone.jpg`
 				),
 				opacity: 0.5,
@@ -155,7 +155,7 @@ const Home: FC<{
 			/>
 			<HeroPanel
 				cards={fns
-					.e(D, `D.getrecords_lolleague.lolleague`, [])
+					.e(D, `D.getrecords_lolleague.init.records`, [])
 					.map((league: { [key: string]: any }) => ({
 						locked: league.locked,
 						hoverComponent: (
@@ -168,7 +168,7 @@ const Home: FC<{
 			/>
 			<Footer fns={fns} endpoint={endpoint} />
 		</Page>
-	);
+	) : null;
 };
 
 export default Home;
