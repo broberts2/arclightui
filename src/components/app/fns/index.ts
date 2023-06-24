@@ -15,6 +15,7 @@ import writeToken from "./writeToken";
 import route404 from "./route404";
 import e from "./eval";
 import scrollLock from "./scrolllock";
+import verifyRegisterUser from "./verifyregisteruser";
 import getCallType from "./getCallType";
 
 const animationFrames: Array<Function> = [];
@@ -27,6 +28,7 @@ export default (D: any, setD: Function, Cookies: any, App: any) => {
 	_.promisify = promisify(D, setD, _);
 	_.parseAdminDomainState = parseAdminDomainState(_);
 	_.setAdminDomainState = setAdminDomainState(_);
+	_.verifyRegisterUser = verifyRegisterUser(_);
 	_.animate = animate(_, animationFrames);
 	_.addAnimationFrame = addAnimationFrame(_, animationFrames);
 	_.getSubdomain = getSubdomain(_);

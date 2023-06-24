@@ -101,6 +101,7 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 										authBackgroundImage={authBackgroundImage}
 										noSelect={noSelect}
 										fns={{
+											verifyRegisterUser: fns.verifyRegisterUser,
 											getCallType: fns.getCallType,
 											readState: fns.readState,
 											scrollLock: fns.scrollLock,
@@ -266,6 +267,13 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
 					setTransitioning(true);
 					await new Promise((r) => setTimeout(r, transitionDuration / 2));
 					window.location.reload();
+				});
+				socket.on(`clearurlparameters`, () => {
+					window.history.replaceState(
+						"object",
+						document.title,
+						window.location.href.split("?")[0]
+					);
 				});
 				["success", "error", "warning", "message"].map((el: string) =>
 					socket.on(`server${el}`, (msg: { msg: string; code: Number }) => {

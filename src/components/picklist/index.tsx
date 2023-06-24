@@ -223,8 +223,6 @@ const PickList: FC<PropTypes> = ({
 						if (hot) {
 							if (!unlinked && d.target.value && d.target.value.length) {
 								const _ = label === "model";
-								if (_ && !D.getdatamodels[`model__${label}value-${keyname}`])
-									return;
 								const _id = _
 									? id
 									: Array.isArray(d.target.value)

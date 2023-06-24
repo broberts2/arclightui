@@ -20,6 +20,7 @@ const Staff: FC<{
 			}}
 		>
 			<Header fns={fns} endpoint={endpoint} />
+			<button onClick={() => fns.verifyRegisterUser("test")}>SHALOM!!!</button>
 			<AuthPage
 				redirect={"/"}
 				D={D}

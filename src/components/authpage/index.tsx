@@ -34,6 +34,7 @@ const AuthPage: FC<PropTypes> = ({
 	const [credentials, setCredentials] = React.useState({
 		username: "",
 		password: "",
+		email: "",
 	});
 	return (
 		<Styles.Container className={className} headless={headless}>
@@ -136,6 +137,11 @@ const AuthPage: FC<PropTypes> = ({
 												noescape: true,
 												body: function Body(props) {
 													const [loading, setLoading] = React.useState(false);
+													const [username, setUsername] = React.useState("");
+													const [password, setPassword] = React.useState("");
+													const [verifyPassword, setVerifyPassword] =
+														React.useState("");
+													const [email, setEmail] = React.useState("");
 													React.useEffect(() => {
 														if (!props.D.serversuccess) setLoading(false);
 														if (props.D.serversuccess) props.setModal(false);
@@ -160,28 +166,36 @@ const AuthPage: FC<PropTypes> = ({
 																	defaultValue: "",
 																	type: "text",
 																	label: "Username",
+																	v: username,
+																	fn: setUsername,
 																},
 																{
 																	defaultValue: "",
 																	type: "password",
 																	label: "Password",
+																	v: password,
+																	fn: setPassword,
 																},
 																{
 																	defaultValue: "",
 																	type: "password",
 																	label: "Verify Password",
+																	v: verifyPassword,
+																	fn: setVerifyPassword,
 																},
 																{
 																	defaultValue: "",
 																	type: "text",
 																	label: "Email",
+																	v: email,
+																	fn: setEmail,
 																},
 															].map((el, i) => (
 																<TextField
 																	span
 																	hot
-																	defaultValue={el.defaultValue}
-																	onChange={(e: any) => null}
+																	value={el.v}
+																	onChange={(e: any) => el.fn(e.target.value)}
 																	type={el.type}
 																	key={i}
 																	label={el.label}
@@ -208,7 +222,10 @@ const AuthPage: FC<PropTypes> = ({
 																		) {
 																			setLoading(true);
 																			fns.calls.registeruser({
-																				username: "test",
+																				username,
+																				password,
+																				email,
+																				redirect: `http://leagueoflegends.localhost:3000/login`,
 																			});
 																		}
 																	}}
