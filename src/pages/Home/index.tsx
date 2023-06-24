@@ -19,6 +19,7 @@ const Home: FC<{
 	D: { [key: string]: any };
 	endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
+	console.log(fns);
 	return D && fns.calls ? (
 		<Page
 			fns={fns}
