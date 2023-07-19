@@ -21,7 +21,7 @@ import constructFromDataModel from "./stfns/constructfromdatamodel";
 import parseCode from "./stfns/parsecode";
 
 // const ItemsArray = [database, integration, event, script, report, form, app];
-const ItemsArray = [database, integration, script, app];
+const ItemsArray = [database, integration, script, app, form];
 
 const Admin: FC<{
 	fns: {
@@ -105,7 +105,17 @@ const Admin: FC<{
 								D={D}
 								authBackgroundImage={`${endpoint}/${authBackgroundImage}`}
 								OATHOnly={false}
-								OATH={[{ type: "discord", onClick: () => null }]}
+								OATH={[
+									{
+										type: "discord",
+										onClick: () =>
+											fns.calls && fns.calls.DiscordOATH2
+												? fns.calls.DiscordOATH2({
+														domain: fns.readState().subdomain,
+												  })
+												: null,
+									},
+								]}
 							/>
 						) : null}
 						{authenticated && Object.keys(fns.calls).length ? (

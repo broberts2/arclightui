@@ -9,7 +9,8 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 		endpoint: string
 	) =>
 	(currentState: { [key: string]: any }, updateState: Function) => ({
-		title: `Manage (${fns.parseAdminDomainState().script}) Scripts`,
+		title: `(${fns.parseAdminDomainState().script}) Scripts`,
+		backgroundImg: `${endpoint}/static/defaultart/nodejs.jpg`,
 		controls:
 			D && D.getscripts && fns.parseAdminDomainState().script
 				? [

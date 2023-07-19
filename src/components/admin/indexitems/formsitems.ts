@@ -1,7 +1,7 @@
-import draweritems_scripts from "../draweritems/scripts";
+import draweritems_form from "../draweritems/form";
 
 export default (D: any, fns: any) => {
-	const Items = draweritems_scripts(
+	const Items = draweritems_form(
 		D,
 		fns
 	)(
@@ -10,18 +10,18 @@ export default (D: any, fns: any) => {
 			D.getdatamodels.records &&
 			Array.isArray(D.getdatamodels.records)
 			? [
-					{ icon: "file-contract", text: "Forms", event: "form" },
+					{ icon: "folder-open", text: "Forms", form: "Form" },
 					{
 						icon: "file-contract",
 						text: "Form Templates",
-						event: "formtemplate",
+						form: "Form Template",
 					},
 			  ]
 			: []
 	);
 	return {
 		items: Items,
-		icon: "file-signature",
+		icon: "tablet",
 		text: "Forms",
 		cond: Items.length,
 	};

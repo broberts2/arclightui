@@ -1,6 +1,7 @@
 //@ts-nocheck
 import React from "react";
-import fns from "../../../../app/fns";
+
+const _SUMMONERKEY = "User";
 
 export default (props: any) => {
 	const [user, setUser] = React.useState(null);
@@ -16,44 +17,68 @@ export default (props: any) => {
 		`D.getintegrations.LoL Tournament API.settings.playermodeltype`,
 		null
 	);
-	return (
+	React.useEffect(() => {
+		if (
+			playermodeltype &&
+			props.D[`getrecords_${playermodeltype}`] &&
+			!props.D[`getrecords_${playermodeltype}`][_SUMMONERKEY]
+		)
+			props.fns.calls[`getrecords_${playermodeltype}`]({
+				index: _SUMMONERKEY,
+				search: {
+					skip: 0,
+					limit: 10,
+				},
+			});
+	}, [props.D]);
+	return playermodeltype &&
+		props.D &&
+		props.D[`getrecords_${playermodeltype}`] &&
+		props.D[`getrecords_${playermodeltype}`][_SUMMONERKEY] ? (
 		<div className={`flex flex-col space-y-10`}>
 			<props.Controls.PickList
-				disallowNone
+				type={playermodeltype}
+				D={props.D}
+				fns={props.fns}
 				span
 				hot
 				value={user}
-				list={props.fns
-					.e(props.D, `D.getrecords_${playermodeltype}.${playermodeltype}`, [])
-					.map((t: any) => ({ text: t.username, value: t }))}
-				onChange={(e: any) => setUser(e.target.value)}
+				list={props.D[`getrecords_${playermodeltype}`][
+					_SUMMONERKEY
+				].records.map((obj: any) => {
+					const _: any = { value: obj._id };
+					if (obj.name) _.text = obj.name;
+					else if (obj.username) _.text = obj.username;
+					else if (obj.text) _.text = obj.text;
+					return _;
+				})}
+				onChange={(e: any) => {
+					return setUser(e.target.value);
+				}}
 				key={0}
-				label={"User Selection"}
+				label={_SUMMONERKEY}
 				variant="standard"
 			/>
-			<div className={puuid ? `pointer-events-none opacity-30` : ""}>
-				<props.Controls.TextField
-					span
-					hot
-					value={summonername && summonername.length ? summonername : ""}
-					onChange={(e: any) => setSummonerName(e.target.value)}
-					type={"text"}
-					key={0}
-					label={"Summoner Name"}
-					variant="standard"
-				/>
-			</div>
-			<div className={`pointer-events-none opacity-30`}>
-				<props.Controls.TextField
-					bind
-					span
-					value={puuid && puuid.length ? puuid : ""}
-					type={"text"}
-					key={0}
-					label={"PUUID"}
-					variant="standard"
-				/>
-			</div>
+			<props.Controls.TextField
+				span
+				hot
+				value={summonername && summonername.length ? summonername : ""}
+				onChange={(e: any) => setSummonerName(e.target.value)}
+				type={"text"}
+				key={0}
+				label={"Summoner Name"}
+				variant="standard"
+			/>
+			<props.Controls.TextField
+				bind
+				span
+				value={puuid && puuid.length ? puuid : ""}
+				onChange={(e: any) => null}
+				type={"text"}
+				key={0}
+				label={"PUUID"}
+				variant="standard"
+			/>
 			<props.Controls.Button
 				span
 				label={
@@ -87,5 +112,5 @@ export default (props: any) => {
 				}}
 			/>
 		</div>
-	);
+	) : null;
 };

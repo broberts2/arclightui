@@ -9,7 +9,8 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 		endpoint: string
 	) =>
 	(currentState: { [key: string]: any }, updateState: Function) => ({
-		title: `Manage (Integration) ${fns.parseAdminDomainState().integration}`,
+		title: `${fns.parseAdminDomainState().integration}`,
+		backgroundImg: `${endpoint}/static/defaultart/integration.jpg`,
 		controls: [
 			{ type: "IntegrationMonaco", label: "Search", onClick: () => null },
 		],

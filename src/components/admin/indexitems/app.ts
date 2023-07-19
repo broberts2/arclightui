@@ -5,6 +5,7 @@ export default (D: any, fns: any) => {
 		D && D.getintegrations
 			? ["LoL Tournament API"].find(
 					(s: string) =>
+						D.getdatamodels &&
 						D.getintegrations[s] &&
 						D.getintegrations[s].active &&
 						D.getintegrations[s].app &&

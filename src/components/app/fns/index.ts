@@ -17,6 +17,8 @@ import e from "./eval";
 import scrollLock from "./scrolllock";
 import verifyRegisterUser from "./verifyregisteruser";
 import getCallType from "./getCallType";
+import setQueryParams from "./setQueryParams";
+import consumeOATH2Code from "./consumeOATH2Code";
 
 const animationFrames: Array<Function> = [];
 // const CryptoJS = require("crypto-js");
@@ -32,9 +34,11 @@ export default (D: any, setD: Function, Cookies: any, App: any) => {
 	_.animate = animate(_, animationFrames);
 	_.addAnimationFrame = addAnimationFrame(_, animationFrames);
 	_.getSubdomain = getSubdomain(_);
+	_.consumeOATH2Code = consumeOATH2Code(_);
 	_.readState = readState(_);
 	_.authenticate = authenticate(_);
 	_.route = route(_);
+	_.setQueryParams = setQueryParams(_);
 	_.routeExternal = routeExternal(_);
 	_.readToken = readToken(_, new Cookies());
 	_.signOut = signOut(_);

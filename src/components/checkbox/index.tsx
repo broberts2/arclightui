@@ -5,15 +5,16 @@ import Styles from "./styles";
 export interface PropTypes {
 	value?: boolean;
 	onChange?: Function;
+	label?: string;
 }
 
-const Checkbox: FC<PropTypes> = ({ value, onChange }) => {
+const Checkbox: FC<PropTypes> = ({ value, onChange, label }) => {
 	const [checked, setChecked] = React.useState<boolean | null | undefined>(
 		value ? value : false
 	);
 	React.useEffect(() => setChecked(value), [value]);
 	return (
-		<Styles.Container>
+		<Styles.Container className={`flex`}>
 			<_Checkbox
 				checked={checked ? true : false}
 				onChange={() =>
@@ -21,6 +22,9 @@ const Checkbox: FC<PropTypes> = ({ value, onChange }) => {
 				}
 				style={{ color: "inherit" }}
 			/>
+			{label ? (
+				<div className={`text-md font-primary primary`}>{label}</div>
+			) : null}
 		</Styles.Container>
 	);
 };

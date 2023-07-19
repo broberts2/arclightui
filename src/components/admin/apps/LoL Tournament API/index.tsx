@@ -29,12 +29,12 @@ const LoLTournamentAPI: FC<{
 									/>
 								),
 								bgImg: `${publicURI}/static/defaultart/ionia_1.jpg`,
-								subText: "Build Tournament Code(s)",
+								subText: "Tournament Codes",
 								onClick: () =>
 									fns.setAdminDomainState({
 										...fns.parseAdminDomainState(),
 										activePanel: 1,
-										subItem: "Build Tournament Code(s)",
+										subItem: "Tournament Codes",
 									}),
 							},
 							{
@@ -61,12 +61,12 @@ const LoLTournamentAPI: FC<{
 									/>
 								),
 								bgImg: `${publicURI}/static/defaultart/ionia_3.jpg`,
-								subText: "Import by Tournament Code",
+								subText: "Import Game Data",
 								onClick: () =>
 									fns.setAdminDomainState({
 										...fns.parseAdminDomainState(),
 										activePanel: 1,
-										subItem: "Import by Tournament Code",
+										subItem: "Import Game Data",
 									}),
 							},
 						]}

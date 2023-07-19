@@ -34,7 +34,7 @@ const H: FC<{
 			]}
 			linksRight={[
 				{ icon: "user-astronaut", route: "/staff", text: "Staff" },
-				{ icon: "scroll", route: "/", text: "Applications" },
+				{ icon: "scroll", route: "/application", text: "Applications" },
 				fns.readToken()._token
 					? {
 							icon: "scroll",
@@ -94,7 +94,7 @@ const H: FC<{
 				{ icon: "chart-line", route: "/teams", text: "Teams and Stats" },
 				{ icon: "chess-knight", route: "/", text: "Crux" },
 				{ icon: "user-astronaut", route: "/staff", text: "Staff" },
-				{ icon: "scroll", route: "/", text: "Applications" },
+				{ icon: "scroll", route: "/application", text: "Applications" },
 				fns.readToken()._token
 					? { icon: "scroll", route: "/profile", text: "My Profile" }
 					: { icon: "scroll", route: "/login", text: "Login" },

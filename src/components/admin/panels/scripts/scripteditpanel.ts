@@ -4,6 +4,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 		const ss = fns.parseAdminDomainState().selectedscript;
 		return {
 			title: ss ? `Edit Script` : `Create Script`,
+			backgroundImg: `${endpoint}/static/defaultart/nodejs.jpg`,
 			controls: [{ type: "ScriptMonaco", label: "Z", onClick: () => null }],
 			[ss ? `onUpdate` : `onCreate`]: () => {
 				return fns.calls[ss ? `updatescripts` : "createscripts"]({

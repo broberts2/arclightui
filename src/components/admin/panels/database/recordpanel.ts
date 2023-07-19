@@ -26,7 +26,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 						(el: any) => el._id === currentState._id
 					);
 					if (o) return o.metaimg;
-				} else if (D[`getrecords_${key}`]) {
+				} else if (D[`getrecords_${key}`] && D[`getrecords_${key}`].init) {
 					const o = D[`getrecords_${key}`].init.records.find(
 						(el: any) => el._id === currentState._id
 					);
@@ -78,6 +78,62 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 						updateState((_: any) => ({
 							..._,
 							publicread: !_.publicread,
+						}))
+				: null,
+		onPublicCreate:
+			key === "permissions"
+				? () =>
+						updateState((_: any) => ({
+							..._,
+							publiccreate: !_.publiccreate,
+						}))
+				: null,
+		onPublicEdit:
+			key === "permissions"
+				? () =>
+						updateState((_: any) => ({
+							..._,
+							publicedit: !_.publicedit,
+						}))
+				: null,
+		onPublicDelete:
+			key === "permissions"
+				? () =>
+						updateState((_: any) => ({
+							..._,
+							publicdelete: !_.publicdelete,
+						}))
+				: null,
+		onOwnerRead:
+			key === "permissions"
+				? () =>
+						updateState((_: any) => ({
+							..._,
+							ownerread: !_.ownerread,
+						}))
+				: null,
+		onOwnerCreate:
+			key === "permissions"
+				? () =>
+						updateState((_: any) => ({
+							..._,
+							ownercreate: !_.ownercreate,
+						}))
+				: null,
+		onOwnerEdit:
+			key === "permissions"
+				? () =>
+						updateState((_: any) => ({
+							..._,
+							owneredit: !_.owneredit,
+						}))
+				: null,
+		onOwnerDelete:
+			key === "permissions"
+				? () =>
+						updateState((_: any) => ({
+							..._,
+							ownerdelete: !_.ownerdelete,
 						}))
 				: null,
 		onRecursiveInit:

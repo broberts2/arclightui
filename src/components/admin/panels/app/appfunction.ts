@@ -3,11 +3,11 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 	(currentState: { [key: string]: any }, updateState: Function) => ({
 		backgroundImg: (() => {
 			switch (fns.parseAdminDomainState().subItem) {
-				case "Build Tournament Code(s)":
+				case "Tournament Codes":
 					return `${endpoint}/static/defaultart/ionia_1.jpg`;
 				case "Authenticate Summoner":
 					return `${endpoint}/static/defaultart/ionia_2.png`;
-				case "Import by Tournament Code":
+				case "Import Game Data":
 					return `${endpoint}/static/defaultart/ionia_3.jpg`;
 			}
 		})(),

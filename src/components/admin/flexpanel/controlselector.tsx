@@ -3,6 +3,7 @@ import ListPanel from "../../listpanel";
 import PickList from "../../picklist";
 import HeroPanel from "../../heropanel";
 import Monaco from "../../monaco";
+import Application from "../../application";
 import textfield from "./components/textfield";
 import dynamicfield from "./components/dynamicfield";
 import listpanel from "./components/listpanel";
@@ -13,6 +14,7 @@ import integrationconfiguration from "./components/integrationconfiguration";
 import scriptconfiguration from "./components/scriptconfiguration";
 import Checkbox from "../../checkbox";
 import app from "./components/app";
+import application from "./components/application";
 
 const __conditions = (obj: any) => ({
 	condition1:
@@ -189,6 +191,16 @@ export default (obj) => {
 					obj.c,
 					obj.i,
 					Monaco,
+					obj.state,
+					obj.setState,
+					obj.fns,
+					obj.D
+				);
+			case "Application":
+				return application(
+					obj.c,
+					obj.i,
+					Application,
 					obj.state,
 					obj.setState,
 					obj.fns,

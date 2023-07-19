@@ -16,7 +16,7 @@ export default (D: any, fns: any) => {
 	);
 	return {
 		items: Items,
-		icon: "fire-flame-simple",
+		icon: "toilet-portable",
 		text: "Database",
 		cond: Items.length,
 	};

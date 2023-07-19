@@ -36,6 +36,10 @@ const AuthPage: FC<PropTypes> = ({
 		password: "",
 		email: "",
 	});
+	React.useEffect(() => {
+		if (D && D.DiscordOATH2 && D.DiscordOATH2.url)
+			window.location.replace(D.DiscordOATH2.url);
+	}, [D]);
 	return (
 		<Styles.Container className={className} headless={headless}>
 			<Styles.Body>

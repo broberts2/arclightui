@@ -9,7 +9,8 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 		endpoint: string
 	) =>
 	(currentState: { [key: string]: any }, updateState: Function) => ({
-		title: `Manage Scripts`,
+		title: `Scripts`,
+		backgroundImg: `${endpoint}/static/defaultart/nodejs.jpg`,
 		controls:
 			D && D.getscripts
 				? [

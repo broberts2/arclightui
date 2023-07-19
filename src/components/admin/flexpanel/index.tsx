@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import Styles from "./styles";
 import Button from "../../button";
+import Picklist from "../../picklist";
 import FontAwesome from "../../fontawesome/index";
 import Loader from "../../loader";
 import controlselector from "./controlselector";
@@ -69,7 +70,9 @@ const FlexPanel: FC<{
 		const map: { [key: string]: number } = {};
 		row.push(
 			<Item
+				D={D}
 				Bttn={Bttn}
+				Picklist={Picklist}
 				Styles={Styles}
 				listquery={state._items[i].listquery}
 				fns={fns}
@@ -88,6 +91,13 @@ const FlexPanel: FC<{
 				onRecursiveInit={state._items[i].onRecursiveInit}
 				onLog={state._items[i].onLog}
 				onPublicRead={state._items[i].onPublicRead}
+				onPublicCreate={state._items[i].onPublicCreate}
+				onPublicEdit={state._items[i].onPublicEdit}
+				onPublicDelete={state._items[i].onPublicDelete}
+				onOwnerRead={state._items[i].onOwnerRead}
+				onOwnerCreate={state._items[i].onOwnerCreate}
+				onOwnerEdit={state._items[i].onOwnerEdit}
+				onOwnerDelete={state._items[i].onOwnerDelete}
 				active={
 					state._items[i].bound
 						? state[`_showingItems${state._items[i].bound}`]

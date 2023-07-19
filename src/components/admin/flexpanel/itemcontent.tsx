@@ -15,6 +15,20 @@ const ChkBox = (props: { v: boolean; a: Function; t: string }) => (
 );
 
 export default (props: any) => {
+	const arr = {
+		public: [
+			{ c: "onPublicRead", s: "publicread" },
+			{ c: "onPublicEdit", s: "publicedit" },
+			{ c: "onPublicCreate", s: "publiccreate" },
+			{ c: "onPublicDelete", s: "publicdelete" },
+		],
+		owner: [
+			{ c: "onOwnerRead", s: "ownerread" },
+			{ c: "onOwnerEdit", s: "owneredit" },
+			{ c: "onOwnerCreate", s: "ownercreate" },
+			{ c: "onOwnerDelete", s: "ownerdelete" },
+		],
+	};
 	return (
 		<props.Styles.ItemContent
 			className={`w-full h-full rounded ${
@@ -29,30 +43,37 @@ export default (props: any) => {
 					>
 						<div className={`w-full space-y-4`}>
 							{props.children}
-							{[
-								{ c: "onPublicRead", s: "publicread" },
-								{ c: "onPublicWrite", s: "publicwrite" },
-								{ c: "onPublicCreate", s: "publiccreate" },
-								{ c: "onPublicDelete", s: "publicdelete" },
-							]
-								.filter((o: { c: string; s: string }) => props[o.c])
-								.map((o: { c: string; s: string }) => (
-									<div
-										className={`w-full ${
-											props.state[o.s] ? `opacity-100` : `opacity-30`
-										}`}
-									>
-										<props.Bttn
-											t={o.s}
-											a={() =>
-												props[o.c]((s: Object) =>
-													props.setState((_: Object) => ({ ..._, ...s }))
-												)
-											}
-											span={true}
-										/>
-									</div>
-								))}
+							{Object.keys(arr).map((k: string) =>
+								arr[k].find((o: { c: string; s: string }) => props[o.c]) ? (
+									<props.Picklist
+										multiple
+										unlinked
+										disallowNone
+										span
+										hot
+										value={Object.keys(props.state).filter(
+											(kk: string) =>
+												arr[k].find((el: any) => el.s === kk) && props.state[kk]
+										)}
+										list={arr[k].map((o: { c: string; s: string }) => ({
+											text: o.s,
+											value: o.s,
+										}))}
+										onChange={(e: any) => {
+											const _ = {};
+											arr[k].map(
+												(el: any) => (_[el.s] = e.target.value.includes(el.s))
+											);
+											props.setState((s: any) => ({ ...s, ..._ }));
+										}}
+										key={0}
+										label={`${k.charAt(0).toUpperCase()}${k
+											.slice(1)
+											.toLowerCase()} Access`}
+										variant="standard"
+									/>
+								) : null
+							)}
 						</div>
 					</div>
 					<div className={`flex flex-row w-full`}>

@@ -19,16 +19,11 @@ const Home: FC<{
 	D: { [key: string]: any };
 	endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
-	console.log(fns);
 	return D && fns.calls ? (
 		<Page
 			fns={fns}
 			backgroundImage={{
-				src: fns.e(
-					D,
-					`D.getrecords_homepagesettings.init.records[0].homepageimg`,
-					`${endpoint}/static/media/yone.jpg`
-				),
+				src: `https://images2.alphacoders.com/128/1287858.jpg`,
 				opacity: 0.5,
 			}}
 		>

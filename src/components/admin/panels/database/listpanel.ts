@@ -8,7 +8,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 				});
 			}
 		},
-		title: `Manage ${xFormKey(key.replace(/_/g, ""))}`,
+		title: `${xFormKey(key.replace(/_/g, ""))}`,
 		backgroundImg:
 			D && D.getdatamodels && D.getdatamodels.records && key !== "model"
 				? D.getdatamodels.records.find((m: any) => m._type === key).metaimg

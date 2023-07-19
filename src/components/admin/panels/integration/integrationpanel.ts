@@ -9,6 +9,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
 		endpoint: string
 	) =>
 	(currentState: { [key: string]: any }, updateState: Function) => ({
-		title: `Manage Integrations`,
+		title: `Integrations`,
+		backgroundImg: `${endpoint}/static/defaultart/integration.jpg`,
 		controls: [{ type: "IntegrationSelector", label: "Search" }],
 	});

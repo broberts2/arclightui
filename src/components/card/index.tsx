@@ -71,7 +71,7 @@ const Card: FC<PropTypes> = ({
 				bodyComponent ? "lg:w-1/3" : null
 			} xl:w-96 text-text-primary font-primary ${
 				className ? className : null
-			} ${active !== null && active === false ? "opacity-30" : null}`}
+			} ${active !== null && active === false ? "opacity-50" : null}`}
 			max={max}
 			modal={modal}
 			medium={medium}

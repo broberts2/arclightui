@@ -7,12 +7,12 @@ export default (_: { [key: string]: any }) =>
 					_.calls[key] &&
 					(key.includes("getrecords") ||
 						key.includes("getintegrations") ||
-						key.includes("getscripts"))
+						key.includes("getscripts") ||
+						key.includes("getformtemplates") ||
+						key.includes("getforms"))
 				) {
 					_.calls[key]();
 				}
-			});
-			Object.keys(_.calls).map((key: string) => {
 				if (key.includes("recursiveinit")) {
 					_.calls[key]({ _recursive: true });
 				}

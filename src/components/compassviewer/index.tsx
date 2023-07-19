@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Styles from "./styles";
-
 import DiamondSelector from "../diamondselector/index";
+import MiniDiamondPicker from "../minidiamondpicker";
 
 export interface PropTypes {
 	items: Array<{ bgImg: string; element: any }>;
@@ -56,32 +56,12 @@ const CompassViewer: FC<PropTypes> = ({
 								defaultSelection={defaultSelection}
 							/>
 							{items && items.length > 4 ? (
-								<div className={`relative mb-40`}>
-									<div
-										className={`absolute left-1/2 -translate-x-1/2 -bottom-10`}
-									>
-										<div className={`flex flex-row justify-center space-x-10`}>
-											{/* @ts-ignore */}
-											{(() => {
-												const _: any = [];
-												for (let i = 0; i < Math.ceil(items.length / 4); i++)
-													_.push(
-														<div
-															onClick={() => setBatch(i)}
-															className={`bg-background-quarternary ${
-																batch === i ? "w-8 h-8" : "w-6 h-6"
-															} rotate-45 border-${
-																batch === i ? "2" : "0"
-															} border-background-tertiary cursor-pointer transition-all duration-200 ${
-																batch === i ? "opacity-100" : "opacity-30"
-															}`}
-														/>
-													);
-												return _;
-											})()}
-										</div>
-									</div>
-								</div>
+								<MiniDiamondPicker
+									columns={4}
+									index={batch}
+									count={items.length}
+									cb={setBatch}
+								/>
 							) : null}
 						</td>
 						<Styles.TdLg expanded={expanded}>

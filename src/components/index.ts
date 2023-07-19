@@ -2,11 +2,13 @@ import "./app/style.css";
 import Admin from "./admin";
 import AnimatedBorder from "./animatedborder";
 import App from "./app";
+import Application from "./application";
 import ArticlePage from "./articlepage";
 import AuthPage from "./authpage";
 import Button from "./button";
 import Card from "./card";
 import Checkbox from "./checkbox";
+import CheckboxGroup from "./checkboxgroup";
 import ClippingMask from "./clippingmask";
 import CompassViewer from "./compassviewer";
 import Dashboard from "./dashboard";
@@ -21,6 +23,7 @@ import HeroPanel from "./heropanel";
 import Layout from "./layout";
 import ListPanel from "./listpanel";
 import Loader from "./loader";
+import MiniDiamondPicker from "./minidiamondpicker";
 import MissionStatement from "./missionstatement";
 import Monaco from "./monaco";
 import Page from "./page";
@@ -39,11 +42,13 @@ export {
 	Admin,
 	AnimatedBorder,
 	App,
+	Application,
 	ArticlePage,
 	AuthPage,
 	Button,
 	Card,
 	Checkbox,
+	CheckboxGroup,
 	ClippingMask,
 	CompassViewer,
 	Dashboard,
@@ -58,6 +63,7 @@ export {
 	Layout,
 	ListPanel,
 	Loader,
+	MiniDiamondPicker,
 	MissionStatement,
 	Monaco,
 	Page,

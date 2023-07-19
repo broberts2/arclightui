@@ -4,6 +4,8 @@ import Styles from "./styles";
 
 export interface PropTypes {
 	type: string;
+	multiline?: boolean;
+	rows?: number;
 	span?: boolean | null;
 	key: number;
 	label?: string | null;
@@ -24,11 +26,15 @@ const TextField: FC<PropTypes> = ({
 	hot,
 	value,
 	defaultValue,
+	multiline,
+	rows,
 }) => {
 	const inputRef = React.useRef<{ [key: string]: any }>();
 	return (
 		<Styles.Container span={span}>
 			<_TextField
+				rows={rows}
+				multiline={multiline}
 				inputRef={inputRef}
 				defaultValue={defaultValue}
 				value={value}

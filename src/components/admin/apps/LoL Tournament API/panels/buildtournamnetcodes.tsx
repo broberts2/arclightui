@@ -1,56 +1,5 @@
 import React from "react";
 
-{
-	/* <PickList
-	type={c.lookup}
-	D={D}
-	fns={fns}
-	disallowNone={c.type === "Boolean"}
-	multiple={multiple}
-	span
-	hot
-	value={
-		state[c.label] !== undefined &&
-		state[c.label] !== null &&
-		Array.isArray(state[c.label])
-			? state[c.label]
-			: !multiple
-			? state[c.label]
-			: []
-	}
-	list={
-		c.type === "Boolean"
-			? [
-					{ text: "true", value: true },
-					{ text: "false", value: false },
-			  ]
-			: c &&
-			  c.D &&
-			  c.lookup &&
-			  c.D[`getrecords_${c.lookup}`] &&
-			  c.D[`getrecords_${c.lookup}`][c.label] &&
-			  c.D[`getrecords_${c.lookup}`][c.label].records
-			? c.D[`getrecords_${c.lookup}`][c.label].records.map((obj: any) => {
-					const _: any = { value: obj._id };
-					if (obj.name) _.text = obj.name;
-					else if (obj.username) _.text = obj.username;
-					else if (obj.text) _.text = obj.text;
-					return _;
-			  })
-			: []
-	}
-	onChange={(e: any) => {
-		return setState((_: any) => ({
-			..._,
-			[c.label]: e.target.value,
-		}));
-	}}
-	key={i}
-	label={c.label}
-	variant="standard"
-/>; */
-}
-
 export default (props: any) => {
 	const [state, setState] = React.useState({
 		league: null,
@@ -194,7 +143,8 @@ export default (props: any) => {
 							props.fns.setModal({
 								noescape: true,
 								mode: "full",
-								body: (
+								bgImg: `${props.publicURI}/static/integrationsart/riotxlol.jpg`,
+								body: () => (
 									<div className={`w-full`}>
 										<div className={`text-4xl`}>
 											{_.league && _.league.name ? _.league.name : ""}
