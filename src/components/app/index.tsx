@@ -70,7 +70,7 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
                 pages[domain][component].noSelect && domain === "admin"
                   ? pages[domain][component].noSelect
                   : null;
-              if (pagenotfound)
+              if (pagenotfound && route)
                 pagenotfound =
                   domain !== "admin"
                     ? !(
@@ -112,6 +112,7 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
                       calls: fns.calls,
                       addAnimationFrame: fns.addAnimationFrame,
                       route: _route,
+                      routeExternal: fns.routeExternal,
                       route404: fns.route404,
                       authenticate: fns.authenticate(
                         socket,
