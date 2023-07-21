@@ -94,6 +94,7 @@ const __query = (obj: any) => {
     obj.fns.calls[_ ? "getdatamodels" : `getrecords_${obj.type}`]({
       index: !_ ? obj.label : undefined,
       search: {
+        text: obj.searchFilterValue ? obj.searchFilterValue : undefined,
         limit: _picklistSizeLimit,
         skip: obj.skip * _picklistSizeLimit,
       },
@@ -194,7 +195,7 @@ const PickList: FC<PropTypes> = ({
   React.useEffect(() => {
     if (unlinked) return;
     if (!fns) return;
-    __query({ type, fns, label, value, skip, keyname, id });
+    __query({ searchFilterValue, type, fns, label, value, skip, keyname, id });
   }, [skip]);
   return (
     <Styles.Container span={span}>
@@ -285,15 +286,7 @@ const PickList: FC<PropTypes> = ({
                   size={"normal"}
                   animation={true}
                   className={`m-1 lg:block`}
-                  onClick={() =>
-                    fns.calls[`getrecords_${type}`]({
-                      index: label,
-                      search: {
-                        limit: _picklistSizeLimit,
-                        skip: skip * _picklistSizeLimit,
-                      },
-                    })
-                  }
+                  onClick={() => setSkip(0)}
                 />
                 <div className={`flex flex-row justify-end w-full`}>
                   <Button

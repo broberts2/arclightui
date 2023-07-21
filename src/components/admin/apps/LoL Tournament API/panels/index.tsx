@@ -53,7 +53,7 @@ export default (
     );
   }
   return (
-    <div>
+    <div className={`w-full`}>
       <PageTitle
         orientation={"center"}
         text={title}

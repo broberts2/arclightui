@@ -3,31 +3,35 @@ import React from "react";
 const Panel = (props) => {
   const [index, setIndex] = React.useState(0);
   return (
-    <div style={{ height: "400px", width: "100%" }}>
-      <props.HeroPanel
-        index={index}
-        rows={1}
-        pageCallback={setIndex}
-        autoSort
-        cards={props.C.map((k: string) => ({
-          active: props.D.getintegrations[k].active,
-          hoverComponent: (
-            <div>
-              <div className={`text-md`}>
-                {props.D.getintegrations[k].decorators.description}
+    <div className={`w-full h-full relative`}>
+      <div
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
+      >
+        <props.HeroPanel
+          index={index}
+          rows={1}
+          pageCallback={setIndex}
+          autoSort
+          cards={props.C.map((k: string) => ({
+            active: props.D.getintegrations[k].active,
+            hoverComponent: (
+              <div>
+                <div className={`text-md`}>
+                  {props.D.getintegrations[k].decorators.description}
+                </div>
               </div>
-            </div>
-          ),
-          bgImg: `${props.publicURI}/${props.D.getintegrations[k].decorators.img}`,
-          subText: k,
-          onClick: () =>
-            props.fns.setAdminDomainState({
-              ...props.fns.parseAdminDomainState(),
-              integration: k,
-              activePanel: 1,
-            }),
-        }))}
-      />
+            ),
+            bgImg: `${props.publicURI}/${props.D.getintegrations[k].decorators.img}`,
+            subText: k,
+            onClick: () =>
+              props.fns.setAdminDomainState({
+                ...props.fns.parseAdminDomainState(),
+                integration: k,
+                activePanel: 1,
+              }),
+          }))}
+        />
+      </div>
     </div>
   );
 };

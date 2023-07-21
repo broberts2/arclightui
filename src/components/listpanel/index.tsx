@@ -151,13 +151,21 @@ const ListPanel: FC<PropTypes> = ({
     >
       {!loading ? (
         <div>
-          {sCards && sCards.length ? (
+          {sCards ? (
             <SearchControls
               hot={true}
               pagination={Object.assign(
-                fns.e(D, fns.getCallType(Request.type, Request.local)[0], {
-                  records: [],
-                }),
+                fns.e(
+                  D,
+                  fns.getCallType(
+                    Request.type,
+                    Request.index,
+                    Request.local
+                  )[0],
+                  {
+                    records: [],
+                  }
+                ),
                 {
                   skip,
                   length: Request.search.limit
