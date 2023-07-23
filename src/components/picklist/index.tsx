@@ -27,10 +27,10 @@ export interface PropTypes {
   list: Array<{ value: any; text: string }>;
   multiple?: boolean;
   disallowNone?: boolean;
-  disableSearch?: boolean;
   D: any;
   fns: any;
   id?: any;
+  searchkey?: string;
 }
 
 const __val = (obj: any, value: boolean = false) => {
@@ -53,10 +53,7 @@ const __val = (obj: any, value: boolean = false) => {
 };
 
 const __condition1 = (obj: any) => {
-  const v = __val(obj);
-  return (
-    !obj.loading && !obj.disableSearch && v && v.totalcount > _picklistSizeLimit
-  );
+  return !obj.loading && !obj.disableSearch && __val(obj);
 };
 
 const __renderValue = (obj: {
@@ -94,16 +91,18 @@ const __query = (obj: any) => {
     obj.fns.calls[_ ? "getdatamodels" : `getrecords_${obj.type}`]({
       index: !_ ? obj.label : undefined,
       search: {
-        text: obj.searchFilterValue ? obj.searchFilterValue : undefined,
+        [obj.searchkey]: obj.searchFilterValue
+          ? { $regex: obj.searchFilterValue, $options: "i" }
+          : undefined,
         limit: _picklistSizeLimit,
         skip: obj.skip * _picklistSizeLimit,
       },
     });
-  if (obj.value && obj.value.length) {
+  else if (obj.value && obj.value.length) {
+    if (!obj.fns.calls[__ ? `getdatamodels` : `getrecords_${obj.type}`]) return;
     const _id = Array.isArray(obj[__ ? "id" : "value"])
       ? { $in: obj[__ ? "id" : "value"] }
       : obj[__ ? "id" : "value"];
-    if (!obj.fns.calls[__ ? `getdatamodels` : `getrecords_${obj.type}`]) return;
     obj.fns.calls[__ ? `getdatamodels` : `getrecords_${obj.type}`]({
       index: `${__ ? "model__" : ""}${obj.label}value${
         __ ? `-${obj.keyname}` : ""
@@ -127,12 +126,13 @@ const PickList: FC<PropTypes> = ({
   value,
   list,
   disallowNone,
-  disableSearch,
   D,
   fns,
   id,
   unlinked,
+  searchkey,
 }) => {
+  const [_searchkey, setSearchKey] = React.useState(searchkey);
   const [skip, setSkip] = React.useState(0);
   const [loading, setLoading] = React.useState(!unlinked && id);
   const [searchFilterValue, setSearchFilterValue] = React.useState<
@@ -196,7 +196,17 @@ const PickList: FC<PropTypes> = ({
   React.useEffect(() => {
     if (unlinked) return;
     if (!fns) return;
-    __query({ searchFilterValue, type, fns, label, value, skip, keyname, id });
+    __query({
+      searchFilterValue,
+      type,
+      fns,
+      label,
+      value,
+      skip,
+      keyname,
+      id,
+      searchkey: _searchkey,
+    });
   }, [skip]);
   return (
     <Styles.Container span={span}>
@@ -216,14 +226,32 @@ const PickList: FC<PropTypes> = ({
         <Select
           multiple={multiple}
           value={value}
-          renderValue={() =>
-            __renderValue({ D, type, label, keyname, list, value, unlinked })
-          }
+          renderValue={() => {
+            return __renderValue({
+              D,
+              type,
+              label,
+              keyname,
+              list,
+              value,
+              unlinked,
+            });
+          }}
           onOpen={() => {
+            setSearchFilterValue(undefined);
             if (unlinked) return;
             setSkip(0);
             if (id) setLoading(true);
-            __query({ type, fns, label, value, skip, keyname, id });
+            __query({
+              type,
+              fns,
+              label,
+              value,
+              skip,
+              keyname,
+              id,
+              searchkey: _searchkey,
+            });
           }}
           onChange={(d: any) => {
             if (hot) {
@@ -247,7 +275,9 @@ const PickList: FC<PropTypes> = ({
               onChange(d);
             }
           }}
-          onBlur={(d: any) => (!hot ? onChange(d) : null)}
+          onBlur={(d: any) => {
+            if (!hot) onChange(d);
+          }}
           style={{
             color: "inherit",
             fontFamily: "inherit",
@@ -262,6 +292,7 @@ const PickList: FC<PropTypes> = ({
                 //backgroundColor: "pink",
               },
             },
+            //transitionDuration: 200
           }}
         >
           {__condition1({ D, loading, type, keyname, label }) ? (
@@ -287,7 +318,20 @@ const PickList: FC<PropTypes> = ({
                   size={"normal"}
                   animation={true}
                   className={`m-1 lg:block`}
-                  onClick={() => setSkip(0)}
+                  onClick={() => {
+                    __query({
+                      searchFilterValue,
+                      type,
+                      fns,
+                      label,
+                      value,
+                      skip,
+                      keyname,
+                      id,
+                      searchkey: _searchkey,
+                    });
+                    setSkip(0);
+                  }}
                 />
                 <div className={`flex flex-row justify-end w-full`}>
                   <Button
@@ -308,7 +352,7 @@ const PickList: FC<PropTypes> = ({
                     size={"normal"}
                     animation={true}
                     className={
-                      D[`getrecords_${type}`][label]
+                      D[`getrecords_${type}`] && D[`getrecords_${type}`][label]
                         ? `m-1 lg:block ${
                             skip * _picklistSizeLimit >
                             D[`getrecords_${type}`][label].totalcount -

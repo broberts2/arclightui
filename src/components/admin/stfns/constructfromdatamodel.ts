@@ -41,18 +41,23 @@ export default (D: any) =>
       return fieldsObj
         ? Object.keys(fieldsObj)
             .filter((k: string) => !(k.slice(0, 1) === "_" || _specials(k)))
-            .map((k: string) => ({
-              lookup: (() => {
-                const _ = D.getdatamodels.records.find(
-                  (dm: any) => dm._type === type
-                )[k];
-                return _ && _.lookup ? _.lookup : null;
-              })(),
-              D,
-              type: lookup(fieldsObj[k]),
-              label: k,
-              required: false,
-            }))
+            .map((k: string) => {
+              const _ = D.getdatamodels.records.find(
+                (dm: any) => dm._type === type
+              )[k];
+              return {
+                searchkey: _
+                  ? D.getdatamodels.records.find(
+                      (dm: any) => dm._type === _.lookup
+                    )
+                  : undefined,
+                lookup: _ && _.lookup ? _.lookup : null,
+                D,
+                type: lookup(fieldsObj[k]),
+                label: k,
+                required: false,
+              };
+            })
         : [];
     }
     return [];

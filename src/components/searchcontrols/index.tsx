@@ -6,15 +6,13 @@ import TextField from "../textfield";
 export interface PropTypes {
   textField: any;
   buttons?: Array<{
-    icon?: string | null;
-    text?: string | null;
-    key?: string | null;
-    onClick?: Function | null;
+    icon: string | null;
+    text: string | null;
+    key: string | null;
   }> | null;
   className?: string | null;
   children: JSX.Element | JSX.Element[];
   constrain?: boolean;
-  onChange?: Function;
   hot?: boolean;
   pagination?: any;
   btnActive?: number;
@@ -25,7 +23,6 @@ export interface PropTypes {
 
 const SearchControls: FC<PropTypes> = ({
   textField,
-  onChange,
   buttons,
   className,
   children,
@@ -37,7 +34,9 @@ const SearchControls: FC<PropTypes> = ({
   search,
   picklist,
 }) => {
-  const [searchKey, setSearchKey] = React.useState(null);
+  const [searchKey, setSearchKey] = React.useState(
+    buttons ? buttons[0].key : null
+  );
   const a = pagination ? pagination.skip * pagination.length + 1 : null;
   const b = pagination
     ? pagination.skip * pagination.length + pagination.length
@@ -110,7 +109,7 @@ const SearchControls: FC<PropTypes> = ({
                   className={`m-1 ${i === btnActive ? "" : "opacity-30"}`}
                   onClick={() => {
                     if (setBtnActive) setBtnActive(i);
-                    b.onClick();
+                    setSearchKey(b.key);
                   }}
                 />
               ))}
@@ -126,7 +125,7 @@ const SearchControls: FC<PropTypes> = ({
                   className={`m-1 ${i === btnActive ? "" : "opacity-30"}`}
                   onClick={() => {
                     if (setBtnActive) setBtnActive(i);
-                    b.onClick();
+                    setSearchKey(b.key);
                   }}
                 />
               ))}

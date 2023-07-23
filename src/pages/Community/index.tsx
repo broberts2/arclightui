@@ -30,6 +30,13 @@ const Community: FC<{
         bgOffset={50}
       />
       <ListPanel
+        controls={[
+          {
+            icon: "diamond",
+            text: "Name",
+            key: "name",
+          },
+        ]}
         Request={{
           index: "community",
           type: `(M) summoner`,

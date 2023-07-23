@@ -15,6 +15,11 @@ export interface PropTypes {
   Request: { type: string; search: any; local?: boolean; index: string };
   card: Function;
   D: any;
+  controls?: Array<{
+    icon: string;
+    text: string;
+    key: string;
+  }>;
 }
 
 const mountAnim = (i: number) => ({
@@ -32,6 +37,7 @@ const ListPanel: FC<PropTypes> = ({
   Request,
   card,
   D,
+  controls,
 }) => {
   const [loading, setLoading] = React.useState(loadwatcher);
   const [sCards, setSCards] = React.useState<any>(<div />);
@@ -207,16 +213,7 @@ const ListPanel: FC<PropTypes> = ({
                   });
                 },
               }}
-              buttons={
-                [
-                  // {
-                  // 	icon: "diamond",
-                  // 	text: "Username",
-                  // 	key: "username",
-                  // 	onClick: () => console.log("clicked"),
-                  // },
-                ]
-              }
+              buttons={controls}
               className={``}
             >
               {sCards}

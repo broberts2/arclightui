@@ -56,6 +56,7 @@ export default (props: any) => {
         key={0}
         label={_SUMMONERKEY}
         variant="standard"
+        searchkey={"username"}
       />
       <props.Controls.TextField
         span
