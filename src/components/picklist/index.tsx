@@ -103,6 +103,7 @@ const __query = (obj: any) => {
     const _id = Array.isArray(obj[__ ? "id" : "value"])
       ? { $in: obj[__ ? "id" : "value"] }
       : obj[__ ? "id" : "value"];
+    if (!obj.fns.calls[__ ? `getdatamodels` : `getrecords_${obj.type}`]) return;
     obj.fns.calls[__ ? `getdatamodels` : `getrecords_${obj.type}`]({
       index: `${__ ? "model__" : ""}${obj.label}value${
         __ ? `-${obj.keyname}` : ""

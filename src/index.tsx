@@ -11,6 +11,11 @@ root.render(
     <App
       nopage={"static/defaultart/404.jpg"}
       socketEndpoint={`http://localhost:7001`}
+      loader={`http://localhost:7001/static/media/TES-logo.png`}
+      background={{
+        src: `http://localhost:7001/static/media/perfectionist.jpg`,
+        opacity: 0.1,
+      }}
       pages={{
         leagueoflegends: {
           Home: { route: "/", component: require("./pages/Home") },
@@ -27,6 +32,10 @@ root.render(
           Application: {
             route: "/application",
             component: require("./pages/Application"),
+          },
+          Content: {
+            route: "/content",
+            component: require("./pages/Content"),
           },
           Article: {
             route: "/article",

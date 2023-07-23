@@ -21,10 +21,17 @@ export interface PropTypes {
     [key: string]: any;
   };
   nopage: string;
-  recursive?: Array<string>;
+  background?: { src: string; opacity: number };
+  loader?: string;
 }
 
-const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
+const App: FC<PropTypes> = ({
+  pages,
+  socketEndpoint,
+  nopage,
+  loader,
+  background,
+}) => {
   const AppRef = React.useRef(null);
   let pagenotfound = true;
   const [D, setD] = React.useState({ nopage: `${socketEndpoint}/${nopage}` });
@@ -43,10 +50,35 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
     // @ts-ignore
     setApp(() => (
       <Styles.Container className={`relative`} ref={AppRef}>
-        <Spinner
-          loader={"GridLoader"}
-          opacity={loading || transitioning ? 100 : 0}
-        />
+        {background ? (
+          <img
+            src={background.src}
+            className={`w-full h-full fixed object-cover`}
+            style={{
+              opacity: loading || transitioning ? background.opacity : 0,
+              transition: `all 0.15s ease-in`,
+            }}
+          />
+        ) : null}
+        {loader ? (
+          <div
+            className={`sticky h-0 top-[50vh]`}
+            style={{
+              opacity: loading || transitioning ? 100 : 0,
+              transition: `all 0.15s ease-in`,
+            }}
+          >
+            <img
+              src={loader}
+              className={`w-56 object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
+            />
+          </div>
+        ) : (
+          <Spinner
+            loader={"GridLoader"}
+            opacity={loading || transitioning ? 100 : 0}
+          />
+        )}
         <div
           className={`bg-background-primary min-h-screen overflow-x-hidden`}
           style={loading || transitioning ? { pointerEvents: "none" } : {}}
@@ -83,7 +115,7 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
                     : !fns.parseAdminDomainState();
               return (fns.readState().subdomain === domain ||
                 (domain === "_root_" && !fns.readState().subdomain)) &&
-                (route === pages[domain][component].route ||
+                (route.split("?")[0] === pages[domain][component].route ||
                   (domain === "admin" && !pagenotfound)) ? (
                 <div
                   className={`${
@@ -164,7 +196,7 @@ const App: FC<PropTypes> = ({ pages, socketEndpoint, nopage, recursive }) => {
         />
       </Styles.Container>
     ));
-    fns.init(D, () => setInit(true), fns, recursive, init);
+    fns.init(D, () => setInit(true), fns, init);
     if (loading && D) setTimeout(() => setLoading(false), 1000);
     if (fns.readState().query)
       fns.consumeOATH2Code(socket, fns.readState().query);

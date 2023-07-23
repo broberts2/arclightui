@@ -47,8 +47,9 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
       ];
     })(),
     onCreate:
-      !fns.parseAdminDomainState().activePanel &&
-      fns.parseAdminDomainState().item === "Form"
+      (!fns.parseAdminDomainState().activePanel &&
+        fns.parseAdminDomainState().item === "Form") ||
+      !fns.calls.createformtemplates
         ? null
         : () => null,
     onBack: fns.parseAdminDomainState().activePanel

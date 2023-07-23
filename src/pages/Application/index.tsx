@@ -37,7 +37,6 @@ const ApplicationPage: FC<{
       );
     fns.setQueryParams({ f: hItem });
   }, [hItem, D]);
-  console.log(D);
   return D && fns.calls ? (
     <Page
       fns={fns}

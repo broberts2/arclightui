@@ -16,6 +16,7 @@ const H: FC<{
         route: "/",
       }}
       linksLeft={[
+        { icon: "users", route: "/content", text: "Content" },
         {
           icon: "users",
           route: "/community",
@@ -90,6 +91,7 @@ const H: FC<{
         route: "/",
       }}
       links={[
+        { icon: "users", route: "/content", text: "Content" },
         { icon: "users", route: "/community", text: "Community" },
         { icon: "chart-line", route: "/teams", text: "Teams and Stats" },
         { icon: "chess-knight", route: "/", text: "Crux" },

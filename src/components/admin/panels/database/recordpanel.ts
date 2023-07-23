@@ -54,32 +54,38 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
           }
         : null
     ),
-    [currentState._id ? "onUpdate" : "onCreate"]: () => {
-      try {
-        delete currentState._items;
-        if (currentState.MonacoRef) {
-          const MonacoRef = currentState.MonacoRef;
-          delete currentState.MonacoRef;
-          Object.keys(MonacoRef).map(
-            (k: string) =>
-              (currentState[k] = JSON.stringify(
-                JSON.parse(MonacoRef[k].current.getValue())
-              ))
-          );
+    [currentState._id ? "onUpdate" : "onCreate"]: fns.calls[
+      `${currentState._id ? "update" : "create"}${
+        key === "model" ? "datamodels" : `records_${key}`
+      }`
+    ]
+      ? () => {
+          try {
+            delete currentState._items;
+            if (currentState.MonacoRef) {
+              const MonacoRef = currentState.MonacoRef;
+              delete currentState.MonacoRef;
+              Object.keys(MonacoRef).map(
+                (k: string) =>
+                  (currentState[k] = JSON.stringify(
+                    JSON.parse(MonacoRef[k].current.getValue())
+                  ))
+              );
+            }
+            fns.calls[
+              `${currentState._id ? "update" : "create"}${
+                key === "model" ? "datamodels" : `records_${key}`
+              }`
+            ](currentState);
+            updateState((_: any) => ({
+              ..._,
+              _isLoading: true,
+            }));
+          } catch (e) {
+            console.log(e);
+          }
         }
-        fns.calls[
-          `${currentState._id ? "update" : "create"}${
-            key === "model" ? "datamodels" : `records_${key}`
-          }`
-        ](currentState);
-        updateState((_: any) => ({
-          ..._,
-          _isLoading: true,
-        }));
-      } catch (e) {
-        console.log(e);
-      }
-    },
+      : null,
     onPublicRead:
       key === "permissions"
         ? () =>
