@@ -87,7 +87,7 @@ const __renderValue = (obj: {
 const __query = (obj: any) => {
   const _ = obj.type === "model";
   const __ = obj.label === "model";
-  if (!__ && obj.fns.calls[_ ? "getdatamodels" : `getrecords_${obj.type}`])
+  if (!__ && obj.fns.calls[_ ? "getdatamodels" : `getrecords_${obj.type}`]) {
     obj.fns.calls[_ ? "getdatamodels" : `getrecords_${obj.type}`]({
       index: !_ ? obj.label : undefined,
       search: {
@@ -98,7 +98,8 @@ const __query = (obj: any) => {
         skip: obj.skip * _picklistSizeLimit,
       },
     });
-  else if (obj.value && obj.value.length) {
+  }
+  if (obj.value && obj.value.length) {
     if (!obj.fns.calls[__ ? `getdatamodels` : `getrecords_${obj.type}`]) return;
     const _id = Array.isArray(obj[__ ? "id" : "value"])
       ? { $in: obj[__ ? "id" : "value"] }
@@ -208,7 +209,7 @@ const PickList: FC<PropTypes> = ({
       searchkey: _searchkey,
     });
   }, [skip]);
-  return (
+  return !(!Array.isArray(value) && multiple) ? (
     <Styles.Container span={span}>
       <FormControl
         variant={variant}
@@ -373,7 +374,7 @@ const PickList: FC<PropTypes> = ({
         </Select>
       </FormControl>
     </Styles.Container>
-  );
+  ) : null;
 };
 
 export default PickList;

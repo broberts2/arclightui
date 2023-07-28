@@ -5,7 +5,7 @@ export default (
   state: { [key: string]: any },
   setState: Function
 ) => {
-  return (
+  return state._id && state[c.label] ? (
     <div className={false ? `opacity-50 pointer-events-none` : ``}>
       <TextField
         span
@@ -27,5 +27,5 @@ export default (
         variant="standard"
       />
     </div>
-  );
+  ) : null;
 };

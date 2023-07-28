@@ -45,7 +45,9 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
         return key;
       })(),
       key === "model",
-      D[`getrecords_${key}`] && key === "permissions"
+      D[`getrecords_${key}`] &&
+        key === "permissions" &&
+        D[`getrecords_${key}`].init
         ? {
             key,
             type: D[`getrecords_${key}`].init.records.find(
