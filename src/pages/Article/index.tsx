@@ -16,7 +16,7 @@ const Article: FC<{
     article = article.records.find(
       (e: any) => e._id === fns.readState().query.id
     );
-  return article ? (
+  return article && false? (
     <Page
       fns={fns}
       backgroundImage={{

@@ -8,7 +8,7 @@ export default (
   fns: any,
   multiple?: boolean
 ) => {
-  return (
+  const _pL = (i: number) => (
     <div className={false ? `opacity-50 pointer-events-none` : ``}>
       <PickList
         type={c.lookup}
@@ -66,4 +66,5 @@ export default (
       />
     </div>
   );
+  return state[c.label] ? _pL(i) : _pL(i + 1);
 };
