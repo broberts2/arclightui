@@ -46,7 +46,7 @@ const PageTitle: FC<PropTypes> = React.memo(
           </div>
         ) : null}
         <span
-          className={`text-text-primary font-primary text-1xl md:text-2xl lg:text-3xl xl:text-4xl relative`}
+          className={`text-text-primary font-primary text-4xl lg:text-6xl relative`}
         >
           {text}
         </span>

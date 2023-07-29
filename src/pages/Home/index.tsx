@@ -35,7 +35,7 @@ const Home: FC<{
 				ruby={require("../../lolicon.png")}
 			/> */}
       <FadeDivider
-        ruby={`${endpoint}/static/media/lolicon.png`}
+        ruby={`${endpoint}/static/media/TES2023_website_summer.png`}
         fadeOpacity={0.05}
       />
       <CompassViewer

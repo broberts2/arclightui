@@ -2,6 +2,10 @@ import React from "react";
 
 const Panel = (props) => {
   const [index, setIndex] = React.useState(0);
+  React.useEffect(() => {
+    props.fns.calls.getintegrations();
+  }, []);
+  if (!props.D || !props.D.getintegrations) return <div />;
   return (
     <div className={`w-full h-full relative`}>
       <div
@@ -12,7 +16,7 @@ const Panel = (props) => {
           rows={1}
           pageCallback={setIndex}
           autoSort
-          cards={props.C.map((k: string) => ({
+          cards={Object.keys(props.D.getintegrations).map((k: string) => ({
             active: props.D.getintegrations[k].active,
             hoverComponent: (
               <div>
@@ -46,8 +50,5 @@ export default (
   D: any,
   publicURI: string
 ) => {
-  const C = D && D.getintegrations ? Object.keys(D.getintegrations) : null;
-  return C ? (
-    <Panel fns={fns} D={D} HeroPanel={HeroPanel} C={C} publicURI={publicURI} />
-  ) : null;
+  return <Panel fns={fns} D={D} HeroPanel={HeroPanel} publicURI={publicURI} />;
 };
