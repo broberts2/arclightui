@@ -29,6 +29,13 @@ export default (props: any) => {
         },
       });
   }, [props.D]);
+  React.useEffect(() => {
+    if (props.fns.calls && props.fns.calls.getintegrations && props.D) {
+      if (!props.D.getintegrations) props.fns.calls.getintegrations();
+      if (usermodeltype && !props.D[`getrecords_${usermodeltype}`])
+        props.fns.calls[`getrecords_${usermodeltype}`]();
+    }
+  });
   return usermodeltype &&
     props.D &&
     props.D[`getrecords_${usermodeltype}`] &&

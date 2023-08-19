@@ -12,7 +12,10 @@ const Panel = (props) => {
           },
         ]}
         Request={{
-          type: `Form Template`,
+          type:
+            props.fns.parseAdminDomainState().activePanel === 1
+              ? "Form"
+              : "Form Template",
           search: { limit: 32 },
         }}
         fns={props.fns}
@@ -21,12 +24,17 @@ const Panel = (props) => {
           img: c.backgroundimage,
           subtext: c.title,
           onClick: () => {
-            if (props.fns.parseAdminDomainState().item === "Form Template")
-              props.fns.setAdminDomainState({
-                ...props.fns.parseAdminDomainState(),
-                activePanel: 2,
-              });
-            console.log(props.fns.parseAdminDomainState());
+            props.fns.setAdminDomainState({
+              ...props.fns.parseAdminDomainState(),
+              activePanel:
+                props.fns.parseAdminDomainState().item === "Form"
+                  ? !props.fns.parseAdminDomainState().activePanel
+                    ? 1
+                    : 2
+                  : 2,
+              formname: c.__filename ? c.__filename.split(".")[0] : undefined,
+              formtemplate: c.__template.split(".")[0],
+            });
           },
         })}
         line={false}

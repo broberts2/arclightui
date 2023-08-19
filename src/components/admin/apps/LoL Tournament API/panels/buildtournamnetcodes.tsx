@@ -10,6 +10,15 @@ export default (props: any) => {
     seasonNum: null,
     MonacoRef: {},
   });
+  React.useEffect(() => {
+    if (
+      props.fns.calls &&
+      props.fns.calls.getintegrations &&
+      props.D &&
+      !props.D.getintegrations
+    )
+      props.fns.calls.getintegrations();
+  });
   return props.D &&
     props.D.getintegrations &&
     props.D.getintegrations["LoL Tournament API"] ? (
