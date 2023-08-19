@@ -56,7 +56,7 @@
     "webpack-merge": "^5.8.0"
   },
   "scripts": {
-    "publish": "git add . && git commit -m \"pre-publish commit\" && git push && npm run build && cd dist && npm publish && cd ..",
+    "publish": "git add . & git commit -m \"pre-publish commit\" & git push && npm run build && cd dist && npm publish && cd ..",
     "publish-test": "npm run build && cd dist && npm publish --dry-run && cd ..",
     "start": "react-app-rewired start",
     "test": "react-app-rewired test",
