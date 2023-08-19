@@ -9,6 +9,8 @@ import dynamicfield from "./components/dynamicfield";
 import listpanel from "./components/listpanel";
 import picklist from "./components/picklist";
 import monaco from "./components/monaco";
+import formselector from "./components/formselector";
+import scriptselector from "./components/scriptselector";
 import integrationelector from "./components/integrationselector";
 import integrationconfiguration from "./components/integrationconfiguration";
 import scriptconfiguration from "./components/scriptconfiguration";
@@ -164,6 +166,28 @@ export default (obj) => {
           obj.setState,
           obj.D,
           obj.fns
+        );
+      case "FormSelector":
+        return formselector(
+          obj.c,
+          obj.i,
+          ListPanel,
+          obj.state,
+          obj.setState,
+          obj.fns,
+          obj.D,
+          obj.publicURI
+        );
+      case "ScriptSelector":
+        return scriptselector(
+          obj.c,
+          obj.i,
+          ListPanel,
+          obj.state,
+          obj.setState,
+          obj.fns,
+          obj.D,
+          obj.publicURI
         );
       case "IntegrationSelector":
         return integrationelector(
