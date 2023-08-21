@@ -25,7 +25,7 @@ export default (
 					"name": "newscript.js",
 					"active": false,
 					"context": "${k}"
-					${k !== "universal" ? `,\n"model": "bindingmodel"` : ""}
+					${k !== "universal" && k !== "endpoint" ? `,\n"model": "bindingmodel"` : ""}
 				}`,
           fn: `async (ServerObject) => {\n\n};`,
         };

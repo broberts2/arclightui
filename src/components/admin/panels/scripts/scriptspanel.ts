@@ -22,6 +22,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
           "after-create",
           "before-delete",
           "after-delete",
+          "endpoint",
           "universal",
         ].map((k: string) => ({
           img: `${endpoint}/static/defaultart/js.jpg`,

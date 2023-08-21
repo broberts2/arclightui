@@ -98,6 +98,8 @@ const FlexPanel: FC<{
         onOwnerCreate={state._items[i].onOwnerCreate}
         onOwnerEdit={state._items[i].onOwnerEdit}
         onOwnerDelete={state._items[i].onOwnerDelete}
+        onAccessType={state._items[i].onAccessType}
+        onScript={state._items[i].onScript}
         active={
           state._items[i].bound
             ? state[`_showingItems${state._items[i].bound}`]

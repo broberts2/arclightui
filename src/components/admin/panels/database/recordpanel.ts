@@ -152,6 +152,22 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
               ownerdelete: !_.ownerdelete,
             }))
         : null,
+    onAccessType:
+      key === "endpoint"
+        ? (accesstype: string) =>
+            updateState((_: any) => ({
+              ..._,
+              accesstype,
+            }))
+        : null,
+    onScript:
+      key === "endpoint"
+        ? (script: string) =>
+            updateState((_: any) => ({
+              ..._,
+              script,
+            }))
+        : null,
     onRecursiveInit:
       key === "permissions"
         ? () =>

@@ -1,4 +1,5 @@
 import Checkbox from "../../checkbox";
+import React from "react";
 
 const ChkBox = (props: { v: boolean; a: Function; t: string }) => (
   <div
@@ -15,6 +16,7 @@ const ChkBox = (props: { v: boolean; a: Function; t: string }) => (
 );
 
 export default (props: any) => {
+  const endpontarr = ["get", "post", "put", "delete"];
   const arr = {
     public: [
       { c: "onPublicRead", s: "publicread" },
@@ -29,6 +31,15 @@ export default (props: any) => {
       { c: "onOwnerDelete", s: "ownerdelete" },
     ],
   };
+  React.useEffect(() => {
+    if (
+      props.onScript &&
+      props.fns &&
+      props.fns.calls &&
+      props.fns.calls.getscripts
+    )
+      props.fns.calls.getscripts();
+  }, []);
   return (
     <props.Styles.ItemContent
       className={`w-full h-full rounded ${
@@ -74,6 +85,91 @@ export default (props: any) => {
                   />
                 ) : null
               )}
+              {/* {[
+                {
+                  c: "onAccessType",
+                  s: "accesstype",
+                  v: ["get", "post", "put", "delete"],
+                },
+                {
+                  c: "onScript",
+                  s: "script",
+                  v: ["get", "post", "put", "delete"],
+                },
+              ].map((S: { c: string; s: string; v: Array<string> }) =>
+                props[S.c] ? (
+                  <props.Picklist
+                    unlinked
+                    disallowNone
+                    span
+                    hot
+                    value={Object.keys(props.state).filter(
+                      (kk: string) =>
+                        S.v.find((el: any) => el.s === kk) && props.state[kk]
+                    )}
+                    list={S.v.map((s: string) => ({
+                      text: s,
+                      value: s,
+                    }))}
+                    onChange={(e: any) => {
+                      // const _ = {};
+                      // arr[k].map(
+                      //   (el: any) => (_[el.s] = e.target.value.includes(el.s))
+                      // );
+                      // props.setState((s: any) => ({ ...s, ..._ }));
+                    }}
+                    key={0}
+                    label={S.s}
+                    variant="standard"
+                  />
+                ) : null
+              )} */}
+              {props.onAccessType ? (
+                <props.Picklist
+                  unlinked
+                  disallowNone
+                  span
+                  hot
+                  value={props.state.accesstype}
+                  list={endpontarr.map((s: string) => ({
+                    text: s,
+                    value: s,
+                  }))}
+                  onChange={(e: any) => {
+                    props.setState((s: any) => ({
+                      ...s,
+                      accesstype: e.target.value,
+                    }));
+                  }}
+                  key={0}
+                  label={"accesstype"}
+                  variant="standard"
+                />
+              ) : null}
+              {props.onScript && props.D && props.D.getscripts ? (
+                <props.Picklist
+                  unlinked
+                  disallowNone
+                  span
+                  hot
+                  value={props.state.script}
+                  list={Object.keys(props.D.getscripts.records.endpoint).map(
+                    (s: string) => ({
+                      text: s,
+                      value: s,
+                    })
+                  )}
+                  onChange={(e: any) => {
+                    props.setState((s: any) => ({
+                      ...s,
+                      script: e.target.value,
+                    }));
+                  }}
+                  key={0}
+                  label={"script"}
+                  variant="standard"
+                />
+              ) : null}
             </div>
           </div>
           <div className={`flex flex-row w-full`}>
