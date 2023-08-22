@@ -44,6 +44,8 @@ export default (props: any) => {
         },
       ].map((el: any) => (
         <props.Controls.PickList
+          keyname={"name"}
+          searchkey={"name"}
           type={el.type}
           D={props.D}
           fns={props.fns}
@@ -144,6 +146,14 @@ export default (props: any) => {
         onClick={(status: any) => {
           props.fns.calls.generatetournamentcodes({
             ...state,
+            seasonNum: state.seasonNum
+              ? state.seasonNum
+              : props.D.getintegrations["LoL Tournament API"].settings
+                  .defaultseason,
+            weekNum: state.weekNum
+              ? state.weekNum
+              : props.D.getintegrations["LoL Tournament API"].settings
+                  .defaultweek,
             MonacoRef: undefined,
           });
           props.setState((_: any) => ({
