@@ -3,12 +3,12 @@ import Styles from "./styles";
 
 export interface PropTypes {
   title: string;
-  message: string;
+  Message: any;
   bgImg?: string;
   button?: any;
 }
 
-const MissionStatement: FC<PropTypes> = ({ title, message, bgImg, button }) => {
+const MissionStatement: FC<PropTypes> = ({ title, Message, bgImg, button }) => {
   return (
     <Styles.Container className={"text-text-primary font-primary"}>
       {bgImg ? <Styles.BgImg src={bgImg} /> : null}
@@ -25,9 +25,9 @@ const MissionStatement: FC<PropTypes> = ({ title, message, bgImg, button }) => {
           {title}
         </div>
         {bgImg ? (
-          <div className={"text-md my-14 w-full"}>{message}</div>
+          <div className={"text-md my-14 w-full"}>{Message}</div>
         ) : (
-          <div className={"text-md lg:text-2xl my-14 w-full"}>{message}</div>
+          <div className={"text-md lg:text-2xl my-14 w-full"}>{Message}</div>
         )}
         {button ? button : null}
       </div>

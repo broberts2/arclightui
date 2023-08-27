@@ -1,16 +1,16 @@
 import React, { FC } from "react";
 import Styles from "./styles";
-
+import { useMediaQuery } from "react-responsive";
 import Card from "../card";
 import SearchControls from "../searchcontrols";
 import Loader from "../loader";
-import Button from "../button";
 
 export interface PropTypes {
   loadwatcher?: boolean;
   constrain?: boolean;
   autoSort?: boolean | null;
   line?: boolean | null;
+  linesmall?: boolean | null;
   fns: any;
   Request: { type: string; search: any; local?: boolean; index: string };
   card: Function;
@@ -23,7 +23,7 @@ export interface PropTypes {
 }
 
 const mountAnim = (i: number) => ({
-  anim: "flipInY",
+  anim: "fadeIn",
   duration: "0.30s",
   delay: `${0.015 * i}s`,
 });
@@ -32,6 +32,7 @@ const ListPanel: FC<PropTypes> = ({
   loadwatcher,
   autoSort,
   line,
+  linesmall,
   constrain,
   fns,
   Request,
@@ -39,6 +40,17 @@ const ListPanel: FC<PropTypes> = ({
   D,
   controls,
 }) => {
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  const max = isTabletOrMobile ? 10 : 32;
+  if (
+    Request &&
+    Request.search &&
+    Request.search.limit &&
+    Request.search.limit > max
+  )
+    Request.search.limit = max;
+  const sizeRef = React.useRef<any>(null);
+  const [minHeight, setMinHeight] = React.useState(0);
   const [loading, setLoading] = React.useState(loadwatcher);
   const [sCards, setSCards] = React.useState<any>(<div />);
   const [nPerRow, setNPerRow] = React.useState(8);
@@ -61,6 +73,8 @@ const ListPanel: FC<PropTypes> = ({
   const rows: any = [];
   const provideCard = (obj: { [key: string]: any }, i: number) => (
     <Card
+      line={line}
+      linesmall={linesmall}
       mountAnim={mountAnim(i)}
       index={skip * Request.search.limit + (i + 1)}
       small
@@ -76,7 +90,7 @@ const ListPanel: FC<PropTypes> = ({
       }
     />
   );
-  if (!line) {
+  if (!line && !linesmall) {
     for (let i = 0; i < cards.length; i++) {
       if (i % nPerRow === 0 && i > 0) {
         rows.push(
@@ -122,6 +136,7 @@ const ListPanel: FC<PropTypes> = ({
   React.useEffect(() => {
     window.addEventListener("resize", handleResize);
     handleResize();
+    setMinHeight(sizeRef.current.clientHeight);
   }, []);
   React.useEffect(() => {
     setTimeout(() => setLoading(false), 1);
@@ -156,68 +171,72 @@ const ListPanel: FC<PropTypes> = ({
       }`}
     >
       {!loading ? (
-        <div>
+        <div ref={sizeRef} style={{ minHeight }}>
           {sCards ? (
-            <SearchControls
-              hot={true}
-              pagination={Object.assign(
-                fns.e(
-                  D,
-                  fns.getCallType(
-                    Request.type,
-                    Request.index,
-                    Request.local
-                  )[0],
+            <div style={{ height: "100%" }}>
+              <SearchControls
+                hot={true}
+                pagination={Object.assign(
+                  fns.e(
+                    D,
+                    fns.getCallType(
+                      Request.type,
+                      Request.index,
+                      Request.local
+                    )[0],
+                    {
+                      records: [],
+                    }
+                  ),
                   {
-                    records: [],
+                    skip,
+                    length: Request.search.limit
+                      ? Request.search.limit
+                      : undefined,
+                    onClick: (n: number) => {
+                      setSkip(skip + n);
+                      setSCards(<div />);
+                      fns.calls[
+                        fns.getCallType(Request.type, Request.local)[1]
+                      ]({
+                        index: Request.index,
+                        search: {
+                          ...Request.search,
+                          skip:
+                            (skip + n) *
+                            (Request.search.limit ? Request.search.limit : 1),
+                        },
+                      });
+                    },
                   }
-                ),
-                {
-                  skip,
-                  length: Request.search.limit
-                    ? Request.search.limit
-                    : undefined,
-                  onClick: (n: number) => {
-                    setSkip(skip + n);
-                    setSCards(<div />);
+                )}
+                constrain={constrain}
+                textField={{
+                  label: "Search",
+                  value: searchValue,
+                  onChange: (e: any) => setSearchValue(e.target.value),
+                }}
+                btnActive={btnActive}
+                setBtnActive={(n: number) => setBtnActive(n)}
+                search={{
+                  onSubmit: (key, $regex) => {
+                    const _ =
+                      key && $regex ? { [key]: { $regex, $options: "i" } } : {};
                     fns.calls[fns.getCallType(Request.type, Request.local)[1]]({
                       index: Request.index,
                       search: {
                         ...Request.search,
-                        skip:
-                          (skip + n) *
-                          (Request.search.limit ? Request.search.limit : 1),
+                        ..._,
                       },
                     });
                   },
-                }
-              )}
-              constrain={constrain}
-              textField={{
-                label: "Search",
-                value: searchValue,
-                onChange: (e: any) => setSearchValue(e.target.value),
-              }}
-              btnActive={btnActive}
-              setBtnActive={(n: number) => setBtnActive(n)}
-              search={{
-                onSubmit: (key, $regex) => {
-                  const _ =
-                    key && $regex ? { [key]: { $regex, $options: "i" } } : {};
-                  fns.calls[fns.getCallType(Request.type, Request.local)[1]]({
-                    index: Request.index,
-                    search: {
-                      ...Request.search,
-                      ..._,
-                    },
-                  });
-                },
-              }}
-              buttons={controls}
-              className={``}
-            >
-              {sCards}
-            </SearchControls>
+                }}
+                buttons={controls}
+                className={``}
+              >
+                {sCards}
+              </SearchControls>
+            </div>
           ) : (
             <div></div>
           )}

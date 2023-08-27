@@ -33,7 +33,7 @@ const FadeDivider: FC<PropTypes> = ({ ruby, fadeOpacity, img }) => {
       {ruby ? (
         <img
           src={ruby}
-          className={`absolute bottom-6 lg:bottom-24 left-1/2 -translate-x-1/2 w-44 lg:w-96`}
+          className={`absolute bottom-6 lg:bottom-24 left-1/2 -translate-x-1/2 w-44 lg:w-72`}
         />
       ) : null}
     </Styles.Container>

@@ -16,6 +16,7 @@ export interface PropTypes {
   className?: string | null;
   index?: number | null;
   line?: boolean | null;
+  linesmall?: boolean | null;
   active?: boolean | null;
   max?: boolean | null;
   modal?: boolean | null;
@@ -40,6 +41,7 @@ const Card: FC<PropTypes> = ({
   className,
   index,
   line,
+  linesmall,
   active,
   hover,
   mountAnim,
@@ -78,6 +80,7 @@ const Card: FC<PropTypes> = ({
       medium={medium}
       small={small}
       line={line}
+      linesmall={linesmall}
       style={{
         height: s,
         cursor: onClick ? "pointer" : "",
@@ -93,13 +96,17 @@ const Card: FC<PropTypes> = ({
       <Styles.Front
         onClick={onClick && !locked ? () => onClick() : null}
         borderRadius={"4px"}
-        className={"flex flex-col justify-end text-center bg-zinc-600"}
+        className={
+          "flex flex-col justify-end text-center bg-background-secondary"
+        }
       >
         <Styles.BgImg
-          line={line}
+          line={line || linesmall}
           style={noBodyComponentAbsolute && (max || modal) ? { top } : {}}
         >
-          <img
+          <Styles.BgImgChild
+            line={line}
+            linesmall={linesmall}
             src={bgImg}
             className={`object-cover h-full w-full`}
             style={
@@ -124,7 +131,7 @@ const Card: FC<PropTypes> = ({
         {hoverComponent && !locked ? (
           <div
             className={`w-full top-0 absolute ${
-              !subText ? "h-full" : line ? "h-2/3" : "h-3/4"
+              !subText ? "h-full" : line || linesmall ? "h-2/3" : "h-3/4"
             } bg-visibility-primary opacity-0 group-hover:opacity-100 transition-all ease-linear`}
           >
             <div
@@ -136,18 +143,22 @@ const Card: FC<PropTypes> = ({
         ) : null}
         <div
           className={`w-full bottom-0 absolute ${
-            line ? "h-1/3" : "h-1/4"
-          } bg-visibility-primary ${!subText ? "hidden" : null}`}
+            line || linesmall ? "h-1/3" : "h-1/4"
+          } bg-visibility-primary ${
+            !subText || line || linesmall ? "hidden" : null
+          }`}
         />
         {subText ? (
           <div
             className={`${
               medium
                 ? "m-2 lg:m-5 text-2xl"
-                : !line && !small
+                : !(line || linesmall) && !small
                 ? "m-2 lg:m-10 text-2xl"
-                : !line
+                : !(line || linesmall)
                 ? "text-sm"
+                : line || linesmall
+                ? "text-sm lg:text-lg text-left px-10 md:px-20 h-3/5"
                 : "text-md lg:text-2xl"
             } relative p-0`}
           >

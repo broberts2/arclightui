@@ -29,15 +29,18 @@ const Home: FC<{
       }}
     >
       <Header main fns={fns} endpoint={endpoint} />
+      <div className={`h-48 lg:h-96`} />
       {/* <SlantedDivider
 				rotation={1}
 				img={require("../../yone2.jpg")}
 				ruby={require("../../lolicon.png")}
 			/> */}
-      <FadeDivider
-        ruby={`${endpoint}/static/media/TES2023_website_summer.png`}
+      {/* <FadeDivider
+        ruby={
+          "http://titanesports.org:7000/static/media/TES2023_website_summer.png"
+        }
         fadeOpacity={0.05}
-      />
+      /> */}
       <CompassViewer
         bgCompassElement={`${endpoint}/static/media/pyke.webm`}
         defaultSelection={1}
@@ -45,13 +48,36 @@ const Home: FC<{
           {
             bgImg: `${endpoint}/static/media/karma.jpg`,
             element: (
-              <MissionStatement
-                bgImg={`${endpoint}/static/media/karma.jpg`}
-                title={"Welcome to Titan Esports!"}
-                message={
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                }
-              />
+              <div>
+                <MissionStatement
+                  bgImg={`${endpoint}/static/media/karma.jpg`}
+                  title={"Welcome to Titan Esports!"}
+                  Message={
+                    <table className={``}>
+                      <tbody>
+                        <tr>
+                          <td className={`hidden sm:block`}>
+                            <img
+                              className={`w-[600px]`}
+                              src={`${endpoint}/static/media/TES2023_website_summer.png`}
+                            />
+                          </td>
+                          <td>
+                            <div className={`pl-10`}>
+                              Lorem Ipsum is simply dummy text of the printing
+                              and typesetting industry. Lorem Ipsum has been the
+                              industry's standard dummy text ever since the
+                              1500s, when an unknown printer took a galley of
+                              type and scrambled it to make a type specimen
+                              book.
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  }
+                />
+              </div>
             ),
           },
           {
@@ -60,8 +86,11 @@ const Home: FC<{
               <MissionStatement
                 bgImg={`${endpoint}/static/media/discord.jpg`}
                 title={"Come chat on Discord"}
-                message={
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                Message={
+                  <div>
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry.
+                  </div>
                 }
                 button={
                   <Button
@@ -85,8 +114,11 @@ const Home: FC<{
                 <MissionStatement
                   bgImg={`${endpoint}/static/media/twitchtv.jpg`}
                   title={"Catch us on Twitch.tv"}
-                  message={
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                  Message={
+                    <div>
+                      Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry.
+                    </div>
                   }
                   button={
                     <Button
@@ -110,8 +142,11 @@ const Home: FC<{
               <MissionStatement
                 bgImg={`${endpoint}/static/media/youtube.jpg`}
                 title={"Check out our Vods"}
-                message={
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                Message={
+                  <div>
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry.
+                  </div>
                 }
                 button={
                   <Button
@@ -136,8 +171,11 @@ const Home: FC<{
               <MissionStatement
                 bgImg={`${endpoint}/static/media/illaoi.jpg`}
                 title={"Catch us on Twitch.tv"}
-                message={
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                Message={
+                  <div>
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry.
+                  </div>
                 }
               />
             ),
@@ -146,8 +184,11 @@ const Home: FC<{
       />
       <MissionStatement
         title={"Titan Esports"}
-        message={
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+        Message={
+          <div>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry.
+          </div>
         }
       />
       <HeroPanel

@@ -43,6 +43,62 @@ const SearchControls: FC<PropTypes> = ({
     : null;
   const c = pagination ? pagination.totalcount : null;
   const bb = pagination ? (b > c ? c : b) : null;
+  const NextLast = (props) => (
+    <React.Fragment>
+      <Button
+        className={"hidden m-1 lg:block pointer-events-auto min-w-max"}
+        style={
+          pagination.skip > 0 ? {} : { opacity: 0.3, pointerEvents: "none" }
+        }
+        label={"Last"}
+        idleIcon={"arrow-left"}
+        type={"button"}
+        size={"normal"}
+        animation={true}
+        onClick={(status: any) => pagination.onClick(-1)}
+      />
+      <Button
+        className={"block m-1 lg:hidden pointer-events-auto"}
+        style={
+          pagination.skip > 0 ? {} : { opacity: 0.3, pointerEvents: "none" }
+        }
+        label={props.isTop ? undefined : "Last"}
+        idleIcon={"arrow-left"}
+        type={"button"}
+        size={"small"}
+        animation={true}
+        onClick={(status: any) => pagination.onClick(-1)}
+      />
+      <Button
+        className={"hidden m-1 lg:block pointer-events-auto min-w-max"}
+        style={
+          (pagination.skip + 1) * pagination.length < pagination.totalcount
+            ? {}
+            : { opacity: 0.3, pointerEvents: "none" }
+        }
+        label={"Next"}
+        idleIcon={"arrow-right"}
+        type={"button"}
+        size={"normal"}
+        animation={true}
+        onClick={(status: any) => pagination.onClick(1)}
+      />
+      <Button
+        className={"block m-1 lg:hidden pointer-events-auto"}
+        style={
+          (pagination.skip + 1) * pagination.length < pagination.totalcount
+            ? {}
+            : { opacity: 0.3, pointerEvents: "none" }
+        }
+        label={props.isTop ? undefined : "Next"}
+        idleIcon={"arrow-right"}
+        type={"button"}
+        size={"small"}
+        animation={true}
+        onClick={(status: any) => pagination.onClick(1)}
+      />
+    </React.Fragment>
+  );
   return (
     <Styles.Container
       picklist={picklist}
@@ -98,6 +154,7 @@ const SearchControls: FC<PropTypes> = ({
                   : null
               }
             />
+            <NextLast isTop={true} />
             <div className={`hidden flex-row justify-end w-full lg:flex`}>
               {buttons.map((b: any, i) => (
                 <Button
@@ -158,64 +215,7 @@ const SearchControls: FC<PropTypes> = ({
       >
         {pagination && pagination.totalcount ? (
           <div className={`flex items-center justify-center`}>
-            <Button
-              className={"hidden m-1 lg:block pointer-events-auto"}
-              style={
-                pagination.skip > 0
-                  ? {}
-                  : { opacity: 0.3, pointerEvents: "none" }
-              }
-              label={"Last"}
-              idleIcon={"arrow-left"}
-              type={"button"}
-              size={"normal"}
-              animation={true}
-              onClick={(status: any) => pagination.onClick(-1)}
-            />
-            <Button
-              className={"block m-1 lg:hidden pointer-events-auto"}
-              style={
-                pagination.skip > 0
-                  ? {}
-                  : { opacity: 0.3, pointerEvents: "none" }
-              }
-              label={"Last"}
-              idleIcon={"arrow-left"}
-              type={"button"}
-              size={"small"}
-              animation={true}
-              onClick={(status: any) => pagination.onClick(-1)}
-            />
-            <Button
-              className={"hidden m-1 lg:block pointer-events-auto"}
-              style={
-                (pagination.skip + 1) * pagination.length <
-                pagination.totalcount
-                  ? {}
-                  : { opacity: 0.3, pointerEvents: "none" }
-              }
-              label={"Next"}
-              idleIcon={"arrow-right"}
-              type={"button"}
-              size={"normal"}
-              animation={true}
-              onClick={(status: any) => pagination.onClick(1)}
-            />
-            <Button
-              className={"block m-1 lg:hidden pointer-events-auto"}
-              style={
-                (pagination.skip + 1) * pagination.length <
-                pagination.totalcount
-                  ? {}
-                  : { opacity: 0.3, pointerEvents: "none" }
-              }
-              label={"Next"}
-              idleIcon={"arrow-right"}
-              type={"button"}
-              size={"small"}
-              animation={true}
-              onClick={(status: any) => pagination.onClick(1)}
-            />
+            <NextLast />
           </div>
         ) : null}
         {pagination && pagination.totalcount ? (

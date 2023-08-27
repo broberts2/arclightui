@@ -3,7 +3,8 @@ import React, { FC } from "react";
 import Header from "../../projectcomponents/header";
 import Footer from "../../projectcomponents/footer";
 
-import { ListPanel, Page, PageTitle, HeroPanel } from "../../components";
+import { ListPanel, Page, PageTitle, HeroPanel, Card } from "../../components";
+import { useMediaQuery } from "react-responsive";
 
 const Community: FC<{
   fns: {
@@ -12,6 +13,7 @@ const Community: FC<{
   D: { [key: string]: any };
   endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
+  const small = useMediaQuery({ query: "(max-width: 1224px)" });
   return D && fns.calls ? (
     <Page
       fns={fns}
@@ -36,11 +38,16 @@ const Community: FC<{
             text: "Name",
             key: "name",
           },
+          {
+            icon: "diamond",
+            text: "Name2",
+            key: "name",
+          },
         ]}
         Request={{
           index: "community",
           type: `(M) summoner`,
-          search: { limit: 32 },
+          search: { limit: small ? 5 : 8 },
         }}
         fns={fns}
         D={D}
@@ -49,7 +56,8 @@ const Community: FC<{
           subtext: c.name,
           onClick: () => null,
         })}
-        line={false}
+        line={true}
+        // linesmall={small}
         constrain
       />
       <Footer fns={fns} endpoint={endpoint} />
