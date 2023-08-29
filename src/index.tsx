@@ -29,6 +29,7 @@ root.render(
           Profile: { route: "/profile", component: require("./pages/Profile") },
           Teams: { route: "/teams", component: require("./pages/Teams") },
           Team: { route: "/team", component: require("./pages/Team") },
+          Bracket: { route: "/bracket", component: require("./pages/Bracket") },
           Application: {
             route: "/application",
             component: require("./pages/Application"),

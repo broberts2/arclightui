@@ -16,7 +16,17 @@ const H: FC<{
         route: "/",
       }}
       linksLeft={[
-        { icon: "users", route: "/content", text: "Content" },
+        {
+          icon: "users",
+          text: "Content",
+          subLinks: [
+            {
+              icon: "users",
+              route: "/content",
+              text: "Content",
+            },
+          ],
+        },
         {
           icon: "users",
           route: "/community",
@@ -31,6 +41,11 @@ const H: FC<{
           icon: "chess-knight",
           route: "/",
           text: "Crux",
+        },
+        {
+          icon: "chess-knight",
+          route: "/bracket",
+          text: "Bracket",
         },
       ]}
       linksRight={[
@@ -95,6 +110,11 @@ const H: FC<{
         { icon: "users", route: "/community", text: "Community" },
         { icon: "chart-line", route: "/teams", text: "Teams and Stats" },
         { icon: "chess-knight", route: "/", text: "Crux" },
+        {
+          icon: "chess-knight",
+          route: "/bracket",
+          text: "Bracket",
+        },
         { icon: "user-astronaut", route: "/staff", text: "Staff" },
         { icon: "scroll", route: "/application", text: "Applications" },
         fns.readToken()._token

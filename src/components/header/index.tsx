@@ -12,6 +12,7 @@ export interface PropTypes {
     text: string;
     icon?: string | null;
     onClick?: Function | null | undefined;
+    subLinks?: Array<{ icon: string; text: string; route: string }>;
   } | null>;
   linksLeft?: Array<{
     route?: string | undefined | null;
@@ -19,6 +20,7 @@ export interface PropTypes {
     text: string;
     icon?: string | null;
     onClick?: Function | null | undefined;
+    subLinks?: Array<{ icon: string; text: string; route: string }>;
   } | null>;
   links?: Array<{
     route?: string | undefined | null;
@@ -26,6 +28,7 @@ export interface PropTypes {
     text: string;
     icon?: string | null;
     onClick?: Function | null | undefined;
+    subLinks?: Array<{ icon: string; text: string; route: string }>;
   } | null>;
   socialMediaRight?: Array<{
     route?: string | undefined | null;
@@ -57,6 +60,7 @@ const Header: FC<PropTypes> = ({
   logo,
   fns,
 }) => {
+  const iconBackdropClassName = `text-xl font-bold whitespace-nowrap transform opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:translate-y-1 transition-all ease-linear`;
   return (
     <Styles.Container className={"text-text-primary font-primary"}>
       <Drawer
@@ -111,30 +115,14 @@ const Header: FC<PropTypes> = ({
                     ? linksLeft
                         .filter((el: any) => el)
                         .map((l: any) => (
-                          <div
-                            className="text-xl font-bold whitespace-nowrap cursor-pointer"
-                            onClick={() => {
-                              if (l.onClick) l.onClick();
-                              if (!fns.route) return;
-                              return l.route
-                                ? fns.route(l.route)
-                                : l.routeExternal
-                                ? fns.routeExternal(l.routeExternal)
-                                : null;
-                            }}
-                          >
-                            {l.text}
-                          </div>
-                        ))
-                    : null}
-                  <div className={"absolute top-12"}>
-                    <div className="flex m-auto gap-4">
-                      {socialMediaLeft
-                        ? socialMediaLeft.map((l) => (
-                            <FontAwesome
-                              animation="none"
-                              icon={l.icon}
-                              size="xl"
+                          <div className={`relative group`}>
+                            <Styles.LinkTextsilhouette
+                              className={`text-xl font-bold whitespace-nowrap text-background-tertiary transform opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:translate-y-1 transition-all ease-linear`}
+                            >
+                              {l.text}
+                            </Styles.LinkTextsilhouette>
+                            <Styles.LinkText
+                              className="text-xl font-bold whitespace-nowrap cursor-pointer relative"
                               onClick={() => {
                                 if (l.onClick) l.onClick();
                                 if (!fns.route) return;
@@ -144,7 +132,52 @@ const Header: FC<PropTypes> = ({
                                   ? fns.routeExternal(l.routeExternal)
                                   : null;
                               }}
-                            />
+                            >
+                              {l.text}
+                            </Styles.LinkText>
+                          </div>
+                        ))
+                    : null}
+                  <div className={"absolute top-12"}>
+                    <div className="flex m-auto gap-4">
+                      {socialMediaLeft
+                        ? socialMediaLeft.map((l) => (
+                            <div className={`relative group`}>
+                              <Styles.LinkTextsilhouette
+                                className={iconBackdropClassName}
+                              >
+                                <FontAwesome
+                                  className={`text-background-tertiary`}
+                                  animation="none"
+                                  icon={l.icon}
+                                  size="lg"
+                                  onClick={() => {
+                                    if (l.onClick) l.onClick();
+                                    if (!fns.route) return;
+                                    return l.route
+                                      ? fns.route(l.route)
+                                      : l.routeExternal
+                                      ? fns.routeExternal(l.routeExternal)
+                                      : null;
+                                  }}
+                                />
+                              </Styles.LinkTextsilhouette>
+                              <FontAwesome
+                                className={`relative z-10`}
+                                animation="none"
+                                icon={l.icon}
+                                size="xl"
+                                onClick={() => {
+                                  if (l.onClick) l.onClick();
+                                  if (!fns.route) return;
+                                  return l.route
+                                    ? fns.route(l.route)
+                                    : l.routeExternal
+                                    ? fns.routeExternal(l.routeExternal)
+                                    : null;
+                                }}
+                              />
+                            </div>
                           ))
                         : null}
                     </div>
@@ -168,30 +201,14 @@ const Header: FC<PropTypes> = ({
                     ? linksRight
                         .filter((el: any) => el)
                         .map((l: any) => (
-                          <div
-                            className="text-xl font-bold whitespace-nowrap cursor-pointer"
-                            onClick={() => {
-                              if (l.onClick) l.onClick();
-                              if (!fns.route) return;
-                              return l.route
-                                ? fns.route(l.route)
-                                : l.routeExternal
-                                ? fns.routeExternal(l.routeExternal)
-                                : null;
-                            }}
-                          >
-                            {l.text}
-                          </div>
-                        ))
-                    : null}
-                  <div className={"absolute top-12"}>
-                    <div className="flex m-auto gap-4 place-content-start">
-                      {socialMediaRight
-                        ? socialMediaRight.map((l) => (
-                            <FontAwesome
-                              animation="none"
-                              icon={l.icon}
-                              size="xl"
+                          <div className={`relative group`}>
+                            <Styles.LinkTextsilhouette
+                              className={`text-xl font-bold whitespace-nowrap text-background-tertiary transform opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:translate-y-1 transition-all ease-linear`}
+                            >
+                              {l.text}
+                            </Styles.LinkTextsilhouette>
+                            <Styles.LinkText
+                              className="text-xl font-bold whitespace-nowrap cursor-pointer relative"
                               onClick={() => {
                                 if (l.onClick) l.onClick();
                                 if (!fns.route) return;
@@ -201,7 +218,52 @@ const Header: FC<PropTypes> = ({
                                   ? fns.routeExternal(l.routeExternal)
                                   : null;
                               }}
-                            />
+                            >
+                              {l.text}
+                            </Styles.LinkText>
+                          </div>
+                        ))
+                    : null}
+                  <div className={"absolute top-12"}>
+                    <div className="flex m-auto gap-4 place-content-start">
+                      {socialMediaRight
+                        ? socialMediaRight.map((l) => (
+                            <div className={`relative group`}>
+                              <Styles.LinkTextsilhouette
+                                className={iconBackdropClassName}
+                              >
+                                <FontAwesome
+                                  className={`text-background-tertiary`}
+                                  animation="none"
+                                  icon={l.icon}
+                                  size="lg"
+                                  onClick={() => {
+                                    if (l.onClick) l.onClick();
+                                    if (!fns.route) return;
+                                    return l.route
+                                      ? fns.route(l.route)
+                                      : l.routeExternal
+                                      ? fns.routeExternal(l.routeExternal)
+                                      : null;
+                                  }}
+                                />
+                              </Styles.LinkTextsilhouette>
+                              <FontAwesome
+                                className={`relative`}
+                                animation="none"
+                                icon={l.icon}
+                                size="xl"
+                                onClick={() => {
+                                  if (l.onClick) l.onClick();
+                                  if (!fns.route) return;
+                                  return l.route
+                                    ? fns.route(l.route)
+                                    : l.routeExternal
+                                    ? fns.routeExternal(l.routeExternal)
+                                    : null;
+                                }}
+                              />
+                            </div>
                           ))
                         : null}
                     </div>
@@ -233,30 +295,14 @@ const Header: FC<PropTypes> = ({
                     ? links
                         .filter((el: any) => el)
                         .map((l: any) => (
-                          <div
-                            className="text-xl font-bold whitespace-nowrap cursor-pointer"
-                            onClick={() => {
-                              if (l.onClick) l.onClick();
-                              if (!fns.route) return;
-                              return l.route
-                                ? fns.route(l.route)
-                                : l.routeExternal
-                                ? fns.routeExternal(l.routeExternal)
-                                : null;
-                            }}
-                          >
-                            {l.text}
-                          </div>
-                        ))
-                    : null}
-                  <div className={"absolute top-12"}>
-                    <div className="flex m-auto gap-4 place-content-start">
-                      {socialMedia
-                        ? socialMedia.map((l) => (
-                            <FontAwesome
-                              animation="none"
-                              icon={l.icon}
-                              size="xl"
+                          <div className={`relative group`}>
+                            <Styles.LinkTextsilhouette
+                              className={`text-xl font-bold whitespace-nowrap text-background-tertiary transform opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:translate-y-1 transition-all ease-linear`}
+                            >
+                              {l.text}
+                            </Styles.LinkTextsilhouette>
+                            <Styles.LinkText
+                              className="text-xl font-bold whitespace-nowrap cursor-pointer relative"
                               onClick={() => {
                                 if (l.onClick) l.onClick();
                                 if (!fns.route) return;
@@ -266,7 +312,52 @@ const Header: FC<PropTypes> = ({
                                   ? fns.routeExternal(l.routeExternal)
                                   : null;
                               }}
-                            />
+                            >
+                              {l.text}
+                            </Styles.LinkText>
+                          </div>
+                        ))
+                    : null}
+                  <div className={"absolute top-12"}>
+                    <div className="flex m-auto gap-4 place-content-start">
+                      {socialMedia
+                        ? socialMedia.map((l) => (
+                            <div className={`relative group`}>
+                              <Styles.LinkTextsilhouette
+                                className={iconBackdropClassName}
+                              >
+                                <FontAwesome
+                                  className={`text-background-tertiary`}
+                                  animation="none"
+                                  icon={l.icon}
+                                  size="lg"
+                                  onClick={() => {
+                                    if (l.onClick) l.onClick();
+                                    if (!fns.route) return;
+                                    return l.route
+                                      ? fns.route(l.route)
+                                      : l.routeExternal
+                                      ? fns.routeExternal(l.routeExternal)
+                                      : null;
+                                  }}
+                                />
+                              </Styles.LinkTextsilhouette>
+                              <FontAwesome
+                                className={`relative`}
+                                animation="none"
+                                icon={l.icon}
+                                size="xl"
+                                onClick={() => {
+                                  if (l.onClick) l.onClick();
+                                  if (!fns.route) return;
+                                  return l.route
+                                    ? fns.route(l.route)
+                                    : l.routeExternal
+                                    ? fns.routeExternal(l.routeExternal)
+                                    : null;
+                                }}
+                              />
+                            </div>
                           ))
                         : null}
                     </div>

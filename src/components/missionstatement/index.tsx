@@ -11,7 +11,7 @@ export interface PropTypes {
 const MissionStatement: FC<PropTypes> = ({ title, Message, bgImg, button }) => {
   return (
     <Styles.Container className={"text-text-primary font-primary"}>
-      {bgImg ? <Styles.BgImg src={bgImg} /> : null}
+      {bgImg ? <Styles.BgImg src={bgImg} className={`rounded`} /> : null}
       <div
         className={`w-full px-10 m-auto lg:w-4/5 relative ${
           bgImg ? "bg-visibility-primary rounded-md p-10" : ""

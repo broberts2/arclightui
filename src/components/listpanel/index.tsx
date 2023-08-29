@@ -25,7 +25,7 @@ export interface PropTypes {
 const mountAnim = (i: number) => ({
   anim: "fadeIn",
   duration: "0.30s",
-  delay: `${0.015 * i}s`,
+  delay: `${0.01 * i}s`,
 });
 
 const ListPanel: FC<PropTypes> = ({
@@ -136,7 +136,7 @@ const ListPanel: FC<PropTypes> = ({
   React.useEffect(() => {
     window.addEventListener("resize", handleResize);
     handleResize();
-    setMinHeight(sizeRef.current.clientHeight);
+    setMinHeight(sizeRef.current.clientHeight - 25);
   }, []);
   React.useEffect(() => {
     setTimeout(() => setLoading(false), 1);
@@ -171,10 +171,11 @@ const ListPanel: FC<PropTypes> = ({
       }`}
     >
       {!loading ? (
-        <div ref={sizeRef} style={{ minHeight }}>
+        <div ref={sizeRef}>
           {sCards ? (
             <div style={{ height: "100%" }}>
               <SearchControls
+                minHeight={minHeight}
                 hot={true}
                 pagination={Object.assign(
                   fns.e(

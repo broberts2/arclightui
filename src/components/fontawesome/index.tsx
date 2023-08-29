@@ -35,7 +35,7 @@ const FontAwesome: FC<IconProps> = ({
   const selectAnimation = () =>
     animation ? { [animation]: true } : { animation: "none" };
   return (
-    <Styles.Container className={`text-text-primary ${className}`}>
+    <Styles.Container className={`${className}`}>
       <FontAwesomeIcon
         {...selectAnimation()}
         // @ts-ignore

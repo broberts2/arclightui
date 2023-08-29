@@ -4,6 +4,7 @@ import Button from "../button";
 import TextField from "../textfield";
 
 export interface PropTypes {
+  minHeight: number;
   textField: any;
   buttons?: Array<{
     icon: string | null;
@@ -22,6 +23,7 @@ export interface PropTypes {
 }
 
 const SearchControls: FC<PropTypes> = ({
+  minHeight,
   textField,
   buttons,
   className,
@@ -195,7 +197,7 @@ const SearchControls: FC<PropTypes> = ({
       true ? (
         <Styles.Children
           className={`relative z-0`}
-          style={{ height: `${!constrain ? `100%` : null}` }}
+          style={{ height: `${!constrain ? `100%` : null}`, minHeight }}
         >
           {children}
         </Styles.Children>

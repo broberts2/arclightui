@@ -11,7 +11,20 @@ const Td = styled.td`
   }
 `;
 
+const LinkText = styled.div`
+  z-index: 1;
+`;
+
+const LinkTextsilhouette = styled.div`
+  z-index: 0;
+  position: absolute;
+  pointer-events: none;
+  text-shadow: none;
+`;
+
 export default {
   Container,
   Td,
+  LinkText,
+  LinkTextsilhouette,
 };

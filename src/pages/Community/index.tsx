@@ -47,7 +47,7 @@ const Community: FC<{
         Request={{
           index: "community",
           type: `(M) summoner`,
-          search: { limit: small ? 5 : 8 },
+          search: { limit: small ? 5 : 5 },
         }}
         fns={fns}
         D={D}

@@ -13,7 +13,7 @@ import _fns from "./fns";
 let fns: any;
 let socket: any;
 
-const transitionDuration = 1500;
+const transitionDuration = 1000;
 
 export interface PropTypes {
   socketEndpoint?: string | null;
