@@ -25,5 +25,5 @@ module.exports = {
       },
     },
   },
-  important: true,
+  important: false,
 };
