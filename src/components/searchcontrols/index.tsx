@@ -48,10 +48,11 @@ const SearchControls: FC<PropTypes> = ({
   const NextLast = (props) => (
     <React.Fragment>
       <Button
-        className={"hidden m-1 lg:block pointer-events-auto min-w-max"}
-        style={
-          pagination.skip > 0 ? {} : { opacity: 0.3, pointerEvents: "none" }
-        }
+        className={`hidden m-1 lg:block min-w-max ${
+          pagination.skip > 0
+            ? "pointer-events-auto"
+            : "opacity-30 pointer-events-none"
+        }`}
         label={"Last"}
         idleIcon={"arrow-left"}
         type={"button"}
@@ -60,10 +61,11 @@ const SearchControls: FC<PropTypes> = ({
         onClick={(status: any) => pagination.onClick(-1)}
       />
       <Button
-        className={"block m-1 lg:hidden pointer-events-auto"}
-        style={
-          pagination.skip > 0 ? {} : { opacity: 0.3, pointerEvents: "none" }
-        }
+        className={`block m-1 lg:hidden ${
+          pagination.skip > 0
+            ? "pointer-events-auto"
+            : "opacity-30 pointer-events-none"
+        }`}
         label={props.isTop ? undefined : "Last"}
         idleIcon={"arrow-left"}
         type={"button"}
@@ -72,12 +74,11 @@ const SearchControls: FC<PropTypes> = ({
         onClick={(status: any) => pagination.onClick(-1)}
       />
       <Button
-        className={"hidden m-1 lg:block pointer-events-auto min-w-max"}
-        style={
+        className={`hidden m-1 lg:block ${
           (pagination.skip + 1) * pagination.length < pagination.totalcount
-            ? {}
-            : { opacity: 0.3, pointerEvents: "none" }
-        }
+            ? "pointer-events-auto"
+            : "opacity-30 pointer-events-none"
+        } min-w-max`}
         label={"Next"}
         idleIcon={"arrow-right"}
         type={"button"}
@@ -86,12 +87,11 @@ const SearchControls: FC<PropTypes> = ({
         onClick={(status: any) => pagination.onClick(1)}
       />
       <Button
-        className={"block m-1 lg:hidden pointer-events-auto"}
-        style={
+        className={`block m-1 lg:hidden ${
           (pagination.skip + 1) * pagination.length < pagination.totalcount
-            ? {}
-            : { opacity: 0.3, pointerEvents: "none" }
-        }
+            ? "pointer-events-auto"
+            : "opacity-30 pointer-events-none"
+        }`}
         label={props.isTop ? undefined : "Next"}
         idleIcon={"arrow-right"}
         type={"button"}
@@ -195,12 +195,14 @@ const SearchControls: FC<PropTypes> = ({
       {(pagination && pagination.totalcount) ||
       (Array.isArray(children) && children.length > 1) ||
       true ? (
-        <Styles.Children
-          className={`relative z-0`}
-          style={{ height: `${!constrain ? `100%` : null}`, minHeight }}
-        >
-          {children}
-        </Styles.Children>
+        <div style={{ minHeight: minHeight + 25 }}>
+          <Styles.Children
+            className={`relative z-0 h-full`}
+            style={{ height: `${!constrain ? `100%` : null}` }}
+          >
+            {children}
+          </Styles.Children>
+        </div>
       ) : (
         <div
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}

@@ -21,7 +21,46 @@ const Staff: FC<{
       }}
     >
       <Header fns={fns} endpoint={endpoint} />
-
+      <Card
+        line
+        bgImg={"https://images6.alphacoders.com/129/1290503.png"}
+        bodyComponent={
+          <div className={`w-full h-full flex justify-start`}>
+            <img
+              src={`${endpoint}/static/media/jungle.png`}
+              className={`mx-10 w-20 h-20 object-cover rounded-full bg-visibility-primary p-2 border-2 border-background-tertiary`}
+            />
+            <div className={`flex flex-col justify-center text-xl`}>
+              Shalom Time!
+            </div>
+            <div className={`flex justify-end text-lg mx-10 grow`}>
+              <div className={`flex flex-col justify-center space-y-3`}>
+                <div
+                  className={`hover:text-violet-700`}
+                  onClick={() =>
+                    fns.routeExternal(
+                      `https://www.op.gg/summoners/na/Jetgorilla`
+                    )
+                  }
+                >
+                  https://www.op.gg/summoners/na/Jetgorilla
+                </div>
+                <div
+                  className={`hover:text-violet-700`}
+                  onClick={() =>
+                    fns.routeExternal(
+                      `https://www.op.gg/summoners/na/Jetgorilla`
+                    )
+                  }
+                >
+                  https://www.op.gg/summoners/na/Jetgorilla
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+        onClick={() => null}
+      />
       <Footer fns={fns} endpoint={endpoint} />
     </Page>
   );

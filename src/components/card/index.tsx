@@ -68,13 +68,15 @@ const Card: FC<PropTypes> = ({
       bodyComponent={bodyComponent}
       onMouseEnter={hover ? hover.onMouseEnter : null}
       onMouseLeave={hover ? hover.onMouseLeave : null}
-      className={`${!noBodyComponentAbsolute ? "group " : null}w-5/6 ${
-        bodyComponent ? "md:w-1/2" : null
+      className={`${!noBodyComponentAbsolute ? "group " : null}${
+        line || linesmall ? "w-full" : "w-5/6"
+      } ${bodyComponent && !line && !linesmall ? "md:w-1/2" : null} ${
+        bodyComponent && !line && !linesmall ? "lg:w-1/3" : null
       } ${
-        bodyComponent ? "lg:w-1/3" : null
-      } xl:w-96 text-text-primary font-primary ${
-        className ? className : null
-      } ${active !== null && active === false ? "opacity-50" : null}`}
+        !line && !linesmall && !small ? "xl:w-96" : ""
+      } text-text-primary font-primary ${className ? className : null} ${
+        active !== null && active === false ? "opacity-50" : null
+      } ${small && (!line || !linesmall) ? "w-40" : ""}`}
       max={max}
       modal={modal}
       medium={medium}

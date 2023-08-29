@@ -21,23 +21,23 @@ const Container = styled.div`
   ${(props) =>
     props.small
       ? `
-			width: 10rem;
-			height: 8rem;
-			@media only screen and (max-width: 1024px) {
-				height: 8rem;
-			}
-		`
+        width: 10rem;
+        height: 8rem;
+        @media only screen and (max-width: 1024px) {
+          height: 8rem;
+        }
+      `
       : null}
 	${(props) =>
     props.line
       ? `
-	  		margin: 12px;
-			width: 100%;
-			height: 6rem;
-			@media only screen and (max-width: 1024px) {
-				height: 6rem;
-			}
-		`
+        margin: 12px;
+        width: 100%;
+        height: 6rem;
+        @media only screen and (max-width: 1024px) {
+          height: 6rem;
+        }
+      `
       : null}
 			${(props) =>
     props.linesmall

@@ -73,7 +73,7 @@ const Admin: FC<{
           opacity: 0.5,
         }}
       >
-        <Styles.Body className={`flex flex-row text-text-primary`}>
+        <Styles.Body className={`flex flex-row`}>
           <Styles.Drawer className={`block ${!authenticated ? "hidden" : ""}`}>
             <Drawer
               autoSort
