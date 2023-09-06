@@ -69,7 +69,7 @@ const Card: FC<PropTypes> = ({
       onMouseEnter={hover ? hover.onMouseEnter : null}
       onMouseLeave={hover ? hover.onMouseLeave : null}
       className={`${!noBodyComponentAbsolute ? "group " : null}${
-        line || linesmall ? "w-full" : "w-5/6"
+        line || linesmall ? "w-full" : ""
       } ${bodyComponent && !line && !linesmall ? "md:w-1/2" : null} ${
         bodyComponent && !line && !linesmall ? "lg:w-1/3" : null
       } ${

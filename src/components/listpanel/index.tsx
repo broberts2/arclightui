@@ -77,7 +77,7 @@ const ListPanel: FC<PropTypes> = ({
       linesmall={linesmall}
       mountAnim={mountAnim(i)}
       index={skip * Request.search.limit + (i + 1)}
-      small
+      small={!line && !linesmall}
       hoverComponent={obj.hoverComponent}
       locked={obj.locked}
       bgImg={obj.img}
@@ -108,7 +108,7 @@ const ListPanel: FC<PropTypes> = ({
     }
     if (row.length) {
       for (let i = row.length; i < nPerRow; i++) {
-        row.push(<div style={{ width: `10rem` }} />);
+        row.push(<div className={`w-40`} />);
       }
       rows.push(
         <div

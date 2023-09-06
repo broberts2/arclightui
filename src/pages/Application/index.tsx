@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 import Header from "../../projectcomponents/header";
 import Footer from "../../projectcomponents/footer";
-import { Page, Application, HeroPanel, PageTitle } from "../../components";
+import { Page, Application, HeroPanel } from "../../components";
 
 const ApplicationPage: FC<{
   fns: {
@@ -11,6 +11,15 @@ const ApplicationPage: FC<{
   D: { [key: string]: any };
   endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
+  const [opacity, setOpacity] = React.useState(0.35);
+  React.useEffect(() => {
+    const onScroll = () => {
+      const n = 0.35 - window.scrollY * 0.0003;
+      setOpacity(n > 0.035 ? n : 0.035);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   const _f = fns.readState().query;
   const bg = (t: string) => {
     const _ = fns
@@ -20,9 +29,7 @@ const ApplicationPage: FC<{
     return "";
   };
   const [index, setIndex] = React.useState(0);
-  const [hItem, setHItem] = React.useState(
-    _f && _f.f ? _f.f : "League Application"
-  );
+  const [hItem, setHItem] = React.useState(_f && _f.f ? _f.f : "Ban Appeal");
   const [form, setForm] = React.useState(null);
   React.useEffect(() => {
     const _f = fns.readState().query;
@@ -37,25 +44,27 @@ const ApplicationPage: FC<{
       );
     fns.setQueryParams({ f: hItem });
   }, [hItem, D]);
+  React.useEffect(() => {
+    if (fns.calls && fns.calls.getformtemplates && !D.getformtemplates)
+      fns.calls.getformtemplates();
+  }, [fns.calls]);
   return D && fns.calls ? (
     <Page
       fns={fns}
       backgroundImage={{
-        src: "https://coolhdwall.com/storage/2203/lol-wild-rift-2022-lunar-new-year-2k-wallpaper-2560x1440-24.jpg",
+        src: "",
         opacity: 0.5,
       }}
     >
       <Header fns={fns} endpoint={endpoint} />
-      <PageTitle
+      {/* <PageTitle
         orientation={"center"}
         text={"Applications"}
         fns={fns}
-        img={
-          "https://support-leagueoflegends.riotgames.com/hc/article_attachments/12749386430099"
-        }
+        img={Settings.titleimage}
         bg={"http://localhost:7000/static/media/background2.mp4"}
         bgOffset={50}
-      />
+      /> */}
       <HeroPanel
         small
         index={index}
