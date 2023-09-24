@@ -7,157 +7,50 @@ const H: FC<{
   };
   main?: boolean;
   endpoint?: string;
-}> = ({ fns, main, endpoint }) =>
-  main ? (
-    <Header
-      fns={fns}
-      logo={{
-        src: `${endpoint}/static/media/TES-logo.png`,
-        route: "/",
-      }}
-      linksLeft={[
-        {
-          icon: "users",
-          text: "Content",
-          subLinks: [
-            {
-              icon: "users",
-              route: "/content",
-              text: "Content",
-            },
-          ],
-        },
-        {
-          icon: "users",
-          route: "/community",
-          text: "Community",
-        },
-        {
-          icon: "chart-line",
-          route: "/teams",
-          text: "Teams and Stats",
-        },
-        {
-          icon: "chess-knight",
-          route: "/",
-          text: "Crux",
-        },
-        {
-          icon: "chess-knight",
-          route: "/bracket",
-          text: "Bracket",
-        },
-      ]}
-      linksRight={[
-        { icon: "user-astronaut", route: "/staff", text: "Staff" },
-        { icon: "scroll", route: "/application", text: "Applications" },
+}> = ({ fns, main, endpoint }) => {
+  return (
+    <div
+      className={`flex py-5 items-center space-x-7 border-b-[1px] border-gray-500 mb-10 pt-10`}
+    >
+      <img
+        src={`http://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`}
+        className={`w-20 cursor-pointer`}
+      />
+      {[
+        { text: "Home", route: "/" },
         fns.readToken()._token
           ? {
-              icon: "scroll",
-              route: "/profile",
-              text: "My Profile",
+              text: "ArclightUI",
+              route: "/arclightui",
             }
-          : { icon: "scroll", route: "/login", text: "Login" },
-        fns.readToken()._token
-          ? {
-              icon: "scroll",
-              route: "/",
-              text: "Sign Out",
-              onClick: () => {
-                fns.writeToken();
-              },
+          : undefined,
+      ]
+        .filter((el: any) => el)
+        .map((el: any) => (
+          <div
+            className={`text-lg cursor-pointer`}
+            onClick={() => fns.route(el.route)}
+          >
+            {el.text}
+          </div>
+        ))}
+      <div className={`grow text-right`}>
+        <div
+          className={`text-lg cursor-pointer inline-flex`}
+          onClick={() => {
+            if (fns.readToken()._token) {
+              fns.route("/");
+              fns.writeToken();
+            } else {
+              fns.route("/login");
             }
-          : null,
-      ]}
-      socialMediaLeft={[
-        {
-          routeExternal: "https://discord.com/invite/Mgs6Xj4pCm",
-          icon: "discord",
-        },
-        {
-          route: "/",
-          icon: "twitch",
-        },
-        {
-          route: "/",
-          icon: "twitter",
-        },
-      ]}
-      socialMediaRight={[
-        {
-          route: "/",
-          icon: "reddit",
-        },
-        {
-          route: "/",
-          icon: "youtube",
-        },
-        {
-          route: "/",
-          icon: "facebook",
-        },
-      ]}
-    />
-  ) : (
-    <Header
-      fns={fns}
-      logo={{
-        src: `${endpoint}/static/media/TES-logo.png`,
-        route: "/",
-      }}
-      links={[
-        { icon: "users", route: "/content", text: "Content" },
-        { icon: "users", route: "/community", text: "Community" },
-        { icon: "chart-line", route: "/teams", text: "Teams and Stats" },
-        { icon: "chess-knight", route: "/", text: "Crux" },
-        {
-          icon: "chess-knight",
-          route: "/bracket",
-          text: "Bracket",
-        },
-        { icon: "user-astronaut", route: "/staff", text: "Staff" },
-        { icon: "scroll", route: "/application", text: "Applications" },
-        fns.readToken()._token
-          ? { icon: "scroll", route: "/profile", text: "My Profile" }
-          : { icon: "scroll", route: "/login", text: "Login" },
-        fns.readToken()._token
-          ? {
-              icon: "scroll",
-              route: "/",
-              text: "Sign Out",
-              onClick: () => {
-                fns.writeToken();
-              },
-            }
-          : null,
-      ]}
-      socialMedia={[
-        {
-          routeExternal: "https://discord.com/invite/Mgs6Xj4pCm",
-          icon: "discord",
-        },
-        {
-          route: "/",
-          icon: "twitch",
-        },
-        {
-          route: "/",
-          icon: "twitter",
-        },
-        {
-          route: "/",
-          icon: "reddit",
-        },
-        {
-          route: "/",
-          icon: "youtube",
-        },
-        {
-          route: "/",
-          icon: "facebook",
-        },
-      ]}
-    />
+          }}
+        >
+          {fns.readToken()._token ? "Sign Out" : "Sign In"}
+        </div>
+      </div>
+    </div>
   );
+};
 
 export default H;

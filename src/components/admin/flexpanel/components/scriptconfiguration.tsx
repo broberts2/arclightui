@@ -25,7 +25,12 @@ export default (
 					"name": "newscript.js",
 					"active": false,
 					"context": "${k}"
-					${k !== "universal" && k !== "endpoint" ? `,\n"model": "bindingmodel"` : ""}
+					${
+            k !== "universal" && k !== "endpoint" && k !== "custom-call"
+              ? `,\n"model": "bindingmodel"`
+              : ""
+          }
+          ${k === "custom-call" ? `,\n"profiles": ["administrator"]` : ""}
 				}`,
           fn: `async (ServerObject) => {\n\n};`,
         };

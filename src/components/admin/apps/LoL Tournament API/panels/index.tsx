@@ -58,8 +58,8 @@ export default (
         orientation={"center"}
         text={title}
         fns={fns}
-        img={`${publicURI}/static/defaultart/${gem}`}
-        bg={`${publicURI}/static/defaultart/${gem}`}
+        img={`http://highmountainlabs.io/arclight/cdn/media/${gem}`}
+        bg={`http://highmountainlabs.io/arclight/cdn/media/${gem}`}
         bgOffset={-50}
       />
       {App}

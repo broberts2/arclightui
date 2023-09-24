@@ -4,6 +4,7 @@ import FontAwesome from "../fontawesome/index";
 import Button from "../button";
 
 export interface PropTypes {
+  managed?: boolean | string;
   exitButton?: Function;
   bgImg: string;
   subText?: string | null;
@@ -29,6 +30,7 @@ export interface PropTypes {
 }
 
 const Card: FC<PropTypes> = ({
+  managed,
   exitButton,
   bodyComponent,
   bgImg,
@@ -162,7 +164,7 @@ const Card: FC<PropTypes> = ({
                 : line || linesmall
                 ? "text-sm lg:text-lg text-left px-10 md:px-20 h-3/5"
                 : "text-md lg:text-2xl"
-            } relative p-0`}
+            } relative p-0${managed ? ` text-cyan-300` : ""}`}
           >
             {subText}
           </div>

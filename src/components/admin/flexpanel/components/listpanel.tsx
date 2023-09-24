@@ -40,9 +40,10 @@ export default (
         }}
         fns={fns}
         D={C.cards ? { [type]: { records: C.cards } } : D}
-        card={(c: any) =>
-          type === "model"
+        card={(c: any) => {
+          return type === "model"
             ? {
+                managed: c._managed,
                 img: c.metaimg,
                 subtext: c._type,
                 onClick: () => {
@@ -52,6 +53,7 @@ export default (
                 },
               }
             : {
+                managed: c._managed,
                 img: c.img,
                 subtext: c.name || c.username,
                 onClick: () => {
@@ -59,8 +61,8 @@ export default (
                   else c.onClick(c);
                   if (listquery) listquery(type, c._id);
                 },
-              }
-        }
+              };
+        }}
         line={false}
         constrain
       />

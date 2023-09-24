@@ -69,7 +69,9 @@ const Admin: FC<{
       <Page
         fns={fns}
         backgroundImage={{
-          src: `${endpoint}/${backgroundImage}`,
+          src: backgroundImage
+            ? backgroundImage
+            : `http://highmountainlabs.io/arclight/cdn/media/2.jpg`,
           opacity: 0.5,
         }}
       >
@@ -79,7 +81,9 @@ const Admin: FC<{
               autoSort
               headerImg={
                 useMediaQuery({ query: "(min-width: 1024px)" })
-                  ? `${endpoint}/${noSelect}`
+                  ? noSelect
+                    ? noSelect
+                    : `http://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`
                   : undefined
               }
               startOpen={useMediaQuery({ query: "(min-width: 1024px)" })}
@@ -100,7 +104,11 @@ const Admin: FC<{
                 disableNewRegistration
                 fns={fns}
                 D={D}
-                authBackgroundImage={`${endpoint}/${authBackgroundImage}`}
+                authBackgroundImage={
+                  authBackgroundImage
+                    ? authBackgroundImage
+                    : `http://highmountainlabs.io/arclight/cdn/media/2.jpg`
+                }
                 OATHOnly={false}
                 OATH={[
                   {
@@ -119,7 +127,11 @@ const Admin: FC<{
               <FlexPanel
                 publicURI={endpoint}
                 fns={fns}
-                noSelect={`${endpoint}/${noSelect}`}
+                // noSelect={
+                //   noSelect
+                //     ? noSelect
+                //     : `http://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`
+                // }
                 D={D}
                 searchOn={fns.parseAdminDomainState().item}
                 callresolved={

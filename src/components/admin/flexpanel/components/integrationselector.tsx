@@ -25,7 +25,7 @@ const Panel = (props) => {
                 </div>
               </div>
             ),
-            bgImg: `${props.publicURI}/${props.D.getintegrations[k].decorators.img}`,
+            bgImg: `${props.D.getintegrations[k].decorators.img}`,
             subText: k,
             onClick: () =>
               props.fns.setAdminDomainState({

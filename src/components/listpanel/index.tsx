@@ -71,25 +71,28 @@ const ListPanel: FC<PropTypes> = ({
   if (autoSort) cards = cards.sort((a, b) => (a.subText < b.subText ? -1 : 1));
   let row: any = [];
   const rows: any = [];
-  const provideCard = (obj: { [key: string]: any }, i: number) => (
-    <Card
-      line={line}
-      linesmall={linesmall}
-      mountAnim={mountAnim(i)}
-      index={skip * Request.search.limit + (i + 1)}
-      small={!line && !linesmall}
-      hoverComponent={obj.hoverComponent}
-      locked={obj.locked}
-      bgImg={obj.img}
-      subText={obj.subtext}
-      onClick={
-        obj.onClick
-          ? //@ts-ignore
-            () => (obj.onClick ? obj.onClick() : null)
-          : null
-      }
-    />
-  );
+  const provideCard = (obj: { [key: string]: any }, i: number) => {
+    return (
+      <Card
+        managed={obj.managed}
+        line={line}
+        linesmall={linesmall}
+        mountAnim={mountAnim(i)}
+        index={skip * Request.search.limit + (i + 1)}
+        small={!line && !linesmall}
+        hoverComponent={obj.hoverComponent}
+        locked={obj.locked}
+        bgImg={obj.img}
+        subText={obj.subtext}
+        onClick={
+          obj.onClick
+            ? //@ts-ignore
+              () => (obj.onClick ? obj.onClick() : null)
+            : null
+        }
+      />
+    );
+  };
   if (!line && !linesmall) {
     for (let i = 0; i < cards.length; i++) {
       if (i % nPerRow === 0 && i > 0) {
@@ -134,6 +137,7 @@ const ListPanel: FC<PropTypes> = ({
     else setNPerRow(3);
   };
   React.useEffect(() => {
+    if (!sizeRef?.current?.clientHeight) return;
     window.addEventListener("resize", handleResize);
     handleResize();
     setMinHeight(sizeRef.current.clientHeight - 25);

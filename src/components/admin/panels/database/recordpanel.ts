@@ -1,6 +1,21 @@
 export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
   (D: any, Constructors: any, fns: any, key: string, endpoint: string) =>
   (currentState: { [key: string]: any }, updateState: Function) => ({
+    managed: (() => {
+      if (D && D.getdatamodels && D.getdatamodels.records && currentState._id) {
+        if (key === "model") {
+          const o = D.getdatamodels.records.find(
+            (el: any) => el._id === currentState._id
+          );
+          if (o) return o._managed;
+        } else if (D[`getrecords_${key}`] && D[`getrecords_${key}`].init) {
+          const o = D[`getrecords_${key}`].init.records.find(
+            (el: any) => el._id === currentState._id
+          );
+          if (o) return o._managed;
+        }
+      }
+    })(),
     title:
       currentState._id && D.getdatamodels && D.getdatamodels.records
         ? `${xFormKey(key.replace(/_/g, "")).slice(0, -1)}: ${(() => {

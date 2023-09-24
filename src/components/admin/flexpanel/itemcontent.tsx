@@ -85,45 +85,6 @@ export default (props: any) => {
                   />
                 ) : null
               )}
-              {/* {[
-                {
-                  c: "onAccessType",
-                  s: "accesstype",
-                  v: ["get", "post", "put", "delete"],
-                },
-                {
-                  c: "onScript",
-                  s: "script",
-                  v: ["get", "post", "put", "delete"],
-                },
-              ].map((S: { c: string; s: string; v: Array<string> }) =>
-                props[S.c] ? (
-                  <props.Picklist
-                    unlinked
-                    disallowNone
-                    span
-                    hot
-                    value={Object.keys(props.state).filter(
-                      (kk: string) =>
-                        S.v.find((el: any) => el.s === kk) && props.state[kk]
-                    )}
-                    list={S.v.map((s: string) => ({
-                      text: s,
-                      value: s,
-                    }))}
-                    onChange={(e: any) => {
-                      // const _ = {};
-                      // arr[k].map(
-                      //   (el: any) => (_[el.s] = e.target.value.includes(el.s))
-                      // );
-                      // props.setState((s: any) => ({ ...s, ..._ }));
-                    }}
-                    key={0}
-                    label={S.s}
-                    variant="standard"
-                  />
-                ) : null
-              )} */}
               {props.onAccessType ? (
                 <props.Picklist
                   unlinked
@@ -146,7 +107,11 @@ export default (props: any) => {
                   variant="standard"
                 />
               ) : null}
-              {props.onScript && props.D && props.D.getscripts ? (
+              {props.onScript &&
+              props.D &&
+              props.D.getscripts &&
+              props.D.getscripts.records &&
+              props.D.getscripts.records.endpoint ? (
                 <props.Picklist
                   unlinked
                   disallowNone

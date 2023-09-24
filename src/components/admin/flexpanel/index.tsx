@@ -70,6 +70,7 @@ const FlexPanel: FC<{
     const map: { [key: string]: number } = {};
     row.push(
       <Item
+        managed={state._items[i].managed}
         D={D}
         Bttn={Bttn}
         Picklist={Picklist}

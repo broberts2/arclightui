@@ -2,7 +2,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
   (D: any, Constructors: any, fns: any, key: string, endpoint: string) =>
   (currentState: { [key: string]: any }, updateState: Function) => ({
     title: `${xFormKey(key.replace(/_/g, ""))}`,
-    backgroundImg: `${endpoint}/static/defaultart/form.jpg`,
+    backgroundImg: `http://highmountainlabs.io/arclight/cdn/media/1.jpg`,
     controls: [
       {
         type: "FormSelector",

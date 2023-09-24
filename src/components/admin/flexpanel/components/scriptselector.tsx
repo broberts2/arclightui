@@ -28,7 +28,7 @@ const Panel = (props) => {
                         props.D.getscripts.records[scriptContext][k].metadata
                       );
                       return {
-                        img: `${props.publicURI}/static/defaultart/${
+                        img: `http://highmountainlabs.io/arclight/cdn/media/${
                           metadata.managed ? "js-m" : "js"
                         }.jpg`,
                         subtext: metadata.name,

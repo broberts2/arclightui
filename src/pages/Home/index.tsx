@@ -1,17 +1,10 @@
 import React, { FC } from "react";
-import {
-  SlantedDivider,
-  HeroPanel,
-  MissionStatement,
-  CompassViewer,
-  Button,
-  Page,
-  FadeDivider,
-  Picklist,
-} from "../../components";
+import { HeroPanel, Page } from "../../components";
+import Styles from "./styles";
 
 import Header from "../../projectcomponents/header";
 import Footer from "../../projectcomponents/footer";
+import Button from "../../projectcomponents/button";
 
 const Home: FC<{
   fns: {
@@ -21,189 +14,76 @@ const Home: FC<{
   endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
   return D && fns.calls ? (
-    <Page
-      fns={fns}
-      backgroundImage={{
-        src: `https://images2.alphacoders.com/128/1287858.jpg`,
-        opacity: 0.5,
-      }}
-    >
-      <Header main fns={fns} endpoint={endpoint} />
-      <div className={`h-48 lg:h-96`} />
-      {/* <SlantedDivider
-				rotation={1}
-				img={require("../../yone2.jpg")}
-				ruby={require("../../lolicon.png")}
-			/> */}
-      {/* <FadeDivider
-        ruby={
-          "http://titanesports.org:7000/static/media/TES2023_website_summer.png"
-        }
-        fadeOpacity={0.05}
-      /> */}
-      <CompassViewer
-        bgCompassElement={`${endpoint}/static/media/pyke.webm`}
-        defaultSelection={1}
-        items={[
-          {
-            bgImg: `${endpoint}/static/media/karma.jpg`,
-            element: (
-              <div>
-                <MissionStatement
-                  bgImg={`${endpoint}/static/media/karma.jpg`}
-                  title={"Welcome to Titan Esports!"}
-                  Message={
-                    <table className={``}>
-                      <tbody>
-                        <tr>
-                          <td className={`hidden sm:block`}>
-                            <img
-                              className={`w-[600px]`}
-                              src={`${endpoint}/static/media/TES2023_website_summer.png`}
-                            />
-                          </td>
-                          <td>
-                            <div className={`pl-10`}>
-                              Lorem Ipsum is simply dummy text of the printing
-                              and typesetting industry. Lorem Ipsum has been the
-                              industry's standard dummy text ever since the
-                              1500s, when an unknown printer took a galley of
-                              type and scrambled it to make a type specimen
-                              book.
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  }
-                />
+    <Page fns={fns} backgroundGradient={{ from: `#283b4c`, to: `#09111c` }}>
+      <Styles.Container className={`px-72`}>
+        <Header main fns={fns} endpoint={endpoint} />
+        <Styles.Body className={`relative`}>
+          <Styles.HeroBody className={`m-auto relative flex space-x-10`}>
+            <Styles.HeroText className={`flex items-center`}>
+              <div className={`flex-col space-y-4`}>
+                <div className={`text-3xl my-6`}>Highmountain Labs</div>
+                <div className={`text-sm`}>
+                  Contrary to popular belief, Lorem Ipsum is not simply random
+                  text. It has roots in a piece of classical Latin literature
+                  from 45 BC, making it over 2000 years old. Richard McClintock,
+                  a Latin professor at Hampden-Sydney College in Virginia,
+                  looked up one of the more obscure Latin words, consectetur,
+                  from.
+                </div>
+                <div className={`text-sm`}>
+                  Contrary to popular belief, Lorem Ipsum is not simply random
+                  text. It has roots in a piece of classical Latin literature
+                  from 45 BC, making it over 2000 years old. Richard McClintock,
+                  a Latin professor at Hampden-Sydney College in Virginia,
+                  looked up one of the more obscure Latin words, consectetur,
+                  from a Lorem Ipsum passage, and going through the cites of the
+                  word in classical literature, discovered the undoubtable
+                  source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of
+                  "de Finibus Bonorum et Malorum" (The Extremes of Good and
+                  Evil) by Cicero, written in 45 BC. This book is a treatise on
+                  the theory of ethics, very popular during the Renaissance. The
+                  first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..",
+                  comes from a line in section 1.10.32.
+                </div>
+                <Button fns={fns} />
               </div>
-            ),
-          },
-          {
-            bgImg: `${endpoint}/static/media/discord.png`,
-            element: (
-              <MissionStatement
-                bgImg={`${endpoint}/static/media/discord.jpg`}
-                title={"Come chat on Discord"}
-                Message={
-                  <div>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </div>
-                }
-                button={
-                  <Button
-                    label={"Titan Esports Discord"}
-                    idleIcon={"discord"}
-                    type={"button"}
-                    size={"normal"}
-                    animation={true}
-                    onClick={(status: any) =>
-                      fns.routeExternal(`https://discord.gg/kuWyKDxkR7`)
-                    }
-                  />
-                }
-              />
-            ),
-          },
-          {
-            bgImg: `${endpoint}/static/media/twitch.png`,
-            element: (
-              <div>
-                <MissionStatement
-                  bgImg={`${endpoint}/static/media/twitchtv.jpg`}
-                  title={"Catch us on Twitch.tv"}
-                  Message={
-                    <div>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry.
-                    </div>
-                  }
-                  button={
-                    <Button
-                      label={"Titan Esports Twitch.tv"}
-                      idleIcon={"twitch"}
-                      type={"button"}
-                      size={"normal"}
-                      animation={true}
-                      onClick={(status: any) =>
-                        fns.routeExternal(`https://www.twitch.tv/titanesportz`)
-                      }
-                    />
-                  }
-                />
-              </div>
-            ),
-          },
-          {
-            bgImg: `${endpoint}/static/media/youtube.jpg`,
-            element: (
-              <MissionStatement
-                bgImg={`${endpoint}/static/media/youtube.jpg`}
-                title={"Check out our Vods"}
-                Message={
-                  <div>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </div>
-                }
-                button={
-                  <Button
-                    label={"Titan Esports Youtube"}
-                    idleIcon={"youtube"}
-                    type={"button"}
-                    size={"normal"}
-                    animation={true}
-                    onClick={(status: any) =>
-                      fns.routeExternal(
-                        `https://www.youtube.com/channel/UCo5klVtSLp2YLch8ye_FBRw/videos`
-                      )
-                    }
-                  />
-                }
-              />
-            ),
-          },
-          {
-            bgImg: `${endpoint}/static/media/illaoi.jpg`,
-            element: (
-              <MissionStatement
-                bgImg={`${endpoint}/static/media/illaoi.jpg`}
-                title={"Catch us on Twitch.tv"}
-                Message={
-                  <div>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </div>
-                }
-              />
-            ),
-          },
-        ]}
-      />
-      <MissionStatement
-        title={"Titan Esports"}
-        Message={
-          <div>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            </Styles.HeroText>
+            <Styles.HeroImg
+              className={`max-w-xl object-cover`}
+              src={`http://highmountainlabs.io/arclight/cdn/media/wise_man.png`}
+            />
+          </Styles.HeroBody>
+          <div className={`my-24`}>
+            <HeroPanel
+              small
+              cards={[
+                {
+                  ht: "Developer reference for ArclightUI",
+                  subText: "ArclightUI",
+                  img: `http://highmountainlabs.io/arclight/cdn/media/flask.jpg`,
+                  route: "/arclightui",
+                },
+                {
+                  locked: true,
+                  ht: "Some text for you",
+                  img: `http://highmountainlabs.io/arclight/cdn/media/1.jpg`,
+                },
+                {
+                  locked: true,
+                  ht: "Some text for you",
+                  img: `http://highmountainlabs.io/arclight/cdn/media/1.jpg`,
+                },
+              ].map((C: { [key: string]: any }) => ({
+                locked: C.locked || !fns.readToken()._token,
+                subText: C.subText,
+                hoverComponent: C.ht ? <div>{C.ht}</div> : undefined,
+                bgImg: C.img,
+                onClick: () => fns.route(C.route),
+              }))}
+            />
           </div>
-        }
-      />
-      <HeroPanel
-        cards={fns
-          .e(D, `D.getrecords_lolleague.init.records`, [])
-          .map((league: { [key: string]: any }) => ({
-            locked: league.locked,
-            hoverComponent: (
-              <img src={league.logo} className={`w-32 lg:w-64 object-cover`} />
-            ),
-            bgImg: league.img,
-            subText: league.name,
-            onClick: () => fns.route("/"),
-          }))}
-      />
+        </Styles.Body>
+      </Styles.Container>
       <Footer fns={fns} endpoint={endpoint} />
     </Page>
   ) : null;

@@ -49,7 +49,10 @@ const App: FC<PropTypes> = ({
   React.useEffect(() => {
     // @ts-ignore
     setApp(() => (
-      <Styles.Container className={`relative`} ref={AppRef}>
+      <Styles.Container
+        className={`relative text-text-primary font-primary`}
+        ref={AppRef}
+      >
         {background ? (
           <img
             src={background.src}

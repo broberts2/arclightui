@@ -15,7 +15,13 @@ export default (props: any) => {
       />
       <div className={`w-full h-full`}>
         {props.title ? (
-          <div className={`font-primary text-4xl`}>{props.title}</div>
+          <div
+            className={`font-primary text-4xl${
+              props.managed ? ` text-cyan-300` : ""
+            }`}
+          >
+            {props.title}
+          </div>
         ) : null}
         <ItemContent {...props}>{props.children}</ItemContent>
       </div>

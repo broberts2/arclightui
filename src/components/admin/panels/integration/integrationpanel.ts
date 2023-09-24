@@ -10,6 +10,6 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
   ) =>
   (currentState: { [key: string]: any }, updateState: Function) => ({
     title: `Integrations`,
-    backgroundImg: `${endpoint}/static/defaultart/integration.jpg`,
+    backgroundImg: `http://highmountainlabs.io/arclight/cdn/media/1.jpg`,
     controls: [{ type: "IntegrationSelector", label: "Search" }],
   });
