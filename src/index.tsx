@@ -10,7 +10,7 @@ root.render(
   <React.StrictMode>
     <App
       nopage={"static/defaultart/404.jpg"}
-      socketEndpoint={`http://localhost:7001`}
+      socketEndpoint={`http://highmountainlabs.io:7001`}
       loader={`http://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`}
       background={{
         src: `http://highmountainlabs.io/arclight/cdn/media/2.jpg`,
