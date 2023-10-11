@@ -29,6 +29,10 @@ root.render(
             // noSelect: "static/media/hml-logo.png",
           },
         },
+        testdomain: {
+          Home: { route: "/", component: require("./pages/Home") },
+          Login: { route: "/login", component: require("./pages/Login") },
+        },
         _root_: {
           Home: { route: "/", component: require("./pages/Home") },
           Login: { route: "/login", component: require("./pages/Login") },

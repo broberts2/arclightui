@@ -13,6 +13,7 @@ const Home: FC<{
   D: { [key: string]: any };
   endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
+  console.log(D);
   return D && fns.calls ? (
     <Page fns={fns} backgroundGradient={{ from: `#283b4c`, to: `#09111c` }}>
       <Styles.Container className={`px-72`}>
@@ -55,34 +56,36 @@ const Home: FC<{
               src={`http://highmountainlabs.io/arclight/cdn/media/wise_man.png`}
             />
           </Styles.HeroBody>
-          <ListPanel
-            key={0}
-            controls={[
-              {
-                icon: "diamond",
-                text: "name",
-                key: "name",
-              },
-            ]}
-            Request={{
-              index: "test",
-              type: "user",
-              script: "test_script",
-              search: {
-                limit: 5,
-                skip: 0,
-              },
-            }}
-            card={(c: any) => ({
-              img: "http://highmountainlabs.io/arclight/cdn/media/flask.jpg",
-              subtext: c.username,
-              onClick: () => console.log("shalom"),
-            })}
-            fns={fns}
-            D={D}
-            line={false}
-            constrain={true}
-          />
+          {false ? (
+            <ListPanel
+              key={0}
+              controls={[
+                {
+                  icon: "diamond",
+                  text: "name",
+                  key: "name",
+                },
+              ]}
+              Request={{
+                index: "test",
+                type: "user",
+                script: "test_script",
+                search: {
+                  limit: 5,
+                  skip: 0,
+                },
+              }}
+              card={(c: any) => ({
+                img: "http://highmountainlabs.io/arclight/cdn/media/flask.jpg",
+                subtext: c.username,
+                onClick: () => console.log("shalom"),
+              })}
+              fns={fns}
+              D={D}
+              line={false}
+              constrain={true}
+            />
+          ) : null}
           {/* <ListPanel
             key={1}
             controls={[

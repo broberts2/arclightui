@@ -34,7 +34,7 @@ const App: FC<PropTypes> = ({
 }) => {
   const AppRef = React.useRef(null);
   let pagenotfound = true;
-  const [D, setD] = React.useState({ nopage: `${socketEndpoint}/${nopage}` });
+  const [D, setD] = React.useState({ nopage });
   const [app, setApp] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [transitioning, setTransitioning] = React.useState(false);
@@ -175,7 +175,7 @@ const App: FC<PropTypes> = ({
               pagenotfound ? `` : `hidden`
             }`}
           >
-            <img src={`${socketEndpoint}/${nopage}`} />
+            <img src={nopage} />
           </div>
           <Snack
             hide={() =>
@@ -191,7 +191,7 @@ const App: FC<PropTypes> = ({
           />
         </div>
         <Modal
-          defaultBackground={`${socketEndpoint}/static/defaultart/permissions.jpg`}
+          defaultBackground={`http://highmountainlabs.io/arclight/cdn/media/permissions.jpg`}
           modal={modal}
           setModal={(modal: { [key: string]: any } | null) => setModal(modal)}
           fns={fns}
