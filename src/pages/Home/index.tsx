@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { HeroPanel, Page } from "../../components";
+import { HeroPanel, ListPanel, Page } from "../../components";
 import Styles from "./styles";
 
 import Header from "../../projectcomponents/header";
@@ -45,7 +45,9 @@ const Home: FC<{
                   first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..",
                   comes from a line in section 1.10.32.
                 </div>
-                <Button fns={fns} />
+                <Button fns={fns} onClick={() => alert("shalom")}>
+                  Shalom
+                </Button>
               </div>
             </Styles.HeroText>
             <Styles.HeroImg
@@ -53,6 +55,62 @@ const Home: FC<{
               src={`http://highmountainlabs.io/arclight/cdn/media/wise_man.png`}
             />
           </Styles.HeroBody>
+          <ListPanel
+            key={0}
+            controls={[
+              {
+                icon: "diamond",
+                text: "name",
+                key: "name",
+              },
+            ]}
+            Request={{
+              index: "test",
+              type: "user",
+              script: "test_script",
+              search: {
+                limit: 5,
+                skip: 0,
+              },
+            }}
+            card={(c: any) => ({
+              img: "http://highmountainlabs.io/arclight/cdn/media/flask.jpg",
+              subtext: c.username,
+              onClick: () => console.log("shalom"),
+            })}
+            fns={fns}
+            D={D}
+            line={false}
+            constrain={true}
+          />
+          {/* <ListPanel
+            key={1}
+            controls={[
+              {
+                icon: "diamond",
+                text: "name",
+                key: "name",
+              },
+            ]}
+            Request={{
+              index: "test2",
+              type: "user",
+              // script: "test_script",
+              search: {
+                limit: 5,
+                skip: 0,
+              },
+            }}
+            card={(c: any) => ({
+              img: "http://highmountainlabs.io/arclight/cdn/media/flask.jpg",
+              subtext: c.username,
+              onClick: () => console.log("shalom"),
+            })}
+            fns={fns}
+            D={D}
+            line={false}
+            constrain={true}
+          /> */}
           <div className={`my-24`}>
             <HeroPanel
               small

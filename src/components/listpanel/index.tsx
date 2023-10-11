@@ -12,7 +12,13 @@ export interface PropTypes {
   line?: boolean | null;
   linesmall?: boolean | null;
   fns: any;
-  Request: { type: string; search: any; local?: boolean; index: string };
+  Request: {
+    type?: string;
+    search: any;
+    local?: boolean;
+    index: string;
+    script?: string;
+  };
   card: Function;
   D: any;
   controls?: Array<{
@@ -151,16 +157,22 @@ const ListPanel: FC<PropTypes> = ({
     setBtnActive(0);
     if (
       fns.calls &&
-      fns.calls[fns.getCallType(Request.type, Request.local)[1]]
+      fns.calls[
+        Request.script || fns.getCallType(Request.type, Request.local)[1]
+      ]
     ) {
-      fns.calls[fns.getCallType(Request.type, Request.local)[1]]({
+      fns.calls[
+        Request.script
+          ? Request.script
+          : fns.getCallType(Request.type, Request.local)[1]
+      ]({
         index: Request.index,
         search: { ...Request.search, skip: 0 },
       });
     }
   }, [Request.type]);
   React.useEffect(() => {
-    if (loadwatcher !== undefined) {
+    if (loadwatcher) {
       setLoading(true);
       setSkip(0);
     }
@@ -202,7 +214,9 @@ const ListPanel: FC<PropTypes> = ({
                       setSkip(skip + n);
                       setSCards(<div />);
                       fns.calls[
-                        fns.getCallType(Request.type, Request.local)[1]
+                        Request.script
+                          ? Request.script
+                          : fns.getCallType(Request.type, Request.local)[1]
                       ]({
                         index: Request.index,
                         search: {
@@ -227,7 +241,11 @@ const ListPanel: FC<PropTypes> = ({
                   onSubmit: (key, $regex) => {
                     const _ =
                       key && $regex ? { [key]: { $regex, $options: "i" } } : {};
-                    fns.calls[fns.getCallType(Request.type, Request.local)[1]]({
+                    fns.calls[
+                      Request.script
+                        ? Request.script
+                        : fns.getCallType(Request.type, Request.local)[1]
+                    ]({
                       index: Request.index,
                       search: {
                         ...Request.search,

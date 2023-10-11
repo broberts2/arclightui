@@ -29,12 +29,14 @@ const Login: FC<{
     editorValue: undefined,
   });
   const [jsxValue, setJsxValue] = React.useState<string | undefined>(undefined);
-  const buildJSX = (obj: any) =>
-    setJsxValue(
+  const buildJSX = (obj: any) => {
+    obj = JSON.parse(obj);
+    return setJsxValue(
       `<${viewingComponent} \n\t${Object.keys(obj)
         .map((k: string) => `${k}={${typeFinder(obj[k])}} `)
         .join("\n\t")}\n/>`
     );
+  };
   const excludes = (n: string) => {
     switch (n) {
       case "Admin":
@@ -54,11 +56,13 @@ const Login: FC<{
   React.useEffect(() => {
     if (!D?.getrecords_arclightui?.init?.records) return;
     if (state.editorValue) return;
-    const json = D?.getrecords_arclightui?.init.records.find(
+    const doc = D?.getrecords_arclightui?.init.records.find(
       (R: any) => R.name === viewingComponent
-    ).json;
+    );
+    const json = doc?.json;
+    if (!json) return;
     setState({
-      editorValue: JSON.stringify(json),
+      editorValue: json,
     });
     buildJSX(json);
   });
@@ -93,7 +97,7 @@ const Login: FC<{
                     (R: any) => R.name === k
                   ).json;
                   setState({
-                    editorValue: JSON.stringify(json),
+                    editorValue: json,
                   });
                   buildJSX(json);
                   setViewingComponent(k);
@@ -146,14 +150,11 @@ const Login: FC<{
                     animation={true}
                     onClick={(status: any) => {
                       const v = state.MonacoRef.editorValue.current.getValue();
-                      const vv = JSON.parse(
-                        state.MonacoRef.editorValue.current.getValue()
-                      );
                       setState({
                         ...state,
                         editorValue: v,
                       });
-                      buildJSX(vv);
+                      buildJSX(v);
                     }}
                   />
                 </div>

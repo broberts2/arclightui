@@ -9,8 +9,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      nopage={"static/defaultart/404.jpg"}
-      socketEndpoint={`http://highmountainlabs.io:7001`}
+      nopage={"http://highmountainlabs.io/arclight/cdn/media/404.jpg"}
+      socketEndpoint={
+        process.env.REACT_APP_ENVIRONMENT === "production"
+          ? `http://highmountainlabs.io:7001`
+          : `localhost:7001`
+      }
       loader={`http://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`}
       background={{
         src: `http://highmountainlabs.io/arclight/cdn/media/2.jpg`,

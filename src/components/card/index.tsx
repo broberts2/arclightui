@@ -68,8 +68,16 @@ const Card: FC<PropTypes> = ({
   return (
     <Styles.Container
       bodyComponent={bodyComponent}
-      onMouseEnter={hover ? hover.onMouseEnter : null}
-      onMouseLeave={hover ? hover.onMouseLeave : null}
+      onMouseEnter={
+        hover?.onMouseEnter && typeof hover.onMouseEnter === "function"
+          ? hover.onMouseEnter
+          : undefined
+      }
+      onMouseLeave={
+        hover?.onMouseLeave && typeof hover.onMouseLeave === "function"
+          ? hover.onMouseLeave
+          : undefined
+      }
       className={`${!noBodyComponentAbsolute ? "group " : null}${
         line || linesmall ? "w-full" : ""
       } ${bodyComponent && !line && !linesmall ? "md:w-1/2" : null} ${
