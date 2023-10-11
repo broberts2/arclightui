@@ -21,7 +21,9 @@ const Page: FC<PropTypes> = ({
   endpoint,
 }) => {
   const type =
-    backgroundImage && backgroundImage.src
+    backgroundImage &&
+    backgroundImage.src &&
+    backgroundImage.src.match(/\.[0-9a-z]+$/i)
       ? backgroundImage.src.match(/\.[0-9a-z]+$/i)[0]
       : null;
   return (
