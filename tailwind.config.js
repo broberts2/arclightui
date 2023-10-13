@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
+  prefix: "arclight",
   mode: "jit",
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -25,5 +26,5 @@ module.exports = {
       },
     },
   },
-  important: true,
+  important: false,
 };
