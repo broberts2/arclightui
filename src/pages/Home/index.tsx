@@ -13,7 +13,6 @@ const Home: FC<{
   D: { [key: string]: any };
   endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
-  console.log(fns);
   return D && fns.calls ? (
     <Page fns={fns} backgroundGradient={{ from: `#283b4c`, to: `#09111c` }}>
       <Styles.Container className={`px-72`}>
