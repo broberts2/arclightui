@@ -10,24 +10,38 @@ export interface PropTypes {
 
 const MissionStatement: FC<PropTypes> = ({ title, Message, bgImg, button }) => {
   return (
-    <Styles.Container className={"text-text-primary font-primary"}>
-      {bgImg ? <Styles.BgImg src={bgImg} className={`rounded`} /> : null}
+    <Styles.Container
+      className={"arclight-text-text-primary arclight-font-primary"}
+    >
+      {bgImg ? (
+        <Styles.BgImg src={bgImg} className={`arclight-rounded`} />
+      ) : null}
       <div
-        className={`w-full px-10 m-auto lg:w-4/5 relative ${
-          bgImg ? "bg-visibility-primary rounded-md p-10" : ""
+        className={`arclight-w-full arclight-px-10 arclight-m-auto lg:arclight-w-4/5 arclight-relative ${
+          bgImg
+            ? "arclight-bg-visibility-primary arclight-rounded-md arclight-p-10"
+            : ""
         }`}
       >
         <div
-          className={`${bgImg ? "text-xl" : "text-6xl"} ${
-            bgImg ? "my-0" : "my-14"
+          className={`${bgImg ? "arclight-text-xl" : "arclight-text-6xl"} ${
+            bgImg ? "arclight-my-0" : "arclight-my-14"
           }`}
         >
           {title}
         </div>
         {bgImg ? (
-          <div className={"text-md my-14 w-full"}>{Message}</div>
+          <div className={"arclight-text-md arclight-my-14 arclight-w-full"}>
+            {Message}
+          </div>
         ) : (
-          <div className={"text-md lg:text-2xl my-14 w-full"}>{Message}</div>
+          <div
+            className={
+              "arclight-text-md lg:arclight-text-2xl arclight-my-14 arclight-w-full"
+            }
+          >
+            {Message}
+          </div>
         )}
         {button ? button : null}
       </div>

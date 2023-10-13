@@ -46,7 +46,7 @@ const FontAwesome: FC<IconProps> = ({
         border={false}
         //pull={"left"} // left | right
         transform={""} // {rotate: 45} | "shrink-6 left-4"
-        className={`${onClick ? "cursor-pointer" : ""}`}
+        className={`${onClick ? "arclight-cursor-pointer" : ""}`}
         style={{ animationPlayState: animationPaused ? "paused" : "" }}
       />
     </Styles.Container>

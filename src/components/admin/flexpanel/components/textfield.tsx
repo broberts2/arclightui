@@ -6,7 +6,11 @@ export default (
   setState: Function
 ) => {
   return state._id && state[c.label] ? (
-    <div className={false ? `opacity-50 pointer-events-none` : ``}>
+    <div
+      className={
+        false ? `arclight-opacity-50 arclight-pointer-events-none` : ``
+      }
+    >
       <TextField
         span
         hot
@@ -28,7 +32,11 @@ export default (
       />
     </div>
   ) : (
-    <div className={false ? `opacity-50 pointer-events-none` : ``}>
+    <div
+      className={
+        false ? `arclight-opacity-50 arclight-pointer-events-none` : ``
+      }
+    >
       <TextField
         span
         hot

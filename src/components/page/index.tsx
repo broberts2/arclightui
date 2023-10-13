@@ -35,20 +35,20 @@ const Page: FC<PropTypes> = ({
             muted
             loop
             src={backgroundImage.src}
-            className={`w-full h-full fixed object-cover`}
+            className={`arclight-w-full arclight-h-full arclight-fixed arclight-object-cover`}
             style={{ opacity: backgroundImage.opacity }}
           />
         ) : (
           <img
             src={backgroundImage.src}
-            className={`w-full h-full fixed object-cover`}
+            className={`arclight-w-full arclight-h-full arclight-fixed arclight-object-cover`}
             style={{ opacity: backgroundImage.opacity }}
           />
         )
       ) : undefined}
       {backgroundGradient ? (
         <div
-          className={`w-full h-full fixed object-cover bg-gradient-to-b from-[${backgroundGradient.to}] bg-gradient-to-t to-[${backgroundGradient.from}]`}
+          className={`arclight-w-full arclight-h-full arclight-fixed arclight-object-cover arclight-bg-gradient-to-b arclight-from-[${backgroundGradient.to}] arclight-bg-gradient-to-t arclight-to-[${backgroundGradient.from}]`}
         />
       ) : undefined}
       <Styles.Body>{children}</Styles.Body>

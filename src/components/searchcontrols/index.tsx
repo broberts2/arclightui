@@ -48,10 +48,10 @@ const SearchControls: FC<PropTypes> = ({
   const NextLast = (props) => (
     <React.Fragment>
       <Button
-        className={`hidden m-1 lg:block min-w-max ${
+        className={`arclight-hidden arclight-m-1 lg:arclight-block arclight-min-w-max ${
           pagination.skip > 0
-            ? "pointer-events-auto"
-            : "opacity-30 pointer-events-none"
+            ? "arclight-pointer-events-auto"
+            : "arclight-opacity-30 arclight-pointer-events-none"
         }`}
         label={"Last"}
         idleIcon={"arrow-left"}
@@ -61,10 +61,10 @@ const SearchControls: FC<PropTypes> = ({
         onClick={(status: any) => pagination.onClick(-1)}
       />
       <Button
-        className={`block m-1 lg:hidden ${
+        className={`arclight-block arclight-m-1 lg:arclight-hidden ${
           pagination.skip > 0
-            ? "pointer-events-auto"
-            : "opacity-30 pointer-events-none"
+            ? "arclight-pointer-events-auto"
+            : "arclight-opacity-30 arclight-pointer-events-none"
         }`}
         label={props.isTop ? undefined : "Last"}
         idleIcon={"arrow-left"}
@@ -74,10 +74,10 @@ const SearchControls: FC<PropTypes> = ({
         onClick={(status: any) => pagination.onClick(-1)}
       />
       <Button
-        className={`hidden m-1 lg:block ${
+        className={`arclight-hidden m-1 lg:arclight-block ${
           (pagination.skip + 1) * pagination.length < pagination.totalcount
-            ? "pointer-events-auto"
-            : "opacity-30 pointer-events-none"
+            ? "arclight-pointer-events-auto"
+            : "arclight-opacity-30 arclight-pointer-events-none"
         } min-w-max`}
         label={"Next"}
         idleIcon={"arrow-right"}
@@ -87,10 +87,10 @@ const SearchControls: FC<PropTypes> = ({
         onClick={(status: any) => pagination.onClick(1)}
       />
       <Button
-        className={`block m-1 lg:hidden ${
+        className={`arclight-block arclight-m-1 lg:arclight-hidden ${
           (pagination.skip + 1) * pagination.length < pagination.totalcount
-            ? "pointer-events-auto"
-            : "opacity-30 pointer-events-none"
+            ? "arclight-pointer-events-auto"
+            : "arclight-opacity-30 arclight-pointer-events-none"
         }`}
         label={props.isTop ? undefined : "Next"}
         idleIcon={"arrow-right"}
@@ -104,7 +104,7 @@ const SearchControls: FC<PropTypes> = ({
   return (
     <Styles.Container
       picklist={picklist}
-      className={`text-text-primary font-primary ${className}`}
+      className={`arclight-text-text-primary arclight-font-primary ${className}`}
     >
       {textField ? (
         <div style={{ textAlign: "left" }}>
@@ -123,14 +123,14 @@ const SearchControls: FC<PropTypes> = ({
       ) : null}
       {buttons && search ? (
         <React.Fragment>
-          <div className={`flex flex-row`}>
+          <div className={`arclight-flex arclight-flex-row`}>
             <Button
               label={"Search"}
               idleIcon={null}
               type={"button"}
               size={"normal"}
               animation={true}
-              className={`hidden m-1 lg:block`}
+              className={`arclight-hidden arclight-m-1 lg:arclight-block`}
               onClick={() =>
                 search
                   ? search.onSubmit(
@@ -146,7 +146,7 @@ const SearchControls: FC<PropTypes> = ({
               type={"button"}
               size={"small"}
               animation={true}
-              className={`block m-1 lg:hidden`}
+              className={`arclight-block arclight-m-1 lg:arclight-hidden`}
               onClick={() =>
                 search
                   ? search.onSubmit(
@@ -157,7 +157,9 @@ const SearchControls: FC<PropTypes> = ({
               }
             />
             <NextLast isTop={true} />
-            <div className={`hidden flex-row justify-end w-full lg:flex`}>
+            <div
+              className={`arclight-hidden arclight-flex-row arclight-justify-end arclight-w-full lg:arclight-flex`}
+            >
               {buttons.map((b: any, i) => (
                 <Button
                   label={b.text ? b.text : null}
@@ -165,7 +167,9 @@ const SearchControls: FC<PropTypes> = ({
                   type={"button"}
                   size={"normal"}
                   animation={true}
-                  className={`m-1 ${i === btnActive ? "" : "opacity-30"}`}
+                  className={`arclight-m-1 ${
+                    i === btnActive ? "" : "arclight-opacity-30"
+                  }`}
                   onClick={() => {
                     if (setBtnActive) setBtnActive(i);
                     setSearchKey(b.key);
@@ -173,7 +177,9 @@ const SearchControls: FC<PropTypes> = ({
                 />
               ))}
             </div>
-            <div className={`flex flex-row justify-end w-full lg:hidden`}>
+            <div
+              className={`arclight-flex arclight-flex-row arclight-justify-end arclight-w-full lg:arclight-hidden`}
+            >
               {buttons.map((b: any, i) => (
                 <Button
                   label={null}
@@ -181,7 +187,9 @@ const SearchControls: FC<PropTypes> = ({
                   type={"button"}
                   size={"small"}
                   animation={true}
-                  className={`m-1 ${i === btnActive ? "" : "opacity-30"}`}
+                  className={`arclight-m-1 ${
+                    i === btnActive ? "" : "arclight-opacity-30"
+                  }`}
                   onClick={() => {
                     if (setBtnActive) setBtnActive(i);
                     setSearchKey(b.key);
@@ -197,7 +205,7 @@ const SearchControls: FC<PropTypes> = ({
       true ? (
         <div style={{ minHeight: minHeight + 25 }}>
           <Styles.Children
-            className={`relative z-0 h-full`}
+            className={`arclight-relative arclight-z-0 arclight-h-full`}
             style={{ height: `${!constrain ? `100%` : null}` }}
           >
             {children}
@@ -205,26 +213,32 @@ const SearchControls: FC<PropTypes> = ({
         </div>
       ) : (
         <div
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
+          className={`arclight-absolute arclight-top-1/2 arclight-left-1/2 -arclight-translate-x-1/2 -arclight-translate-y-1/2`}
         >
           No Data
         </div>
       )}
       <div
-        className={`absolute w-full pointer-events-none bottom-0`}
+        className={`arclight-absolute arclight-w-full arclight-pointer-events-none arclight-bottom-0`}
         style={{
           top: constrain ? "100%" : "125%",
           display: Array.isArray(children) && children.length > 1 ? "" : "",
         }}
       >
         {pagination && pagination.totalcount ? (
-          <div className={`flex items-center justify-center`}>
+          <div
+            className={`arclight-flex arclight-items-center arclight-justify-center`}
+          >
             <NextLast />
           </div>
         ) : null}
         {pagination && pagination.totalcount ? (
-          <div className="text-center pointer-events-auto">
-            <div className={"text-text-primary font-primary text-lg"}>
+          <div className="arclight-text-center arclight-pointer-events-auto">
+            <div
+              className={
+                "arclight-text-text-primary arclight-font-primary arclight-text-lg"
+              }
+            >
               Showing {a}-{bb} of {c}
             </div>
           </div>

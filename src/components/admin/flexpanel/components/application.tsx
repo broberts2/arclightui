@@ -22,13 +22,17 @@ export default (
         ))
       : (f = D.getforms.records[s.formtemplate][s.formname]);
   return k && f ? (
-    <div className={false ? `opacity-50 pointer-events-none` : ``}>
+    <div
+      className={
+        false ? `arclight-opacity-50 arclight-pointer-events-none` : ``
+      }
+    >
       <Application
         locked={true || fns.parseAdminDomainState().item !== "Form Template"}
         D={D}
         fns={fns}
         form={f}
-        className={`rounded-sm`}
+        className={`arclight-rounded-sm`}
       />
     </div>
   ) : null;

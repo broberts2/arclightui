@@ -47,7 +47,7 @@ const Login: FC<{
   const Component = viewingComponent ? Components[viewingComponent] : null;
   const T = (props: { value: string }) => (
     <textarea
-      className={`bg-transparent w-full resize-none outline-none`}
+      className={`arclight-bg-transparent arclight-w-full arclight-resize-none arclight-outline-none`}
       style={{ height: `calc(100% - 42px)` }}
     >
       {props.value}
@@ -109,13 +109,17 @@ const Login: FC<{
           })
           .sort((a: any, b: any) => (a.text < b.text ? -1 : 1))}
       />
-      <Styles.Container className={`h-screen flex-col pl-72`}>
-        <div className={`px-36`}>
+      <Styles.Container
+        className={`arclight-h-screen arclight-flex-col arclight-pl-72`}
+      >
+        <div className={`arclight-px-36`}>
           <Header fns={fns} endpoint={endpoint} />
         </div>
-        <Styles.Body className={`mx-36 h-[700px] bg-gray-700 rounded flex`}>
+        <Styles.Body
+          className={`arclight-mx-36 arclight-h-[700px] arclight-bg-gray-700 arclight-rounded arclight-flex`}
+        >
           <div
-            className={`h-full w-2/3 relative flex justify-center items-center p-5`}
+            className={`arclight-h-full arclight-w-2/3 arclight-relative arclight-flex arclight-justify-center arclight-items-center arclight-p-5`}
           >
             <Component
               {...JSON.parse(state.editorValue)}
@@ -128,9 +132,13 @@ const Login: FC<{
               }}
             />
           </div>
-          <div className={`h-full w-1/3 flex`}>
-            <div className={`flex-col w-full h-full`}>
-              <div className={`h-2/3 w-full relative flex p-5`}>
+          <div className={`arclight-h-full arclight-w-1/3 arclight-flex`}>
+            <div
+              className={`arclight-flex-col arclight-w-full arclight-h-full`}
+            >
+              <div
+                className={`arclight-h-2/3 arclight-w-full arclight-relative arclight-flex p-5`}
+              >
                 <Components.Monaco
                   refName={"editorValue"}
                   language={"json"}
@@ -139,8 +147,10 @@ const Login: FC<{
                   setState={setState}
                 />
               </div>
-              <div className={`h-1/3 w-full relative flex p-5`}>
-                <div className={`flex-col w-full`}>
+              <div
+                className={`arclight-h-1/3 arclight-w-full arclight-relative arclight-flex arclight-p-5`}
+              >
+                <div className={`arclight-flex-col arclight-w-full`}>
                   <T value={jsxValue} />
                   <Components.Button
                     span={true}

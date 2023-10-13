@@ -60,14 +60,16 @@ const Header: FC<PropTypes> = ({
   logo,
   fns,
 }) => {
-  const iconBackdropClassName = `text-xl font-bold whitespace-nowrap transform opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:translate-y-1 transition-all ease-linear`;
+  const iconBackdropClassName = `arclight-text-xl arclight-font-bold arclight-whitespace-nowrap arclight-transform arclight-opacity-0 group-hover:arclight-opacity-100 group-hover:arclight-translate-x-1 group-hover:arclight-translate-y-1 arclight-transition-all arclight-ease-linear`;
   return (
-    <Styles.Container className={"text-text-primary font-primary"}>
+    <Styles.Container
+      className={"arclight-text-text-primary arclight-font-primary"}
+    >
       <Drawer
         animation={"slide"}
         buttonSide="right"
         side="right"
-        className={"lg:hidden"}
+        className={"lg:arclight-hidden"}
         // @ts-ignore
         items={
           linksRight && linksLeft
@@ -102,27 +104,27 @@ const Header: FC<PropTypes> = ({
       />
       <div
         className={
-          "lg:my-10 absolute left-1/2 transform -translate-x-1/2 w-full"
+          "lg:arclight-my-10 arclight-absolute arclight-left-1/2 arclight-transform -arclight-translate-x-1/2 arclight-w-full"
         }
         style={links ? { display: "none" } : {}}
       >
-        <table className="table-fixed w-full">
+        <table className="arclight-table-fixed arclight-w-full">
           <tbody>
             <tr>
               <Styles.Td className="w-2/5 relative">
-                <div className="flex m-auto gap-8 relative place-content-end">
+                <div className="arclight-flex arclight-m-auto arclight-gap-8 arclight-relative arclight-place-content-end">
                   {linksLeft
                     ? linksLeft
                         .filter((el: any) => el)
                         .map((l: any) => (
-                          <div className={`relative group`}>
+                          <div className={`arclight-relative arclight-group`}>
                             <Styles.LinkTextsilhouette
-                              className={`text-xl font-bold whitespace-nowrap text-background-tertiary transform opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:translate-y-1 transition-all ease-linear`}
+                              className={`arclight-text-xl arclight-font-bold arclight-whitespace-nowrap arclight-text-background-tertiary arclight-transform arclight-opacity-0 group-hover:arclight-opacity-100 group-hover:arclight-translate-x-1 group-hover:arclight-translate-y-1 arclight-transition-all ease-linear`}
                             >
                               {l.text}
                             </Styles.LinkTextsilhouette>
                             <Styles.LinkText
-                              className="text-xl font-bold whitespace-nowrap cursor-pointer relative"
+                              className="arclight-text-xl arclight-font-bold arclight-whitespace-nowrap arclight-cursor-pointer arclight-relative"
                               onClick={() => {
                                 if (l.onClick) l.onClick();
                                 if (!fns.route) return;
@@ -138,16 +140,16 @@ const Header: FC<PropTypes> = ({
                           </div>
                         ))
                     : null}
-                  <div className={"absolute top-12"}>
-                    <div className="flex m-auto gap-4">
+                  <div className={"arclight-absolute arclight-top-12"}>
+                    <div className="arclight-flex arclight-m-auto arclight-gap-4">
                       {socialMediaLeft
                         ? socialMediaLeft.map((l) => (
-                            <div className={`relative group`}>
+                            <div className={`arclight-relative arclight-group`}>
                               <Styles.LinkTextsilhouette
                                 className={iconBackdropClassName}
                               >
                                 <FontAwesome
-                                  className={`text-background-tertiary`}
+                                  className={`arclight-text-background-tertiary`}
                                   animation="none"
                                   icon={l.icon}
                                   size="lg"
@@ -163,7 +165,7 @@ const Header: FC<PropTypes> = ({
                                 />
                               </Styles.LinkTextsilhouette>
                               <FontAwesome
-                                className={`relative z-10`}
+                                className={`arclight-relative arclight-z-10`}
                                 animation="none"
                                 icon={l.icon}
                                 size="xl"
@@ -184,7 +186,7 @@ const Header: FC<PropTypes> = ({
                   </div>
                 </div>
               </Styles.Td>
-              <td className="w-1/5">
+              <td className="arclight-w-1/5">
                 <img
                   onClick={() => {
                     if (logo.onClick) logo.onClick();
@@ -192,23 +194,25 @@ const Header: FC<PropTypes> = ({
                     return fns.route(logo.route);
                   }}
                   src={logo.src}
-                  className={"h-24 m-4 lg:h-36 lg:m-auto cursor-pointer"}
+                  className={
+                    "arclight-h-24 arclight-m-4 lg:arclight-h-36 lg:arclight-m-auto arclight-cursor-pointer"
+                  }
                 />
               </td>
-              <Styles.Td className="w-2/5">
-                <div className="flex m-auto gap-8 relative">
+              <Styles.Td className="arclight-w-2/5">
+                <div className="arclight-flex arclight-m-auto arclight-gap-8 arclight-relative">
                   {linksRight
                     ? linksRight
                         .filter((el: any) => el)
                         .map((l: any) => (
-                          <div className={`relative group`}>
+                          <div className={`arclight-relative arclight-group`}>
                             <Styles.LinkTextsilhouette
-                              className={`text-xl font-bold whitespace-nowrap text-background-tertiary transform opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:translate-y-1 transition-all ease-linear`}
+                              className={`arclight-text-xl arclight-font-bold arclight-whitespace-nowrap arclight-text-background-tertiary arclight-transform arclight-opacity-0 group-hover:arclight-opacity-100 group-hover:arclight-translate-x-1 group-hover:arclight-translate-y-1 arclight-transition-all arclight-ease-linear`}
                             >
                               {l.text}
                             </Styles.LinkTextsilhouette>
                             <Styles.LinkText
-                              className="text-xl font-bold whitespace-nowrap cursor-pointer relative"
+                              className="arclight-text-xl arclight-font-bold arclight-whitespace-nowrap arclight-cursor-pointer arclight-relative"
                               onClick={() => {
                                 if (l.onClick) l.onClick();
                                 if (!fns.route) return;
@@ -224,16 +228,16 @@ const Header: FC<PropTypes> = ({
                           </div>
                         ))
                     : null}
-                  <div className={"absolute top-12"}>
-                    <div className="flex m-auto gap-4 place-content-start">
+                  <div className={"arclight-absolute arclight-top-12"}>
+                    <div className="arclight-flex arclight-m-auto arclight-gap-4 arclight-place-content-start">
                       {socialMediaRight
                         ? socialMediaRight.map((l) => (
-                            <div className={`relative group`}>
+                            <div className={`arclight-relative arclight-group`}>
                               <Styles.LinkTextsilhouette
                                 className={iconBackdropClassName}
                               >
                                 <FontAwesome
-                                  className={`text-background-tertiary`}
+                                  className={`arclight-text-background-tertiary`}
                                   animation="none"
                                   icon={l.icon}
                                   size="lg"
@@ -249,7 +253,7 @@ const Header: FC<PropTypes> = ({
                                 />
                               </Styles.LinkTextsilhouette>
                               <FontAwesome
-                                className={`relative`}
+                                className={`arclight-relative`}
                                 animation="none"
                                 icon={l.icon}
                                 size="xl"
@@ -274,11 +278,14 @@ const Header: FC<PropTypes> = ({
           </tbody>
         </table>
       </div>
-      <div className={"lg:py-10"} style={!links ? { display: "none" } : {}}>
+      <div
+        className={"lg:arclight-py-10"}
+        style={!links ? { display: "none" } : {}}
+      >
         <table width={"100%"}>
           <tbody>
             <tr>
-              <td className="w-1/5 relative">
+              <td className="arclight-w-1/5 arclight-relative">
                 <img
                   onClick={() => {
                     if (logo.onClick) logo.onClick();
@@ -286,23 +293,25 @@ const Header: FC<PropTypes> = ({
                     return fns.route(logo.route);
                   }}
                   src={logo.src}
-                  className={"h-16 m-4 lg:h-24 lg:m-auto cursor-pointer"}
+                  className={
+                    "arclight-h-16 arclight-m-4 lg:arclight-h-24 lg:arclight-m-auto arclight-cursor-pointer"
+                  }
                 />
               </td>
-              <Styles.Td className="w-4/5 relative">
-                <div className="flex m-auto gap-8 relative justify-center">
+              <Styles.Td className="arclight-w-4/5 arclight-relative">
+                <div className="arclight-flex arclight-m-auto arclight-gap-8 arclight-relative arclight-justify-center">
                   {links
                     ? links
                         .filter((el: any) => el)
                         .map((l: any) => (
-                          <div className={`relative group`}>
+                          <div className={`arclight-relative arclight-group`}>
                             <Styles.LinkTextsilhouette
-                              className={`text-xl font-bold whitespace-nowrap text-background-tertiary transform opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:translate-y-1 transition-all ease-linear`}
+                              className={`arclight-text-xl arclight-font-bold arclight-whitespace-nowrap arclight-text-background-tertiary arclight-transform arclight-opacity-0 group-hover:arclight-opacity-100 group-hover:arclight-translate-x-1 group-hover:arclight-translate-y-1 arclight-transition-all arclight-ease-linear`}
                             >
                               {l.text}
                             </Styles.LinkTextsilhouette>
                             <Styles.LinkText
-                              className="text-xl font-bold whitespace-nowrap cursor-pointer relative"
+                              className="arclight-text-xl arclight-font-bold arclight-whitespace-nowrap arclight-cursor-pointer arclight-relative"
                               onClick={() => {
                                 if (l.onClick) l.onClick();
                                 if (!fns.route) return;
@@ -318,16 +327,16 @@ const Header: FC<PropTypes> = ({
                           </div>
                         ))
                     : null}
-                  <div className={"absolute top-12"}>
-                    <div className="flex m-auto gap-4 place-content-start">
+                  <div className={"arclight-absolute arclight-top-12"}>
+                    <div className="arclight-flex arclight-m-auto arclight-gap-4 arclight-place-content-start">
                       {socialMedia
                         ? socialMedia.map((l) => (
-                            <div className={`relative group`}>
+                            <div className={`arclight-relative arclight-group`}>
                               <Styles.LinkTextsilhouette
                                 className={iconBackdropClassName}
                               >
                                 <FontAwesome
-                                  className={`text-background-tertiary`}
+                                  className={`arclight-text-background-tertiary`}
                                   animation="none"
                                   icon={l.icon}
                                   size="lg"
@@ -343,7 +352,7 @@ const Header: FC<PropTypes> = ({
                                 />
                               </Styles.LinkTextsilhouette>
                               <FontAwesome
-                                className={`relative`}
+                                className={`arclight-relative`}
                                 animation="none"
                                 icon={l.icon}
                                 size="xl"

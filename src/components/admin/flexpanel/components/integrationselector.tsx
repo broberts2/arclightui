@@ -7,9 +7,9 @@ const Panel = (props) => {
   }, []);
   if (!props.D || !props.D.getintegrations) return <div />;
   return (
-    <div className={`w-full h-full relative`}>
+    <div className={`arclight-w-full arclight-h-full arclight-relative`}>
       <div
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
+        className={`arclight-absolute arclight-top-1/2 arclight-left-1/2 -arclight-translate-x-1/2 -arclight-translate-y-1/2`}
       >
         <props.HeroPanel
           index={index}

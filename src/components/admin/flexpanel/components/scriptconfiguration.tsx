@@ -64,7 +64,7 @@ export default (
       <div
         key={state.scriptkey}
         style={{ height: "100%", maxHeight: "600px" }}
-        className={`mt-5`}
+        className={`arclight-mt-5`}
       >
         <Monaco
           refName={cc ? "Script Logic" : "Metadata"}

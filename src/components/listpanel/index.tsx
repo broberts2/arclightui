@@ -105,7 +105,7 @@ const ListPanel: FC<PropTypes> = ({
         rows.push(
           <div
             className={
-              "flex flex-row w-full items-center justify-center m-auto gap-4 my-4"
+              "arclight-flex arclight-flex-row arclight-w-full arclight-items-center arclight-justify-center arclight-m-auto arclight-gap-4 arclight-my-4"
             }
           >
             {row}
@@ -117,12 +117,12 @@ const ListPanel: FC<PropTypes> = ({
     }
     if (row.length) {
       for (let i = row.length; i < nPerRow; i++) {
-        row.push(<div className={`w-40`} />);
+        row.push(<div className={`arclight-w-40`} />);
       }
       rows.push(
         <div
           className={
-            "flex flex-row w-full items-center justify-center m-auto gap-4 my-4"
+            "arclight-flex arclight-flex-row arclight-w-full arclight-items-center arclight-justify-center arclight-m-auto arclight-gap-4 arclight-my-4"
           }
         >
           {row}
@@ -182,8 +182,8 @@ const ListPanel: FC<PropTypes> = ({
       mh={(Request.search.limit / nPerRow) * 150}
       className={`${
         constrain
-          ? `w-4/5 max-w-screen-xl m-auto`
-          : `w-full flex flex-col flex-1`
+          ? `arclight-w-4/5 arclight-max-w-screen-xl arclight-m-auto`
+          : `arclight-w-full arclight-flex arclight-flex-col arclight-flex-1`
       }`}
     >
       {!loading ? (

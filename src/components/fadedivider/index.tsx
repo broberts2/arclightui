@@ -26,14 +26,14 @@ const FadeDivider: FC<PropTypes> = ({ ruby, fadeOpacity, img }) => {
         <React.Fragment>{imgs}</React.Fragment>
       ) : (
         <Styles.BackgroundFade
-          className={`bg-gradient-to-b from-background-tertiary to to-transparent`}
+          className={`arclight-bg-gradient-to-b arclight-from-background-tertiary arclight-to arclight-to-transparent`}
           style={{ opacity: fadeOpacity }}
         />
       )}
       {ruby ? (
         <img
           src={ruby}
-          className={`absolute bottom-6 lg:bottom-24 left-1/2 -translate-x-1/2 w-44 lg:w-72`}
+          className={`arclight-absolute arclight-bottom-6 lg:arclight-bottom-24 arclight-left-1/2 -arclight-translate-x-1/2 arclight-w-44 lg:arclight-w-72`}
         />
       ) : null}
     </Styles.Container>

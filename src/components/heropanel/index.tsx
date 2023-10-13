@@ -30,9 +30,9 @@ const HeroPanel: FC<PropTypes> = React.memo(
     const CL = cards.length;
     if (rows && index)
       cards = cards.filter((c: any, i: number) => i >= index * (rows * 3));
-    const className = `flex flex-col lg:flex-row w-full items-center justify-${
+    const className = `arclight-flex arclight-flex-col lg:arclight-flex-row arclight-w-full arclight-items-center arclight-justify-${
       left ? "start" : "center"
-    } m-auto gap-7 lg:gap-7 xl:gap-7 my-7`;
+    } arclight-m-auto arclight-gap-7 lg:arclight-gap-7 xl:arclight-gap-7 arclight-my-7`;
     const [hItem, setHItem] = React.useState(-1);
     if (autoSort)
       cards = cards.sort((a, b) =>
@@ -42,7 +42,7 @@ const HeroPanel: FC<PropTypes> = React.memo(
     const _rows: any = [];
     _rows.push(
       <div className={className}>
-        <div className="text-text-primary font-primary text-3xl text-start">
+        <div className="arclight-text-text-primary arclight-font-primary arclight-text-3xl arclight-text-start">
           {title}
         </div>
       </div>
@@ -89,7 +89,7 @@ const HeroPanel: FC<PropTypes> = React.memo(
     }
     if (row.length > 0) _rows.push(<div className={className}>{row}</div>);
     return (
-      <Styles.Container className={"lg:px-20"}>
+      <Styles.Container className={"lg:arclight-px-20"}>
         {_rows}
         {rows && CL > 3 ? (
           <MiniDiamondPicker

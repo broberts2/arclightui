@@ -3,7 +3,7 @@ import ItemContent from "./itemcontent";
 export default (props: any) => {
   return (
     <props.Styles.Item
-      className={`bg-background-primary w-full h-full rounded p-5 ${props.className}`}
+      className={`arclight-bg-background-primary arclight-w-full arclight-h-full arclight-rounded arclight-p-5 ${props.className}`}
       mountAnim={{ anim: "fadeIn", duration: "0.35s" }}
     >
       <props.Styles.BgImg
@@ -13,11 +13,11 @@ export default (props: any) => {
             : "http://localhost:7000/static/integrationsart/daedalus.jpg"
         }
       />
-      <div className={`w-full h-full`}>
+      <div className={`arclight-w-full arclight-h-full`}>
         {props.title ? (
           <div
-            className={`font-primary text-4xl${
-              props.managed ? ` text-cyan-300` : ""
+            className={`arclight-font-primary arclight-text-4xl${
+              props.managed ? ` arclight-text-cyan-300` : ""
             }`}
           >
             {props.title}

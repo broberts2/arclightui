@@ -12,7 +12,7 @@ export default (
 ) => {
   return state && state[c.label] && typeof state[c.label] === "object" ? (
     <div
-      className={`border-background-quarternary border-l-2 p-4 flex-row justify-start space-y-4`}
+      className={`arclight-border-background-quarternary arclight-border-l-2 arclight-p-4 arclight-flex-row arclight-justify-start arclight-space-y-4`}
     >
       <TextField
         span

@@ -113,7 +113,7 @@ const FlexPanel: FC<{
           <FontAwesome
             size={"lg"}
             icon={"chain"}
-            className={`absolute top-5 right-5 lg:top-10 lg:right-10`}
+            className={`arclight-absolute arclight-top-5 arclight-right-5 lg:arclight-top-10 lg:arclight-right-10`}
           />
         ) : null}
         {state._items[i].controls
@@ -161,17 +161,23 @@ const FlexPanel: FC<{
   }, []);
   return (
     <Styles.Container
-      className={`p-2 ${state._isLoading ? "pointer-events-none" : null}`}
+      className={`arclight-p-2 ${
+        state._isLoading ? "arclight-pointer-events-none" : null
+      }`}
     >
       {!state._isLoading && rows && row && row.length ? (
-        <Styles.Table className={`h-full text-text-primary font-primary`}>
+        <Styles.Table
+          className={`arclight-h-full arclight-text-text-primary arclight-font-primary`}
+        >
           <tbody>{rows}</tbody>
         </Styles.Table>
       ) : noSelect ? (
         <Styles.NoSelect mountAnim={{ anim: "fadeIn", duration: "0.5s" }}>
           <img
             src={noSelect}
-            className={"w-1/2 md:w-1/4 m-auto justify-center align-middle"}
+            className={
+              "arclight-w-1/2 md:arclight-w-1/4 arclight-m-auto arclight-justify-center arclight-align-middle"
+            }
           />
         </Styles.NoSelect>
       ) : null}

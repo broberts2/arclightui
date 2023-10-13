@@ -21,18 +21,25 @@ const TournamentBracket: FC<PropTypes> = ({}) => {
   }: IRenderSeedProps) => {
     const SItem = (props) => (
       <SeedTeam
-        className={`relative overflow-hidden cursor-pointer ${
-          props.won ? `border-cyan-300 border-[0px]` : null
+        className={`arclight-relative arclight-overflow-hidden arclight-cursor-pointer ${
+          props.won ? `arclight-border-cyan-300 arclight-border-[0px]` : null
         }`}
       >
-        <img src={props.img} className={`absolute opacity-10 top-0 left-0`} />
-        <div className={"flex align-middle relative"}>
+        <img
+          src={props.img}
+          className={`arclight-absolute arclight-opacity-10 arclight-top-0 arclight-left-0`}
+        />
+        <div
+          className={"arclight-flex arclight-align-middle arclight-relative"}
+        >
           <img
             src="http://titanesports.org:7000/static/media/TES-logo.png"
-            className={`mr-5`}
+            className={`arclight-mr-5`}
             style={{ height: 35 }}
           />
-          <div className={`flex flex-col justify-center`}>
+          <div
+            className={`arclight-flex arclight-flex-col arclight-justify-center`}
+          >
             <div>{seed.teams[0]?.name || "NO TEAM "}</div>
           </div>
         </div>
@@ -41,7 +48,7 @@ const TournamentBracket: FC<PropTypes> = ({}) => {
     return (
       <Seed mobileBreakpoint={breakpoint} style={{ fontSize: "12px" }}>
         <SeedItem>
-          <div className={`bg-background-primary`}>
+          <div className={`arclight-bg-background-primary`}>
             <SItem
               img={"https://pbs.twimg.com/media/DTxLgmyXcAE7Z5c.jpg"}
               won
@@ -117,7 +124,9 @@ const TournamentBracket: FC<PropTypes> = ({}) => {
     },
   ];
   return (
-    <Styles.Container className={`flex font-primary text-text-primary`}>
+    <Styles.Container
+      className={`arclight-flex arclight-font-primary arclight-text-text-primary`}
+    >
       <Bracket rounds={rounds} renderSeedComponent={CustomSeed} rtl={false} />
     </Styles.Container>
   );

@@ -78,15 +78,17 @@ const Card: FC<PropTypes> = ({
           ? hover.onMouseLeave
           : undefined
       }
-      className={`${!noBodyComponentAbsolute ? "group " : null}${
-        line || linesmall ? "w-full" : "w-full"
-      } ${bodyComponent && !line && !linesmall ? "md:w-1/2" : null} ${
-        bodyComponent && !line && !linesmall ? "lg:w-1/3" : null
+      className={`${!noBodyComponentAbsolute ? "arclight-group " : null}${
+        line || linesmall ? "arclight-w-full" : ""
+      } ${bodyComponent && !line && !linesmall ? "md:arclight-w-1/2" : null} ${
+        bodyComponent && !line && !linesmall ? "lg:arclight-w-1/3" : null
       } ${
-        !line && !linesmall && !small ? "xl:w-96" : ""
-      } text-text-primary font-primary ${className ? className : null} ${
-        active !== null && active === false ? "opacity-50" : null
-      } ${small && (!line || !linesmall) ? "w-40" : ""}`}
+        !line && !linesmall && !small ? "xl:arclight-w-96" : ""
+      } arclight-text-text-primary arclight-font-primary ${
+        className ? className : null
+      } ${active !== null && active === false ? "arclight-opacity-50" : null} ${
+        small && (!line || !linesmall) ? "arclight-w-40" : ""
+      }`}
       max={max}
       modal={modal}
       medium={medium}
@@ -101,15 +103,15 @@ const Card: FC<PropTypes> = ({
     >
       <Styles.Back
         borderRadius={"4px"}
-        className={`transform bg-background-tertiary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:translate-y-1 transition-all ease-linear ${
-          locked ? "hidden" : ""
+        className={`arclight-transform arclight-bg-background-tertiary arclight-opacity-0 group-hover:arclight-opacity-100 group-hover:arclight-translate-x-1 group-hover:arclight-translate-y-1 arclight-transition-all arclight-ease-linear ${
+          locked ? "arclight-hidden" : ""
         }`}
       />
       <Styles.Front
         onClick={onClick && !locked ? () => onClick() : null}
         borderRadius={"4px"}
         className={
-          "flex flex-col justify-end text-center bg-background-secondary"
+          "arclight-flex arclight-flex-col arclight-justify-end arclight-text-center arclight-bg-background-secondary"
         }
       >
         <Styles.BgImg
@@ -120,7 +122,7 @@ const Card: FC<PropTypes> = ({
             line={line}
             linesmall={linesmall}
             src={bgImg}
-            className={`object-cover h-full w-full`}
+            className={`arclight-object-cover arclight-h-full arclight-w-full`}
             style={
               noBodyComponentAbsolute && false
                 ? { height: `calc(100vh + 1000px)` }
@@ -133,53 +135,63 @@ const Card: FC<PropTypes> = ({
             noabsolute={noBodyComponentAbsolute}
             ref={BodyComponentRef}
           >
-            <div className={`flex justify-center`}>{bodyComponent}</div>
+            <div className={`arclight-flex arclight-justify-center`}>
+              {bodyComponent}
+            </div>
           </Styles.BodyComponent>
         ) : null}
-        <Styles.TabNumberWrapper className={`${!index ? "hidden" : null}`} />
-        <Styles.TabNumber className={`${!index ? "hidden" : null}`}>
+        <Styles.TabNumberWrapper
+          className={`${!index ? "arclight-hidden" : null}`}
+        />
+        <Styles.TabNumber className={`${!index ? "arclight-hidden" : null}`}>
           {index}
         </Styles.TabNumber>
         {hoverComponent && !locked ? (
           <div
-            className={`w-full top-0 absolute ${
-              !subText ? "h-full" : line || linesmall ? "h-2/3" : "h-3/4"
-            } bg-visibility-primary opacity-0 group-hover:opacity-100 transition-all ease-linear`}
+            className={`arclight-w-full arclight-top-0 arclight-absolute ${
+              !subText
+                ? "arclight-h-full"
+                : line || linesmall
+                ? "arclight-h-2/3"
+                : "arclight-h-3/4"
+            } arclight-bg-visibility-primary arclight-opacity-0 group-hover:arclight-opacity-100 arclight-transition-all arclight-ease-linear`}
           >
             <div
-              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
+              className={`arclight-absolute arclight-top-1/2 arclight-left-1/2 -arclight-translate-x-1/2 -arclight-translate-y-1/2`}
             >
               {hoverComponent}
             </div>
           </div>
         ) : null}
         <div
-          className={`w-full bottom-0 absolute ${
-            line || linesmall ? "h-1/3" : "h-1/4"
-          } bg-visibility-primary ${
-            !subText || line || linesmall ? "hidden" : null
+          className={`arclight-w-full arclight-bottom-0 arclight-absolute ${
+            line || linesmall ? "arclight-h-1/3" : "arclight-h-1/4"
+          } arclight-bg-visibility-primary ${
+            !subText || line || linesmall ? "arclight-hidden" : null
           }`}
         />
         {subText ? (
           <div
             className={`${
               medium
-                ? "m-2 lg:m-5 text-2xl"
+                ? "arclight-m-2 lg:arclight-m-5 arclight-text-2xl"
                 : !(line || linesmall) && !small
-                ? "m-2 lg:m-10 text-2xl"
+                ? "arclight-m-2 lg:arclight-m-10 arclight-text-2xl"
                 : !(line || linesmall)
-                ? "text-sm"
+                ? "arclight-text-sm"
                 : line || linesmall
-                ? "text-sm lg:text-lg text-left px-10 md:px-20 h-3/5"
-                : "text-md lg:text-2xl"
-            } relative p-0${managed ? ` text-cyan-300` : ""}`}
+                ? "arclight-text-sm lg:arclight-text-lg arclight-text-left arclight-px-10 md:arclight-px-20 arclight-h-3/5"
+                : "arclight-text-md lg:arclight-text-2xl"
+            } arclight-relative arclight-p-0${
+              managed ? ` arclight-text-cyan-300` : ""
+            }`}
           >
             {subText}
           </div>
         ) : null}
         {exitButton ? (
           <Button
-            className={`absolute top-2 right-2`}
+            className={`arclight-absolute arclight-top-2 arclight-right-2`}
             idleIcon={"arrow-right-from-bracket"}
             type={"button"}
             size={"normal"}
@@ -189,13 +201,19 @@ const Card: FC<PropTypes> = ({
         ) : null}
       </Styles.Front>
       <Styles.LockContainer
-        className={`bg-visibility-primary ${locked ? "" : "hidden"}`}
+        className={`arclight-bg-visibility-primary ${
+          locked ? "" : "arclight-hidden"
+        }`}
       >
         <div
-          className={`absolute left-1/2 top-1/2 -translate-x-2/4 -translate-y-1/2 text-center`}
+          className={`arclight-absolute arclight-left-1/2 arclight-top-1/2 -arclight-translate-x-2/4 -arclight-translate-y-1/2 arclight-text-center`}
         >
           <FontAwesome size={"2x"} icon={"lock"} />
-          <div className={`text-sm xl:text-lg text-left md-10`}>{locked}</div>
+          <div
+            className={`arclight-text-sm xl:arclight-text-lg arclight-text-left arclight-md-10`}
+          >
+            {locked}
+          </div>
         </div>
       </Styles.LockContainer>
     </Styles.Container>

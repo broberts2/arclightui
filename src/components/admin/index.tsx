@@ -75,8 +75,12 @@ const Admin: FC<{
           opacity: 0.5,
         }}
       >
-        <Styles.Body className={`flex flex-row`}>
-          <Styles.Drawer className={`block ${!authenticated ? "hidden" : ""}`}>
+        <Styles.Body className={`arclight-flex arclight-flex-row`}>
+          <Styles.Drawer
+            className={`arclight-block ${
+              !authenticated ? "arclight-hidden" : ""
+            }`}
+          >
             <Drawer
               autoSort
               headerImg={

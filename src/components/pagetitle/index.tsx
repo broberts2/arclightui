@@ -24,16 +24,18 @@ const PageTitle: FC<PropTypes> = React.memo(
     window.addEventListener("resize", handleResize);
     React.useEffect(handleResize, []);
     return (
-      <Styles.Container className={`text-${orientation} m-24 lg:m-36`}>
+      <Styles.Container
+        className={`arclight-text-${orientation} arclight-m-24 lg:arclight-m-36`}
+      >
         {img ? (
-          <div className={"relative"}>
+          <div className={"arclight-relative"}>
             <AnimatedBorder
               fns={fns}
               src={img ? <img src={img} width={`400px`} /> : null}
               video={bg ? <video src={bg} /> : null}
               heightOffset={bgOffset ? bgOffset : 100}
               borderWidth={20}
-              className={`m-auto ${small ? "hidden" : null}`}
+              className={`arclight-m-auto ${small ? "arclight-hidden" : null}`}
             />
             <AnimatedBorder
               fns={fns}
@@ -41,12 +43,12 @@ const PageTitle: FC<PropTypes> = React.memo(
               video={bg ? <video src={bg} /> : null}
               heightOffset={bgOffset ? bgOffset : 100}
               borderWidth={10}
-              className={`m-auto ${!small ? "hidden" : null}`}
+              className={`arclight-m-auto ${!small ? "arclight-hidden" : null}`}
             />
           </div>
         ) : null}
         <span
-          className={`text-text-primary font-primary text-4xl lg:text-6xl relative`}
+          className={`arclight-text-text-primary arclight-font-primary arclight-text-4xl lg:arclight-text-6xl arclight-relative`}
         >
           {text}
         </span>

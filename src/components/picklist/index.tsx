@@ -142,7 +142,7 @@ const PickList: FC<PropTypes> = ({
   const None =
     !loading && !multiple && !disallowNone ? (
       <MenuItem value="" sx={{ backgroundColor: "transparent" }}>
-        <div className={`text-text-primary font-primary`}>
+        <div className={`arclight-text-text-primary arclight-font-primary`}>
           <em>None</em>
         </div>
       </MenuItem>
@@ -160,7 +160,9 @@ const PickList: FC<PropTypes> = ({
                 display: !el.text || !el.text.length ? "none" : "",
               }}
             >
-              <div className={`text-text-primary font-primary`}>
+              <div
+                className={`arclight-text-text-primary arclight-font-primary`}
+              >
                 {multiple ? (
                   <table>
                     <tbody>
@@ -298,7 +300,7 @@ const PickList: FC<PropTypes> = ({
         >
           {__condition1({ D, loading, type, keyname, label }) ? (
             <div
-              className={`text-text-primary font-primary m-5 mb-0 mt-0 max-w-sm`}
+              className={`arclight-text-text-primary arclight-font-primary arclight-m-5 arclight-mb-0 arclight-mt-0 arclight-max-w-sm`}
             >
               <__TextField
                 value={searchFilterValue}
@@ -311,14 +313,16 @@ const PickList: FC<PropTypes> = ({
                 label={"Search"}
                 variant="standard"
               />
-              <div className={`flex flex-row justify-start`}>
+              <div
+                className={`arclight-flex arclight-flex-row arclight-justify-start`}
+              >
                 <Button
                   label={"Search"}
                   idleIcon={null}
                   type={"button"}
                   size={"normal"}
                   animation={true}
-                  className={`m-1 lg:block`}
+                  className={`arclight-m-1 lg:arclight-block`}
                   onClick={() => {
                     __query({
                       searchFilterValue,
@@ -334,15 +338,19 @@ const PickList: FC<PropTypes> = ({
                     setSkip(0);
                   }}
                 />
-                <div className={`flex flex-row justify-end w-full`}>
+                <div
+                  className={`arclight-flex arclight-flex-row arclight-justify-end arclight-w-full`}
+                >
                   <Button
                     label={"Last"}
                     idleIcon={"arrow-left"}
                     type={"button"}
                     size={"normal"}
                     animation={true}
-                    className={`m-1 lg:block ${
-                      skip < 1 ? `opacity-30 pointer-events-none` : ""
+                    className={`arclight-m-1 lg:arclight-block ${
+                      skip < 1
+                        ? `arclight-opacity-30 arclight-pointer-events-none`
+                        : ""
                     }`}
                     onClick={() => setSkip(skip - 1)}
                   />
@@ -354,11 +362,11 @@ const PickList: FC<PropTypes> = ({
                     animation={true}
                     className={
                       D[`getrecords_${type}`] && D[`getrecords_${type}`][label]
-                        ? `m-1 lg:block ${
+                        ? `arclight-m-1 lg:arclight-block ${
                             skip * _picklistSizeLimit >
                             D[`getrecords_${type}`][label].totalcount -
                               _picklistSizeLimit
-                              ? `opacity-30 pointer-events-none`
+                              ? `arclight-opacity-30 arclight-pointer-events-none`
                               : ""
                           }`
                         : ``

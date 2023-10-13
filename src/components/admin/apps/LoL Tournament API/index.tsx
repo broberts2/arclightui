@@ -12,10 +12,12 @@ const LoLTournamentAPI: FC<{
   publicURI: string;
 }> = ({ state, setState, D, fns, publicURI }) => {
   return (
-    <Styles.Container className={`flex justify-center align-middle h-full`}>
+    <Styles.Container
+      className={`arclight-flex arclight-justify-center arclight-align-middle arclight-h-full`}
+    >
       {!fns.parseAdminDomainState().activePanel ? (
         <Styles.SubContainer
-          className={`flex flex-col justify-center align-middle h-full`}
+          className={`arclight-flex arclight-flex-col arclight-justify-center arclight-align-middle arclight-h-full`}
         >
           <HeroPanel
             small
@@ -25,7 +27,7 @@ const LoLTournamentAPI: FC<{
                 hoverComponent: (
                   <img
                     src={`http://highmountainlabs.io/arclight/cdn/media/purple_essence.png`}
-                    className={`w-32 lg:w-64 object-cover`}
+                    className={`arclight-w-32 lg:arclight-w-64 arclight-object-cover`}
                   />
                 ),
                 bgImg: `http://highmountainlabs.io/arclight/cdn/media/ionia_1.jpg`,
@@ -41,7 +43,7 @@ const LoLTournamentAPI: FC<{
                 hoverComponent: (
                   <img
                     src={`http://highmountainlabs.io/arclight/cdn/media/orange_essence.png`}
-                    className={`w-32 lg:w-64 object-cover`}
+                    className={`arclight-w-32 lg:arclight-w-64 arclight-object-cover`}
                   />
                 ),
                 bgImg: `http://highmountainlabs.io/arclight/cdn/media/ionia_2.png`,
@@ -58,7 +60,7 @@ const LoLTournamentAPI: FC<{
                 hoverComponent: (
                   <img
                     src={`http://highmountainlabs.io/arclight/cdn/media/blue_essence.png`}
-                    className={`w-32 lg:w-64 object-cover`}
+                    className={`arclight-w-32 lg:arclight-w-64 arclight-object-cover`}
                   />
                 ),
                 bgImg: `http://highmountainlabs.io/arclight/cdn/media/ionia_3.jpg`,

@@ -36,12 +36,16 @@ const CompassViewer: FC<PropTypes> = ({
     [selected]
   );
   return (
-    <Styles.Container className={"text-text-primary font-primary w-full"}>
-      <table className={"w-full overflow-hidden"}>
+    <Styles.Container
+      className={
+        "arclight-text-text-primary arclight-font-primary arclight-w-full"
+      }
+    >
+      <table className={"arclight-w-full arclight-overflow-hidden"}>
         <tbody>
           <tr>
             <td
-              className={"transition-all duration-500"}
+              className={"arclight-transition-all arclight-duration-500"}
               align={"center"}
               width={expanded ? "25%" : "100%"}
               onClick={() => setExpanded(true)}
@@ -67,19 +71,19 @@ const CompassViewer: FC<PropTypes> = ({
             <Styles.TdLg expanded={expanded}>
               <Styles.ViewItem
                 className={`${
-                  expanded ? "w-full" : "w-0"
-                } transition-all duration-300 px-12`}
+                  expanded ? "arclight-w-full" : "arclight-w-0"
+                } arclight-transition-all arclight-duration-300 arclight-px-12`}
               >
                 {RenderItem}
               </Styles.ViewItem>
             </Styles.TdLg>
           </tr>
-          <tr className={`xl:hidden`}>
+          <tr className={`xl:arclight-hidden`}>
             <Styles.TdSm expanded={expanded}>
               <Styles.ViewItem
                 className={`${
-                  expanded ? "w-full" : "w-0"
-                } transition-all duration-300 px-10`}
+                  expanded ? "arclight-w-full" : "arclight-w-0"
+                } arclight-transition-all arclight-duration-300 arclight-px-10`}
               >
                 {RenderItem}
               </Styles.ViewItem>

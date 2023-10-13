@@ -16,13 +16,19 @@ const Home: FC<{
   return D && fns.calls ? (
     <Page fns={fns} backgroundGradient={{ from: `#283b4c`, to: `#09111c` }}>
       <Header main fns={fns} endpoint={endpoint} />
-      <Styles.Container className={`px-10 md:px-36 xl:px-72`}>
-        <Styles.Body className={`relative`}>
-          <Styles.HeroBody className={`m-auto relative flex space-x-10`}>
-            <Styles.HeroText className={`flex items-center`}>
-              <div className={`flex-col space-y-4`}>
-                <div className={`text-3xl my-6`}>Highmountain Labs</div>
-                <div className={`text-sm`}>
+      <Styles.Container
+        className={`arclight-px-10 md:arclight-px-36 xl:arclight-px-72`}
+      >
+        <Styles.Body className={`arclight-relative`}>
+          <Styles.HeroBody
+            className={`arclight-m-auto arclight-relative arclight-flex arclight-space-x-10`}
+          >
+            <Styles.HeroText className={`arclight-flex arclight-items-center`}>
+              <div className={`arclight-flex-col arclight-space-y-4`}>
+                <div className={`arclight-text-3xl arclight-my-6`}>
+                  Highmountain Labs
+                </div>
+                <div className={`arclight-text-sm`}>
                   Contrary to popular belief, Lorem Ipsum is not simply random
                   text. It has roots in a piece of classical Latin literature
                   from 45 BC, making it over 2000 years old. Richard McClintock,
@@ -30,7 +36,7 @@ const Home: FC<{
                   looked up one of the more obscure Latin words, consectetur,
                   from.
                 </div>
-                <div className={`text-sm`}>
+                <div className={`arclight-text-sm`}>
                   Contrary to popular belief, Lorem Ipsum is not simply random
                   text. It has roots in a piece of classical Latin literature
                   from 45 BC, making it over 2000 years old. Richard McClintock,
@@ -51,7 +57,7 @@ const Home: FC<{
               </div>
             </Styles.HeroText>
             <Styles.HeroImg
-              className={`w-0 lg:w-48 xl:w-96 object-cover`}
+              className={`arclight-w-0 lg:arclight-w-48 xl:arclight-w-96 arclight-object-cover`}
               src={`http://highmountainlabs.io/arclight/cdn/media/wise_man.png`}
             />
           </Styles.HeroBody>
@@ -113,7 +119,7 @@ const Home: FC<{
             line={false}
             constrain={true}
           /> */}
-          <div className={`my-24`}>
+          <div className={`arclight-my-24`}>
             <HeroPanel
               small
               cards={[

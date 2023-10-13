@@ -28,7 +28,7 @@ const Footer: FC<PropTypes> = ({
       style={{ width: src.props.width, height: src.props.width }}
     >
       <div
-        className={`absolute`}
+        className={`arclight-absolute`}
         style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
       >
         {video ? (

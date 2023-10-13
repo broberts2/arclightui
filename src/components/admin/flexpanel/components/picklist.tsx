@@ -9,7 +9,11 @@ export default (
   multiple?: boolean
 ) => {
   const _pL = (i: number) => (
-    <div className={false ? `opacity-50 pointer-events-none` : ``}>
+    <div
+      className={
+        false ? `arclight-opacity-50 arclight-pointer-events-none` : ``
+      }
+    >
       <PickList
         type={c.lookup}
         D={D}

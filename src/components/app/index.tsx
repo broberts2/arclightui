@@ -50,13 +50,13 @@ const App: FC<PropTypes> = ({
     // @ts-ignore
     setApp(() => (
       <Styles.Container
-        className={`relative text-text-primary font-primary`}
+        className={`arclight-relative arclight-text-text-primary arclight-font-primary`}
         ref={AppRef}
       >
         {background ? (
           <img
             src={background.src}
-            className={`w-full h-full fixed object-cover`}
+            className={`arclight-w-full arclight-h-full arclight-fixed arclight-object-cover`}
             style={{
               opacity: loading || transitioning ? background.opacity : 0,
               transition: `all 0.15s ease-in`,
@@ -65,7 +65,7 @@ const App: FC<PropTypes> = ({
         ) : null}
         {loader ? (
           <div
-            className={`sticky h-0 top-[50vh]`}
+            className={`arclight-sticky arclight-h-0 arclight-top-[50vh]`}
             style={{
               opacity: loading || transitioning ? 100 : 0,
               transition: `all 0.15s ease-in`,
@@ -73,7 +73,7 @@ const App: FC<PropTypes> = ({
           >
             <img
               src={loader}
-              className={`w-56 object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
+              className={`arclight-w-56 arclight-object-cover arclight-absolute arclight-top-1/2 arclight-left-1/2 -arclight-translate-x-1/2 -arclight-translate-y-1/2`}
             />
           </div>
         ) : (
@@ -83,7 +83,7 @@ const App: FC<PropTypes> = ({
           />
         )}
         <div
-          className={`bg-background-primary min-h-screen overflow-x-hidden`}
+          className={`arclight-bg-background-primary arclight-min-h-screen arclight-overflow-x-hidden`}
           style={loading || transitioning ? { pointerEvents: "none" } : {}}
         >
           {Object.keys(pages).map((domain: string) => {
@@ -122,8 +122,10 @@ const App: FC<PropTypes> = ({
                   (domain === "admin" && !pagenotfound)) ? (
                 <div
                   className={`${
-                    loading || transitioning ? `opacity-0` : `opacity-100`
-                  } duration-700 delay-0 transition-all`}
+                    loading || transitioning
+                      ? `arclight-opacity-0`
+                      : `arclight-opacity-100`
+                  } arclight-duration-700 arclight-delay-0 arclight-transition-all`}
                 >
                   <Page
                     D={D}
@@ -170,9 +172,11 @@ const App: FC<PropTypes> = ({
           })}
           <div
             className={`nopage ${
-              loading || transitioning ? `opacity-0` : `opacity-100`
-            } duration-700 delay-0 transition-all ${
-              pagenotfound ? `` : `hidden`
+              loading || transitioning
+                ? `arclight-opacity-0`
+                : `arclight-opacity-100`
+            } arclight-duration-700 arclight-delay-0 arclight-transition-all ${
+              pagenotfound ? `` : `arclight-hidden`
             }`}
           >
             <img src={nopage} />

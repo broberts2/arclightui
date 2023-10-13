@@ -72,7 +72,7 @@ const Item = styled.div`
   }
 
   /* Styling of overlay */
-  .bm-overlay2 {
+  .bm-overlay {
     background: rgba(0, 0, 0, 1);
   }
 `;

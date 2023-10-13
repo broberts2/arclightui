@@ -11,13 +11,15 @@ export default (props: any) => {
   }, [props]);
   return (
     <td
-      className={`p-2 ${
+      className={`arclight-p-2 ${
         props.active
           ? `${
-              props.waiting ? `opacity-30 pointer-events-none` : `opacity-100`
-            } scale-100`
-          : `hidden`
-      } transition-all duration-300 flex-1 w-full h-full`}
+              props.waiting
+                ? `arclight-opacity-30 arclight-pointer-events-none`
+                : `arclight-opacity-100`
+            } arclight-scale-100`
+          : `arclight-hidden`
+      } arclight-transition-all arclight-duration-300 arclight-flex-1 arclight-w-full arclight-h-full`}
       align={"center"}
     >
       {item}

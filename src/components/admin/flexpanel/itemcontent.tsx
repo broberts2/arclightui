@@ -3,15 +3,15 @@ import React from "react";
 
 const ChkBox = (props: { v: boolean; a: Function; t: string }) => (
   <div
-    className={`text-text-primary font-primary text-base flex justify-start`}
+    className={`arclight-text-text-primary arclight-font-primary arclight-text-base arclight-flex arclight-justify-start`}
   >
-    <div className={`m-auto`}>
+    <div className={`arclight-m-auto`}>
       <Checkbox
         value={props.v}
         onChange={(b: boolean, cb: Function) => props.a()}
       />
     </div>
-    <div className={`m-auto`}>{props.t}</div>
+    <div className={`arclight-m-auto`}>{props.t}</div>
   </div>
 );
 
@@ -42,17 +42,21 @@ export default (props: any) => {
   }, []);
   return (
     <props.Styles.ItemContent
-      className={`w-full h-full rounded ${
-        props.constrain ? "max-w-xl" : null
-      } p-5 max-h-full`}
+      className={`arclight-w-full arclight-h-full arclight-rounded ${
+        props.constrain ? "arclight-max-w-xl" : null
+      } arclight-p-5 arclight-max-h-full`}
     >
-      <div className={"flex justify-center items-center w-full h-full"}>
-        <div className={"w-full space-y-8 h-full"}>
+      <div
+        className={
+          "arclight-flex arclight-justify-center arclight-items-center arclight-w-full arclight-h-full"
+        }
+      >
+        <div className={"arclight-w-full arclight-space-y-8 arclight-h-full"}>
           <div
-            className={`flex justify-start w-full space-y-4`}
+            className={`arclight-flex arclight-justify-start arclight-w-full arclight-space-y-4`}
             style={{ maxHeight: "85%", minHeight: "85%" }}
           >
-            <div className={`w-full space-y-4`}>
+            <div className={`arclight-w-full arclight-space-y-4`}>
               {props.children}
               {Object.keys(arr).map((k: string) =>
                 arr[k].find((o: { c: string; s: string }) => props[o.c]) ? (
@@ -137,8 +141,10 @@ export default (props: any) => {
               ) : null}
             </div>
           </div>
-          <div className={`flex flex-row w-full`}>
-            <div className={`flex justify-start space-x-2 w-1/3`}>
+          <div className={`arclight-flex arclight-flex-row arclight-w-full`}>
+            <div
+              className={`arclight-flex arclight-justify-start arclight-space-x-2 arclight-w-1/3`}
+            >
               {[{ fn: "onRecursiveInit", t: "Recursive Init" }]
                 .filter((el) => props[el.fn])
                 .map((el) => (
@@ -153,7 +159,9 @@ export default (props: any) => {
                   />
                 ))}
             </div>
-            <div className={`flex justify-end space-x-2 w-full`}>
+            <div
+              className={`arclight-flex arclight-justify-end arclight-space-x-2 arclight-w-full`}
+            >
               {[
                 { fn: "onExecute", t: "Execute" },
                 { fn: "onLog", t: "Log" },

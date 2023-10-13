@@ -47,32 +47,34 @@ const Application: FC<PropTypes> = ({ className, fns, D, form, locked }) => {
         delay: `0s`,
       }}
     >
-      <Styles.Body className={`max-w-6xl m-auto`}>
+      <Styles.Body className={`arclight-max-w-6xl arclight-m-auto`}>
         {form.backgroundimage ? (
           <Styles.BackgroundImage>
             <FadeDivider img={form.backgroundimage} />
           </Styles.BackgroundImage>
         ) : null}
-        <div className={`relative p-10`}>
+        <div className={`arclight-relative arclight-p-10`}>
           <Styles.TitleImg
-            className={`w-96 h-96 ${
-              form.titleimage ? `border-0 border-black` : ""
+            className={`arclight-w-96 arclight-h-96 ${
+              form.titleimage ? `arclight-border-0 arclight-border-black` : ""
             }`}
           >
             {form.titleimage ? <img src={form.titleimage} /> : null}
           </Styles.TitleImg>
           <Styles.Title
-            className={`text-text-primary font-primary text-6xl m-10`}
+            className={`arclight-text-text-primary arclight-font-primary arclight-text-6xl arclight-m-10`}
           >
             {form.title}
           </Styles.Title>
           <Styles.Description
-            className={`text-black font-primary text-2xl m-10`}
+            className={`arclight-text-black arclight-font-primary arclight-text-2xl arclight-m-10`}
           >
             {form.description}
           </Styles.Description>
-          <Styles.Input className={`text-black font-primary text-1xl m-10`}>
-            <Styles.Controls className={`mb-10`}>
+          <Styles.Input
+            className={`arclight-text-black arclight-font-primary arclight-text-1xl arclight-m-10`}
+          >
+            <Styles.Controls className={`arclight-mb-10`}>
               {form.controls
                 ? form.controls.map(
                     (control: { [key: string]: any }, i: number) => {
@@ -137,17 +139,21 @@ const Application: FC<PropTypes> = ({ className, fns, D, form, locked }) => {
                           );
                         else if (control.type === "text")
                           return (
-                            <Styles.Text className={`text-black font-primary`}>
+                            <Styles.Text
+                              className={`arclight-text-black arclight-font-primary`}
+                            >
                               {control.value}
                             </Styles.Text>
                           );
                         else if (control.type === "divide")
-                          return <div className={`mt-5 mb-5`} />;
+                          return (
+                            <div className={`arclight-mt-5 arclight-mb-5`} />
+                          );
                         else if (control.type === "link")
                           return (
                             <div>
                               <Styles.Link
-                                className={`font-primary`}
+                                className={`arclight-font-primary`}
                                 href={control.href}
                                 target={"_blank"}
                               >
@@ -272,7 +278,7 @@ const Application: FC<PropTypes> = ({ className, fns, D, form, locked }) => {
       </Styles.Body>
     </Styles.Container>
   ) : (
-    <div className={`h-96`} />
+    <div className={`arclight-h-96`} />
   );
 };
 

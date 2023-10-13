@@ -32,7 +32,7 @@ const Item: FC<ItemPropTypes> = ({
   return icon || text ? (
     <Styles.Item
       className={
-        "flex items-center cursor-pointer font-primary text-text-primary text-left whitespace-nowrap z-20"
+        "arclight-flex arclight-items-center arclight-cursor-pointer arclight-font-primary arclight-text-text-primary arclight-text-left arclight-whitespace-nowrap arclight-z-20"
       }
       style={{ opacity: 0 }}
       mountAnim={{
@@ -41,7 +41,7 @@ const Item: FC<ItemPropTypes> = ({
         delay: `${0.075 * index}s`,
       }}
     >
-      <table className={"w-full"}>
+      <table className={"arclight-w-full"}>
         <tbody>
           <tr
             onClick={() => {
@@ -49,7 +49,9 @@ const Item: FC<ItemPropTypes> = ({
                 setExpanded(!expanded);
               if (onClick) onClick();
             }}
-            className={`relative group ${italic ? "italic" : null}`}
+            className={`arclight-relative arclight-group ${
+              italic ? "arclight-italic" : null
+            }`}
             style={{ color }}
           >
             {items ? (
@@ -57,28 +59,28 @@ const Item: FC<ItemPropTypes> = ({
                 animation="none"
                 icon={"arrow-right"}
                 size="xs"
-                className={`absolute -left-5 ${
-                  expanded ? `rotate-90` : `rotate-0`
-                } transition-all duration-200 text-inherit`}
+                className={`arclight-absolute -arclight-left-5 ${
+                  expanded ? `arclight-rotate-90` : `arclight-rotate-0`
+                } arclight-transition-all arclight-duration-200 arclight-text-inherit`}
               />
             ) : null}
             {icon ? (
-              <td className={"w-5"}>
+              <td className={"arclight-w-5"}>
                 <FontAwesome
                   animation="none"
                   icon={icon}
                   size="1x"
-                  className={"mr-2 text-inherit"}
+                  className={"arclight-mr-2 arclight-text-inherit"}
                 />
               </td>
             ) : null}
             {text ? (
-              <td className={"text-left"}>
-                <span className={"text-lg bold"}>{text}</span>
+              <td className={"arclight-text-left"}>
+                <span className={"arclight-text-lg arclight-bold"}>{text}</span>
               </td>
             ) : null}
             <div
-              className={`left-0 bottom-0 absolute border-b-2 w-0 group-hover:w-full transition-all duration-200`}
+              className={`arclight-left-0 arclight-bottom-0 arclight-absolute arclight-border-b-2 arclight-w-0 group-hover:arclight-w-full arclight-transition-all arclight-duration-200`}
             />
           </tr>
           {items ? (
@@ -86,12 +88,12 @@ const Item: FC<ItemPropTypes> = ({
               <td>
                 <div
                   className={`${
-                    !expanded ? "scale-y-0 h-0" : null
-                  } w-0 transition-all duration-200 origin-top ${
-                    italic ? "italic" : null
+                    !expanded ? "arclight-scale-y-0 h-0" : null
+                  } arclight-w-0 arclight-transition-all arclight-duration-200 arclight-origin-top ${
+                    italic ? "arclight-italic" : null
                   }`}
                 >
-                  <div className={`scale-90 ml-4`}>
+                  <div className={`arclight-scale-90 arclight-ml-4`}>
                     {items
                       // @ts-ignore
                       .sort((a, b) =>
@@ -191,11 +193,14 @@ const Drawer: FC<PropTypes> = ({
           onOpen={() => (!locked ? setIsOpen(true) : null)}
           onClose={() => (!locked ? setIsOpen(false) : null)}
           noOverlay={locked}
-          overlayClassName={`bm-overlay2`}
+          overlayClassName={`bm-overlay`}
         >
-          <Styles.Component className={`${!locked ? "pt-6" : ""}`}>
+          <Styles.Component className={`${!locked ? "arclight-pt-6" : ""}`}>
             {headerImg ? (
-              <img src={headerImg} className={`w-24 m-auto mb-10 mt-0`} />
+              <img
+                src={headerImg}
+                className={`arclight-w-24 arclight-m-auto arclight-mb-10 arclight-mt-0`}
+              />
             ) : null}
             {items && Array.isArray(items) ? (
               items
@@ -239,7 +244,7 @@ const Drawer: FC<PropTypes> = ({
               />
             ) : null}
             {signOut ? (
-              <Styles.SignOut className={`mt-8`}>
+              <Styles.SignOut className={`arclight-mt-8`}>
                 <Button
                   span={true}
                   label={"Sign Out"}
