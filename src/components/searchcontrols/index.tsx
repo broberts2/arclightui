@@ -74,11 +74,11 @@ const SearchControls: FC<PropTypes> = ({
         onClick={(status: any) => pagination.onClick(-1)}
       />
       <Button
-        className={`arclight-hidden m-1 lg:arclight-block ${
+        className={`arclight-hidden arclight-m-1 lg:arclight-block ${
           (pagination.skip + 1) * pagination.length < pagination.totalcount
             ? "arclight-pointer-events-auto"
             : "arclight-opacity-30 arclight-pointer-events-none"
-        } min-w-max`}
+        } arclight-min-w-max`}
         label={"Next"}
         idleIcon={"arrow-right"}
         type={"button"}

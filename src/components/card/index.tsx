@@ -83,7 +83,9 @@ const Card: FC<PropTypes> = ({
       } ${bodyComponent && !line && !linesmall ? "md:arclight-w-1/2" : null} ${
         bodyComponent && !line && !linesmall ? "lg:arclight-w-1/3" : null
       } ${
-        !line && !linesmall && !small ? "xl:arclight-w-96" : ""
+        !line && !linesmall && !small
+          ? "arclight-w-full lg:arclight-max-w-sm"
+          : ""
       } arclight-text-text-primary arclight-font-primary ${
         className ? className : null
       } ${active !== null && active === false ? "arclight-opacity-50" : null} ${

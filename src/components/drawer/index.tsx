@@ -88,7 +88,7 @@ const Item: FC<ItemPropTypes> = ({
               <td>
                 <div
                   className={`${
-                    !expanded ? "arclight-scale-y-0 h-0" : null
+                    !expanded ? "arclight-scale-y-0 arclight-h-0" : null
                   } arclight-w-0 arclight-transition-all arclight-duration-200 arclight-origin-top ${
                     italic ? "arclight-italic" : null
                   }`}
