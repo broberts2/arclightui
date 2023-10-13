@@ -9,47 +9,32 @@ const H: FC<{
   endpoint?: string;
 }> = ({ fns, main, endpoint }) => {
   return (
-    <div
-      className={`flex py-5 items-center space-x-7 border-b-[1px] border-gray-500 mb-10 pt-10`}
-    >
-      <img
-        src={`http://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`}
-        className={`w-20 cursor-pointer`}
-      />
-      {[
-        { text: "Home", route: "/" },
+    <Header
+      fns={fns}
+      logo={{
+        src: `http://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`,
+        route: "/",
+      }}
+      links={[
+        {
+          route: "/",
+          text: "Home",
+        },
+        {
+          route: "/arclightui",
+          text: "ArclightUI",
+        },
         fns.readToken()._token
           ? {
-              text: "ArclightUI",
-              route: "/arclightui",
+              icon: "scroll",
+              route: "/",
+              text: "Logout",
+              onClick: () => fns.writeToken(),
             }
-          : undefined,
-      ]
-        .filter((el: any) => el)
-        .map((el: any) => (
-          <div
-            className={`text-lg cursor-pointer`}
-            onClick={() => fns.route(el.route)}
-          >
-            {el.text}
-          </div>
-        ))}
-      <div className={`grow text-right`}>
-        <div
-          className={`text-lg cursor-pointer inline-flex`}
-          onClick={() => {
-            if (fns.readToken()._token) {
-              fns.route("/");
-              fns.writeToken();
-            } else {
-              fns.route("/login");
-            }
-          }}
-        >
-          {fns.readToken()._token ? "Sign Out" : "Sign In"}
-        </div>
-      </div>
-    </div>
+          : { icon: "scroll", route: "/login", text: "Login" },
+      ]}
+      socialMedia={[]}
+    />
   );
 };
 

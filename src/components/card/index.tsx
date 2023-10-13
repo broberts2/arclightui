@@ -79,7 +79,7 @@ const Card: FC<PropTypes> = ({
           : undefined
       }
       className={`${!noBodyComponentAbsolute ? "group " : null}${
-        line || linesmall ? "w-full" : ""
+        line || linesmall ? "w-full" : "w-full"
       } ${bodyComponent && !line && !linesmall ? "md:w-1/2" : null} ${
         bodyComponent && !line && !linesmall ? "lg:w-1/3" : null
       } ${

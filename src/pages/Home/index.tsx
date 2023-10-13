@@ -15,8 +15,8 @@ const Home: FC<{
 }> = ({ fns, D, endpoint }) => {
   return D && fns.calls ? (
     <Page fns={fns} backgroundGradient={{ from: `#283b4c`, to: `#09111c` }}>
-      <Styles.Container className={`px-72`}>
-        <Header main fns={fns} endpoint={endpoint} />
+      <Header main fns={fns} endpoint={endpoint} />
+      <Styles.Container className={`px-10 md:px-36 xl:px-72`}>
         <Styles.Body className={`relative`}>
           <Styles.HeroBody className={`m-auto relative flex space-x-10`}>
             <Styles.HeroText className={`flex items-center`}>
@@ -51,7 +51,7 @@ const Home: FC<{
               </div>
             </Styles.HeroText>
             <Styles.HeroImg
-              className={`max-w-xl object-cover`}
+              className={`w-0 lg:w-48 xl:w-96 object-cover`}
               src={`http://highmountainlabs.io/arclight/cdn/media/wise_man.png`}
             />
           </Styles.HeroBody>

@@ -191,6 +191,7 @@ const Drawer: FC<PropTypes> = ({
           onOpen={() => (!locked ? setIsOpen(true) : null)}
           onClose={() => (!locked ? setIsOpen(false) : null)}
           noOverlay={locked}
+          overlayClassName={`bm-overlay2`}
         >
           <Styles.Component className={`${!locked ? "pt-6" : ""}`}>
             {headerImg ? (
