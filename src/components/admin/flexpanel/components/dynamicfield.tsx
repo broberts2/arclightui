@@ -94,16 +94,16 @@ export default (
         />
       ) : null}
       <div
-        className={`text-text-primary font-primary text-base flex justify-start`}
+        className={`arclight-text-text-primary arclight-font-primary arclight-text-base arclight-flex arclight-justify-start`}
       >
         <div
-          className={`m-auto ${
+          className={`arclight-m-auto ${
             state[c.label] &&
             state[c.label].type &&
             (state[c.label].type === "String" ||
               state[c.label].type === "Array")
               ? null
-              : `opacity-30 pointer-events-none`
+              : `arclight-opacity-30 arclight-pointer-events-none`
           }`}
         >
           <Checkbox
@@ -121,18 +121,18 @@ export default (
           />
         </div>
         <div
-          className={`m-auto ${
+          className={`arclight-m-auto ${
             state[c.label] &&
             state[c.label].type &&
             (state[c.label].type === "String" ||
               state[c.label].type === "Array")
               ? null
-              : `opacity-30 pointer-events-none`
+              : `arclight-opacity-30 arclight-pointer-events-none`
           }`}
         >
           Lookup
         </div>
-        <div className={`m-auto`}>
+        <div className={`arclight-m-auto`}>
           <Checkbox
             value={state[c.label].required}
             onChange={(b: boolean, cb: Function) => {
@@ -147,8 +147,8 @@ export default (
             }}
           />
         </div>
-        <div className={`m-auto`}>Required</div>
-        <div className={`m-auto`}>
+        <div className={`arclight-m-auto`}>Required</div>
+        <div className={`arclight-m-auto`}>
           <Checkbox
             value={state[c.label].searchable}
             onChange={(b: boolean, cb: Function) => {
@@ -163,8 +163,10 @@ export default (
             }}
           />
         </div>
-        <div className={`m-auto`}>Searchable</div>
-        <div className={`flex justify-end w-full space-x-2`}>
+        <div className={`arclight-m-auto`}>Searchable</div>
+        <div
+          className={`arclight-flex arclight-justify-end arclight-w-full arclight-space-x-2`}
+        >
           {!state[c.label].system || true ? (
             <Bttn
               t={"Remove"}

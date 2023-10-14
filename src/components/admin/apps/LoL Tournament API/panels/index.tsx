@@ -53,7 +53,7 @@ export default (
     );
   }
   return (
-    <div className={`w-full`}>
+    <div className={`arclight-w-full`}>
       <PageTitle
         orientation={"center"}
         text={title}

@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import Styles from "./styles";
 import Card from "../card";
-import Page from "../page";
 import Button from "../button";
 import TextField from "../textfield";
 import Loader from "../loader";
@@ -44,7 +43,7 @@ const AuthPage: FC<PropTypes> = ({
     <Styles.Container className={className} headless={headless}>
       <Styles.Body>
         <div
-          className={`arclight-flex arclight-justify-center arclight-relative`}
+          className={`arclight-flex arclight-justify-center arclight-relative xs:max-md:arclight-w-3/4 xs:max-md:arclight-mx-auto`}
         >
           <Card
             bgImg={authBackgroundImage}

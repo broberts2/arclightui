@@ -20,6 +20,8 @@ import constructFromRecordList from "./stfns/constructfromrecordlist";
 import constructFromDataModel from "./stfns/constructfromdatamodel";
 import parseCode from "./stfns/parsecode";
 
+const _HIDE_BREAKPOINT = "lg";
+
 // const ItemsArray = [database, integration, event, script, report, form, app];
 const ItemsArray = [database, integration, script, app, form];
 
@@ -75,7 +77,9 @@ const Admin: FC<{
           opacity: 0.5,
         }}
       >
-        <Styles.Body className={`arclight-flex arclight-flex-row`}>
+        <Styles.Body
+          className={`arclight-flex arclight-flex-row xs:max-${_HIDE_BREAKPOINT}:arclight-hidden`}
+        >
           <Styles.Drawer
             className={`arclight-block ${
               !authenticated ? "arclight-hidden" : ""
@@ -153,6 +157,21 @@ const Admin: FC<{
             ) : null}
           </Styles.Content>
         </Styles.Body>
+        <div
+          className={`${_HIDE_BREAKPOINT}:arclight-hidden arclight-absolute arclight-left-1/2 arclight-top-1/2 -arclight-translate-x-1/2 -arclight-translate-y-1/2`}
+        >
+          <div className={`arclight-flex arclight-justify-center`}>
+            <img
+              src={`http://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`}
+              className={`arclight-w-44`}
+            />
+          </div>
+          <div className={`arclight-flex arclight-justify-center`}>
+            <div className={`arclight-mx-10 arclight-text-lg arclight-w-64`}>
+              Arclight does not currently support this viewport.
+            </div>
+          </div>
+        </div>
       </Page>
     </Styles.Container>
   );

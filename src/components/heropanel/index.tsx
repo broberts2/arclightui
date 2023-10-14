@@ -23,10 +23,22 @@ export interface PropTypes {
   autoSort?: boolean | null;
   small?: boolean | null;
   title?: string | null;
+  singleSmall?: boolean;
 }
 
 const HeroPanel: FC<PropTypes> = React.memo(
-  ({ cards, autoSort, small, title, left, rows, pageCallback, index }) => {
+  ({
+    cards,
+    autoSort,
+    small,
+    title,
+    left,
+    rows,
+    pageCallback,
+    index,
+    singleSmall,
+  }) => {
+    const MAX_C = singleSmall ? 1 : 3;
     const CL = cards.length;
     if (rows && index)
       cards = cards.filter((c: any, i: number) => i >= index * (rows * 3));

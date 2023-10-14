@@ -27,9 +27,11 @@ const MissionStatement: FC<PropTypes> = ({ title, Message, bgImg, button }) => {
         }`}
       >
         <div
-          className={`${bgImg ? "arclight-text-xl" : "arclight-text-6xl"} ${
-            bgImg ? "arclight-my-0" : "arclight-my-14"
-          }`}
+          className={`${
+            bgImg
+              ? "arclight-text-xl"
+              : `arclight-text-2xl md:arclight-text-6xl`
+          } ${bgImg ? "arclight-my-0" : "arclight-my-14"}`}
         >
           {title}
         </div>

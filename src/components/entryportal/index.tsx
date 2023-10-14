@@ -5,6 +5,7 @@ import HeroPanel from "../heropanel";
 
 export interface PropTypes {
   baseBackground: string;
+  className?: string;
   cards: Array<{
     backgroundHover?: string | null;
     bgImg: string;
@@ -16,10 +17,14 @@ export interface PropTypes {
   }>;
 }
 
-const EntryPortal: FC<PropTypes> = ({ cards, baseBackground }) => {
+const EntryPortal: FC<PropTypes> = ({ cards, baseBackground, className }) => {
   const [h, setH] = React.useState(-1);
   return (
-    <Styles.Container className={"arclight-flex arclight-min-h-screen"}>
+    <Styles.Container
+      className={`arclight-flex arclight-min-h-screen${
+        className ? ` ${className}` : ""
+      }`}
+    >
       <Styles.BaseBackground
         src={baseBackground}
         style={{ opacity: h < 0 ? 0.1 : 0 }}

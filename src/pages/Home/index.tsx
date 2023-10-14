@@ -128,6 +128,7 @@ const Home: FC<{
           <div className={`arclight-my-24`}>
             <HeroPanel
               small
+              singleSmall
               cards={[
                 {
                   ht: "Developer reference for ArclightUI",
@@ -154,32 +155,6 @@ const Home: FC<{
               }))}
             />
           </div>
-          <CompassViewer
-            bgCompassElement={``}
-            defaultSelection={1}
-            items={[
-              {
-                bgImg: `https://images8.alphacoders.com/133/1333301.jpeg`,
-                element: (
-                  <MissionStatement
-                    bgImg={`https://images8.alphacoders.com/133/1333301.jpeg`}
-                    title={"Test Title"}
-                    Message={
-                      <table className={``}>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div className={`arclight-pl-0`}>Test</div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    }
-                  />
-                ),
-              },
-            ]}
-          />
         </Styles.Body>
       </Styles.Container>
       <Footer fns={fns} endpoint={endpoint} />

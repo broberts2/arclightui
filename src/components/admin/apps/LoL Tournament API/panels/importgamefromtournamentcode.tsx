@@ -15,7 +15,7 @@ export default (props: any) => {
       props.fns.calls.getintegrations();
   });
   return (
-    <div className={`flex flex-col space-y-10`}>
+    <div className={`arclight-flex arclight-flex-col arclight-space-y-10`}>
       <props.Controls.TextField
         span
         hot
