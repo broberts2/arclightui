@@ -9,32 +9,34 @@ const Panel = (props) => {
   return (
     <div className={`arclight-w-full arclight-h-full arclight-relative`}>
       <div
-        className={`arclight-absolute arclight-top-1/2 arclight-left-1/2 -arclight-translate-x-1/2 -arclight-translate-y-1/2`}
+        className={`arclight-w-full arclight-absolute arclight-top-1/2 arclight-left-1/2 -arclight-translate-x-1/2 -arclight-translate-y-1/2`}
       >
-        <props.HeroPanel
-          index={index}
-          rows={1}
-          pageCallback={setIndex}
-          autoSort
-          cards={Object.keys(props.D.getintegrations).map((k: string) => ({
-            active: props.D.getintegrations[k].active,
-            hoverComponent: (
-              <div>
-                <div className={`text-md`}>
-                  {props.D.getintegrations[k].decorators.description}
+        <div className={`arclight-w-full`}>
+          <props.HeroPanel
+            index={index}
+            rows={1}
+            pageCallback={setIndex}
+            autoSort
+            cards={Object.keys(props.D.getintegrations).map((k: string) => ({
+              active: props.D.getintegrations[k].active,
+              hoverComponent: (
+                <div>
+                  <div className={`text-md`}>
+                    {props.D.getintegrations[k].decorators.description}
+                  </div>
                 </div>
-              </div>
-            ),
-            bgImg: `${props.D.getintegrations[k].decorators.img}`,
-            subText: k,
-            onClick: () =>
-              props.fns.setAdminDomainState({
-                ...props.fns.parseAdminDomainState(),
-                integration: k,
-                activePanel: 1,
-              }),
-          }))}
-        />
+              ),
+              bgImg: `${props.D.getintegrations[k].decorators.img}`,
+              subText: k,
+              onClick: () =>
+                props.fns.setAdminDomainState({
+                  ...props.fns.parseAdminDomainState(),
+                  integration: k,
+                  activePanel: 1,
+                }),
+            }))}
+          />
+        </div>
       </div>
     </div>
   );

@@ -11,17 +11,21 @@ const LoLTournamentAPI: FC<{
   fns: { [key: string]: any };
   publicURI: string;
 }> = ({ state, setState, D, fns, publicURI }) => {
+  const [index, setIndex] = React.useState(0);
   return (
     <Styles.Container
       className={`arclight-flex arclight-justify-center arclight-align-middle arclight-h-full`}
     >
       {!fns.parseAdminDomainState().activePanel ? (
         <Styles.SubContainer
-          className={`arclight-flex arclight-flex-col arclight-justify-center arclight-align-middle arclight-h-full`}
+          className={`arclight-flex arclight-flex-col arclight-justify-center arclight-align-middle arclight-h-full arclight-w-full`}
         >
           <HeroPanel
+            index={index}
             small
+            rows={1}
             title={"Select a Function"}
+            pageCallback={setIndex}
             cards={[
               {
                 hoverComponent: (
@@ -53,6 +57,23 @@ const LoLTournamentAPI: FC<{
                     ...fns.parseAdminDomainState(),
                     activePanel: 1,
                     subItem: "Authenticate Summoner",
+                  }),
+              },
+              {
+                locked: true,
+                hoverComponent: (
+                  <img
+                    src={`http://highmountainlabs.io/arclight/cdn/media/blue_essence.png`}
+                    className={`arclight-w-32 lg:arclight-w-64 arclight-object-cover`}
+                  />
+                ),
+                bgImg: `http://highmountainlabs.io/arclight/cdn/media/ionia_3.jpg`,
+                subText: "Insert Forfeit",
+                onClick: () =>
+                  fns.setAdminDomainState({
+                    ...fns.parseAdminDomainState(),
+                    activePanel: 1,
+                    subItem: "Insert Forfeit",
                   }),
               },
               {

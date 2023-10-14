@@ -40,7 +40,7 @@ export default (props: any) => {
     props.D &&
     props.D[`getrecords_${usermodeltype}`] &&
     props.D[`getrecords_${usermodeltype}`][_SUMMONERKEY] ? (
-    <div className={`flex flex-col space-y-10`}>
+    <div className={`arclight-flex arclight-flex-col arclight-space-y-10`}>
       <props.Controls.PickList
         type={usermodeltype}
         D={props.D}

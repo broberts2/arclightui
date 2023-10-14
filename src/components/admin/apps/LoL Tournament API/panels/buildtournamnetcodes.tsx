@@ -22,7 +22,7 @@ export default (props: any) => {
   return props.D &&
     props.D.getintegrations &&
     props.D.getintegrations["LoL Tournament API"] ? (
-    <div className={`flex flex-col space-y-10`}>
+    <div className={`arclight-flex arclight-flex-col arclight-space-y-10`}>
       {[
         {
           type: props.D.getintegrations["LoL Tournament API"].settings
@@ -170,8 +170,10 @@ export default (props: any) => {
                 mode: "full",
                 bgImg: `${props.publicURI}/static/integrationsart/riotxlol.jpg`,
                 body: () => (
-                  <div className={`w-full`}>
-                    <div className={`w-full h-96 p-4`}>
+                  <div className={`arclight-w-full`}>
+                    <div
+                      className={`arclight-w-full arclight-h-96 arclight-p-4`}
+                    >
                       <props.Controls.Monaco
                         refName={"codes"}
                         language={"json"}
