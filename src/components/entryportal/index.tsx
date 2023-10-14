@@ -19,7 +19,7 @@ export interface PropTypes {
 const EntryPortal: FC<PropTypes> = ({ cards, baseBackground }) => {
   const [h, setH] = React.useState(-1);
   return (
-    <Styles.Container className={"arclight-flex"}>
+    <Styles.Container className={"arclight-flex arclight-min-h-screen"}>
       <Styles.BaseBackground
         src={baseBackground}
         style={{ opacity: h < 0 ? 0.1 : 0 }}

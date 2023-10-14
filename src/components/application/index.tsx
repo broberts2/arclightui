@@ -53,7 +53,7 @@ const Application: FC<PropTypes> = ({ className, fns, D, form, locked }) => {
             <FadeDivider img={form.backgroundimage} />
           </Styles.BackgroundImage>
         ) : null}
-        <div className={`arclight-relative arclight-p-10`}>
+        <div className={`arclight-relative arclight-p-3 md:arclight-p-10`}>
           <Styles.TitleImg
             className={`arclight-w-96 arclight-h-96 ${
               form.titleimage ? `arclight-border-0 arclight-border-black` : ""

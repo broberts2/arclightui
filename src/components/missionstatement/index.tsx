@@ -14,7 +14,10 @@ const MissionStatement: FC<PropTypes> = ({ title, Message, bgImg, button }) => {
       className={"arclight-text-text-primary arclight-font-primary"}
     >
       {bgImg ? (
-        <Styles.BgImg src={bgImg} className={`arclight-rounded`} />
+        <Styles.BgImg
+          src={bgImg}
+          className={`arclight-rounded xs:max-md:arclight-h-full`}
+        />
       ) : null}
       <div
         className={`arclight-w-full arclight-px-10 arclight-m-auto lg:arclight-w-4/5 arclight-relative ${

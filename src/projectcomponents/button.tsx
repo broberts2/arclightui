@@ -11,7 +11,7 @@ const B: FC<{
 }> = ({ fns, endpoint, onClick, children }) => (
   <button
     onClick={onClick ? () => onClick() : undefined}
-    className={`bg-red-600 p-2 px-10 rounded text-xs`}
+    className={`arclight-bg-red-600 arclight-p-2 arclight-px-10 arclight-rounded arclight-text-xs`}
   >
     {children}
   </button>

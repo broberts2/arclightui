@@ -11,7 +11,7 @@ const BgImg = styled.img`
   left: 0;
   bottom: 50%;
   transform: translateY(50%);
-  object-fit: fill;
+  object-fit: cover;
 `;
 
 export default {
