@@ -38,7 +38,7 @@ const EntryPortal: FC<PropTypes> = ({ cards, baseBackground, className }) => {
           />
         ) : null
       )}
-      <Styles.Body>
+      <Styles.Body className={`arclight-p-10 md:arclight-p-0`}>
         <HeroPanel
           cards={cards.map((c: any, i) => {
             if (c.backgroundHover && !c.locked) {

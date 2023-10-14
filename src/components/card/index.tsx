@@ -78,19 +78,25 @@ const Card: FC<PropTypes> = ({
           ? hover.onMouseLeave
           : undefined
       }
-      className={`${!noBodyComponentAbsolute ? "arclight-group " : null}${
-        line || linesmall ? "arclight-w-full" : ""
-      } ${bodyComponent && !line && !linesmall ? "md:arclight-w-1/2" : null} ${
-        bodyComponent && !line && !linesmall ? "lg:arclight-w-1/3" : null
-      } ${
-        !line && !linesmall && !small
-          ? "arclight-w-full lg:arclight-max-w-sm"
-          : ""
-      } arclight-text-text-primary arclight-font-primary ${
-        className ? className : null
-      } ${active !== null && active === false ? "arclight-opacity-50" : null} ${
-        small && (!line || !linesmall) ? "arclight-w-40" : ""
-      }`}
+      className={
+        !modal
+          ? `${!noBodyComponentAbsolute ? "arclight-group " : null}${
+              line || linesmall ? "arclight-w-full" : ""
+            } ${
+              bodyComponent && !line && !linesmall
+                ? "md:arclight-w-1/2 lg:arclight-w-1/3"
+                : null
+            } ${
+              !line && !linesmall && !small
+                ? "arclight-w-full lg:arclight-max-w-sm"
+                : ""
+            } arclight-text-text-primary arclight-font-primary ${
+              className ? className : null
+            } ${
+              active !== null && active === false ? "arclight-opacity-50" : null
+            } ${small && (!line || !linesmall) ? "arclight-w-40" : ""}`
+          : null
+      }
       max={max}
       modal={modal}
       medium={medium}
