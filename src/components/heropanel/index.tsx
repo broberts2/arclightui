@@ -23,7 +23,7 @@ export interface PropTypes {
   autoSort?: boolean | null;
   small?: boolean | null;
   title?: string | null;
-  singleSmall?: boolean;
+  single?: boolean;
 }
 
 const HeroPanel: FC<PropTypes> = React.memo(
@@ -36,12 +36,15 @@ const HeroPanel: FC<PropTypes> = React.memo(
     rows,
     pageCallback,
     index,
-    singleSmall,
+    single,
   }) => {
-    const MAX_C = singleSmall ? 1 : 3;
+    const MAX_C = single ? 1 : 3;
     const CL = cards.length;
+    rows = single ? 1 : rows;
     if (rows && index)
-      cards = cards.filter((c: any, i: number) => i >= index * (rows * 3));
+      cards = cards.filter(
+        (c: any, i: number) => i >= index * ((rows ? rows : 1) * MAX_C)
+      );
     const className = `arclight-flex arclight-flex-col lg:arclight-flex-row arclight-w-full arclight-items-center arclight-justify-${
       left ? "start" : "center"
     } arclight-m-auto arclight-gap-7 lg:arclight-gap-7 xl:arclight-gap-7 arclight-my-7`;
@@ -59,8 +62,8 @@ const HeroPanel: FC<PropTypes> = React.memo(
         </div>
       </div>
     );
-    for (let i = 0; i < (rows ? rows * 3 : cards.length); i++) {
-      if (i % 3 === 0 && i > 0) {
+    for (let i = 0; i < (rows ? rows * MAX_C : cards.length); i++) {
+      if (i % MAX_C === 0 && i > 0) {
         _rows.push(<div className={className}>{row}</div>);
         row = [];
       }
@@ -103,10 +106,11 @@ const HeroPanel: FC<PropTypes> = React.memo(
     return (
       <Styles.Container className={"lg:arclight-px-20"}>
         {_rows}
-        {rows && CL > 3 ? (
+        {rows && CL > MAX_C ? (
           <MiniDiamondPicker
+            // images={cards.map((c: any) => c.bgImg)}
             index={index}
-            columns={3}
+            columns={MAX_C}
             count={CL}
             cb={pageCallback}
           />

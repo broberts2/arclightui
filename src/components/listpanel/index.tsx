@@ -65,7 +65,9 @@ const ListPanel: FC<PropTypes> = ({
   const [searchValue, setSearchValue] = React.useState("");
   let cards = fns.e(
     D,
-    fns.getCallType(Request.type, Request.index, Request.local)[0],
+    Request.script
+      ? `D.${Request.script}.${Request.index}`
+      : fns.getCallType(Request.type, Request.index, Request.local)[0],
     {
       records: [],
     }

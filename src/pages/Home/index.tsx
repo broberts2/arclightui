@@ -20,6 +20,7 @@ const Home: FC<{
   D: { [key: string]: any };
   endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
+  const [heroPanelIndex, setHeroPanelIndex] = React.useState(0);
   return D && fns.calls ? (
     <Page fns={fns} backgroundGradient={{ from: `#283b4c`, to: `#09111c` }}>
       <Header main fns={fns} endpoint={endpoint} />
@@ -98,38 +99,12 @@ const Home: FC<{
               constrain={true}
             />
           ) : null}
-          {/* <ListPanel
-            key={1}
-            controls={[
-              {
-                icon: "diamond",
-                text: "name",
-                key: "name",
-              },
-            ]}
-            Request={{
-              index: "test2",
-              type: "user",
-              // script: "test_script",
-              search: {
-                limit: 5,
-                skip: 0,
-              },
-            }}
-            card={(c: any) => ({
-              img: "http://highmountainlabs.io/arclight/cdn/media/flask.jpg",
-              subtext: c.username,
-              onClick: () => console.log("shalom"),
-            })}
-            fns={fns}
-            D={D}
-            line={false}
-            constrain={true}
-          /> */}
           <div className={`arclight-my-24`}>
             <HeroPanel
               small
-              singleSmall
+              single={false}
+              pageCallback={setHeroPanelIndex}
+              index={heroPanelIndex}
               cards={[
                 {
                   ht: "Developer reference for ArclightUI",
@@ -156,6 +131,34 @@ const Home: FC<{
               }))}
             />
           </div>
+          <ListPanel
+            key={1}
+            controls={[
+              {
+                icon: "diamond",
+                text: "username",
+                key: "username",
+              },
+            ]}
+            Request={{
+              index: "test2",
+              // type: "user",
+              script: "test_script",
+              search: {
+                limit: 5,
+                skip: 0,
+              },
+            }}
+            card={(c: any) => ({
+              img: "https://highmountainlabs.io/arclight/cdn/media/flask.jpg",
+              subtext: c.username,
+              onClick: () => console.log("shalom"),
+            })}
+            fns={fns}
+            D={D}
+            line={false}
+            constrain={true}
+          />
         </Styles.Body>
       </Styles.Container>
       <Footer fns={fns} endpoint={endpoint} />
