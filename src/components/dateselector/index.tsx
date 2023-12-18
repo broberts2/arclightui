@@ -2,9 +2,9 @@ import React, { FC } from "react";
 import moment from "moment";
 import Styles from "./styles";
 
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment/index.js";
+import { LocalizationProvider } from "@mui/x-date-pickers/index.js";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker/index.js";
 
 export interface PropTypes {
   onChange: Function;
