@@ -49,7 +49,7 @@ const AuthPage: FC<PropTypes> = ({
             bgImg={authBackgroundImage}
             bodyComponent={
               <div
-                className={`arclight-flex arclight-flex-col arclight-space-y-6 arclight-justify-center arclight-w-3/4`}
+                className={`arclight-flex arclight-flex-col arclight-space-y-6 arclight-justify-center arclight-w-3/4 arclight-m-auto`}
               >
                 {!OATHOnly ? (
                   <React.Fragment>

@@ -6,8 +6,11 @@ import {
   ListPanel,
   MissionStatement,
   Page,
+  Calendar,
+  DateSelector,
 } from "../../components";
 import Styles from "./styles";
+import moment from "moment";
 
 import Header from "../../projectcomponents/header";
 import Footer from "../../projectcomponents/footer";
@@ -158,6 +161,14 @@ const Home: FC<{
             D={D}
             line={false}
             constrain={true}
+          />
+          <DateSelector onChange={(value) => console.log(value)} />
+          <Calendar
+            D={D}
+            fns={fns}
+            defaultEventBgImg={`https://titanesports.org:7000/static/media/tesbg.png`}
+            // events={[]}
+            type={"script"}
           />
         </Styles.Body>
       </Styles.Container>

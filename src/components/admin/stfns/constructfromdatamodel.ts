@@ -17,6 +17,7 @@ export default (D: any) =>
           else if (value._type === "Array") return "PickList";
           else if (value._type === "String") return "TextField";
           else if (value._type === "Boolean") return "Boolean";
+          else if (value._type === "Date") return "Date";
           else if (value._type === "JSON") return "Monaco";
         } else if (t === "string") {
           if (isModel) {

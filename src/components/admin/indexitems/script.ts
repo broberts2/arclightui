@@ -5,14 +5,13 @@ export default (D: any, fns: any) => {
     D,
     fns
   )(
-    D &&
-      D.getdatamodels &&
-      D.getdatamodels.records &&
+    D?.getdatamodels?.records &&
       Array.isArray(D.getdatamodels.records) &&
-      fns &&
-      fns.calls &&
-      fns.calls.getscripts
-      ? [{ icon: "node-js", text: "Scripts", script: "scripts" }]
+      fns?.calls?.getscripts
+      ? [
+          { icon: "calendar", text: "Scheduler", type: "scriptcalendar" },
+          { icon: "node-js", text: "Scripts", script: "scripts" },
+        ]
       : []
   );
   return {

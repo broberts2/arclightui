@@ -55,6 +55,7 @@ export default (
             : {
                 managed: c._managed,
                 img: c.img,
+                vid: c.url,
                 subtext: c.name || c.username,
                 onClick: () => {
                   if (C.onClick) C.onClick(c);

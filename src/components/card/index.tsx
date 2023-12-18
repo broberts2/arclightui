@@ -6,7 +6,8 @@ import Button from "../button";
 export interface PropTypes {
   managed?: boolean | string;
   exitButton?: Function;
-  bgImg: string;
+  bgImg?: string;
+  bgVid?: string;
   subText?: string | null;
   onClick?: Function | null;
   locked?: boolean | string | null;
@@ -34,6 +35,7 @@ const Card: FC<PropTypes> = ({
   exitButton,
   bodyComponent,
   bgImg,
+  bgVid,
   subText,
   onClick,
   locked,
@@ -91,11 +93,13 @@ const Card: FC<PropTypes> = ({
                 ? "arclight-w-full lg:arclight-max-w-sm"
                 : ""
             } arclight-text-text-primary arclight-font-primary ${
-              className ? className : null
-            } ${
               active !== null && active === false ? "arclight-opacity-50" : null
-            } ${small && (!line || !linesmall) ? "arclight-w-40" : ""}`
-          : null
+            } ${small && (!line || !linesmall) ? "arclight-w-40" : ""} ${
+              className ? className : null
+            }`
+          : `arclight-max-w-2xl arclight-w-[100vw] ${
+              className ? className : ""
+            }`
       }
       max={max}
       modal={modal}
@@ -118,32 +122,57 @@ const Card: FC<PropTypes> = ({
       <Styles.Front
         onClick={onClick && !locked ? () => onClick() : null}
         borderRadius={"4px"}
-        className={
-          "arclight-flex arclight-flex-col arclight-justify-end arclight-text-center arclight-bg-background-secondary"
-        }
+        className={`arclight-flex arclight-flex-col arclight-justify-end arclight-text-center arclight-bg-background-secondary ${
+          !modal ? `arclight-overflow-hidden` : ""
+        }`}
       >
-        <Styles.BgImg
-          line={line || linesmall}
-          style={noBodyComponentAbsolute && (max || modal) ? { top } : {}}
-        >
-          <Styles.BgImgChild
-            line={line}
-            linesmall={linesmall}
-            src={bgImg}
-            className={`arclight-object-cover arclight-h-full arclight-w-full`}
-            style={
-              noBodyComponentAbsolute && false
-                ? { height: `calc(100vh + 1000px)` }
-                : {}
-            }
-          />
-        </Styles.BgImg>
+        {bgImg ? (
+          <Styles.BgImg
+            line={line || linesmall}
+            className={`arclight-rounded arclight-overflow-hidden`}
+            style={noBodyComponentAbsolute && (max || modal) ? { top } : {}}
+          >
+            <Styles.BgImgChild
+              line={line}
+              linesmall={linesmall}
+              src={bgImg}
+              className={`arclight-object-cover arclight-h-full arclight-w-full`}
+              style={
+                noBodyComponentAbsolute && false
+                  ? { height: `calc(100vh + 1000px)` }
+                  : {}
+              }
+            />
+          </Styles.BgImg>
+        ) : null}
+        {bgVid ? (
+          <Styles.BgImg
+            line={line || linesmall}
+            className={`arclight-rounded arclight-overflow-hidden`}
+            style={noBodyComponentAbsolute && (max || modal) ? { top } : {}}
+          >
+            <Styles.BgVidChild
+              preload
+              line={line}
+              linesmall={linesmall}
+              src={bgVid}
+              className={`arclight-object-cover arclight-h-full arclight-w-full`}
+              style={
+                noBodyComponentAbsolute && false
+                  ? { height: `calc(100vh + 1000px)` }
+                  : {}
+              }
+            />
+          </Styles.BgImg>
+        ) : null}
         {bodyComponent ? (
           <Styles.BodyComponent
             noabsolute={noBodyComponentAbsolute}
             ref={BodyComponentRef}
           >
-            <div className={`arclight-flex arclight-justify-center`}>
+            <div
+              className={`arclight-flex arclight-flex-col arclight-justify-center arclight-align-middle arclight-w-full arclight-h-full arclight-rounded`}
+            >
               {bodyComponent}
             </div>
           </Styles.BodyComponent>

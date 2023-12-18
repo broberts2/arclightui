@@ -169,7 +169,9 @@ export default (props: any) => {
                 { fn: "onCreate", t: "Create" },
                 { fn: "onSubmit", t: "Submit" },
                 { fn: "onUpdate", t: "Update" },
+                { fn: "onReplace", t: "Replace" },
                 { fn: "onDelete", t: "Delete" },
+                { fn: "onUpload", t: "Upload" },
                 { fn: "onBack", t: "Back" },
               ]
                 .filter(

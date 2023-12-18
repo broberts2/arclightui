@@ -10,7 +10,6 @@ import { useMediaQuery } from "react-responsive";
 
 import database from "./indexitems/database";
 import integration from "./indexitems/integration";
-import event from "./indexitems/event";
 import script from "./indexitems/script";
 import report from "./indexitems/reportsitems";
 import form from "./indexitems/formsitems";
@@ -143,11 +142,10 @@ const Admin: FC<{
                 D={D}
                 searchOn={fns.parseAdminDomainState().item}
                 callresolved={
-                  D &&
-                  (D.serversuccess ||
-                    D.servererror ||
-                    D.serverwarning ||
-                    D.servermessage)
+                  D?.serversuccess ||
+                  D?.servererror ||
+                  D?.serverwarning ||
+                  D?.servermessage
                     ? parseCode(D)
                     : 0
                 }

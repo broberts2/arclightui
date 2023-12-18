@@ -1,3 +1,5 @@
+import FileLoader from "../../flexpanel/components/fileloader";
+
 export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
   (D: any, Constructors: any, fns: any, key: string, endpoint: string) =>
   (currentState: { [key: string]: any }, updateState: Function) => ({
@@ -30,9 +32,8 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
       },
     ],
     onCreate:
-      D &&
-      D.getdatamodels &&
-      D.getdatamodels.records &&
+      key !== "media" &&
+      D?.getdatamodels?.records &&
       key !== "permissions" &&
       (key !== "model"
         ? fns && fns.calls && fns.calls[`createrecords_${key}`]
@@ -54,6 +55,18 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
               ...fns.parseAdminDomainState(),
               _id: null,
               activePanel: 1,
+            });
+          }
+        : null,
+    onUpload:
+      key === "media" && fns?.calls && fns.calls[`createrecords_${key}`]
+        ? () => {
+            fns.setModal({
+              noescape: true,
+              mode: "full",
+              bgImg: ``,
+              body: () =>
+                FileLoader(currentState, updateState, D, fns, "create"),
             });
           }
         : null,

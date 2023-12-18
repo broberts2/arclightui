@@ -6,16 +6,19 @@ import Application from "./application";
 import ArticlePage from "./articlepage";
 import AuthPage from "./authpage";
 import Button from "./button";
+import Calendar from "./calendar";
 import Card from "./card";
 import Checkbox from "./checkbox";
 import CheckboxGroup from "./checkboxgroup";
 import ClippingMask from "./clippingmask";
 import CompassViewer from "./compassviewer";
 import Dashboard from "./dashboard";
+import DateSelector from "./dateselector";
 import DiamondSelector from "./diamondselector";
 import Drawer from "./drawer";
 import EntryPortal from "./entryportal";
 import FadeDivider from "./fadedivider";
+import FileLoader from "./fileloader";
 import FontAwesome from "./fontawesome";
 import Footer from "./footer";
 import Header from "./header";
@@ -46,16 +49,19 @@ export {
   ArticlePage,
   AuthPage,
   Button,
+  Calendar,
   Card,
   Checkbox,
   CheckboxGroup,
   ClippingMask,
   CompassViewer,
   Dashboard,
+  DateSelector,
   DiamondSelector,
   Drawer,
   EntryPortal,
   FadeDivider,
+  FileLoader,
   FontAwesome,
   Footer,
   Header,

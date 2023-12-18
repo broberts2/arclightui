@@ -6,6 +6,7 @@ import HeroPanel from "../heropanel";
 export interface PropTypes {
   baseBackground: string;
   className?: string;
+  rows?: number;
   cards: Array<{
     backgroundHover?: string | null;
     bgImg: string;
@@ -17,8 +18,14 @@ export interface PropTypes {
   }>;
 }
 
-const EntryPortal: FC<PropTypes> = ({ cards, baseBackground, className }) => {
+const EntryPortal: FC<PropTypes> = ({
+  cards,
+  baseBackground,
+  className,
+  rows,
+}) => {
   const [h, setH] = React.useState(-1);
+  const [index, setIndex] = React.useState(0);
   return (
     <Styles.Container
       className={`arclight-flex arclight-min-h-screen${
@@ -40,6 +47,9 @@ const EntryPortal: FC<PropTypes> = ({ cards, baseBackground, className }) => {
       )}
       <Styles.Body className={`arclight-p-10 md:arclight-p-0`}>
         <HeroPanel
+          rows={rows}
+          index={rows ? index : undefined}
+          pageCallback={rows ? (n: number) => setIndex(n) : undefined}
           cards={cards.map((c: any, i) => {
             if (c.backgroundHover && !c.locked) {
               c.onHover = () => setH(i);

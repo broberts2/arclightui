@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { mountHandler } from "../animations";
-//import tw from "twin.macro";
 
 const Container = styled.div`
   ${(props) => mountHandler(props)}
@@ -12,11 +11,11 @@ const Container = styled.div`
   ${(props) =>
     props.medium
       ? `
-			height: 18rem;
-			@media only screen and (max-width: 1024px) {
-				height: 12rem;
-			}
-		`
+        height: 18rem;
+        @media only screen and (max-width: 1024px) {
+          height: 12rem;
+        }
+      `
       : null}
   ${(props) =>
     props.small
@@ -63,7 +62,6 @@ const Container = styled.div`
     props.modal
       ? `
 			height: 65vh;
-			width: 65vw;
 		`
       : null}
 `;
@@ -80,7 +78,6 @@ const Front = styled.div`
   height: 100%;
   position: absolute;
   border-radius: ${(props) => props.borderRadius};
-  overflow: hidden;
 `;
 
 const BgImg = styled.div`
@@ -98,6 +95,21 @@ const BgImg = styled.div`
 `;
 
 const BgImgChild = styled.img`
+  ${(props) =>
+    props.line || props.linesmall
+      ? `
+		-webkit-mask-image: -webkit-gradient(
+			linear,
+			right top,
+			left bottom,
+			from(rgba(0, 0, 0, 1)),
+			to(rgba(0, 0, 0, 0))
+		);
+		`
+      : null}
+`;
+
+const BgVidChild = styled.video`
   ${(props) =>
     props.line || props.linesmall
       ? `
@@ -146,6 +158,7 @@ const BodyComponent = styled.div`
 			transform: translateY(-50%);
 			width: 100%;`
       : null}
+  height: 100%;
 `;
 
 export default {
@@ -158,4 +171,5 @@ export default {
   TabNumber,
   TabNumberWrapper,
   BgImgChild,
+  BgVidChild,
 };

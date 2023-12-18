@@ -6,9 +6,10 @@ export interface PropTypes {
   defaultBackground: string;
   setModal: Function;
   modal: {
+    events?: Array<any>;
     bgImg?: string;
     noescape?: boolean;
-    mode?: "full";
+    mode?: boolean;
     body?: JSX.Element;
   } | null;
   fns: any;
@@ -29,13 +30,13 @@ const Modal: FC<PropTypes> = ({
   if (modal && modal.body) Body = modal.body;
   const [exitButton, setExitButton] = React.useState(true);
   React.useEffect(() => fns.scrollLock(modal ? true : false), [modal]);
+  const [activeEvent, setActiveEvent] = React.useState(0);
   return (
     <div
       className={`arclight-absolute arclight-top-0 ${
         M ? `arclight-opacity-100` : `arclight-opacity-0`
       }`}
       style={{
-        zIndex: 9998,
         pointerEvents: !modal ? "none" : "auto",
       }}
     >
@@ -46,10 +47,19 @@ const Modal: FC<PropTypes> = ({
             modal ? "arclight-opacity-100" : "arclight-opacity-0"
           } arclight-transition-opacity arclight-duration-300`}
         ></Styles.Backdrop>
-        <Styles.Element className={`arclight-flex arclight-justify-center`}>
+        <Styles.Element
+          className={`arclight-flex arclight-justify-center relative`}
+        >
           <Card
-            modal={modal?.mode === "full"}
-            exitButton={exitButton ? () => setModal(null) : undefined}
+            modal={true}
+            exitButton={
+              exitButton
+                ? () => {
+                    setActiveEvent(0);
+                    setModal(null);
+                  }
+                : undefined
+            }
             mountAnim={{
               anim: modal ? "zoomIn" : "zoomOut",
               duration: "0.25s",
@@ -62,12 +72,62 @@ const Modal: FC<PropTypes> = ({
             bgImg={modal && modal.bgImg ? modal.bgImg : defaultBackground}
             bodyComponent={
               modal?.body ? (
-                <Body
-                  setExitButton={setExitButton}
-                  D={D}
-                  fns={fns}
-                  setModal={setModal}
-                />
+                <div className={`relative arclight-w-full arclight-h-full`}>
+                  {modal.events && modal.events.length ? (
+                    <div
+                      className={`arclight-bg-background-primary arclight-absolute arclight-left-0 arclight-top-3 -arclight-translate-x-44 arclight-w-40 flex-col arclight-space-y-1 arclight-border-0 arclight-rounded arclight-pr-6`}
+                    >
+                      <div className={`arclight-text-lg`}>Events</div>
+                      {modal.events.map((el: any, i: number) => {
+                        return (
+                          <div className={``}>
+                            <Card
+                              className={`arclight-border-[1px] arclight-border-white arclight-rounded`}
+                              active={activeEvent === i}
+                              linesmall
+                              hover={{
+                                onMouseEnter: () => {},
+                                onMouseLeave: () => {},
+                              }}
+                              bgImg={el.info.img}
+                              bodyComponent={
+                                <div className={`arclight-text-xs`}>
+                                  {el._id ? el.info.text : "+ New Event"}
+                                </div>
+                              }
+                              onClick={() => {
+                                const Body = modal?.events ? (
+                                  modal.events[i].info.body
+                                ) : (
+                                  <div />
+                                );
+                                setActiveEvent(i);
+                                setModal({
+                                  noescape: modal.noescape,
+                                  body: () => (
+                                    <div
+                                      className={`arclight-flex arclight-flex-col arclight-justify-center arclight-align-middle arclight-w-full arclight-h-full arclight-rounded`}
+                                    >
+                                      {Body}
+                                    </div>
+                                  ),
+                                  events: modal.events,
+                                  bgImg: el.info.img,
+                                });
+                              }}
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : null}
+                  <Body
+                    setExitButton={setExitButton}
+                    D={D}
+                    fns={fns}
+                    setModal={setModal}
+                  />
+                </div>
               ) : null
             }
             onClick={() => null}

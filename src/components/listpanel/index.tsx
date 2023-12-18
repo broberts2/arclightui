@@ -91,6 +91,7 @@ const ListPanel: FC<PropTypes> = ({
         hoverComponent={obj.hoverComponent}
         locked={obj.locked}
         bgImg={obj.img}
+        bgVid={obj.vid}
         subText={obj.subtext}
         onClick={
           obj.onClick

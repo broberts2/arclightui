@@ -86,6 +86,8 @@ const FlexPanel: FC<{
         onSubmit={state._items[i].onSubmit}
         onUpdate={state._items[i].onUpdate}
         onDelete={state._items[i].onDelete}
+        onUpload={state._items[i].onUpload}
+        onReplace={state._items[i].onReplace}
         onBack={state._items[i].onBack}
         onAddField={state._items[i].onAddField}
         onExecute={state._items[i].onExecute}
@@ -138,11 +140,17 @@ const FlexPanel: FC<{
   React.useEffect(() => {
     if (callresolved) {
       if (callresolved > 1) {
-        fns.setAdminDomainState({
-          ...fns.parseAdminDomainState(),
-          activePanel: fns.parseAdminDomainState().activePanel - 1,
-        });
-        if (state._primemodal) state._primemodal(D);
+        if (callresolved === 2) {
+          fns.setAdminDomainState({
+            ...fns.parseAdminDomainState(),
+            activePanel: fns.parseAdminDomainState().activePanel - 1,
+          });
+        }
+        if (state._primemodal) {
+          state._primemodal(D);
+        } else {
+          fns.setModal(null);
+        }
       }
       setState((_: any) => ({
         ..._,

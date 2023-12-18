@@ -1,13 +1,17 @@
 import TextField from "../../textfield";
+import DateSelector from "../../dateselector";
+import Calendar from "../../calendar";
 import ListPanel from "../../listpanel";
 import PickList from "../../picklist";
 import HeroPanel from "../../heropanel";
 import Monaco from "../../monaco";
 import Application from "../../application";
 import textfield from "./components/textfield";
+import dateselector from "./components/dateselector";
 import dynamicfield from "./components/dynamicfield";
 import listpanel from "./components/listpanel";
 import picklist from "./components/picklist";
+import calendar from "./components/calendar";
 import monaco from "./components/monaco";
 import formselector from "./components/formselector";
 import scriptselector from "./components/scriptselector";
@@ -21,10 +25,8 @@ import application from "./components/application";
 const __conditions = (obj: any) => ({
   condition1:
     obj.D &&
-    obj.c &&
-    obj.c.label &&
-    obj.state &&
-    obj.state._id &&
+    obj.c?.label &&
+    obj.state?._id &&
     obj.state[obj.c.label] === undefined &&
     (obj.searchOn === "model"
       ? obj.D.getdatamodels
@@ -81,6 +83,24 @@ export default (obj) => {
         return app(obj.state, obj.setState, obj.D, obj.fns, obj.publicURI);
       case "TextField":
         return textfield(obj.c, obj.i, TextField, obj.state, obj.setState);
+      case "Date":
+        return dateselector(
+          obj.c,
+          obj.i,
+          DateSelector,
+          obj.state,
+          obj.setState
+        );
+      case "Calendar":
+        return calendar(
+          obj.c,
+          obj.i,
+          Calendar,
+          obj.state,
+          obj.setState,
+          obj.D,
+          obj.fns
+        );
       case "TextFieldNumber":
         return (
           <div className={``}>

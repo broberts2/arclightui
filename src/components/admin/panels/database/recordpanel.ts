@@ -1,3 +1,5 @@
+import FileLoader from "../../flexpanel/components/fileloader";
+
 export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
   (D: any, Constructors: any, fns: any, key: string, endpoint: string) =>
   (currentState: { [key: string]: any }, updateState: Function) => ({
@@ -103,6 +105,18 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
           }
         }
       : null,
+    onReplace:
+      key === "media" && fns?.calls && fns.calls[`updaterecords_${key}`]
+        ? () => {
+            fns.setModal({
+              noescape: true,
+              mode: "full",
+              bgImg: ``,
+              body: () =>
+                FileLoader(currentState, updateState, D, fns, "update"),
+            });
+          }
+        : null,
     onPublicRead:
       key === "permissions"
         ? () =>

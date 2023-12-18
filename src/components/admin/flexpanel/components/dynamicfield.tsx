@@ -43,6 +43,7 @@ export default (
           { value: "Number", text: "Number" },
           { value: "Boolean", text: "Boolean" },
           { value: "Array", text: "Array" },
+          { value: "Date", text: "Date" },
           { value: "JSON", text: "JSON" },
         ].sort((a, b) => (a.text < b.text ? -1 : 1))}
         onChange={(e: any) =>
