@@ -1,8 +1,7 @@
 {
   "name": "@highmountainlabs/arclight-ui",
-  "version": "0.3.67",
+  "version": "0.3.68",
   "main": "index.js",
-  "module": "index.mjs",
   "types": "index.d.ts",
   "dependencies": {
     "@emotion/react": "^11.10.6",
