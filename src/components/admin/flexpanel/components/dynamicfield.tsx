@@ -149,7 +149,7 @@ export default (
           />
         </div>
         <div className={`arclight-m-auto`}>Required</div>
-        <div className={`arclight-m-auto`}>
+        {/* <div className={`arclight-m-auto`}>
           <Checkbox
             value={state[c.label].searchable}
             onChange={(b: boolean, cb: Function) => {
@@ -164,7 +164,7 @@ export default (
             }}
           />
         </div>
-        <div className={`arclight-m-auto`}>Searchable</div>
+        <div className={`arclight-m-auto`}>Searchable</div> */}
         <div
           className={`arclight-flex arclight-justify-end arclight-w-full arclight-space-x-2`}
         >

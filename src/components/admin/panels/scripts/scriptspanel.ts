@@ -23,6 +23,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
           "before-delete",
           "after-delete",
           "custom-call",
+          "custom-call-admin",
           "endpoint",
           "universal",
         ].map((k: string) => ({

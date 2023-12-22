@@ -62,9 +62,9 @@ const Card: FC<PropTypes> = ({
         if (!BodyComponentRef.current) return;
         return setS(BodyComponentRef.current.clientHeight);
       };
-      window.addEventListener("resize", () => resize());
+      window.addEventListener("resize", resize);
       resize();
-      return window.removeEventListener("resize", () => resize());
+      return window.removeEventListener("resize", resize);
     }
   }, [bodyComponent]);
   return (

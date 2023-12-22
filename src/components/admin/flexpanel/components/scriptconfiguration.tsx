@@ -26,7 +26,10 @@ export default (
 					"active": false,
 					"context": "${k}"
 					${
-            k !== "universal" && k !== "endpoint" && k !== "custom-call"
+            k !== "universal" &&
+            k !== "endpoint" &&
+            k !== "custom-call" &&
+            k !== "custom-call-admin"
               ? `,\n"model": "bindingmodel"`
               : ""
           }

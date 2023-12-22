@@ -12,6 +12,10 @@ export default (
   const keyarr = ["username"];
   const type = fns.parseAdminDomainState().item;
   let key = D.getdatamodels.records.find((r: any) => r._type === type);
+  const script =
+    key && key.adminlookup && key.adminlookup.length
+      ? key.adminlookup
+      : undefined;
   if (key) {
     key = (() => {
       for (let i = 0; i < keyarr.length; i++) {
@@ -25,18 +29,22 @@ export default (
   return (
     <div style={{ height: "100%" }}>
       <ListPanel
-        controls={[
-          {
-            icon: "diamond",
-            text: key,
-            key,
-          },
-        ]}
+        controls={
+          [
+            // {
+            //   icon: "diamond",
+            //   text: key,
+            //   key,
+            // },
+          ]
+        }
         loadwatcher={fns.parseAdminDomainState().activePanel}
         Request={{
+          index: "init",
           type,
           search: { limit: 32, skip: 0 },
           local: C.cards,
+          script,
         }}
         fns={fns}
         D={C.cards ? { [type]: { records: C.cards } } : D}

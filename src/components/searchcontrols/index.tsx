@@ -37,7 +37,7 @@ const SearchControls: FC<PropTypes> = ({
   picklist,
 }) => {
   const [searchKey, setSearchKey] = React.useState(
-    buttons ? buttons[0].key : null
+    buttons && buttons.length ? buttons[0].key : null
   );
   const a = pagination ? pagination.skip * pagination.length + 1 : null;
   const b = pagination
