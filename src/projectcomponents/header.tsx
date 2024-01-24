@@ -9,32 +9,30 @@ const H: FC<{
   endpoint?: string;
 }> = ({ fns, main, endpoint }) => {
   return (
-    <Header
-      fns={fns}
-      logo={{
-        src: `http://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`,
-        route: "/",
-      }}
-      links={[
-        {
+    <div className={`arclight-px-44`}>
+      <Header
+        fns={fns}
+        logo={{
+          src: `http://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`,
           route: "/",
-          text: "Home",
-        },
-        {
-          route: "/arclightui",
-          text: "ArclightUI",
-        },
-        fns.readToken()._token
-          ? {
-              icon: "scroll",
-              route: "/",
-              text: "Logout",
-              onClick: () => fns.writeToken(),
-            }
-          : { icon: "scroll", route: "/login", text: "Login" },
-      ]}
-      socialMedia={[]}
-    />
+        }}
+        links={[
+          {
+            route: "/",
+            text: "Home",
+          },
+          fns.readToken()._token
+            ? {
+                icon: "scroll",
+                route: "/",
+                text: "Logout",
+                onClick: () => fns.writeToken(),
+              }
+            : { icon: "scroll", route: "/login", text: "Login" },
+        ]}
+        socialMedia={[]}
+      />
+    </div>
   );
 };
 

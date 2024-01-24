@@ -29,16 +29,24 @@ root.render(
             // noSelect: "static/media/hml-logo.png",
           },
         },
-        testdomain: {
-          Home: { route: "/", component: require("./pages/Home") },
-          Login: { route: "/login", component: require("./pages/Login") },
+        brocroberts: {
+          Home: {
+            route: "/",
+            component: require("./pages/brocroberts/Home"),
+          },
         },
         _root_: {
-          Home: { route: "/", component: require("./pages/Home") },
-          Login: { route: "/login", component: require("./pages/Login") },
+          Home: {
+            route: "/",
+            component: require("./pages/highmountainlabs/Home"),
+          },
+          Login: {
+            route: "/login",
+            component: require("./pages/highmountainlabs/Login"),
+          },
           ArclightUI: {
             route: "/arclightui",
-            component: require("./pages/ArclightUI"),
+            component: require("./pages/highmountainlabs/ArclightUI"),
           },
         },
       }}

@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import * as Components from "../../components";
+import * as Components from "../../../components";
 import Styles from "./styles";
 
-import Header from "../../projectcomponents/header";
-import Footer from "../../projectcomponents/footer";
+import Header from "../../../projectcomponents/header";
+import Footer from "../../../projectcomponents/footer";
 
 const typeFinder = (v: any) => {
   switch (typeof v) {
