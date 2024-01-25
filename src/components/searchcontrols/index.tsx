@@ -157,7 +157,7 @@ const SearchControls: FC<PropTypes> = ({
               }
             />
             <NextLast isTop={true} />
-            <div
+            {/* <div
               className={`arclight-hidden arclight-flex-row arclight-justify-end arclight-w-full lg:arclight-flex`}
             >
               {buttons.map((b: any, i) => (
@@ -196,7 +196,7 @@ const SearchControls: FC<PropTypes> = ({
                   }}
                 />
               ))}
-            </div>
+            </div> */}
           </div>
         </React.Fragment>
       ) : null}

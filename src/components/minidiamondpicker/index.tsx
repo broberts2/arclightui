@@ -19,9 +19,9 @@ const Checkbox: FC<PropTypes> = ({ count, cb, index, columns, images }) => {
           }`}
         >
           <div
-            className={`arclight-flex arclight-flex-row arclight-justify-center arclight-space-x-10 arclight-h-${
-              images ? `24` : `11`
-            }`}
+            className={`arclight-flex arclight-flex-row arclight-justify-center arclight-space-x-${
+              !images ? `10` : `5`
+            } arclight-h-${images ? `24` : `11`}`}
           >
             {/* @ts-ignore */}
             {(() => {
@@ -34,8 +34,8 @@ const Checkbox: FC<PropTypes> = ({ count, cb, index, columns, images }) => {
                       src={images[i]}
                       className={`${
                         index === i
-                          ? "arclight-w-24 arclight-h-24 arclight-opacity-100 arclight-border-2"
-                          : "arclight-w-20 arclight-h-20 arclight-opacity-30 arclight-border-0"
+                          ? "arclight-w-16 arclight-h-16 arclight-opacity-100 arclight-border-[1px]"
+                          : "arclight-w-14 arclight-h-14 arclight-opacity-30 arclight-border-0"
                       } arclight-border-background-tertiary arclight-object-cover arclight-cursor-pointer arclight-transition-all arclight-duration-200`}
                       style={{ borderRadius: `50%` }}
                     />

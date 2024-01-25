@@ -16,7 +16,7 @@ const Panel = (props) => {
             index={index}
             rows={1}
             pageCallback={setIndex}
-            autoSort
+            autoSort={false}
             cards={Object.keys(props.D.getintegrations).map((k: string) => ({
               active: props.D.getintegrations[k].active,
               hoverComponent: (

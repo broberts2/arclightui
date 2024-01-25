@@ -44,6 +44,7 @@ const LoLTournamentAPI: FC<{
                   }),
               },
               {
+                locked: true,
                 hoverComponent: (
                   <img
                     src={`http://highmountainlabs.io/arclight/cdn/media/orange_essence.png`}

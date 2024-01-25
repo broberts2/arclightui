@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import Styles from "./styles";
 import FontAwesome from "../fontawesome/index";
 import Button from "../button";
+import PuffLoader from "react-spinners/PuffLoader";
 
 export interface PropTypes {
   managed?: boolean | string;
@@ -53,9 +54,11 @@ const Card: FC<PropTypes> = ({
   modal,
   noBodyComponentAbsolute,
 }) => {
+  const imgref: any = React.useRef();
   const [top, setTop] = React.useState(0);
   const [s, setS] = React.useState(null);
   const BodyComponentRef = React.useRef<any>(null);
+  const [bgOpacity, setBgOpacity] = React.useState(0);
   React.useEffect(() => {
     if (noBodyComponentAbsolute && (max || modal)) {
       const resize = () => {
@@ -67,6 +70,19 @@ const Card: FC<PropTypes> = ({
       return window.removeEventListener("resize", resize);
     }
   }, [bodyComponent]);
+  React.useEffect(() => {
+    if (!bgImg) return;
+    const loaded = () => setBgOpacity(1);
+    if (imgref.current.complete) {
+      loaded();
+    } else {
+      imgref.current.addEventListener("load", loaded);
+    }
+    // return () => {
+    //   imgref.current.removeEventListener("load");
+    //   imgref.current.removeEventListener("error");
+    // };
+  }, []);
   return (
     <Styles.Container
       bodyComponent={bodyComponent}
@@ -132,17 +148,30 @@ const Card: FC<PropTypes> = ({
             className={`arclight-rounded arclight-overflow-hidden`}
             style={noBodyComponentAbsolute && (max || modal) ? { top } : {}}
           >
-            <Styles.BgImgChild
-              line={line}
-              linesmall={linesmall}
-              src={bgImg}
-              className={`arclight-object-cover arclight-h-full arclight-w-full`}
-              style={
-                noBodyComponentAbsolute && false
-                  ? { height: `calc(100vh + 1000px)` }
-                  : {}
-              }
-            />
+            <div
+              className={`arclight-relative arclight-w-full arclight-h-full`}
+            >
+              <Styles.BgImgChild
+                ref={imgref}
+                line={line}
+                linesmall={linesmall}
+                src={bgImg}
+                className={`arclight-object-cover arclight-h-full arclight-w-full arclight-transition-all arclight-duration-600 ${
+                  !bgOpacity ? `arclight-opacity-0` : `arclight-opacity-100`
+                }`}
+                style={
+                  noBodyComponentAbsolute && false
+                    ? { height: `calc(100vh + 1000px)` }
+                    : {}
+                }
+              />
+              <PuffLoader
+                color="#B6B6B6"
+                className={`arclight-absolute arclight-transition-all arclight-duration-600 arclight-top-1/2 arclight-left-1/2 -arclight-translate-x-1/2 -arclight-translate-y-1/2 ${
+                  bgOpacity ? `arclight-opacity-0` : `arclight-opacity-100`
+                }`}
+              />
+            </div>
           </Styles.BgImg>
         ) : null}
         {bgVid ? (

@@ -17,7 +17,7 @@ root.render(
       }
       loader={`https://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`}
       background={{
-        src: `https://highmountainlabs.io/arclight/cdn/media/2.jpg`,
+        src: `https://highmountainlabs.io/arclight/cdn/media/1.jpg`,
         opacity: 0.1,
       }}
       pages={{

@@ -9,7 +9,7 @@ export default (
   D: any
 ) => {
   if (!D.getdatamodels) return;
-  const keyarr = ["username"];
+  const keyarr = ["username", "name"];
   const type = fns.parseAdminDomainState().item;
   let key = D.getdatamodels.records.find((r: any) => r._type === type);
   const script =
@@ -23,21 +23,19 @@ export default (
           return (key = keyarr[i]);
         }
       }
-      return "name";
+      return "_type";
     })();
-  } else key = "_type";
+  }
   return (
     <div style={{ height: "100%" }}>
       <ListPanel
-        controls={
-          [
-            // {
-            //   icon: "diamond",
-            //   text: key,
-            //   key,
-            // },
-          ]
-        }
+        controls={[
+          {
+            icon: "diamond",
+            text: key,
+            key,
+          },
+        ]}
         loadwatcher={fns.parseAdminDomainState().activePanel}
         Request={{
           index: "init",

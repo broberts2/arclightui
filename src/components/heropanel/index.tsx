@@ -43,7 +43,7 @@ const HeroPanel: FC<PropTypes> = React.memo(
     rows = single ? 1 : rows;
     if (rows && index)
       cards = cards.filter(
-        (c: any, i: number) => i >= index * ((rows ? rows : 1) * MAX_C)
+        (c: any, i: number) => i > index * ((rows ? rows : 1) * MAX_C) - 1
       );
     const className = `arclight-flex arclight-flex-col lg:arclight-flex-row arclight-w-full arclight-items-center arclight-justify-${
       left ? "start" : "center"

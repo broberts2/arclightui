@@ -5,6 +5,7 @@ import Picklist from "../../picklist";
 import FontAwesome from "../../fontawesome/index";
 import Loader from "../../loader";
 import controlselector from "./controlselector";
+import HeroPanel from "../../heropanel";
 import Item from "./item";
 
 const Bttn = (props: { a: Function; t: string; span?: boolean }) => (
@@ -30,7 +31,7 @@ const FlexPanel: FC<{
   callresolved: number;
   D: any;
   searchOn: string;
-  noSelect?: string;
+  noSelect?: boolean;
   fns: { [key: string]: any };
   publicURI: string;
 }> = ({
@@ -180,13 +181,24 @@ const FlexPanel: FC<{
           <tbody>{rows}</tbody>
         </Styles.Table>
       ) : noSelect ? (
-        <Styles.NoSelect mountAnim={{ anim: "fadeIn", duration: "0.5s" }}>
-          <img
-            src={noSelect}
-            className={
-              "arclight-w-1/2 md:arclight-w-1/4 arclight-m-auto arclight-justify-center arclight-align-middle"
-            }
-          />
+        <Styles.NoSelect
+          className={`arclight-relative`}
+          mountAnim={{ anim: "fadeIn", duration: "0.5s" }}
+        >
+          <div
+            className={`arclight-w-full arclight-h-full arclight-flex arclight-align-middle arclight-items-center`}
+          >
+            {/* <HeroPanel
+              rows={1}
+              cards={[
+                {
+                  bgImg: `https://highmountainlabs.io/arclight/cdn/media/1.jpg`,
+                  bodyComponent: <div>Server Vitals</div>,
+                  onClick: () => null,
+                },
+              ]}
+            /> */}
+          </div>
         </Styles.NoSelect>
       ) : null}
       <Loader loading={state._isLoading} />

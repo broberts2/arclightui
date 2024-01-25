@@ -72,7 +72,7 @@ const Admin: FC<{
         backgroundImage={{
           src: backgroundImage
             ? backgroundImage
-            : `http://highmountainlabs.io/arclight/cdn/media/2.jpg`,
+            : `http://highmountainlabs.io/arclight/cdn/media/1.jpg`,
           opacity: 0.5,
         }}
       >
@@ -134,11 +134,7 @@ const Admin: FC<{
               <FlexPanel
                 publicURI={endpoint}
                 fns={fns}
-                // noSelect={
-                //   noSelect
-                //     ? noSelect
-                //     : `http://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`
-                // }
+                noSelect
                 D={D}
                 searchOn={fns.parseAdminDomainState().item}
                 callresolved={

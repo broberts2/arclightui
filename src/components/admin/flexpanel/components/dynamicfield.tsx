@@ -1,3 +1,5 @@
+import React from "react";
+
 export default (
   c: { [key: string]: any },
   i: Number,
@@ -10,6 +12,7 @@ export default (
   D: any,
   fns: any
 ) => {
+  console.log(state[c.label].lookup);
   return state && state[c.label] && typeof state[c.label] === "object" ? (
     <div
       className={`arclight-border-background-quarternary arclight-border-l-2 arclight-p-4 arclight-flex-row arclight-justify-start arclight-space-y-4`}
@@ -60,26 +63,36 @@ export default (
         label={"type"}
         variant="standard"
       />
-      {state[c.label].lookup && D.getdatamodels && D.getdatamodels.records ? (
+      {state[c.label].lookup &&
+      !state[c.label].adminlookup &&
+      D.getdatamodels &&
+      D.getdatamodels.records ? (
         <PickList
           disallowNone
           span
           hot
-          value={state[c.label].lookup}
+          value={
+            state[c.label].lookup &&
+            D.getdatamodels.records.find(
+              (R: any) => R._type === state[c.label].lookup
+            )
+              ? state[c.label].lookup
+              : undefined
+          }
           list={D.getdatamodels.records.map((el: any) => ({
             text: el._type,
             value: el._type,
             _id: el._id,
           }))}
-          onChange={(e: any) =>
-            setState((_: any) => ({
+          onChange={(e: any) => {
+            return setState((_: any) => ({
               ..._,
               [c.label]: {
                 ...state[c.label],
                 lookup: e.target.value,
               },
-            }))
-          }
+            }));
+          }}
           keyname={state[c.label].key}
           id={(() => {
             const _ = D.getdatamodels.records.find(
@@ -92,6 +105,26 @@ export default (
           type={state[c.label].lookup}
           fns={fns}
           D={D}
+        />
+      ) : null}
+      {state[c.label].adminlookup ? (
+        <TextField
+          span
+          hot
+          defaultValue={state[c.label].adminlookup}
+          onChange={(e: any) =>
+            setState((_: any) => ({
+              ..._,
+              [c.label]: {
+                ...state[c.label],
+                adminlookup: e.target.value,
+              },
+            }))
+          }
+          type={"text"}
+          key={i}
+          label={"adminlookup"}
+          variant="standard"
         />
       ) : null}
       <div
@@ -133,6 +166,28 @@ export default (
         >
           Lookup
         </div>
+        {state[c.label].lookup ? (
+          <React.Fragment>
+            <div className={`arclight-m-auto`}>
+              <Checkbox
+                value={state[c.label].adminlookup ? true : false}
+                onChange={(b: boolean, cb: Function) => {
+                  setState((_: any) => ({
+                    ..._,
+                    [c.label]: {
+                      ...state[c.label],
+                      adminlookup: b ? undefined : "",
+                    },
+                  }));
+                  cb(!b);
+                }}
+              />
+            </div>
+            <div className={`arclight-m-auto arclight-whitespace-nowrap`}>
+              Admin Lookup
+            </div>
+          </React.Fragment>
+        ) : null}
         <div className={`arclight-m-auto`}>
           <Checkbox
             value={state[c.label].required}
