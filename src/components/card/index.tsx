@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import Styles from "./styles";
 import FontAwesome from "../fontawesome/index";
 import Button from "../button";
-import PuffLoader from "react-spinners/PuffLoader";
+import PuffLoader from "react-spinners/PuffLoader.js";
 
 export interface PropTypes {
   managed?: boolean | string;
