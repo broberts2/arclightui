@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import Styles from "./styles";
 import FontAwesome from "../fontawesome/index";
 import Button from "../button";
-// import PuffLoader from "react-spinners/PuffLoader.js";
+import { PuffLoader } from "react-spinners";
 
 export interface PropTypes {
   managed?: boolean | string;
@@ -165,12 +165,12 @@ const Card: FC<PropTypes> = ({
                     : {}
                 }
               />
-              {/* <PuffLoader
+              <PuffLoader
                 color="#B6B6B6"
                 className={`arclight-absolute arclight-transition-all arclight-duration-600 arclight-top-1/2 arclight-left-1/2 -arclight-translate-x-1/2 -arclight-translate-y-1/2 ${
                   bgOpacity ? `arclight-opacity-0` : `arclight-opacity-100`
                 }`}
-              /> */}
+              />
             </div>
           </Styles.BgImg>
         ) : null}
