@@ -134,6 +134,8 @@ const App: FC<PropTypes> = ({
                     authBackgroundImage={authBackgroundImage}
                     noSelect={noSelect}
                     fns={{
+                      joinRoom: fns.joinRoom(socket),
+                      subscribe: fns.subscribe(socket),
                       verifyRegisterUser: fns.verifyRegisterUser,
                       getCallType: fns.getCallType,
                       readState: fns.readState,

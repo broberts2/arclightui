@@ -46,7 +46,10 @@ const Home: FC<{
                 ].map((t: string) => (
                   <div className={`arclight-text-sm`}>{t}</div>
                 ))}
-                <Button fns={fns} onClick={() => null}>
+                <Button
+                  fns={fns}
+                  onClick={() => fns.calls.getrecords_champion()}
+                >
                   Some Button
                 </Button>
               </div>
