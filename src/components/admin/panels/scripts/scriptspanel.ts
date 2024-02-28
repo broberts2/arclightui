@@ -10,7 +10,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
   ) =>
   (currentState: { [key: string]: any }, updateState: Function) => ({
     title: `Scripts`,
-    backgroundImg: `http://highmountainlabs.io/arclight/cdn/media/1.jpg`,
+    backgroundImg: `http://highmountainlabs.io/cdn/arclight/media/1.jpg`,
     controls: [
       {
         cards: [
@@ -27,7 +27,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
           "endpoint",
           "universal",
         ].map((k: string) => ({
-          img: `http://highmountainlabs.io/arclight/cdn/media/js-c.jpg`,
+          img: `http://highmountainlabs.io/cdn/arclight/media/js-c.jpg`,
           name: k,
           onClick: () => {
             fns.setAdminDomainState({

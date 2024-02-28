@@ -171,7 +171,7 @@ const NewEvent: FC<PropTypes> = ({ D, fns, script, type, date, event }) => {
             }
             if (script) {
               delete __.jsx;
-              __.img = "https://highmountainlabs.io/arclight/cdn/media/js.jpg";
+              __.img = "https://highmountainlabs.io/cdn/arclight/media/js.jpg";
             }
             const _obj = fns?.calls;
             const n = event?._id

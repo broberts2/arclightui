@@ -23,7 +23,7 @@ const Home: FC<{
   D: { [key: string]: any };
   endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
-  const [heroPanelIndex, setHeroPanelIndex] = React.useState(0);
+  const [programIndex, setProgramIndex] = React.useState(0);
   return D && fns.calls ? (
     <Page fns={fns} backgroundGradient={{ from: `#283b4c`, to: `#09111c` }}>
       <Header main fns={fns} endpoint={endpoint} />
@@ -46,49 +46,50 @@ const Home: FC<{
                 ].map((t: string) => (
                   <div className={`arclight-text-sm`}>{t}</div>
                 ))}
-                <Button
+                {/* <Button
                   fns={fns}
                   onClick={() => fns.calls.getrecords_champion()}
                 >
                   Some Button
-                </Button>
+                </Button> */}
               </div>
             </Styles.HeroText>
             <Styles.HeroImg
               className={`arclight-w-0 lg:arclight-w-48 xl:arclight-w-96 arclight-object-cover`}
-              src={`http://highmountainlabs.io/arclight/cdn/media/wise_man.png`}
+              src={`https://highmountainlabs.io/cdn/arclight/media/wise_man.png`}
             />
           </Styles.HeroBody>
-          {false ? (
-            <ListPanel
-              key={0}
-              controls={[
+          <div className={`arclight-my-32`}>
+            <HeroPanel
+              small
+              rows={1}
+              index={programIndex}
+              pageCallback={(n: number) => setProgramIndex(n)}
+              cards={[
                 {
-                  icon: "diamond",
-                  text: "name",
-                  key: "name",
+                  logo: "https://highmountainlabs.io/cdn/arclight/media/cruxdraft.png",
+                  locked: false,
+                  subText: "Crux",
+                  bgImg:
+                    "https://highmountainlabs.io/cdn/arclight/media/crux.jpg",
                 },
-              ]}
-              Request={{
-                index: "test",
-                type: "user",
-                script: "test_script",
-                search: {
-                  limit: 5,
-                  skip: 0,
-                },
-              }}
-              card={(c: any) => ({
-                img: "http://highmountainlabs.io/arclight/cdn/media/flask.jpg",
-                subtext: c.username,
-                onClick: () => console.log("shalom"),
-              })}
-              fns={fns}
-              D={D}
-              line={false}
-              constrain={true}
+              ].map((P: { [key: string]: any }) => ({
+                locked: P.locked,
+                hoverComponent: (
+                  <div>
+                    <img
+                      src={P.logo}
+                      className={`w-18 lg:arclight-w-36 object-cover m-auto`}
+                    />
+                  </div>
+                ),
+                bgImg: P.bgImg,
+                subText: P.subText,
+                onClick: () =>
+                  fns.routeExternal("https://crux.highmountainlabs.io"),
+              }))}
             />
-          ) : null}
+          </div>
         </Styles.Body>
       </Styles.Container>
       <Footer fns={fns} endpoint={endpoint} />

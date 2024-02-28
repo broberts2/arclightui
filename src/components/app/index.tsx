@@ -197,7 +197,7 @@ const App: FC<PropTypes> = ({
           />
         </div>
         <Modal
-          defaultBackground={`http://highmountainlabs.io/arclight/cdn/media/permissions.jpg`}
+          defaultBackground={`http://highmountainlabs.io/cdn/arclight/media/permissions.jpg`}
           modal={modal}
           setModal={(modal: { [key: string]: any } | null) => setModal(modal)}
           fns={fns}

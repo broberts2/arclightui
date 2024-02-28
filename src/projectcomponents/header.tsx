@@ -13,23 +13,25 @@ const H: FC<{
       <Header
         fns={fns}
         logo={{
-          src: `http://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`,
+          src: `https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`,
           route: "/",
         }}
-        links={[
-          {
-            route: "/",
-            text: "Home",
-          },
-          fns.readToken()._token
-            ? {
-                icon: "scroll",
-                route: "/",
-                text: "Logout",
-                onClick: () => fns.writeToken(),
-              }
-            : { icon: "scroll", route: "/login", text: "Login" },
-        ]}
+        links={
+          [
+            // {
+            //   route: "/",
+            //   text: "Home",
+            // },
+            // fns.readToken()._token
+            //   ? {
+            //       icon: "scroll",
+            //       route: "/",
+            //       text: "Logout",
+            //       onClick: () => fns.writeToken(),
+            //     }
+            //   : { icon: "scroll", route: "/login", text: "Login" },
+          ]
+        }
         socialMedia={[]}
       />
     </div>

@@ -1,6 +1,6 @@
 {
   "name": "@highmountainlabs/arclight-ui",
-  "version": "0.3.80",
+  "version": "0.3.88",
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
@@ -64,6 +64,7 @@
     "start": "react-app-rewired start",
     "test": "react-app-rewired test",
     "build": "shx rm -rf dist && tsup src/components/index.ts --format cjs,esm --dts && node prependcss.js && shx cp package.json dist/package.json",
+    "prod": "set \"REACT_APP_ENVIRONMENT=production\" && react-scripts build",
     "build-old": "npm run remove-dist & rollup -c",
     "link": "npm unlink @highmountainlabs/arclight-ui && npm run build && cd dist && npm link && cd .. && npm link @highmountainlabs/arclight-ui",
     "link-test": "npm run link && npm start",

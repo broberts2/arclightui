@@ -10,7 +10,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
   ) =>
   (currentState: { [key: string]: any }, updateState: Function) => ({
     title: `(${fns.parseAdminDomainState().script}) Scripts`,
-    backgroundImg: `http://highmountainlabs.io/arclight/cdn/media/2.jpg`,
+    backgroundImg: `http://highmountainlabs.io/cdn/arclight/media/2.jpg`,
     controls:
       D && D.getscripts && fns.parseAdminDomainState().script
         ? [
@@ -20,7 +20,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
                     D.getscripts.records[fns.parseAdminDomainState().script]
                   ).map((k: string) => {
                     return {
-                      img: `http://highmountainlabs.io/arclight/cdn/media/${
+                      img: `http://highmountainlabs.io/cdn/arclight/media/${
                         JSON.parse(
                           D.getscripts.records[
                             fns.parseAdminDomainState().script

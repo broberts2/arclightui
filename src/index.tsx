@@ -9,15 +9,15 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      nopage={"https://highmountainlabs.io/arclight/cdn/media/404.jpg"}
+      nopage={"https://highmountainlabs.io/cdn/arclight/media/404.jpg"}
       socketEndpoint={
         process.env.REACT_APP_ENVIRONMENT === "production"
           ? `https://highmountainlabs.io:7001`
           : `localhost:7001`
       }
-      loader={`https://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`}
+      loader={`https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`}
       background={{
-        src: `https://highmountainlabs.io/arclight/cdn/media/1.jpg`,
+        src: `https://highmountainlabs.io/cdn/arclight/media/1.jpg`,
         opacity: 0.1,
       }}
       pages={{

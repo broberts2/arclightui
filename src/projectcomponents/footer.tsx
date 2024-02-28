@@ -8,7 +8,7 @@ const F: FC<{
   endpoint?: string;
 }> = ({ fns, endpoint }) => (
   <Footer
-    logoSrc={`http://highmountainlabs.io/arclight/cdn/media/highmountainlabs.png`}
+    logoSrc={`https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`}
     text={"Highmountain Labs"}
   />
 );

@@ -14,7 +14,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
     backgroundImg:
       D && D.getdatamodels && D.getdatamodels.records && key !== "model"
         ? D.getdatamodels.records.find((m: any) => m._type === key).metaimg
-        : `http://highmountainlabs.io/arclight/cdn/media/2.jpg`,
+        : `http://highmountainlabs.io/cdn/arclight/media/2.jpg`,
     controls: [
       {
         onClick: (el) => {

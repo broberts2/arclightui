@@ -10,7 +10,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
   ) =>
   (currentState: { [key: string]: any }, updateState: Function) => ({
     title: `Script Scheduler`,
-    backgroundImg: `http://highmountainlabs.io/arclight/cdn/media/1.jpg`,
+    backgroundImg: `http://highmountainlabs.io/cdn/arclight/media/1.jpg`,
     controls: [
       {
         type: "Calendar",

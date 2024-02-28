@@ -192,7 +192,7 @@ const FlexPanel: FC<{
               rows={1}
               cards={[
                 {
-                  bgImg: `https://highmountainlabs.io/arclight/cdn/media/1.jpg`,
+                  bgImg: `https://highmountainlabs.io/cdn/arclight/media/1.jpg`,
                   bodyComponent: <div>Server Vitals</div>,
                   onClick: () => null,
                 },

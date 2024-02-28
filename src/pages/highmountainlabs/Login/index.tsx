@@ -21,7 +21,7 @@ const Login: FC<{
           redirect={"/"}
           D={D}
           fns={fns}
-          authBackgroundImage={`http://highmountainlabs.io/arclight/cdn/media/1.jpg`}
+          authBackgroundImage={`http://highmountainlabs.io/cdn/arclight/media/1.jpg`}
         />
       </Styles.Container>
       <Footer fns={fns} endpoint={endpoint} />
