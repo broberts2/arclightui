@@ -65,43 +65,45 @@ const Header: FC<PropTypes> = ({
     <Styles.Container
       className={"arclight-text-text-primary arclight-font-primary"}
     >
-      <Drawer
-        animation={"slide"}
-        buttonSide="right"
-        side="right"
-        className={"lg:arclight-hidden"}
-        // @ts-ignore
-        items={
-          linksRight && linksLeft
-            ? linksLeft
-                .concat(linksRight)
-                .filter((el: any) => el)
-                .map((l: any) => ({
-                  icon: l.icon,
-                  text: l.text,
-                  onClick: () =>
-                    fns.route
-                      ? fns.route(l.route)
-                      : fns.routeExternal
-                      ? fns.routeExternal(l.routeExternal)
-                      : null,
-                }))
-            : links
-            ? links
-                .filter((el: any) => el)
-                .map((l: any) => ({
-                  icon: l.icon,
-                  text: l.text,
-                  onClick: () =>
-                    fns.route
-                      ? fns.route(l.route)
-                      : fns.routeExternal
-                      ? fns.routeExternal(l.routeExternal)
-                      : null,
-                }))
-            : null
-        }
-      />
+      {links?.length || linksLeft?.length || linksRight?.length ? (
+        <Drawer
+          animation={"slide"}
+          buttonSide="right"
+          side="right"
+          className={"lg:arclight-hidden"}
+          // @ts-ignore
+          items={
+            linksRight && linksLeft
+              ? linksLeft
+                  .concat(linksRight)
+                  .filter((el: any) => el)
+                  .map((l: any) => ({
+                    icon: l.icon,
+                    text: l.text,
+                    onClick: () =>
+                      fns.route
+                        ? fns.route(l.route)
+                        : fns.routeExternal
+                        ? fns.routeExternal(l.routeExternal)
+                        : null,
+                  }))
+              : links
+              ? links
+                  .filter((el: any) => el)
+                  .map((l: any) => ({
+                    icon: l.icon,
+                    text: l.text,
+                    onClick: () =>
+                      fns.route
+                        ? fns.route(l.route)
+                        : fns.routeExternal
+                        ? fns.routeExternal(l.routeExternal)
+                        : null,
+                  }))
+              : null
+          }
+        />
+      ) : null}
       <div
         className={
           "lg:arclight-my-10 arclight-absolute arclight-left-1/2 arclight-transform -arclight-translate-x-1/2 arclight-w-full"

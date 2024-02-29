@@ -5,47 +5,45 @@ import Styles from "./styles";
 export interface PropTypes {
   defaultBackground: string;
   setModal: Function;
+  preloadModal: Function;
   modal: {
+    active?: boolean;
     events?: Array<any>;
     bgImg?: string;
     noescape?: boolean;
     mode?: boolean;
     body?: JSX.Element;
-  } | null;
+  };
   fns: any;
   D: any;
 }
-
-let M = false;
 
 const Modal: FC<PropTypes> = ({
   defaultBackground,
   modal,
   setModal,
+  preloadModal,
   fns,
   D,
 }) => {
   let Body;
-  if (modal) M = true;
   if (modal && modal.body) Body = modal.body;
   const [exitButton, setExitButton] = React.useState(true);
-  React.useEffect(() => fns.scrollLock(modal ? true : false), [modal]);
+  React.useEffect(() => fns.scrollLock(modal.active ? true : false), [modal]);
   const [activeEvent, setActiveEvent] = React.useState(0);
   return (
     <div
       className={`arclight-absolute arclight-top-0 ${
-        M ? `arclight-opacity-100` : `arclight-opacity-0`
-      }`}
+        modal.active ? `arclight-opacity-100` : `arclight-opacity-0`
+      } arclight-transition-all arclight-duration-300 arclight-z-[9999]`}
       style={{
-        pointerEvents: !modal ? "none" : "auto",
+        pointerEvents: !modal.active ? "none" : "auto",
       }}
     >
       <Styles.Container>
         <Styles.Backdrop
-          onClick={() => (modal && !modal.noescape ? setModal(null) : null)}
-          className={`arclight-bg-visibility-primary ${
-            modal ? "arclight-opacity-100" : "arclight-opacity-0"
-          } arclight-transition-opacity arclight-duration-300`}
+          onClick={() => (!modal.noescape ? setModal(null) : null)}
+          className={`arclight-bg-visibility-primary`}
         ></Styles.Backdrop>
         <Styles.Element
           className={`arclight-flex arclight-justify-center relative`}

@@ -29,25 +29,25 @@ root.render(
             // noSelect: "static/media/hml-logo.png",
           },
         },
-        brocroberts: {
-          Home: {
-            route: "/",
-            component: require("./pages/brocroberts/Home"),
-          },
-        },
+        // brocroberts: {
+        //   Home: {
+        //     route: "/",
+        //     component: require("./pages/brocroberts/Home"),
+        //   },
+        // },
         _root_: {
           Home: {
             route: "/",
             component: require("./pages/highmountainlabs/Home"),
           },
-          Login: {
-            route: "/login",
-            component: require("./pages/highmountainlabs/Login"),
-          },
-          ArclightUI: {
-            route: "/arclightui",
-            component: require("./pages/highmountainlabs/ArclightUI"),
-          },
+          // Login: {
+          //   route: "/login",
+          //   component: require("./pages/highmountainlabs/Login"),
+          // },
+          // ArclightUI: {
+          //   route: "/arclightui",
+          //   component: require("./pages/highmountainlabs/ArclightUI"),
+          // },
         },
       }}
     />

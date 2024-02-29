@@ -23,14 +23,23 @@ const Home: FC<{
   D: { [key: string]: any };
   endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
-  const [programIndex, setProgramIndex] = React.useState(0);
+  React.useEffect(
+    () =>
+      fns.preloadModal({
+        noescape: true,
+        mode: "full",
+        bgImg: `https://highmountainlabs.io/arclight/static/media/65dec076a0ce4f406a2ed7c0.png`,
+        body: () => <div>Shalom</div>,
+      }),
+    []
+  );
   return D && fns.calls ? (
     <Page fns={fns} backgroundGradient={{ from: `#283b4c`, to: `#09111c` }}>
       <Header main fns={fns} endpoint={endpoint} />
       <Styles.Container
-        className={`arclight-px-10 md:arclight-px-36 xl:arclight-px-72`}
+        className={`arclight-px-10 md:arclight-px-36 xl:arclight-px-72 arclight-min-h-screen`}
       >
-        <Styles.Body className={`arclight-relative arclight-min-h-screen`}>
+        <Styles.Body className={`arclight-relative`}>
           <Styles.HeroBody
             className={`arclight-m-auto arclight-relative arclight-flex arclight-space-x-10`}
           >
@@ -46,12 +55,19 @@ const Home: FC<{
                 ].map((t: string) => (
                   <div className={`arclight-text-sm`}>{t}</div>
                 ))}
-                {/* <Button
+                <Button
                   fns={fns}
-                  onClick={() => fns.calls.getrecords_champion()}
+                  onClick={() =>
+                    fns.setModal({
+                      noescape: true,
+                      // mode: "full",
+                      bgImg: `https://highmountainlabs.io/arclight/static/media/65dec076a0ce4f406a2ed7c0.png`,
+                      body: () => <div>Shalom</div>,
+                    })
+                  }
                 >
                   Some Button
-                </Button> */}
+                </Button>
               </div>
             </Styles.HeroText>
             <Styles.HeroImg
@@ -59,7 +75,7 @@ const Home: FC<{
               src={`https://highmountainlabs.io/cdn/arclight/media/wise_man.png`}
             />
           </Styles.HeroBody>
-          <div className={`arclight-my-32`}>
+          {/* <div className={`arclight-my-32`}>
             <HeroPanel
               small
               rows={1}
@@ -89,7 +105,7 @@ const Home: FC<{
                   fns.routeExternal("https://crux.highmountainlabs.io"),
               }))}
             />
-          </div>
+          </div> */}
         </Styles.Body>
       </Styles.Container>
       <Footer fns={fns} endpoint={endpoint} />

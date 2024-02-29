@@ -5,7 +5,7 @@ import Snack from "../snack";
 import Spinner from "../spinner";
 import Modal from "../modal";
 import Admin from "../admin";
-import LifeCycle from "./lifecycle";
+// import LifeCycle from "./lifecycle";
 import Styles from "./styles";
 import "./style.css";
 
@@ -39,13 +39,17 @@ const App: FC<PropTypes> = ({
   const [loading, setLoading] = React.useState(true);
   const [transitioning, setTransitioning] = React.useState(false);
   const [init, setInit] = React.useState(false);
-  const [modal, setModal] = React.useState<{ [key: string]: any } | null>(null);
+  const [modal, _setModal] = React.useState<{ [key: string]: any }>({});
   if (!fns) fns = _fns(D, setD, Cookies, AppRef);
   const [route, setRoute] = React.useState(fns.readState().route);
   const _route = fns.route(setRoute, setTransitioning, transitionDuration);
   const setAdminDomainState = fns.setAdminDomainState((_: string) =>
     fns.route(setRoute, null, 0)(_, null, null)
   );
+  const setModal = (M: { [key: string]: any } | null) =>
+    _setModal(M ? { ...M, active: true } : { ...modal, active: false });
+  const preloadModal = (M: { [key: string]: any }) =>
+    _setModal({ ...M, active: false });
   React.useEffect(() => {
     // @ts-ignore
     setApp(() => (
@@ -142,6 +146,7 @@ const App: FC<PropTypes> = ({
                       setQueryParams: fns.setQueryParams,
                       scrollLock: fns.scrollLock,
                       setModal,
+                      preloadModal,
                       readToken: fns.readToken,
                       writeToken: fns.writeToken,
                       e: fns.e,
@@ -199,7 +204,8 @@ const App: FC<PropTypes> = ({
         <Modal
           defaultBackground={`http://highmountainlabs.io/cdn/arclight/media/permissions.jpg`}
           modal={modal}
-          setModal={(modal: { [key: string]: any } | null) => setModal(modal)}
+          setModal={setModal}
+          preloadModal={preloadModal}
           fns={fns}
           D={D}
         />

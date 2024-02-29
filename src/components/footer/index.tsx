@@ -14,7 +14,7 @@ const Footer: FC<PropTypes> = ({ logoSrc, text }) => {
       }
     >
       <img src={logoSrc} className={"arclight-h-full"} />
-      <div className={"arclight-text-x"}>
+      <div className={"arclight-text-md"}>
         {text} © {new Date().getFullYear()}
       </div>
     </Styles.Container>
