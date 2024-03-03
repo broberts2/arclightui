@@ -1,14 +1,15 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import Styles from "./styles";
-
-import Button from "../button";
 
 export interface PropTypes {
   children: JSX.Element | JSX.Element[];
   fns: {
     [key: string]: any;
   };
-  backgroundImage?: any;
+  backgroundImage?: {
+    src: string;
+    opacity: number;
+  };
   backgroundGradient?: any;
   endpoint?: string;
 }
@@ -21,10 +22,9 @@ const Page: FC<PropTypes> = ({
   endpoint,
 }) => {
   const type =
-    backgroundImage &&
-    backgroundImage.src &&
-    backgroundImage.src.match(/\.[0-9a-z]+$/i)
-      ? backgroundImage.src.match(/\.[0-9a-z]+$/i)[0]
+    backgroundImage?.src && backgroundImage.src.match(/\.[0-9a-z]+$/i)
+      ? //@ts-ignore
+        backgroundImage.src.match(/\.[0-9a-z]+$/i)[0]
       : null;
   return (
     <Styles.Container>
