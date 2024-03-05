@@ -36,8 +36,9 @@ const Home: FC<{
   React.useEffect(() => {
     if (!D[callmethod] || D[callmethod].message.content === output) return;
     setOutput(D[callmethod].message.content);
-    if (D.ollama_chat.newId)
+    if (D.ollama_chat.newId) {
       fns.writeToken(D.ollama_chat.newId, "mox_session_id");
+    }
   }, [D]);
   React.useEffect(() => {
     Music.src = `https://highmountainlabs.io/arclight/static/media/65e40a8735b8895019faa245.mp3`;
@@ -55,7 +56,7 @@ const Home: FC<{
     init++;
     console.log(fns.readToken("mox_session_id"));
     fns.calls[callmethod]({
-      prompt: "Hello Mox.",
+      prompt: "greetings",
       id: fns.readToken("mox_session_id")._token,
       init: true,
     });
