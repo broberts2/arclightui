@@ -24,9 +24,12 @@ root.render(
         admin: {
           Home: {
             route: "/",
-            // backgroundImage: "static/media/zoe.jpg",
-            // authBackgroundImage: "static/media/aurelionsol.jpg",
-            // noSelect: "static/media/hml-logo.png",
+            backgroundImage:
+              "https://highmountainlabs.io/cdn/arclight/media/hml.jpg",
+            authBackgroundImage:
+              "https://highmountainlabs.io/cdn/arclight/media/hml.jpg",
+            noSelect:
+              "https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png",
           },
         },
         // brocroberts: {

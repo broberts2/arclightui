@@ -1,8 +1,9 @@
 export default (_: { [key: string]: any }, C: { [key: string]: any }) =>
-	(token: string | null) => {
-		if (token) C.set("authtoken", token, { path: "/" });
-		else {
-			C.remove("authtoken", { path: "/" });
-			window.location.reload();
-		}
-	};
+  (token?: string, customname?: string) => {
+    if (token)
+      C.set(customname ? customname : "authtoken", token, { path: "/" });
+    else {
+      C.remove(customname ? customname : "authtoken", { path: "/" });
+      if (!customname) window.location.reload();
+    }
+  };
