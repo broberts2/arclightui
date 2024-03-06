@@ -23,20 +23,22 @@ const InputPrompt: FC<{
     setLocked(true);
     const _ = async (s: string = "") => {
       if (s.length <= output.length) {
-        const __ = Math.ceil(Math.random() * 20 + 10);
+        const __ = Math.ceil(Math.random() * 2);
         setShownChars(s);
         await new Promise((r: any) => setTimeout(r, __));
         scrolldown();
         return await _(`${s}${output[s.length]}`);
-      } else {
-        setLocked(false);
-        setTimeout(() => scrolldown(), 100);
       }
     };
     await _();
+    setTimeout(() => {
+      scrolldown();
+      setLocked(false);
+      setLocalInput("");
+    }, 350);
   };
   React.useEffect(() => {
-    rollout();
+    if (output && output.length) rollout();
   }, [output]);
   return (
     <div
@@ -48,6 +50,9 @@ const InputPrompt: FC<{
           if (e.keyCode === 8 && !e.target.value.split("> ")[1].length)
             e.preventDefault();
           else if (e.keyCode === 13) {
+            if (!localInput?.length) return e.preventDefault();
+            setLocked(true);
+            setShownChars("");
             e.preventDefault();
             submit(localInput);
             setLocalInput("");
@@ -61,7 +66,7 @@ const InputPrompt: FC<{
       />
       <Button
         onClick={() => {
-          fns.writeToken(undefined, "mox_session_id");
+          fns.writeToken(undefined, "ollama_chat_session_id");
           window.location.reload();
         }}
         label={"start new conversation"}
@@ -70,7 +75,7 @@ const InputPrompt: FC<{
         span
         animation={false}
         className={
-          fns.readToken("mox_session_id")._token
+          fns.readToken("ollama_chat_session_id")._token && !locked
             ? `arclight-opacity-100`
             : `arclight-opacity-30 arclight-pointer-events-none`
         }

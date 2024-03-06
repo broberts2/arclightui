@@ -18,46 +18,39 @@ const Home: FC<{
   D: { [key: string]: any };
   endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
-  const callmethod = "ollama_chat";
   const [output, setOutput] = React.useState("");
-  const submit = (s: string) => {
-    setInput(s);
+  const submit = (prompt: string) => {
+    setInput(prompt);
     setOutput("");
-    if (fns?.calls && fns.calls[callmethod])
-      fns.calls[callmethod]({
-        prompt: s,
-        id: fns.readToken("mox_session_id")._token,
-      });
+    fns.calls.ollama_ask({
+      prompt,
+      id: fns.readToken("ollama_chat_session_id")._token,
+    });
   };
   const [input, setInput] = React.useState("");
   React.useEffect(() => {
     if (!userinteraction) return;
   }, [input]);
   React.useEffect(() => {
-    if (!D[callmethod] || D[callmethod].message.content === output) return;
-    setOutput(D[callmethod].message.content);
-    if (D.ollama_chat.newId) {
-      fns.writeToken(D.ollama_chat.newId, "mox_session_id");
+    if (!D.ollama_ask || D.ollama_ask.message.content === output) return;
+    setOutput(D.ollama_ask.message.content);
+    console.log(fns.readToken("ollama_chat_session_id"));
+    if (
+      D.ollama_ask.ollama_chat_session_id &&
+      fns.readToken("ollama_chat_session_id")._token !==
+        D.ollama_ask.ollama_chat_session_id
+    ) {
+      fns.writeToken(
+        D.ollama_ask.ollama_chat_session_id,
+        "ollama_chat_session_id"
+      );
     }
   }, [D]);
   React.useEffect(() => {
-    Music.src = `https://highmountainlabs.io/arclight/static/media/65e40a8735b8895019faa245.mp3`;
-    Music.addEventListener("canplay", () => {
-      document.addEventListener("click", () => {
-        if (userinteraction) return;
-        userinteraction++;
-        Music.muted = false;
-        Music.play();
-      });
-    });
-  }, []);
-  React.useEffect(() => {
-    if (!fns?.calls || !fns.calls[callmethod] || init) return;
+    if (init || !fns?.calls || !fns.calls.ollama_ask) return;
     init++;
-    console.log(fns.readToken("mox_session_id"));
-    fns.calls[callmethod]({
+    fns.calls.ollama_ask({
       prompt: "greetings",
-      id: fns.readToken("mox_session_id")._token,
       init: true,
     });
   }, [fns]);
