@@ -4,6 +4,8 @@ import { Page } from "../../../components";
 import Pipe from "../../../projectcomponents/pipe";
 import InputPrompt from "../../../projectcomponents/inputprompt";
 
+const REDIRECT = undefined;
+
 const Music = new Audio();
 Music.volume = 0.05;
 Music.muted = true;
@@ -25,6 +27,7 @@ const Home: FC<{
     fns.calls.ollama_ask({
       prompt,
       id: fns.readToken("ollama_chat_session_id")._token,
+      redirect: REDIRECT,
     });
   };
   const [input, setInput] = React.useState("");
@@ -34,7 +37,6 @@ const Home: FC<{
   React.useEffect(() => {
     if (!D.ollama_ask || D.ollama_ask.message.content === output) return;
     setOutput(D.ollama_ask.message.content);
-    console.log(fns.readToken("ollama_chat_session_id"));
     if (
       D.ollama_ask.ollama_chat_session_id &&
       fns.readToken("ollama_chat_session_id")._token !==
@@ -52,6 +54,7 @@ const Home: FC<{
     fns.calls.ollama_ask({
       prompt: "greetings",
       init: true,
+      redirect: REDIRECT,
     });
   }, [fns]);
   return D && fns.calls ? (

@@ -14,6 +14,7 @@ root.render(
         process.env.REACT_APP_ENVIRONMENT === "production"
           ? `https://highmountainlabs.io:7001`
           : `localhost:7001`
+        // "http://47.5.53.138"
       }
       loader={`https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`}
       background={{
