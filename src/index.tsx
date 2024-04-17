@@ -44,6 +44,10 @@ root.render(
             route: "/",
             component: require("./pages/highmountainlabs/Home"),
           },
+          Mox: {
+            route: "/mox",
+            component: require("./pages/highmountainlabs/Mox"),
+          },
           // Login: {
           //   route: "/login",
           //   component: require("./pages/highmountainlabs/Login"),

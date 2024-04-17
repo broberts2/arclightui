@@ -202,7 +202,7 @@ const App: FC<PropTypes> = ({
           />
         </div>
         <Modal
-          defaultBackground={`http://highmountainlabs.io/cdn/arclight/media/permissions.jpg`}
+          defaultBackground={`https://highmountainlabs.io/cdn/arclight/media/permissions.jpg`}
           modal={modal}
           setModal={setModal}
           preloadModal={preloadModal}
@@ -316,7 +316,7 @@ const App: FC<PropTypes> = ({
           window.location.reload();
         });
         socket.on(`clearurlparameters`, () => {
-          window.history.replaceState(
+          window.history.pushState(
             "object",
             document.title,
             window.location.href.split("?")[0]
