@@ -18,8 +18,8 @@ root.render(
       }
       loader={`https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`}
       background={{
-        src: `https://highmountainlabs.io/cdn/arclight/media/1.jpg`,
-        opacity: 0.1,
+        src: `https://highmountainlabs.io/cdn/arclight/media/hml.jpg`,
+        opacity: 0,
       }}
       pages={{
         admin: {
@@ -28,7 +28,7 @@ root.render(
             backgroundImage:
               "https://highmountainlabs.io/cdn/arclight/media/hml.jpg",
             authBackgroundImage:
-              "https://highmountainlabs.io/cdn/arclight/media/hml.jpg",
+              "https://highmountainlabs.io/cdn/arclight/media/hml-inverted.jpg",
             noSelect:
               "https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png",
           },

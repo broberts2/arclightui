@@ -14,35 +14,20 @@ const Home: FC<{
       fns={fns}
       backgroundImage={{
         src: `https://highmountainlabs.io/arclight/static/media/65e3b40035b8895019faa204.jpg`,
-        opacity: 0.1,
+        opacity: 0.0,
       }}
     >
-      <div className={``}>
-        <div>
-          <button
-            onClick={() =>
-              fns.calls.registeruser({
-                username: "test",
-                password: "test",
-                email: "broc.roberts2@gmail.com",
-                redirect: `http://localhost:3000`,
-              })
-            }
-          >
-            Sign Up
-          </button>
-        </div>
-        <div>
-          <button
-            onClick={() =>
-              fns.calls.verifyregisteruser({
-                v: fns.readState().query.v,
-                password: "test",
-              })
-            }
-          >
-            Verify
-          </button>
+      <div
+        className={`arclight-h-screen arclight-flex arclight-pointer-events-none`}
+      >
+        <div
+          className={`arclight-m-auto arclight-text-center arclight-flex-col arclight-space-y-3`}
+        >
+          <img
+            src={`https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`}
+            className={`arclight-w-56 arclight-m-auto`}
+          />
+          <div className={`arclight-text-2xl`}>HighmountainLabs</div>
         </div>
       </div>
     </Page>
