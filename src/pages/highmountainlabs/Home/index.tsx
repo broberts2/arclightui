@@ -8,7 +8,6 @@ const Home: FC<{
   D: { [key: string]: any };
   endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
-  console.log(D);
   return D && fns.calls ? (
     <Page
       fns={fns}
@@ -27,7 +26,7 @@ const Home: FC<{
             src={`https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`}
             className={`arclight-w-56 arclight-m-auto`}
           />
-          <div className={`arclight-text-2xl`}>HighmountainLabs</div>
+          <div className={`arclight-text-2xl`}>Highmountain Labs</div>
         </div>
       </div>
     </Page>

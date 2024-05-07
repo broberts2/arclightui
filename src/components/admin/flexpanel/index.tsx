@@ -188,16 +188,26 @@ const FlexPanel: FC<{
           <div
             className={`arclight-w-full arclight-h-full arclight-flex arclight-align-middle arclight-items-center`}
           >
-            {/* <HeroPanel
+            <HeroPanel
               rows={1}
               cards={[
                 {
-                  bgImg: `https://highmountainlabs.io/cdn/arclight/media/1.jpg`,
-                  bodyComponent: <div>Server Vitals</div>,
+                  bgImg: `https://highmountainlabs.io/cdn/arclight/media/hml.jpg`,
+                  bodyComponent: <div></div>,
+                  onClick: () => null,
+                },
+                {
+                  bgImg: `https://highmountainlabs.io/cdn/arclight/media/hml.jpg`,
+                  bodyComponent: <div></div>,
+                  onClick: () => null,
+                },
+                {
+                  bgImg: `https://highmountainlabs.io/cdn/arclight/media/hml.jpg`,
+                  bodyComponent: <div></div>,
                   onClick: () => null,
                 },
               ]}
-            /> */}
+            />
           </div>
         </Styles.NoSelect>
       ) : null}

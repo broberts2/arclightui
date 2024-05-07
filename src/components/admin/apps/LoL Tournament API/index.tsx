@@ -30,11 +30,11 @@ const LoLTournamentAPI: FC<{
               {
                 hoverComponent: (
                   <img
-                    src={`http://highmountainlabs.io/cdn/arclight/media/purple_essence.png`}
+                    src={`https://highmountainlabs.io/cdn/arclight/media/purple_essence.png`}
                     className={`arclight-w-32 lg:arclight-w-64 arclight-object-cover`}
                   />
                 ),
-                bgImg: `http://highmountainlabs.io/cdn/arclight/media/ionia_1.jpg`,
+                bgImg: `https://highmountainlabs.io/cdn/arclight/media/ionia_1.jpg`,
                 subText: "Tournament Codes",
                 onClick: () =>
                   fns.setAdminDomainState({
@@ -47,11 +47,11 @@ const LoLTournamentAPI: FC<{
                 locked: true,
                 hoverComponent: (
                   <img
-                    src={`http://highmountainlabs.io/cdn/arclight/media/orange_essence.png`}
+                    src={`https://highmountainlabs.io/cdn/arclight/media/orange_essence.png`}
                     className={`arclight-w-32 lg:arclight-w-64 arclight-object-cover`}
                   />
                 ),
-                bgImg: `http://highmountainlabs.io/cdn/arclight/media/ionia_2.png`,
+                bgImg: `https://highmountainlabs.io/cdn/arclight/media/ionia_2.png`,
                 subText: "Authenticate Summoner",
                 onClick: () =>
                   fns.setAdminDomainState({
@@ -64,11 +64,11 @@ const LoLTournamentAPI: FC<{
                 locked: true,
                 hoverComponent: (
                   <img
-                    src={`http://highmountainlabs.io/cdn/arclight/media/blue_essence.png`}
+                    src={`https://highmountainlabs.io/cdn/arclight/media/blue_essence.png`}
                     className={`arclight-w-32 lg:arclight-w-64 arclight-object-cover`}
                   />
                 ),
-                bgImg: `http://highmountainlabs.io/cdn/arclight/media/ionia_3.jpg`,
+                bgImg: `https://highmountainlabs.io/cdn/arclight/media/ionia_3.jpg`,
                 subText: "Insert Forfeit",
                 onClick: () =>
                   fns.setAdminDomainState({
@@ -81,11 +81,11 @@ const LoLTournamentAPI: FC<{
                 locked: true,
                 hoverComponent: (
                   <img
-                    src={`http://highmountainlabs.io/cdn/arclight/media/blue_essence.png`}
+                    src={`https://highmountainlabs.io/cdn/arclight/media/blue_essence.png`}
                     className={`arclight-w-32 lg:arclight-w-64 arclight-object-cover`}
                   />
                 ),
-                bgImg: `http://highmountainlabs.io/cdn/arclight/media/ionia_3.jpg`,
+                bgImg: `https://highmountainlabs.io/cdn/arclight/media/ionia_3.jpg`,
                 subText: "Import Game Data",
                 onClick: () =>
                   fns.setAdminDomainState({

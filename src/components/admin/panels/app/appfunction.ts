@@ -4,11 +4,11 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
     backgroundImg: (() => {
       switch (fns.parseAdminDomainState().subItem) {
         case "Tournament Codes":
-          return `http://highmountainlabs.io/cdn/arclight/media/ionia_1.jpg`;
+          return `https://highmountainlabs.io/cdn/arclight/media/ionia_1.jpg`;
         case "Authenticate Summoner":
-          return `http://highmountainlabs.io/cdn/arclight/media/ionia_2.png`;
+          return `https://highmountainlabs.io/cdn/arclight/media/ionia_2.png`;
         case "Import Game Data":
-          return `http://highmountainlabs.io/cdn/arclight/media/ionia_3.jpg`;
+          return `https://highmountainlabs.io/cdn/arclight/media/ionia_3.jpg`;
       }
     })(),
     controls: [{ type: "App", label: "Search", onClick: () => null }],

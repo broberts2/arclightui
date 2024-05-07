@@ -5,6 +5,7 @@ import Snack from "../snack";
 import Spinner from "../spinner";
 import Modal from "../modal";
 import Admin from "../admin";
+import { diff } from "deep-object-diff";
 // import LifeCycle from "./lifecycle";
 import Styles from "./styles";
 import "./style.css";
@@ -34,12 +35,16 @@ const App: FC<PropTypes> = ({
 }) => {
   const AppRef = React.useRef(null);
   let pagenotfound = true;
-  const [D, setD] = React.useState({ nopage });
+  const [D, _setD] = React.useState<any>({ nopage });
+  const [LastD, setLastD] = React.useState<any>(undefined);
   const [app, setApp] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [transitioning, setTransitioning] = React.useState(false);
   const [init, setInit] = React.useState(false);
   const [modal, _setModal] = React.useState<{ [key: string]: any }>({});
+  const setD = (fn: any) => {
+    _setD(fn);
+  };
   if (!fns) fns = _fns(D, setD, Cookies, AppRef);
   const [route, setRoute] = React.useState(fns.readState().route);
   const _route = fns.route(setRoute, setTransitioning, transitionDuration);
@@ -51,6 +56,8 @@ const App: FC<PropTypes> = ({
   const preloadModal = (M: { [key: string]: any }) =>
     _setModal({ ...M, active: false });
   React.useEffect(() => {
+    const _diff = diff(LastD, D) || {};
+    setLastD(D);
     // @ts-ignore
     setApp(() => (
       <Styles.Container
@@ -132,7 +139,16 @@ const App: FC<PropTypes> = ({
                   } arclight-duration-700 arclight-delay-0 arclight-transition-all`}
                 >
                   <Page
-                    D={D}
+                    D={{
+                      ...D,
+                      _diff: (() => {
+                        const _ = {};
+                        Object.keys(_diff).map((k: string) => {
+                          _[k] = _diff[k];
+                        });
+                        return _;
+                      })(),
+                    }}
                     endpoint={socketEndpoint}
                     backgroundImage={backgroundImage}
                     authBackgroundImage={authBackgroundImage}
@@ -153,7 +169,23 @@ const App: FC<PropTypes> = ({
                       setAdminDomainState:
                         domain === "admin" ? setAdminDomainState : null,
                       parseAdminDomainState: fns.parseAdminDomainState,
-                      calls: fns.calls,
+                      calls: (() => {
+                        const _ = {};
+                        Object.keys(fns.calls || {}).map((key: string) => {
+                          if (fns?.calls[key])
+                            _[key] = async (input: any) => {
+                              fns.calls[key](input);
+                              return await new Promise((res: any, rej: any) => {
+                                setTimeout(
+                                  () => rej(`Failed to call ${fns.calls[key]}`),
+                                  100000
+                                );
+                                return res();
+                              });
+                            };
+                        });
+                        return _;
+                      })(),
                       addAnimationFrame: fns.addAnimationFrame,
                       route: _route,
                       routeExternal: fns.routeExternal,
@@ -189,15 +221,15 @@ const App: FC<PropTypes> = ({
             <img src={nopage} />
           </div>
           <Snack
-            hide={() =>
+            hide={() => {
               setD((_: any) => ({
                 ..._,
                 serversuccess: null,
                 servererror: null,
                 serverwarning: null,
                 servermessage: null,
-              }))
-            }
+              }));
+            }}
             D={D}
           />
         </div>
@@ -289,15 +321,17 @@ const App: FC<PropTypes> = ({
               const index = data.index;
               delete data._triggerFetch;
               delete data.index;
-              setD((_: any) => ({
-                ..._,
-                [event]: index
-                  ? {
-                      ..._[event],
-                      [index]: data,
-                    }
-                  : data,
-              }));
+              setD((_: any) => {
+                return {
+                  ..._,
+                  [event]: index
+                    ? {
+                        ..._[event],
+                        [index]: data,
+                      }
+                    : data,
+                };
+              });
               if (trigger) {
                 socket.emit(event, {
                   ...fns.readToken(),
@@ -330,13 +364,17 @@ const App: FC<PropTypes> = ({
             ) {
               fns.writeToken();
             }
-            setD((_: any) => ({
-              ..._,
-              [`server${el}`]: `(${msg.code}) ${msg.msg}`,
-            }));
+            setD((_: any) => {
+              return {
+                ..._,
+                [`server${el}`]: `(${msg.code}) ${msg.msg}`,
+              };
+            });
           })
         );
-        setD((_: any) => ({ ..._ }));
+        setD((_: any) => {
+          return { ..._ };
+        });
       });
     }
   }, []);

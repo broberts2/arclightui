@@ -72,7 +72,7 @@ const Admin: FC<{
         backgroundImage={{
           src: backgroundImage
             ? backgroundImage
-            : `http://highmountainlabs.io/cdn/arclight/media/1.jpg`,
+            : `https://highmountainlabs.io/cdn/arclight/media/1.jpg`,
           opacity: 0.5,
         }}
       >
@@ -90,7 +90,7 @@ const Admin: FC<{
                 useMediaQuery({ query: "(min-width: 1024px)" })
                   ? noSelect
                     ? noSelect
-                    : `http://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`
+                    : `https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`
                   : undefined
               }
               startOpen={useMediaQuery({ query: "(min-width: 1024px)" })}
@@ -114,7 +114,7 @@ const Admin: FC<{
                 authBackgroundImage={
                   authBackgroundImage
                     ? authBackgroundImage
-                    : `http://highmountainlabs.io/cdn/arclight/media/2.jpg`
+                    : `https://highmountainlabs.io/cdn/arclight/media/2.jpg`
                 }
                 OATHOnly={false}
                 OATH={[
@@ -156,7 +156,7 @@ const Admin: FC<{
         >
           <div className={`arclight-flex arclight-justify-center`}>
             <img
-              src={`http://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`}
+              src={`https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`}
               className={`arclight-w-44`}
             />
           </div>

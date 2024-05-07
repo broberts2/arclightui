@@ -52,7 +52,7 @@ const Home: FC<{
     if (init || !fns?.calls || !fns.calls.ollama_ask) return;
     init++;
     fns.calls.ollama_ask({
-      prompt: "greetings",
+      prompt: "Greetings!",
       init: true,
       redirect: REDIRECT,
     });
