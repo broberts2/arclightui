@@ -44,15 +44,13 @@ const Panel = (props) => {
   );
 };
 
-export default (
-  c: { [key: string]: any },
-  i: any,
-  ListPanel: any,
-  state: { [key: string]: any },
-  setState: Function,
-  fns: any,
-  D: any,
-  publicURI: string
-) => {
-  return <Panel fns={fns} D={D} ListPanel={ListPanel} publicURI={publicURI} />;
+export default (obj: any) => {
+  return (
+    <Panel
+      fns={obj.fns}
+      D={obj.D}
+      ListPanel={obj.ListPanel}
+      publicURI={obj.publicURI}
+    />
+  );
 };

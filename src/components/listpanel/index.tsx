@@ -194,6 +194,8 @@ const ListPanel: FC<PropTypes> = ({
           {sCards ? (
             <div style={{ height: "100%" }}>
               <SearchControls
+                D={D}
+                fns={fns}
                 minHeight={minHeight}
                 hot={true}
                 pagination={Object.assign(
@@ -257,7 +259,7 @@ const ListPanel: FC<PropTypes> = ({
                     });
                   },
                 }}
-                buttons={controls}
+                controls={controls}
                 className={``}
               >
                 {sCards}

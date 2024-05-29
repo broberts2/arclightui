@@ -1,33 +1,28 @@
-export default (
-  c: { [key: string]: any },
-  i: Number,
-  TextField: any,
-  state: { [key: string]: any },
-  setState: Function
-) => {
-  return state._id && state[c.label] ? (
+export default (obj: any) => {
+  return obj.state._id && obj.state[obj.c.label] ? (
     <div
       className={
         false ? `arclight-opacity-50 arclight-pointer-events-none` : ``
       }
     >
-      <TextField
+      <obj.TextField
         span
         hot
         defaultValue={
-          state[c.label] !== null && state[c.label] !== undefined
-            ? state[c.label]
+          obj.state[obj.c.label] !== null &&
+          obj.state[obj.c.label] !== undefined
+            ? obj.state[obj.c.label]
             : ""
         }
         onChange={(e: any) =>
-          setState((_: any) => ({
+          obj.setState((_: any) => ({
             ..._,
-            [c.label]: e.target.value,
+            [obj.c.label]: e.target.value,
           }))
         }
         type={"text"}
-        key={state._id}
-        label={c.label}
+        key={obj.state._id}
+        label={obj.c.label}
         variant="standard"
       />
     </div>
@@ -37,19 +32,19 @@ export default (
         false ? `arclight-opacity-50 arclight-pointer-events-none` : ``
       }
     >
-      <TextField
+      <obj.TextField
         span
         hot
         defaultValue={null}
         onChange={(e: any) =>
-          setState((_: any) => ({
+          obj.setState((_: any) => ({
             ..._,
-            [c.label]: e.target.value,
+            [obj.c.label]: e.target.value,
           }))
         }
         type={"text"}
-        key={i}
-        label={c.label}
+        key={obj.i}
+        label={obj.c.label}
         variant="standard"
       />
     </div>

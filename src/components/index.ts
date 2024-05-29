@@ -33,6 +33,7 @@ import Page from "./page";
 import PageTitle from "./pagetitle";
 import Picklist from "./picklist";
 import ProfilePage from "./profilepage";
+import Quill from "./quill";
 import SearchControls from "./searchcontrols";
 import SlantedDivider from "./slanteddivider";
 import Snack from "./snack";
@@ -76,6 +77,7 @@ export {
   PageTitle,
   Picklist,
   ProfilePage,
+  Quill,
   SearchControls,
   SlantedDivider,
   Snack,

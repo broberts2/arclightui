@@ -4,9 +4,11 @@ import Calendar from "../../calendar";
 import ListPanel from "../../listpanel";
 import PickList from "../../picklist";
 import HeroPanel from "../../heropanel";
+import ArticlePage from "../../articlepage";
 import Monaco from "../../monaco";
 import Application from "../../application";
 import textfield from "./components/textfield";
+import articlepage from "./components/articlepage";
 import dateselector from "./components/dateselector";
 import dynamicfield from "./components/dynamicfield";
 import listpanel from "./components/listpanel";
@@ -68,21 +70,15 @@ export default (obj) => {
     }
     switch (obj.c.type) {
       case "Monaco":
-        return monaco(obj.c, obj.i, Monaco, obj.state, obj.setState);
+        return monaco({ ...obj, Monaco });
       case "Boolean":
-        return picklist(
-          obj.c,
-          obj.i,
-          PickList,
-          obj.state,
-          obj.setState,
-          obj.D,
-          obj.fns
-        );
+        return picklist({ ...obj, PickList });
       case "App":
-        return app(obj.state, obj.setState, obj.D, obj.fns, obj.publicURI);
+        return app({ ...obj });
+      case "ArticlePage":
+        return articlepage({ ...obj, ArticlePage });
       case "TextField":
-        return textfield(obj.c, obj.i, TextField, obj.state, obj.setState);
+        return textfield({ ...obj, TextField });
       case "Date":
         return dateselector(
           obj.c,
@@ -92,15 +88,7 @@ export default (obj) => {
           obj.setState
         );
       case "Calendar":
-        return calendar(
-          obj.c,
-          obj.i,
-          Calendar,
-          obj.state,
-          obj.setState,
-          obj.D,
-          obj.fns
-        );
+        return calendar({ ...obj, Calendar });
       case "TextFieldNumber":
         return (
           <div className={``}>
@@ -143,26 +131,9 @@ export default (obj) => {
           />
         );
       case "SinglePickList":
-        return picklist(
-          obj.c,
-          obj.i,
-          PickList,
-          obj.state,
-          obj.setState,
-          obj.D,
-          obj.fns
-        );
+        return picklist({ ...obj, PickList });
       case "PickList":
-        return picklist(
-          obj.c,
-          obj.i,
-          PickList,
-          obj.state,
-          obj.setState,
-          obj.D,
-          obj.fns,
-          true
-        );
+        return picklist({ ...obj, PickList }, true);
       case "ListPanel":
         return listpanel(
           obj.state._items[obj.i].listquery,
@@ -175,81 +146,19 @@ export default (obj) => {
           obj.D
         );
       case "DynamicField":
-        return dynamicfield(
-          obj.c,
-          obj.i,
-          TextField,
-          PickList,
-          Checkbox,
-          obj.Bttn,
-          obj.state,
-          obj.setState,
-          obj.D,
-          obj.fns
-        );
+        return dynamicfield({ ...obj, TextField, PickList, Checkbox });
       case "FormSelector":
-        return formselector(
-          obj.c,
-          obj.i,
-          ListPanel,
-          obj.state,
-          obj.setState,
-          obj.fns,
-          obj.D,
-          obj.publicURI
-        );
+        return formselector({ ...obj, ListPanel });
       case "ScriptSelector":
-        return scriptselector(
-          obj.c,
-          obj.i,
-          ListPanel,
-          obj.state,
-          obj.setState,
-          obj.fns,
-          obj.D,
-          obj.publicURI
-        );
+        return scriptselector({ ...obj, ListPanel });
       case "IntegrationSelector":
-        return integrationelector(
-          obj.c,
-          obj.i,
-          HeroPanel,
-          obj.state,
-          obj.setState,
-          obj.fns,
-          obj.D,
-          obj.publicURI
-        );
+        return integrationelector({ ...obj, HeroPanel });
       case "IntegrationMonaco":
-        return integrationconfiguration(
-          obj.c,
-          obj.i,
-          Monaco,
-          obj.state,
-          obj.setState,
-          obj.fns,
-          obj.D
-        );
+        return integrationconfiguration({ ...obj, Monaco });
       case "ScriptMonaco":
-        return scriptconfiguration(
-          obj.c,
-          obj.i,
-          Monaco,
-          obj.state,
-          obj.setState,
-          obj.fns,
-          obj.D
-        );
+        return scriptconfiguration({ ...obj, Monaco });
       case "Application":
-        return application(
-          obj.c,
-          obj.i,
-          Application,
-          obj.state,
-          obj.setState,
-          obj.fns,
-          obj.D
-        );
+        return application({ ...obj, Application });
     }
   }
 };

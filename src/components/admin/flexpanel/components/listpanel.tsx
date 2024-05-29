@@ -30,11 +30,19 @@ export default (
     <div style={{ height: "100%" }}>
       <ListPanel
         controls={[
-          {
-            icon: "diamond",
-            text: key,
-            key,
-          },
+          // {
+          //   icon: "diamond",
+          //   text: key,
+          //   key,
+          //   type: "button",
+          // },
+          false
+            ? {
+                text: key,
+                key,
+                type: "picklist",
+              }
+            : {},
         ]}
         loadwatcher={fns.parseAdminDomainState().activePanel}
         Request={{
@@ -62,7 +70,7 @@ export default (
                 managed: c._managed,
                 img: c.img,
                 vid: c.url,
-                subtext: c.name || c.username,
+                subtext: c.name || c.username || c.title,
                 onClick: () => {
                   if (C.onClick) C.onClick(c);
                   else c.onClick(c);

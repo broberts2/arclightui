@@ -14,7 +14,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
     backgroundImg:
       D && D.getdatamodels && D.getdatamodels.records && key !== "model"
         ? D.getdatamodels.records.find((m: any) => m._type === key).metaimg
-        : `https://highmountainlabs.io/cdn/arclight/media/2.jpg`,
+        : `https://highmountainlabs.io/cdn/arclight/media/hml.jpg`,
     controls: [
       {
         onClick: (el) => {
@@ -23,7 +23,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
           }));
           fns.setAdminDomainState({
             ...fns.parseAdminDomainState(),
-            activePanel: 1,
+            activePanel: key === "article" ? 3 : 1,
             id: el._id,
           });
         },
@@ -54,7 +54,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
             fns.setAdminDomainState({
               ...fns.parseAdminDomainState(),
               _id: null,
-              activePanel: 1,
+              activePanel: key === "article" ? 3 : 1,
             });
           }
         : null,

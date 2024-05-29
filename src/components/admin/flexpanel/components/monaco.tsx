@@ -1,27 +1,23 @@
-export default (
-  c: { [key: string]: any },
-  i: Number,
-  Monaco: any,
-  state: { [key: string]: any },
-  setState: Function
-) => {
+export default (obj: any) => {
   return (
     <div
       className={`arclight-h-96 ${
         false ? `arclight-opacity-50 arclight-pointer-events-none` : ``
       }`}
     >
-      <div className={`arclight-text-start arclight-text-sm`}>{c.label}</div>
-      <Monaco
-        refName={c.label}
+      <div className={`arclight-text-start arclight-text-sm`}>
+        {obj.c.label}
+      </div>
+      <obj.Monaco
+        refName={obj.c.label}
         language={"json"}
         defaultValue={
-          state[c.label] && typeof state[c.label] === "string"
-            ? state[c.label]
+          obj.state[obj.c.label] && typeof obj.state[obj.c.label] === "string"
+            ? obj.state[obj.c.label]
             : ""
         }
-        state={state}
-        setState={setState}
+        state={obj.state}
+        setState={obj.setState}
       />
     </div>
   );

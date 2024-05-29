@@ -1,36 +1,30 @@
-export default (
-  c: { [key: string]: any },
-  i: Number,
-  Application: any,
-  state: { [key: string]: any },
-  setState: Function,
-  fns: any,
-  D: any
-) => {
+export default (obj: any) => {
   let f;
-  const s = fns.parseAdminDomainState();
+  const s = obj.fns.parseAdminDomainState();
   const k =
-    D &&
+    obj.D &&
     s.formtemplate &&
     (s.formname || s.item === "Form Template") &&
-    D[s.item === "Form Template" ? "getformtemplates" : "getforms"] &&
-    D[s.item === "Form Template" ? "getformtemplates" : "getforms"].records;
+    obj.D[s.item === "Form Template" ? "getformtemplates" : "getforms"] &&
+    obj.D[s.item === "Form Template" ? "getformtemplates" : "getforms"].records;
   if (k)
     s.item === "Form Template"
-      ? (f = D.getformtemplates.records.find(
+      ? (f = obj.D.getformtemplates.records.find(
           (r: any) => r.__template === `${s.formtemplate}.json`
         ))
-      : (f = D.getforms.records[s.formtemplate][s.formname]);
+      : (f = obj.D.getforms.records[s.formtemplate][s.formname]);
   return k && f ? (
     <div
       className={
         false ? `arclight-opacity-50 arclight-pointer-events-none` : ``
       }
     >
-      <Application
-        locked={true || fns.parseAdminDomainState().item !== "Form Template"}
-        D={D}
-        fns={fns}
+      <obj.Application
+        locked={
+          true || obj.fns.parseAdminDomainState().item !== "Form Template"
+        }
+        D={obj.D}
+        fns={obj.fns}
         form={f}
         className={`arclight-rounded-sm`}
       />

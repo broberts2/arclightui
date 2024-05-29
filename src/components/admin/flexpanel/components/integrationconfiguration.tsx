@@ -1,27 +1,19 @@
 import React from "react";
 
-export default (
-  c: { [key: string]: any },
-  i: any,
-  Monaco: any,
-  state: { [key: string]: any },
-  setState: Function,
-  fns: any,
-  D: any
-) => {
-  const k = fns.parseAdminDomainState().integration;
+export default (obj: any) => {
+  const k = obj.fns.parseAdminDomainState().integration;
   const v =
-    D && D.getintegrations && D.getintegrations[k]
-      ? D.getintegrations[k]
+    obj.D && obj.D.getintegrations && obj.D.getintegrations[k]
+      ? obj.D.getintegrations[k]
       : null;
   return v ? (
     <div style={{ height: "100%", width: "100%" }}>
-      <Monaco
+      <obj.Monaco
         refName={"Integration"}
         language={"json"}
-        defaultValue={JSON.stringify(D.getintegrations[k])}
-        state={state}
-        setState={setState}
+        defaultValue={JSON.stringify(obj.D.getintegrations[k])}
+        state={obj.state}
+        setState={obj.setState}
       />
     </div>
   ) : null;

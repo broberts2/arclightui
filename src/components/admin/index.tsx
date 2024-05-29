@@ -72,7 +72,7 @@ const Admin: FC<{
         backgroundImage={{
           src: backgroundImage
             ? backgroundImage
-            : `https://highmountainlabs.io/cdn/arclight/media/1.jpg`,
+            : `https://highmountainlabs.io/cdn/arclight/media/hml.jpg`,
           opacity: 0.5,
         }}
       >
@@ -114,7 +114,7 @@ const Admin: FC<{
                 authBackgroundImage={
                   authBackgroundImage
                     ? authBackgroundImage
-                    : `https://highmountainlabs.io/cdn/arclight/media/2.jpg`
+                    : `https://highmountainlabs.io/cdn/arclight/media/hml.jpg`
                 }
                 OATHOnly={false}
                 OATH={[

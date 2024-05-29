@@ -1,6 +1,7 @@
 import DatabaseListPanel from "./database/listpanel";
 import DatabaseRecordPanel from "./database/recordpanel";
 import EventSchedulerPanel from "./database/eventschedulerpanel";
+import DatabaseArticlePanel from "./database/articlepanel";
 
 import FormsListPanel from "./forms/listpanel";
 import FormsPanel from "./forms/formpanel";
@@ -45,9 +46,12 @@ const isProtectedRecord = (currentState: any) => {
 };
 
 const Panels: any = {
-  Database: [DatabaseListPanel, DatabaseRecordPanel, EventSchedulerPanel].map(
-    (panel: any) => panel(xFormKey, setTitle, isProtectedRecord)
-  ),
+  Database: [
+    DatabaseListPanel,
+    DatabaseRecordPanel,
+    EventSchedulerPanel,
+    DatabaseArticlePanel,
+  ].map((panel: any) => panel(xFormKey, setTitle, isProtectedRecord)),
   Forms: [FormsListPanel, FormsListPanel, FormsPanel].map((panel: any) =>
     panel(xFormKey, setTitle, isProtectedRecord)
   ),

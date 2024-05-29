@@ -42,15 +42,13 @@ const Panel = (props) => {
   );
 };
 
-export default (
-  c: { [key: string]: any },
-  i: any,
-  HeroPanel: any,
-  state: { [key: string]: any },
-  setState: Function,
-  fns: any,
-  D: any,
-  publicURI: string
-) => {
-  return <Panel fns={fns} D={D} HeroPanel={HeroPanel} publicURI={publicURI} />;
+export default (obj: any) => {
+  return (
+    <Panel
+      fns={obj.fns}
+      D={obj.D}
+      HeroPanel={obj.HeroPanel}
+      publicURI={obj.publicURI}
+    />
+  );
 };

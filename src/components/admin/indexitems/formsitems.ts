@@ -5,7 +5,9 @@ export default (D: any, fns: any) => {
     D,
     fns
   )(
-    D &&
+    // remove false flag to restore
+    false &&
+      D &&
       D.getdatamodels &&
       D.getdatamodels.records &&
       Array.isArray(D.getdatamodels.records) &&

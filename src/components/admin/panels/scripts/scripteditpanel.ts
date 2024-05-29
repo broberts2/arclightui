@@ -4,7 +4,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
     const ss = fns.parseAdminDomainState().selectedscript;
     return {
       title: ss ? `Edit Script` : `Create Script`,
-      backgroundImg: `https://highmountainlabs.io/cdn/arclight/media/2.jpg`,
+      backgroundImg: `https://highmountainlabs.io/cdn/arclight/media/hml.jpg`,
       controls: [{ type: "ScriptMonaco", label: "Z", onClick: () => null }],
       [ss ? `onUpdate` : `onCreate`]: () => {
         return fns.calls[ss ? `updatescripts` : "createscripts"]({

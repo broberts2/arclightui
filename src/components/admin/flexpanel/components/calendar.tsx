@@ -1,19 +1,11 @@
-export default (
-  c: { [key: string]: any },
-  i: Number,
-  Calendar: any,
-  state: { [key: string]: any },
-  setState: Function,
-  D: any,
-  fns: any
-) => {
+export default (obj: any) => {
   return (
     <div className={``}>
-      <Calendar
-        script={c.script}
-        type={!c.script ? "admin" : undefined}
-        D={D}
-        fns={fns}
+      <obj.Calendar
+        script={obj.c.script}
+        type={!obj.c.script ? "admin" : undefined}
+        D={obj.D}
+        fns={obj.fns}
         defaultEventBgImg={`https://titanesports.org:7000/static/media/tesbg.png`}
         events={[]}
       />

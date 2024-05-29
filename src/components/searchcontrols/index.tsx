@@ -1,12 +1,13 @@
 import React, { FC } from "react";
 import Styles from "./styles";
 import Button from "../button";
+import PickList from "../picklist";
 import TextField from "../textfield";
 
 export interface PropTypes {
   minHeight: number;
   textField: any;
-  buttons?: Array<{
+  controls?: Array<{
     icon: string | null;
     text: string | null;
     key: string | null;
@@ -20,12 +21,14 @@ export interface PropTypes {
   setBtnActive?: Function;
   search?: any;
   picklist?: boolean;
+  D: any;
+  fns: any;
 }
 
 const SearchControls: FC<PropTypes> = ({
   minHeight,
   textField,
-  buttons,
+  controls,
   className,
   children,
   constrain,
@@ -35,9 +38,11 @@ const SearchControls: FC<PropTypes> = ({
   setBtnActive,
   search,
   picklist,
+  D,
+  fns,
 }) => {
   const [searchKey, setSearchKey] = React.useState(
-    buttons && buttons.length ? buttons[0].key : null
+    controls && controls.length ? controls[0].key : null
   );
   const a = pagination ? pagination.skip * pagination.length + 1 : null;
   const b = pagination
@@ -121,7 +126,7 @@ const SearchControls: FC<PropTypes> = ({
           />
         </div>
       ) : null}
-      {buttons && search ? (
+      {controls && search ? (
         <React.Fragment>
           <div className={`arclight-flex arclight-flex-row`}>
             <Button
@@ -157,46 +162,93 @@ const SearchControls: FC<PropTypes> = ({
               }
             />
             <NextLast isTop={true} />
-            {/* <div
-              className={`arclight-hidden arclight-flex-row arclight-justify-end arclight-w-full lg:arclight-flex`}
+            <div
+              className={`arclight-hidden arclight-flex-row arclight-justify-end arclight-w-full lg:arclight-flex arclight-space-x-3`}
             >
-              {buttons.map((b: any, i) => (
-                <Button
-                  label={b.text ? b.text : null}
-                  idleIcon={b.icon ? b.icon : null}
-                  type={"button"}
-                  size={"normal"}
-                  animation={true}
-                  className={`arclight-m-1 ${
-                    i === btnActive ? "" : "arclight-opacity-30"
-                  }`}
-                  onClick={() => {
-                    if (setBtnActive) setBtnActive(i);
-                    setSearchKey(b.key);
-                  }}
-                />
-              ))}
+              {controls.map((b: any, i) => {
+                if (b.type === "button")
+                  return (
+                    <Button
+                      label={b?.text}
+                      idleIcon={b?.icon}
+                      type={"button"}
+                      size={"normal"}
+                      animation={true}
+                      className={`arclight-m-1 ${
+                        i === btnActive ? "" : "arclight-opacity-30"
+                      }`}
+                      onClick={() => {
+                        if (setBtnActive) setBtnActive(i);
+                        setSearchKey(b.key);
+                      }}
+                    />
+                  );
+                if (b.type === "picklist")
+                  return (
+                    <div className={`arclight-w-96`}>
+                      <PickList
+                        disallowNone
+                        span
+                        hot
+                        value={"test"}
+                        list={[]}
+                        onChange={(e: any) => {}}
+                        keyname={"test"}
+                        id={undefined}
+                        label={"model"}
+                        variant="standard"
+                        type={"test"}
+                        fns={fns}
+                        D={D}
+                      />
+                    </div>
+                  );
+              })}
             </div>
             <div
-              className={`arclight-flex arclight-flex-row arclight-justify-end arclight-w-full lg:arclight-hidden`}
+              className={`arclight-flex arclight-flex-row arclight-justify-end arclight-w-full lg:arclight-hidden arclight-space-x-3`}
             >
-              {buttons.map((b: any, i) => (
-                <Button
-                  label={null}
-                  idleIcon={b.icon ? b.icon : null}
-                  type={"button"}
-                  size={"small"}
-                  animation={true}
-                  className={`arclight-m-1 ${
-                    i === btnActive ? "" : "arclight-opacity-30"
-                  }`}
-                  onClick={() => {
-                    if (setBtnActive) setBtnActive(i);
-                    setSearchKey(b.key);
-                  }}
-                />
-              ))}
-            </div> */}
+              {controls.map((b: any, i) => {
+                if (b.type === "button")
+                  return (
+                    <Button
+                      label={null}
+                      idleIcon={b.icon ? b.icon : null}
+                      type={"button"}
+                      size={"small"}
+                      animation={true}
+                      className={`arclight-m-1 ${
+                        i === btnActive ? "" : "arclight-opacity-30"
+                      }`}
+                      onClick={() => {
+                        if (setBtnActive) setBtnActive(i);
+                        setSearchKey(b.key);
+                      }}
+                    />
+                  );
+                if (b.type === "picklist")
+                  return (
+                    <div className={`arclight-w-96`}>
+                      {/* <PickList
+                        D={D}
+                        fns={fns}
+                        unlinked
+                        disallowNone
+                        span
+                        hot
+                        value={"Test"}
+                        list={[{ value: "String", text: "String" }].sort(
+                          (a, b) => (a.text < b.text ? -1 : 1)
+                        )}
+                        onChange={(e: any) => {}}
+                        keyname={"test"}
+                        label={"type"}
+                        variant="standard"
+                      /> */}
+                    </div>
+                  );
+              })}
+            </div>
           </div>
         </React.Fragment>
       ) : null}

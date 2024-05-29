@@ -1,46 +1,36 @@
 import React from "react";
 
-export default (
-  c: { [key: string]: any },
-  i: Number,
-  TextField: any,
-  PickList: any,
-  Checkbox: any,
-  Bttn: any,
-  state: { [key: string]: any },
-  setState: Function,
-  D: any,
-  fns: any
-) => {
-  console.log(state[c.label].lookup);
-  return state && state[c.label] && typeof state[c.label] === "object" ? (
+export default (obj: any) => {
+  return obj.state &&
+    obj.state[obj.c.label] &&
+    typeof obj.state[obj.c.label] === "object" ? (
     <div
       className={`arclight-border-background-quarternary arclight-border-l-2 arclight-p-4 arclight-flex-row arclight-justify-start arclight-space-y-4`}
     >
-      <TextField
+      <obj.TextField
         span
         hot
-        defaultValue={state[c.label].key}
+        defaultValue={obj.state[obj.c.label].key}
         onChange={(e: any) =>
-          setState((_: any) => ({
+          obj.setState((_: any) => ({
             ..._,
-            [c.label]: {
-              ...state[c.label],
+            [obj.c.label]: {
+              ...obj.state[obj.c.label],
               key: e.target.value,
             },
           }))
         }
         type={"text"}
-        key={i}
+        key={obj.i}
         label={"key"}
         variant="standard"
       />
-      <PickList
+      <obj.PickList
         unlinked
         disallowNone
         span
         hot
-        value={state[c.label].type}
+        value={obj.state[obj.c.label].type}
         list={[
           { value: "String", text: "String" },
           { value: "Number", text: "Number" },
@@ -50,79 +40,79 @@ export default (
           { value: "JSON", text: "JSON" },
         ].sort((a, b) => (a.text < b.text ? -1 : 1))}
         onChange={(e: any) =>
-          setState((_: any) => ({
+          obj.setState((_: any) => ({
             ..._,
-            [c.label]: {
-              ...state[c.label],
+            [obj.c.label]: {
+              ...obj.state[obj.c.label],
               type: e.target.value,
               lookup: null,
             },
           }))
         }
-        key={i}
+        key={obj.i}
         label={"type"}
         variant="standard"
       />
-      {state[c.label].lookup &&
-      !state[c.label].adminlookup &&
-      D.getdatamodels &&
-      D.getdatamodels.records ? (
-        <PickList
+      {obj.state[obj.c.label].lookup &&
+      !obj.state[obj.c.label].adminlookup &&
+      obj.D.getdatamodels &&
+      obj.D.getdatamodels.records ? (
+        <obj.PickList
           disallowNone
           span
           hot
           value={
-            state[c.label].lookup &&
-            D.getdatamodels.records.find(
-              (R: any) => R._type === state[c.label].lookup
+            obj.state[obj.c.label].lookup &&
+            obj.D.getdatamodels.records.find(
+              (R: any) => R._type === obj.state[obj.c.label].lookup
             )
-              ? state[c.label].lookup
+              ? obj.state[obj.c.label].lookup
               : undefined
           }
-          list={D.getdatamodels.records.map((el: any) => ({
+          list={obj.D.getdatamodels.records.map((el: any) => ({
             text: el._type,
             value: el._type,
             _id: el._id,
           }))}
           onChange={(e: any) => {
-            return setState((_: any) => ({
+            return obj.setState((_: any) => ({
               ..._,
-              [c.label]: {
-                ...state[c.label],
+              [obj.c.label]: {
+                ...obj.state[obj.c.label],
                 lookup: e.target.value,
               },
             }));
           }}
-          keyname={state[c.label].key}
+          keyname={obj.state[obj.c.label].key}
           id={(() => {
-            const _ = D.getdatamodels.records.find(
-              (el: any) => el._type === state[c.label].lookup
+            const _ = obj.D.getdatamodels.records.find(
+              (el: any) => el._type === obj.state[obj.c.label].lookup
             );
             if (_) return _._id;
           })()}
           label={"model"}
           variant="standard"
-          type={state[c.label].lookup}
-          fns={fns}
-          D={D}
+          type={obj.state[obj.c.label].lookup}
+          fns={obj.fns}
+          D={obj.D}
         />
       ) : null}
-      {state[c.label].adminlookup ? (
-        <TextField
+      {obj.state[obj.c.label].adminlookup ? (
+        <obj.TextField
           span
           hot
-          defaultValue={state[c.label].adminlookup}
+          defaultValue={obj.state[obj.c.label].adminlookup}
           onChange={(e: any) =>
-            setState((_: any) => ({
+            obj.setState((_: any) => ({
               ..._,
-              [c.label]: {
-                ...state[c.label],
+              [obj.c.label]: {
+                ...obj.state[obj.c.label],
                 adminlookup: e.target.value,
               },
             }))
           }
           type={"text"}
-          key={i}
+          key={obj.i}
           label={"adminlookup"}
           variant="standard"
         />
@@ -132,22 +122,22 @@ export default (
       >
         <div
           className={`arclight-m-auto ${
-            state[c.label] &&
-            state[c.label].type &&
-            (state[c.label].type === "String" ||
-              state[c.label].type === "Array")
+            obj.state[obj.c.label] &&
+            obj.state[obj.c.label].type &&
+            (obj.state[obj.c.label].type === "String" ||
+              obj.state[obj.c.label].type === "Array")
               ? null
               : `arclight-opacity-30 arclight-pointer-events-none`
           }`}
         >
-          <Checkbox
-            value={state[c.label].lookup}
+          <obj.Checkbox
+            value={obj.state[obj.c.label].lookup}
             onChange={(b: boolean, cb: Function) => {
-              setState((_: any) => ({
+              obj.setState((_: any) => ({
                 ..._,
-                [c.label]: {
-                  ...state[c.label],
-                  lookup: b ? null : _[c.label],
+                [obj.c.label]: {
+                  ...obj.state[obj.c.label],
+                  lookup: b ? null : _[obj.c.label],
                 },
               }));
               cb(!b);
@@ -156,26 +146,26 @@ export default (
         </div>
         <div
           className={`arclight-m-auto ${
-            state[c.label] &&
-            state[c.label].type &&
-            (state[c.label].type === "String" ||
-              state[c.label].type === "Array")
+            obj.state[obj.c.label] &&
+            obj.state[obj.c.label].type &&
+            (obj.state[obj.c.label].type === "String" ||
+              obj.state[obj.c.label].type === "Array")
               ? null
               : `arclight-opacity-30 arclight-pointer-events-none`
           }`}
         >
           Lookup
         </div>
-        {state[c.label].lookup ? (
+        {obj.state[obj.c.label].lookup ? (
           <React.Fragment>
             <div className={`arclight-m-auto`}>
-              <Checkbox
-                value={state[c.label].adminlookup ? true : false}
+              <obj.Checkbox
+                value={obj.state[obj.c.label].adminlookup ? true : false}
                 onChange={(b: boolean, cb: Function) => {
-                  setState((_: any) => ({
+                  obj.setState((_: any) => ({
                     ..._,
-                    [c.label]: {
-                      ...state[c.label],
+                    [obj.c.label]: {
+                      ...obj.state[obj.c.label],
                       adminlookup: b ? undefined : "",
                     },
                   }));
@@ -189,13 +179,13 @@ export default (
           </React.Fragment>
         ) : null}
         <div className={`arclight-m-auto`}>
-          <Checkbox
-            value={state[c.label].required}
+          <obj.Checkbox
+            value={obj.state[obj.c.label].required}
             onChange={(b: boolean, cb: Function) => {
-              setState((_: any) => ({
+              obj.setState((_: any) => ({
                 ..._,
-                [c.label]: {
-                  ...state[c.label],
+                [obj.c.label]: {
+                  ...obj.state[obj.c.label],
                   required: b ? false : true,
                 },
               }));
@@ -223,11 +213,11 @@ export default (
         <div
           className={`arclight-flex arclight-justify-end arclight-w-full arclight-space-x-2`}
         >
-          {!state[c.label].system || true ? (
-            <Bttn
+          {!obj.state[obj.c.label].system || true ? (
+            <obj.Bttn
               t={"Remove"}
               a={() => {
-                setState((_: any) => ({ ..._, [c.label]: undefined }));
+                obj.setState((_: any) => ({ ..._, [obj.c.label]: undefined }));
               }}
             />
           ) : null}
