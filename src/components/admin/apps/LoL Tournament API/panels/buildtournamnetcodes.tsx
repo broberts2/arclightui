@@ -1,6 +1,7 @@
 import React from "react";
 
 export default (props: any) => {
+  let TEAMS_LIST = undefined;
   const [state, setState] = React.useState({
     league: null,
     team1: null,
@@ -19,6 +20,15 @@ export default (props: any) => {
     )
       props.fns.calls.getintegrations();
   });
+  if (
+    props.D &&
+    props.D.getintegrations &&
+    props.D.getintegrations["LoL Tournament API"] &&
+    props.D.getintegrations["LoL Tournament API"].overrides.teamlookup &&
+    props.D.getintegrations["LoL Tournament API"].overrides.teamlookup.length
+  )
+    TEAMS_LIST =
+      props.D.getintegrations["LoL Tournament API"].overrides.teamlookup;
   return props.D &&
     props.D.getintegrations &&
     props.D.getintegrations["LoL Tournament API"] ? (
@@ -44,6 +54,9 @@ export default (props: any) => {
         },
       ].map((el: any) => (
         <props.Controls.PickList
+          script={
+            TEAMS_LIST && el.value.includes("team") ? TEAMS_LIST : undefined
+          }
           keyname={"name"}
           searchkey={"name"}
           type={el.type}
@@ -54,16 +67,30 @@ export default (props: any) => {
           value={state[el.value]}
           list={
             props.D &&
-            props.D[`getrecords_${el.type}`] &&
-            props.D[`getrecords_${el.type}`][el.label] &&
-            props.D[`getrecords_${el.type}`][el.label].records
-              ? props.D[`getrecords_${el.type}`][el.label].records.map(
-                  (obj: any) => {
-                    const _: any = { value: obj._id };
-                    _.text = obj.name;
-                    return _;
-                  }
-                )
+            props.D[
+              TEAMS_LIST && el.value.includes("team")
+                ? TEAMS_LIST
+                : `getrecords_${el.type}`
+            ] &&
+            props.D[
+              TEAMS_LIST && el.value.includes("team")
+                ? TEAMS_LIST
+                : `getrecords_${el.type}`
+            ][el.label] &&
+            props.D[
+              TEAMS_LIST && el.value.includes("team")
+                ? TEAMS_LIST
+                : `getrecords_${el.type}`
+            ][el.label].records
+              ? props.D[
+                  TEAMS_LIST && el.value.includes("team")
+                    ? TEAMS_LIST
+                    : `getrecords_${el.type}`
+                ][el.label].records.map((obj: any) => {
+                  const _: any = { value: obj._id };
+                  _.text = obj.name;
+                  return _;
+                })
               : []
           }
           onChange={(e: any) =>

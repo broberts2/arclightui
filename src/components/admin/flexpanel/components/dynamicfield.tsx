@@ -54,7 +54,6 @@ export default (obj: any) => {
         variant="standard"
       />
       {obj.state[obj.c.label].lookup &&
-      !obj.state[obj.c.label].adminlookup &&
       obj.D.getdatamodels &&
       obj.D.getdatamodels.records ? (
         <obj.PickList
@@ -97,7 +96,7 @@ export default (obj: any) => {
           D={obj.D}
         />
       ) : null}
-      {obj.state[obj.c.label].adminlookup ? (
+      {obj.state[obj.c.label].lookup ? (
         <obj.TextField
           span
           hot
@@ -156,28 +155,6 @@ export default (obj: any) => {
         >
           Lookup
         </div>
-        {obj.state[obj.c.label].lookup ? (
-          <React.Fragment>
-            <div className={`arclight-m-auto`}>
-              <obj.Checkbox
-                value={obj.state[obj.c.label].adminlookup ? true : false}
-                onChange={(b: boolean, cb: Function) => {
-                  obj.setState((_: any) => ({
-                    ..._,
-                    [obj.c.label]: {
-                      ...obj.state[obj.c.label],
-                      adminlookup: b ? undefined : "",
-                    },
-                  }));
-                  cb(!b);
-                }}
-              />
-            </div>
-            <div className={`arclight-m-auto arclight-whitespace-nowrap`}>
-              Admin Lookup
-            </div>
-          </React.Fragment>
-        ) : null}
         <div className={`arclight-m-auto`}>
           <obj.Checkbox
             value={obj.state[obj.c.label].required}
@@ -194,22 +171,6 @@ export default (obj: any) => {
           />
         </div>
         <div className={`arclight-m-auto`}>Required</div>
-        {/* <div className={`arclight-m-auto`}>
-          <Checkbox
-            value={state[c.label].searchable}
-            onChange={(b: boolean, cb: Function) => {
-              setState((_: any) => ({
-                ..._,
-                [c.label]: {
-                  ...state[c.label],
-                  searchable: b ? false : true,
-                },
-              }));
-              cb(!b);
-            }}
-          />
-        </div>
-        <div className={`arclight-m-auto`}>Searchable</div> */}
         <div
           className={`arclight-flex arclight-justify-end arclight-w-full arclight-space-x-2`}
         >

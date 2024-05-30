@@ -91,6 +91,7 @@ export default (xFormKey: any, setTitle: any, isProtectedRecord: any) =>
                   ))
               );
             }
+            delete currentState.Article;
             fns.calls[
               `${currentState._id ? "update" : "create"}${
                 key === "model" ? "datamodels" : `records_${key}`

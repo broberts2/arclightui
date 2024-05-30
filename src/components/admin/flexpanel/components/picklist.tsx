@@ -1,4 +1,13 @@
 export default (obj: any, multiple?: boolean) => {
+  const dblist =
+    (obj.c.adminlookup &&
+      obj.c.D[obj.c.adminlookup] &&
+      obj.c.D[obj.c.adminlookup][obj.c.label] &&
+      obj.c.D[obj.c.adminlookup][obj.c.label].records) ||
+    (obj.c.lookup &&
+      obj.c.D[`getrecords_${obj.c.lookup}`] &&
+      obj.c.D[`getrecords_${obj.c.lookup}`][obj.c.label] &&
+      obj.c.D[`getrecords_${obj.c.lookup}`][obj.c.label].records);
   const _pL = (i: number) => (
     <div
       className={
@@ -6,6 +15,7 @@ export default (obj: any, multiple?: boolean) => {
       }
     >
       <obj.PickList
+        script={obj.c.adminlookup}
         type={obj.c.lookup}
         D={obj.D}
         fns={obj.fns}
@@ -29,21 +39,14 @@ export default (obj: any, multiple?: boolean) => {
                 { text: "true", value: true },
                 { text: "false", value: false },
               ]
-            : obj.c &&
-              obj.c.D &&
-              obj.c.lookup &&
-              obj.c.D[`getrecords_${obj.c.lookup}`] &&
-              obj.c.D[`getrecords_${obj.c.lookup}`][obj.c.label] &&
-              obj.c.D[`getrecords_${obj.c.lookup}`][obj.c.label].records
-            ? obj.c.D[`getrecords_${obj.c.lookup}`][obj.c.label].records.map(
-                (obj: any) => {
-                  const _: any = { value: obj._id };
-                  if (obj.name) _.text = obj.name;
-                  else if (obj.username) _.text = obj.username;
-                  else if (obj.text) _.text = obj.text;
-                  return _;
-                }
-              )
+            : obj.c && obj.c.D && dblist
+            ? dblist.map((obj: any) => {
+                const _: any = { value: obj._id };
+                if (obj.name) _.text = obj.name;
+                else if (obj.username) _.text = obj.username;
+                else if (obj.text) _.text = obj.text;
+                return _;
+              })
             : []
         }
         onChange={(e: any) => {

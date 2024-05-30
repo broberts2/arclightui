@@ -56,6 +56,7 @@ export default (obj) => {
                   key: obj.c.label,
                   type: v[obj.c.label]._type,
                   lookup: obj.c.lookup,
+                  adminlookup: obj.c.adminlookup,
                   required: obj.c.required,
                   system: v._system,
                 }

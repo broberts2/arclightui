@@ -31,24 +31,21 @@ export interface PropTypes {
   fns: any;
   id?: any;
   searchkey?: string;
+  script?: string;
 }
 
 const __val = (obj: any, value: boolean = false) => {
   if (!obj.D) return;
   const _ = obj.label === "model";
+  const __ = obj.script ? obj.script : `getrecords_${obj.type}`;
   if (
     _ &&
     obj.D.getdatamodels &&
     obj.D.getdatamodels[`model__${obj.label}value-${obj.keyname}`]
   ) {
     return obj.D.getdatamodels[`model__${obj.label}value-${obj.keyname}`];
-  } else if (
-    obj.D[`getrecords_${obj.type}`] &&
-    obj.D[`getrecords_${obj.type}`][`${obj.label}`]
-  ) {
-    return obj.D[`getrecords_${obj.type}`][
-      `${obj.label}${value ? "value" : ""}`
-    ];
+  } else if (obj.D[__] && obj.D[__][`${obj.label}`]) {
+    return obj.D[__][`${obj.label}${value ? "value" : ""}`];
   }
 };
 
@@ -64,6 +61,7 @@ const __renderValue = (obj: {
   list?: any;
   value?: any;
   unlinked?: boolean;
+  script?: string;
 }) => {
   const v = obj.unlinked
     ? {
@@ -76,7 +74,7 @@ const __renderValue = (obj: {
     return v.records
       .map((_: any) => {
         if (!_) return;
-        const arr = ["_type", "username", "name", "text"];
+        const arr = ["_type", "username", "name", "text", "title"];
         for (let i = 0; i < arr.length; i++) if (_[arr[i]]) return _[arr[i]];
       })
       .join(", ");
@@ -87,31 +85,63 @@ const __renderValue = (obj: {
 const __query = (obj: any) => {
   const _ = obj.type === "model";
   const __ = obj.label === "model";
-  if (!__ && obj.fns.calls[_ ? "getdatamodels" : `getrecords_${obj.type}`]) {
-    obj.fns.calls[_ ? "getdatamodels" : `getrecords_${obj.type}`]({
-      index: !_ ? obj.label : undefined,
-      search: {
-        [obj.searchkey]: obj.searchFilterValue
-          ? { $regex: obj.searchFilterValue, $options: "i" }
-          : undefined,
-        limit: _picklistSizeLimit,
-        skip: obj.skip * _picklistSizeLimit,
-      },
-    });
+  if (
+    !__ &&
+    obj.fns.calls[
+      obj.script ? obj.script : _ ? "getdatamodels" : `getrecords_${obj.type}`
+    ]
+  ) {
+    if (obj.script) {
+      obj.fns.calls[obj.script]({
+        index: obj.label,
+        search: {
+          [obj.searchkey]: obj.searchFilterValue
+            ? { $regex: obj.searchFilterValue, $options: "i" }
+            : undefined,
+          limit: _picklistSizeLimit,
+          skip: obj.skip * _picklistSizeLimit,
+        },
+      });
+    } else {
+      obj.fns.calls[_ ? "getdatamodels" : `getrecords_${obj.type}`]({
+        index: !_ ? obj.label : undefined,
+        search: {
+          [obj.searchkey]: obj.searchFilterValue
+            ? { $regex: obj.searchFilterValue, $options: "i" }
+            : undefined,
+          limit: _picklistSizeLimit,
+          skip: obj.skip * _picklistSizeLimit,
+        },
+      });
+    }
   }
   if (obj.value && obj.value.length) {
-    if (!obj.fns.calls[__ ? `getdatamodels` : `getrecords_${obj.type}`]) return;
+    if (
+      obj.script
+        ? !obj.fns.calls[obj.script]
+        : !obj.fns.calls[__ ? `getdatamodels` : `getrecords_${obj.type}`]
+    )
+      return;
     const _id = Array.isArray(obj[__ ? "id" : "value"])
       ? { $in: obj[__ ? "id" : "value"] }
       : obj[__ ? "id" : "value"];
-    obj.fns.calls[__ ? `getdatamodels` : `getrecords_${obj.type}`]({
-      index: `${__ ? "model__" : ""}${obj.label}value${
-        __ ? `-${obj.keyname}` : ""
-      }`,
-      search: {
-        _id,
-      },
-    });
+    if (obj.script) {
+      obj.fns.calls[obj.script]({
+        index: `${obj.label}value`,
+        search: {
+          _id,
+        },
+      });
+    } else {
+      obj.fns.calls[__ ? `getdatamodels` : `getrecords_${obj.type}`]({
+        index: `${__ ? "model__" : ""}${obj.label}value${
+          __ ? `-${obj.keyname}` : ""
+        }`,
+        search: {
+          _id,
+        },
+      });
+    }
   }
 };
 
@@ -132,6 +162,7 @@ const PickList: FC<PropTypes> = ({
   id,
   unlinked,
   searchkey,
+  script,
 }) => {
   const [_searchkey, setSearchKey] = React.useState(searchkey);
   const [skip, setSkip] = React.useState(0);
@@ -209,6 +240,7 @@ const PickList: FC<PropTypes> = ({
       keyname,
       id,
       searchkey: _searchkey,
+      script,
     });
   }, [skip]);
   return !(!Array.isArray(value) && multiple) ? (
@@ -231,6 +263,7 @@ const PickList: FC<PropTypes> = ({
           value={value}
           renderValue={() => {
             return __renderValue({
+              script,
               D,
               type,
               label,
@@ -246,6 +279,7 @@ const PickList: FC<PropTypes> = ({
             setSkip(0);
             if (id) setLoading(true);
             __query({
+              script,
               type,
               fns,
               label,
@@ -265,11 +299,12 @@ const PickList: FC<PropTypes> = ({
                   : Array.isArray(d.target.value)
                   ? { $in: d.target.value }
                   : d.target.value;
-                const index = _
-                  ? `model__${label}value-${keyname}`
-                  : `${label}value`;
-                fns.calls[_ ? `getdatamodels` : `getrecords_${type}`]({
-                  index,
+                fns.calls[
+                  _ ? `getdatamodels` : script ? script : `getrecords_${type}`
+                ]({
+                  index: _
+                    ? `model__${label}value-${keyname}`
+                    : `${label}value`,
                   search: {
                     _id,
                   },
@@ -298,7 +333,7 @@ const PickList: FC<PropTypes> = ({
             //transitionDuration: 200
           }}
         >
-          {__condition1({ D, loading, type, keyname, label }) ? (
+          {__condition1({ D, loading, type, keyname, label, script }) ? (
             <div
               className={`arclight-text-text-primary arclight-font-primary arclight-m-5 arclight-mb-0 arclight-mt-0 arclight-max-w-sm`}
             >
@@ -325,6 +360,7 @@ const PickList: FC<PropTypes> = ({
                   className={`arclight-m-1 lg:arclight-block`}
                   onClick={() => {
                     __query({
+                      script,
                       searchFilterValue,
                       type,
                       fns,

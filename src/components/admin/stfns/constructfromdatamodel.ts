@@ -53,6 +53,7 @@ export default (D: any) =>
                     )
                   : undefined,
                 lookup: _ && _.lookup ? _.lookup : null,
+                adminlookup: _ && _.adminlookup ? _.adminlookup : null,
                 D,
                 type: lookup(fieldsObj[k]),
                 label: k,
