@@ -33,29 +33,19 @@ root.render(
               "https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png",
           },
         },
-        // brocroberts: {
-        //   Home: {
-        //     route: "/",
-        //     component: require("./pages/brocroberts/Home"),
-        //   },
-        // },
         _root_: {
           Home: {
             route: "/",
             component: require("./pages/highmountainlabs/Home"),
           },
-          Mox: {
-            route: "/mox",
-            component: require("./pages/highmountainlabs/Mox"),
+          // Mox: {
+          //   route: "/mox",
+          //   component: require("./pages/highmountainlabs/Mox"),
+          // },
+          Lab_ArticlePage: {
+            route: "/lab-articlepage",
+            component: require("./pages/highmountainlabs/Lab/articlepage"),
           },
-          // Login: {
-          //   route: "/login",
-          //   component: require("./pages/highmountainlabs/Login"),
-          // },
-          // ArclightUI: {
-          //   route: "/arclightui",
-          //   component: require("./pages/highmountainlabs/ArclightUI"),
-          // },
         },
       }}
     />

@@ -3,17 +3,18 @@ import { TextField as _TextField } from "@mui/material";
 import Styles from "./styles";
 
 export interface PropTypes {
-  type: string;
+  type: "text" | "password" | string;
   multiline?: boolean;
   rows?: number;
   span?: boolean | null;
   key: number;
   label?: string | null;
-  variant: any;
+  variant: "standard";
   onChange: Function;
   hot?: boolean;
   value?: string;
   defaultValue?: string;
+  onSelect?: Function;
 }
 
 const TextField: FC<PropTypes> = ({
@@ -28,6 +29,7 @@ const TextField: FC<PropTypes> = ({
   defaultValue,
   multiline,
   rows,
+  onSelect,
 }) => {
   const inputRef = React.useRef<{ [key: string]: any }>();
   return (
@@ -37,6 +39,7 @@ const TextField: FC<PropTypes> = ({
           e.stopPropagation();
           //e.preventDefault();
         }}
+        onClick={() => (onSelect ? onSelect() : undefined)}
         rows={rows}
         multiline={multiline}
         inputRef={inputRef}

@@ -11,6 +11,7 @@ import Card from "./card";
 import Checkbox from "./checkbox";
 import CheckboxGroup from "./checkboxgroup";
 import ClippingMask from "./clippingmask";
+import Comments from "./comments";
 import CompassViewer from "./compassviewer";
 import Dashboard from "./dashboard";
 import DateSelector from "./dateselector";
@@ -55,6 +56,7 @@ export {
   Checkbox,
   CheckboxGroup,
   ClippingMask,
+  Comments,
   CompassViewer,
   Dashboard,
   DateSelector,

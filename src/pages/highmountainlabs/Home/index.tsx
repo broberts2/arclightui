@@ -1,5 +1,6 @@
 import React, { FC } from "react";
-import { Page } from "../../../components";
+import { ArticlePage, Page } from "../../../components";
+import init from "../../../projectcomponents/init";
 
 const Home: FC<{
   fns: {
@@ -8,19 +9,19 @@ const Home: FC<{
   D: { [key: string]: any };
   endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
+  React.useEffect(() => init(fns, D), [fns]);
   return D && fns.calls ? (
     <Page
       fns={fns}
       backgroundImage={{
-        src: `https://highmountainlabs.io/arclight/static/media/65e3b40035b8895019faa204.jpg`,
-        opacity: 0.0,
+        // src: "https://highmountainlabs.io/arclight/static/media/6659788dad339f0190d46071.mp4",
+        src: "https://highmountainlabs.io/arclight/static/media/6659788dad339f0190d46074.mp4",
+        opacity: 0.5,
       }}
     >
-      <div
-        className={`arclight-h-screen arclight-flex arclight-pointer-events-none`}
-      >
+      <div className={`arclight-h-screen arclight-flex`}>
         <div
-          className={`arclight-m-auto arclight-text-center arclight-flex-col arclight-space-y-3`}
+          className={`arclight-m-auto arclight-text-center arclight-flex-col arclight-space-y-3 arclight-pointer-events-none`}
         >
           <img
             src={`https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`}

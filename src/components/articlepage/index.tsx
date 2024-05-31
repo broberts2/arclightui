@@ -6,6 +6,8 @@ import TextField from "../textfield";
 import Quill from "../quill";
 import Button from "../button";
 import moment from "moment";
+import FontAwesome from "../fontawesome";
+import Comments from "../comments";
 
 export interface PropTypes {
   fns: {
@@ -15,13 +17,15 @@ export interface PropTypes {
   setPreview?: Function;
   D: { [key: string]: any };
   className?: string | object | null;
-  bannerImg: string;
-  ruby: string;
-  googledoc: string;
+  bannerImg?: string;
+  ruby?: string;
+  googledoc?: string;
   nopage: string;
   cb?: Function;
   init?: { [key: string]: any };
-  edit?: Boolean;
+  edit?: boolean;
+  comments?: boolean;
+  views?: boolean;
 }
 
 const ArticlePage: FC<PropTypes> = ({
@@ -37,6 +41,8 @@ const ArticlePage: FC<PropTypes> = ({
   preview,
   setPreview,
   edit,
+  comments,
+  views,
 }) => {
   const blockTemplate = (index: number) => ({
     title: `Block Title ${index + 1}`,
@@ -218,22 +224,53 @@ const ArticlePage: FC<PropTypes> = ({
               />
             ))}
           </div>
-          <div className={`arclight-text-right arclight-flex-col`}>
-            {authorName ? (
-              <div className={`arclight-text-lg`}>{authorName}</div>
-            ) : null}
-            {init?.createddate ? (
-              <div className={`arclight-text-sm`}>
-                {moment(init.createddate).format("MMM Do, YYYY").toString()}
-              </div>
-            ) : null}
+          <div className={`arclight-flex arclight-items-end`}>
+            <div
+              className={`arclight-flex arclight-items-start arclight-justify-start arclight-w-full arclight-space-x-5`}
+            >
+              {[
+                {
+                  icon: "eye",
+                  text: "views",
+                  value: views ? init.views : undefined,
+                },
+                {
+                  icon: "comments",
+                  text: "comments",
+                  value: comments ? init.comments.length : undefined,
+                },
+              ]
+                .filter((el: any) => el.value !== undefined)
+                .map((icon: any) => (
+                  <div className={`arclight-flex arclight-space-x-3`}>
+                    <FontAwesome icon={icon.icon} size={`xl`} />
+                    <div>{icon.value}</div>
+                  </div>
+                ))}
+            </div>
+            <div
+              className={`arclight-text-right arclight-flex-col arclight-w-full`}
+            >
+              {authorName ? (
+                <div className={`arclight-text-lg`}>{authorName}</div>
+              ) : null}
+              {init?.createddate ? (
+                <div className={`arclight-text-sm`}>
+                  {moment(init.createddate).format("MMM Do, YYYY").toString()}
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>
     ) : null;
   React.useEffect(() => {
     if (authorName) return;
-    if (fns?.calls?.getrecords_user && init?.author) {
+    if (
+      fns?.calls?.getrecords_user &&
+      init?.author &&
+      typeof init.author === "string"
+    ) {
       fns.calls.getrecords_user({
         search: {
           _id: init.author,
@@ -245,6 +282,8 @@ const ArticlePage: FC<PropTypes> = ({
     if (authorName) return;
     if (D?.getrecords_user?.authorvalue?.records) {
       setAuthorName(D.getrecords_user.authorvalue.records[0].username);
+    } else if (typeof init?.author === "object") {
+      setAuthorName(init.author.username);
     }
   }, [D]);
   return (
@@ -269,6 +308,7 @@ const ArticlePage: FC<PropTypes> = ({
             />
           </div>
         ) : null}
+        {comments ? <Comments comments={init?.comments} /> : null}
       </Styles.Body>
     </Styles.Container>
   );

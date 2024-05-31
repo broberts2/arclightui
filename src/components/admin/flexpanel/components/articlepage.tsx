@@ -24,7 +24,6 @@ export default (obj: any) => {
         init={obj.state[obj.c.label]}
         nopage={obj.D.nopage}
         googledoc={null}
-        author={null}
         fns={obj.fns}
         D={obj.D}
         bannerImg={null}
