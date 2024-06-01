@@ -13,7 +13,7 @@ const _ArticlePage: FC<{
   React.useEffect(() => {
     if (!D.identifyself && fns.calls.identifyself) fns.calls.identifyself();
   }, [fns]);
-  return D && fns.calls && D.getarticles ? (
+  return D && fns.calls && D.getarticles?.viewarticle ? (
     <Page
       fns={fns}
       backgroundImage={{
@@ -24,8 +24,11 @@ const _ArticlePage: FC<{
       <div className={`arclight-p-3 lg:arclight-p-32`}>
         <ArticlePage
           commenter={D?.identifyself?.user}
-          refresh={fns.calls.getarticles}
-          init={D.getarticles.records[0]}
+          refresh={{
+            index: "viewarticle",
+            fn: fns.calls.getarticles,
+          }}
+          init={D.getarticles.viewarticle.records[0]}
           nopage={D.nopage}
           fns={fns}
           D={D}

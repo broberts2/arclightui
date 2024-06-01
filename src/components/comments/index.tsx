@@ -32,32 +32,35 @@ const Comments: FC<PropTypes> = ({
   const CommentController = (props) => {
     const [open, setOpen] = React.useState(0);
     const [content, setContent] = React.useState("");
+    console.log(commenter);
     return (
       <div className={`arclight-flex-col arclight-space-y-0`}>
-        <div
-          className={`arclight-flex arclight-space-x-5 arclight-w-full arclight-items-start`}
-        >
-          <div className={`arclight-w-14`}>
-            <img
-              src={commenter?.avatar}
-              className={`arclight-w-full arclight-object-cover arclight-rounded-full`}
-            />
+        {commenter && Object.keys(commenter).length ? (
+          <div
+            className={`arclight-flex arclight-space-x-5 arclight-w-full arclight-items-start`}
+          >
+            <div className={`arclight-w-14`}>
+              <img
+                src={commenter?.avatar}
+                className={`arclight-w-full arclight-object-cover arclight-rounded-full`}
+              />
+            </div>
+            <div className={`arclight-w-full`}>
+              <TextField
+                span
+                hot
+                multiline
+                value={content}
+                onSelect={() => setOpen(1)}
+                label={"Add a comment..."}
+                key={0}
+                type={"text"}
+                variant={"standard"}
+                onChange={(e) => setContent(e.target.value)}
+              />
+            </div>
           </div>
-          <div className={`arclight-w-full`}>
-            <TextField
-              span
-              hot
-              multiline
-              value={content}
-              onSelect={() => setOpen(1)}
-              label={"Add a comment..."}
-              key={0}
-              type={"text"}
-              variant={"standard"}
-              onChange={(e) => setContent(e.target.value)}
-            />
-          </div>
-        </div>
+        ) : null}
         <div
           className={`arclight-flex arclight-space-x-5 arclight-items-center arclight-justify-end`}
           style={{ transform: `scaleY(${open})` }}
