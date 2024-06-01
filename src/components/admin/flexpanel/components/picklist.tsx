@@ -45,6 +45,7 @@ export default (obj: any, multiple?: boolean) => {
                 if (obj.name) _.text = obj.name;
                 else if (obj.username) _.text = obj.username;
                 else if (obj.text) _.text = obj.text;
+                else if (obj.title) _.text = obj.title;
                 return _;
               })
             : []
@@ -60,8 +61,10 @@ export default (obj: any, multiple?: boolean) => {
         variant="standard"
         searchkey={(() => {
           if (!obj.c || !obj.c.searchkey) return;
-          if (obj.c.searchkey["username"]) return "username";
-          else if (obj.c.searchkey["name"]) return "name";
+          const arr = ["username", "name", "text", "title"];
+          for (let i = 0; i < arr.length; i++) {
+            if (obj.c.searchkey[arr[i]]) return arr[i];
+          }
         })()}
       />
     </div>

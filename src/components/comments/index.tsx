@@ -5,13 +5,33 @@ import TextField from "../textfield";
 import Button from "../button";
 
 export interface PropTypes {
-  comments: Array<{ [key: string]: any }>;
+  article?: {
+    [key: string]: any;
+  };
+  commenter?: {
+    [key: string]: any;
+  };
+  createcomment?: Function;
+  editcomment?: Function;
+  deletecomment?: Function;
+  likecomment?: Function;
+  dislikecomment?: Function;
+  reportcomment?: Function;
 }
 
-const Comments: FC<PropTypes> = ({ comments }) => {
+const Comments: FC<PropTypes> = ({
+  article,
+  commenter,
+  createcomment,
+  editcomment,
+  deletecomment,
+  likecomment,
+  dislikecomment,
+  reportcomment,
+}) => {
   const CommentController = (props) => {
     const [open, setOpen] = React.useState(0);
-    const [value, setValue] = React.useState("");
+    const [content, setContent] = React.useState("");
     return (
       <div className={`arclight-flex-col arclight-space-y-0`}>
         <div
@@ -19,7 +39,7 @@ const Comments: FC<PropTypes> = ({ comments }) => {
         >
           <div className={`arclight-w-14`}>
             <img
-              src={`https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`}
+              src={commenter?.avatar}
               className={`arclight-w-full arclight-object-cover arclight-rounded-full`}
             />
           </div>
@@ -28,13 +48,13 @@ const Comments: FC<PropTypes> = ({ comments }) => {
               span
               hot
               multiline
-              value={value}
+              value={content}
               onSelect={() => setOpen(1)}
               label={"Add a comment..."}
               key={0}
               type={"text"}
               variant={"standard"}
-              onChange={(e) => setValue(e.target.value)}
+              onChange={(e) => setContent(e.target.value)}
             />
           </div>
         </div>
@@ -44,7 +64,10 @@ const Comments: FC<PropTypes> = ({ comments }) => {
         >
           <div
             className={`arclight-text-xs arclight-cursor-pointer`}
-            onClick={() => setOpen(0)}
+            onClick={() => {
+              setContent("");
+              setOpen(0);
+            }}
           >
             Cancel
           </div>
@@ -54,7 +77,15 @@ const Comments: FC<PropTypes> = ({ comments }) => {
               size={"md"}
               animation={true}
               label={"Comment"}
-              onClick={() => null}
+              onClick={() => {
+                if (!createcomment) return;
+                createcomment({
+                  content,
+                  articleowner: article?._id,
+                });
+                setOpen(0);
+                setContent("");
+              }}
             />
           </div>
         </div>
@@ -62,11 +93,14 @@ const Comments: FC<PropTypes> = ({ comments }) => {
     );
   };
   const Comment = (props) => {
+    const originalcontent = props.content;
+    const [content, setContent] = React.useState(props.content);
+    const [editing, setEditing] = React.useState(false);
     return (
       <div className={`arclight-flex arclight-space-x-5 arclight-w-full`}>
         <div className={`arclight-w-14`}>
           <img
-            src={props.avatar}
+            src={props.owner.avatar}
             className={`arclight-w-full arclight-object-cover`}
           />
         </div>
@@ -77,50 +111,108 @@ const Comments: FC<PropTypes> = ({ comments }) => {
             <div
               className={`arclight-flex arclight-items-center arclight-space-x-5`}
             >
-              <div className={`arclight-text-md`}>{props.commenter}</div>
+              <div className={`arclight-text-md`}>{props.owner.username}</div>
               <div className={`arclight-text-xs`}>{props.date}</div>
+              {props.updated ? (
+                <div className={`arclight-text-xs`}>
+                  (edited - {props.updated})
+                </div>
+              ) : null}
             </div>
-            <div className={`arclight-text-sm`}>
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
-              It has roots in a piece of classical Latin literature from 45 BC,
-              making it over 2000 years old. Richard McClintock, a Latin
-              professor at Hampden-Sydney College in Virginia, looked up one of
-              the more obscure Latin words, consectetur, from a Lorem Ipsum
-              passage, and going through the cites of the word in classical
-              literature, discovered the undoubtable source. Lorem Ipsum comes
-              from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et
-              Malorum" (The Extremes of Good and Evil) by Cicero, written in 45
-              BC. This book is a treatise on the theory of ethics, very popular
-              during the Renaissance. The first line of Lorem Ipsum, "Lorem
-              ipsum dolor sit amet..", comes from a line in section 1.10.32.
-            </div>
+            {editing ? (
+              <div className={`arclight-w-full`}>
+                <TextField
+                  span
+                  hot
+                  multiline
+                  value={content}
+                  onSelect={() => null}
+                  label={null}
+                  key={0}
+                  type={"text"}
+                  variant={"standard"}
+                  onChange={(e) => setContent(e.target.value)}
+                />
+              </div>
+            ) : (
+              <div className={`arclight-text-sm`}>{content}</div>
+            )}
             <div
               className={`arclight-flex arclight-space-x-5 arclight-items-center`}
             >
               {[
-                { icon: "thumbs-up", n: props.likes },
-                { icon: "thumbs-down", n: props.dislikes },
-                { text: "Reply" },
-              ].map((el: any) =>
-                el.icon ? (
-                  <div
-                    className={`arclight-flex arclight-space-x-2 arclight-items-center`}
-                  >
-                    <FontAwesome
-                      icon={el.icon}
-                      size={"md"}
-                      className={`arclight-cursor-pointer`}
-                    />
-                    {el.n ? (
-                      <div className={`arclight-text-sm`}>{el.n}</div>
-                    ) : null}
-                  </div>
-                ) : (
-                  <div className={`arclight-text-sm arclight-cursor-pointer`}>
-                    {el.text}
-                  </div>
-                )
-              )}
+                { icon: "thumbs-up", n: props.likes, show: !editing },
+                { icon: "thumbs-down", n: props.dislikes, show: !editing },
+                { text: "Reply", show: !editing },
+                {
+                  text: "Edit",
+                  show: props.owner._id === commenter?._id && !editing,
+                  fn: () => {
+                    setEditing(!editing);
+                    if (editing) setContent(originalcontent);
+                  },
+                },
+                {
+                  text: "Delete",
+                  show: props.owner._id === commenter?._id && !editing,
+                  fn: () => {
+                    if (!deletecomment) return;
+                    deletecomment({
+                      _id: props._id,
+                    });
+                  },
+                },
+                {
+                  text: "Undo",
+                  show: editing,
+                  fn: () => {
+                    setEditing(!editing);
+                    if (editing) setContent(originalcontent);
+                  },
+                },
+              ]
+                .filter((c: any) => c.show === undefined || c.show)
+                .map((el: any) =>
+                  el.icon ? (
+                    <div
+                      className={`arclight-flex arclight-space-x-2 arclight-items-center`}
+                    >
+                      <FontAwesome
+                        icon={el.icon}
+                        size={"md"}
+                        className={`arclight-cursor-pointer`}
+                        onClick={el.fn}
+                      />
+                      {el.n ? (
+                        <div className={`arclight-text-sm`}>{el.n}</div>
+                      ) : null}
+                    </div>
+                  ) : (
+                    <div
+                      className={`arclight-text-sm arclight-cursor-pointer`}
+                      onClick={el.fn}
+                    >
+                      {el.text}
+                    </div>
+                  )
+                )}
+              {editing ? (
+                <div>
+                  <Button
+                    type={"standard"}
+                    size={"md"}
+                    animation={true}
+                    label={"Update"}
+                    onClick={() => {
+                      if (!editcomment) return;
+                      editcomment({
+                        _id: props._id,
+                        content,
+                      });
+                    }}
+                  />
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -129,12 +221,12 @@ const Comments: FC<PropTypes> = ({ comments }) => {
   };
   return (
     <Styles.Container
-      className={`arclight-flex-col arclight-space-y-10 arclight-p-5`}
+      className={`arclight-flex-col arclight-space-y-10 arclight-p-2 lg:arclight-p-5 arclight-mt-10`}
     >
       <CommentController />
-      {comments.map((el: any) => (
-        <Comment {...el} />
-      ))}
+      {(article || {}).comments.map((el: any) => {
+        return <Comment {...el} />;
+      })}
     </Styles.Container>
   );
 };

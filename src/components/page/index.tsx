@@ -15,7 +15,6 @@ export interface PropTypes {
 }
 
 const Page: FC<PropTypes> = ({
-  fns,
   backgroundImage,
   children,
   backgroundGradient,

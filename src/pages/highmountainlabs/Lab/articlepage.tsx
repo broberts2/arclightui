@@ -10,6 +10,9 @@ const _ArticlePage: FC<{
   endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
   React.useEffect(() => init(fns, D), [fns]);
+  React.useEffect(() => {
+    if (!D.identifyself && fns.calls.identifyself) fns.calls.identifyself();
+  }, [fns]);
   return D && fns.calls && D.getarticles ? (
     <Page
       fns={fns}
@@ -20,12 +23,22 @@ const _ArticlePage: FC<{
     >
       <div className={`arclight-p-3 lg:arclight-p-32`}>
         <ArticlePage
+          commenter={D?.identifyself?.user}
+          refresh={fns.calls.getarticles}
           init={D.getarticles.records[0]}
           nopage={D.nopage}
           fns={fns}
           D={D}
           comments={true}
           views={true}
+          commentfns={{
+            createcomment: fns?.calls?.createrecords_articlecomment,
+            editcomment: fns?.calls?.updaterecords_articlecomment,
+            deletecomment: fns?.calls?.deleterecords_articlecomment,
+            likecomment: fns?.calls?.createrecords_articlecomment,
+            dislikecomment: fns?.calls?.updaterecords_articlecomment,
+            reportcomment: fns?.calls?.deleterecords_articlecomment,
+          }}
         />
       </div>
     </Page>

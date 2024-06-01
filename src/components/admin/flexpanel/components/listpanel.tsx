@@ -9,7 +9,7 @@ export default (
   D: any
 ) => {
   if (!D.getdatamodels) return;
-  const keyarr = ["username", "name"];
+  const keyarr = ["username", "name", "title"];
   const type = fns.parseAdminDomainState().item;
   let key = D.getdatamodels.records.find((r: any) => r._type === type);
   const script =

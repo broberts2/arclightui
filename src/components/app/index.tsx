@@ -55,8 +55,29 @@ const App: FC<PropTypes> = ({
     _setModal(M ? { ...M, active: true } : { ...modal, active: false });
   const preloadModal = (M: { [key: string]: any }) =>
     _setModal({ ...M, active: false });
+  const getdiff = (obj1, obj2) => {
+    const _diff = diff(obj1, obj2) || {};
+    const _ = {};
+    Object.keys(_diff).map((k: string) => {
+      _[k] = _diff[k];
+    });
+    return _;
+  };
   React.useEffect(() => {
-    const _diff = diff(LastD, D) || {};
+    const calls = (() => {
+      const _ = {};
+      Object.keys(fns.calls || {}).map((key: string) => {
+        if (fns?.calls[key])
+          _[key] = async (input: any) => {
+            fns.calls[key](input);
+            return await new Promise((res: any, rej: any) => {
+              setTimeout(() => rej(`Failed to call ${fns.calls[key]}`), 100000);
+              return res();
+            });
+          };
+      });
+      return _;
+    })();
     setLastD(D);
     // @ts-ignore
     setApp(() => (
@@ -141,13 +162,7 @@ const App: FC<PropTypes> = ({
                   <Page
                     D={{
                       ...D,
-                      _diff: (() => {
-                        const _ = {};
-                        Object.keys(_diff).map((k: string) => {
-                          _[k] = _diff[k];
-                        });
-                        return _;
-                      })(),
+                      _diff: getdiff(LastD, D),
                     }}
                     endpoint={socketEndpoint}
                     backgroundImage={backgroundImage}
@@ -169,27 +184,12 @@ const App: FC<PropTypes> = ({
                       setAdminDomainState:
                         domain === "admin" ? setAdminDomainState : null,
                       parseAdminDomainState: fns.parseAdminDomainState,
-                      calls: (() => {
-                        const _ = {};
-                        Object.keys(fns.calls || {}).map((key: string) => {
-                          if (fns?.calls[key])
-                            _[key] = async (input: any) => {
-                              fns.calls[key](input);
-                              return await new Promise((res: any, rej: any) => {
-                                setTimeout(
-                                  () => rej(`Failed to call ${fns.calls[key]}`),
-                                  100000
-                                );
-                                return res();
-                              });
-                            };
-                        });
-                        return _;
-                      })(),
+                      calls,
                       addAnimationFrame: fns.addAnimationFrame,
                       route: _route,
                       routeExternal: fns.routeExternal,
                       route404: fns.route404,
+                      getdiff,
                       authenticate: fns.authenticate(
                         socket,
                         async (b: boolean) => {

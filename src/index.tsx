@@ -14,7 +14,6 @@ root.render(
         process.env.REACT_APP_ENVIRONMENT === "production"
           ? `https://highmountainlabs.io:7001`
           : `localhost:7001`
-        // "http://47.5.53.138"
       }
       loader={`https://highmountainlabs.io/cdn/arclight/media/highmountainlabs.png`}
       background={{
@@ -38,13 +37,13 @@ root.render(
             route: "/",
             component: require("./pages/highmountainlabs/Home"),
           },
-          // Mox: {
-          //   route: "/mox",
-          //   component: require("./pages/highmountainlabs/Mox"),
-          // },
           Lab_ArticlePage: {
             route: "/lab-articlepage",
             component: require("./pages/highmountainlabs/Lab/articlepage"),
+          },
+          Auth: {
+            route: "/auth",
+            component: require("./pages/highmountainlabs/Login"),
           },
         },
       }}

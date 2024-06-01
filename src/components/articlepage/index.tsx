@@ -26,6 +26,16 @@ export interface PropTypes {
   edit?: boolean;
   comments?: boolean;
   views?: boolean;
+  refresh: Function;
+  commenter?: { [key: string]: any };
+  commentfns?: {
+    createcomment?: Function;
+    editcomment?: Function;
+    deletecomment?: Function;
+    likecomment?: Function;
+    dislikecomment?: Function;
+    reportcomment?: Function;
+  };
 }
 
 const ArticlePage: FC<PropTypes> = ({
@@ -43,6 +53,9 @@ const ArticlePage: FC<PropTypes> = ({
   edit,
   comments,
   views,
+  refresh,
+  commenter,
+  commentfns,
 }) => {
   const blockTemplate = (index: number) => ({
     title: `Block Title ${index + 1}`,
@@ -209,7 +222,7 @@ const ArticlePage: FC<PropTypes> = ({
     init ? (
       <div className={`arclight-flex-col arclight-space-y-5`}>
         <div
-          className={`arclight-bg-slate-100 arclight-text-black arclight-flex-col arclight-space-y-14 arclight-text-left arclight-p-10`}
+          className={`arclight-bg-slate-100 arclight-text-black arclight-flex-col arclight-space-y-14 arclight-text-left arclight-p-3 lg:arclight-p-10`}
           style={{ textShadow: "none" }}
         >
           <div className={`arclight-text-center arclight-text-3xl`}>
@@ -279,6 +292,14 @@ const ArticlePage: FC<PropTypes> = ({
     }
   }, [init]);
   React.useEffect(() => {
+    const cond =
+      D._diff.createrecords_articlecomment ||
+      D._diff.updaterecords_articlecomment ||
+      D._diff.deleterecords_articlecomment;
+    if (D?._diff && cond && init)
+      refresh({
+        _id: init._id.toString(),
+      });
     if (authorName) return;
     if (D?.getrecords_user?.authorvalue?.records) {
       setAuthorName(D.getrecords_user.authorvalue.records[0].username);
@@ -308,7 +329,9 @@ const ArticlePage: FC<PropTypes> = ({
             />
           </div>
         ) : null}
-        {comments ? <Comments comments={init?.comments} /> : null}
+        {comments ? (
+          <Comments commenter={commenter} article={init} {...commentfns} />
+        ) : null}
       </Styles.Body>
     </Styles.Container>
   );
