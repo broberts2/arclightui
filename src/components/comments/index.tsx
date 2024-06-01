@@ -101,7 +101,7 @@ const Comments: FC<PropTypes> = ({
         <div className={`arclight-w-14`}>
           <img
             src={props.owner.avatar}
-            className={`arclight-w-full arclight-object-cover`}
+            className={`arclight-w-full arclight-object-cover arclight-rounded-full`}
           />
         </div>
         <div className={`arclight-flex-grow-1 arclight-w-full`}>

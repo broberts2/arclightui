@@ -26,7 +26,10 @@ export interface PropTypes {
   edit?: boolean;
   comments?: boolean;
   views?: boolean;
-  refresh: Function;
+  refresh: {
+    index: string;
+    fn: Function;
+  };
   commenter?: { [key: string]: any };
   commentfns?: {
     createcomment?: Function;
@@ -297,8 +300,9 @@ const ArticlePage: FC<PropTypes> = ({
       D._diff.updaterecords_articlecomment ||
       D._diff.deleterecords_articlecomment;
     if (D?._diff && cond && init)
-      refresh({
+      refresh.fn({
         _id: init._id.toString(),
+        index: refresh.index,
       });
     if (authorName) return;
     if (D?.getrecords_user?.authorvalue?.records) {
