@@ -10,12 +10,12 @@ const Home: FC<{
   endpoint?: string;
 }> = ({ fns, D, endpoint }) => {
   React.useEffect(() => init(fns, D), [fns]);
-  return D && fns.calls ? (
+  console.log(D);
+  return D && fns.calls && D.getrecords_settings ? (
     <Page
       fns={fns}
       backgroundImage={{
-        // src: "https://highmountainlabs.io/arclight/static/media/6659788dad339f0190d46071.mp4",
-        src: "https://highmountainlabs.io/arclight/static/media/6659788dad339f0190d46074.mp4",
+        src: D.getrecords_settings.init.records[0].highmountainlabsbg,
         opacity: 0.5,
       }}
     >

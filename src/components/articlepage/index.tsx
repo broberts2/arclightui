@@ -36,7 +36,6 @@ export interface PropTypes {
     editcomment?: Function;
     deletecomment?: Function;
     likecomment?: Function;
-    dislikecomment?: Function;
     reportcomment?: Function;
   };
 }
@@ -253,7 +252,7 @@ const ArticlePage: FC<PropTypes> = ({
                 {
                   icon: "comments",
                   text: "comments",
-                  value: comments ? init.comments.length : undefined,
+                  value: comments ? init.commentcount : undefined,
                 },
               ]
                 .filter((el: any) => el.value !== undefined)
@@ -334,7 +333,12 @@ const ArticlePage: FC<PropTypes> = ({
           </div>
         ) : null}
         {comments ? (
-          <Comments commenter={commenter} article={init} {...commentfns} />
+          <Comments
+            commenter={commenter}
+            article={init}
+            {...commentfns}
+            refreshindex={refresh.index}
+          />
         ) : null}
       </Styles.Body>
     </Styles.Container>

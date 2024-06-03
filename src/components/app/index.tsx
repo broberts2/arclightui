@@ -71,7 +71,7 @@ const App: FC<PropTypes> = ({
           _[key] = async (input: any) => {
             fns.calls[key](input);
             return await new Promise((res: any, rej: any) => {
-              setTimeout(() => rej(`Failed to call ${fns.calls[key]}`), 100000);
+              setTimeout(() => rej(`Failed to call ${fns.calls[key]}`), 600000);
               return res();
             });
           };

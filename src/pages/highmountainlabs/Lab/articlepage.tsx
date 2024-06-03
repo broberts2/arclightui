@@ -38,8 +38,7 @@ const _ArticlePage: FC<{
             createcomment: fns?.calls?.createrecords_articlecomment,
             editcomment: fns?.calls?.updaterecords_articlecomment,
             deletecomment: fns?.calls?.deleterecords_articlecomment,
-            likecomment: fns?.calls?.createrecords_articlecomment,
-            dislikecomment: fns?.calls?.updaterecords_articlecomment,
+            likecomment: fns?.calls?.likecomment,
             reportcomment: fns?.calls?.deleterecords_articlecomment,
           }}
         />
