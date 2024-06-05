@@ -9,6 +9,7 @@ export interface PropTypes {
   backgroundImage?: {
     src: string;
     opacity: number;
+    loop?: boolean;
   };
   backgroundGradient?: any;
   endpoint?: string;
@@ -32,7 +33,9 @@ const Page: FC<PropTypes> = ({
           <video
             autoPlay
             muted
-            loop
+            loop={
+              backgroundImage.loop !== undefined ? backgroundImage.loop : true
+            }
             src={backgroundImage.src}
             className={`arclight-w-full arclight-h-full arclight-fixed arclight-object-cover`}
             style={{ opacity: backgroundImage.opacity }}

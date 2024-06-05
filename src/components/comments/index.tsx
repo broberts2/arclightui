@@ -297,7 +297,7 @@ const Comments: FC<PropTypes> = ({
                   />
                   <div>{Object.keys(props.childcomments).length} replies</div>
                 </div>
-                {childComponentsExpanded ? (
+                {childComponentsExpanded && props?.childcomments?.map ? (
                   <div
                     className={``}
                     style={{
